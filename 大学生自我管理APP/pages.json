@@ -1,0 +1,76 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "uni-app"
+			}
+		}
+	    ,{
+            "path" : "pages/todolist/todolist",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/self-record/self-record",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/self-manage/self-manage",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#3cc51f",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/schedule.png",
+				"selectedIconPath": "static/schedule.png",
+				"text": "课程表"
+			},
+			{
+				"pagePath": "pages/todolist/todolist",
+				"iconPath": "static/todolist.png",
+				"selectedIconPath": "static/todolist.png",
+				"text": "待办"
+			},
+			{
+				"pagePath": "pages/self-record/self-record",
+				"iconPath": "static/self-record.png",
+				"selectedIconPath": "static/self-record.png",
+				"text": "个人记录"
+			},
+			{
+				"pagePath": "pages/self-manage/self-manage",
+				"iconPath": "static/self-manage.png",
+				"selectedIconPath": "static/self-manage.png",
+				"text": "自我管理"
+			}
+		]
+	},
+	"uniIdRouter": {}
+}
