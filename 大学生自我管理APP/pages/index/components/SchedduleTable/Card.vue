@@ -1,5 +1,5 @@
 <template>
-  <uni-card is-full="true" padding="2px 0">
+  <uni-card :is-full="true" padding="2px 0">
     <text class="course">{{ data.course }}</text>
     <br>
     <text class="teacher">{{ data.teacher }}</text>

@@ -1,7 +1,7 @@
 import {
   uniHttpGet,
   uniHttpPost
-} from '../libs/http.js'
+} from '@/pages/index/libs/http.js'
 // import { formatScheduleData } from './utils.js'
 
 function formatScheduleData(data) {
