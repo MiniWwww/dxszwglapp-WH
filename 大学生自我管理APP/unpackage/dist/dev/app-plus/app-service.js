@@ -1,28 +1,12 @@
-var __defProp = Object.defineProperty;
-var __defProps = Object.defineProperties;
-var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    }
-  return a;
-};
-var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 if (typeof Promise !== "undefined" && !Promise.prototype.finally) {
   Promise.prototype.finally = function(callback) {
     const promise = this.constructor;
-    return this.then((value) => promise.resolve(callback()).then(() => value), (reason) => promise.resolve(callback()).then(() => {
-      throw reason;
-    }));
+    return this.then(
+      (value) => promise.resolve(callback()).then(() => value),
+      (reason) => promise.resolve(callback()).then(() => {
+        throw reason;
+      })
+    );
   };
 }
 ;
@@ -57,14 +41,14 @@ if (uni.restoreGlobal) {
   function resolveEasycom(component, easycom) {
     return shared.isString(component) ? easycom : component;
   }
-  var _export_sfc = (sfc, props) => {
+  const _export_sfc = (sfc, props) => {
     const target = sfc.__vccOpts || sfc;
     for (const [key, val] of props) {
       target[key] = val;
     }
     return target;
   };
-  const _sfc_main$m = {
+  const _sfc_main$B = {
     name: "uniTh",
     options: {
       virtualHost: true
@@ -117,6 +101,7 @@ if (uni.restoreGlobal) {
       };
     },
     computed: {
+      // 根据props中的width属性 自动匹配当前th的宽度(px)
       customWidth() {
         if (typeof this.width === "number") {
           return this.width;
@@ -208,6 +193,9 @@ if (uni.restoreGlobal) {
       ondropdown(e) {
         this.$emit("filter-change", e);
       },
+      /**
+       * 获取父元素实例
+       */
       getTable(name) {
         let parent = this.$parent;
         let parentName = parent.$options.name;
@@ -221,16 +209,22 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", {
-      class: vue.normalizeClass(["uni-table-th", { "table--border": $data.border }]),
-      style: vue.normalizeStyle({ width: $options.customWidth + "px", "text-align": $props.align })
-    }, [
-      vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
-    ], 6);
+  function _sfc_render$w(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        class: vue.normalizeClass(["uni-table-th", { "table--border": $data.border }]),
+        style: vue.normalizeStyle({ width: $options.customWidth + "px", "text-align": $props.align })
+      },
+      [
+        vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+      ],
+      6
+      /* CLASS, STYLE */
+    );
   }
-  var __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$h], ["__scopeId", "data-v-511e81f9"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-table/components/uni-th/uni-th.vue"]]);
-  const _sfc_main$l = {
+  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$w], ["__scopeId", "data-v-bf970acd"], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/uni_modules/uni-table/components/uni-th/uni-th.vue"]]);
+  const _sfc_main$A = {
     name: "TableCheckbox",
     emits: ["checkboxSelected"],
     props: {
@@ -295,17 +289,23 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$v(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "uni-table-checkbox",
       onClick: _cache[0] || (_cache[0] = (...args) => $options.selected && $options.selected(...args))
     }, [
-      !$props.indeterminate ? (vue.openBlock(), vue.createElementBlock("view", {
-        key: 0,
-        class: vue.normalizeClass(["checkbox__inner", { "is-checked": $data.isChecked, "is-disable": $data.isDisabled }])
-      }, [
-        vue.createElementVNode("view", { class: "checkbox__inner-icon" })
-      ], 2)) : (vue.openBlock(), vue.createElementBlock("view", {
+      !$props.indeterminate ? (vue.openBlock(), vue.createElementBlock(
+        "view",
+        {
+          key: 0,
+          class: vue.normalizeClass(["checkbox__inner", { "is-checked": $data.isChecked, "is-disable": $data.isDisabled }])
+        },
+        [
+          vue.createElementVNode("view", { class: "checkbox__inner-icon" })
+        ],
+        2
+        /* CLASS */
+      )) : (vue.openBlock(), vue.createElementBlock("view", {
         key: 1,
         class: "checkbox__inner checkbox--indeterminate"
       }, [
@@ -313,8 +313,8 @@ if (uni.restoreGlobal) {
       ]))
     ]);
   }
-  var tableCheckbox = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$g], ["__scopeId", "data-v-68100fa0"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-table/components/uni-tr/table-checkbox.vue"]]);
-  const _sfc_main$k = {
+  const tableCheckbox = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$v], ["__scopeId", "data-v-25e435b1"], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/uni_modules/uni-table/components/uni-tr/table-checkbox.vue"]]);
+  const _sfc_main$z = {
     name: "uniTr",
     components: { tableCheckbox },
     props: {
@@ -360,7 +360,7 @@ if (uni.restoreGlobal) {
     mounted() {
       if (this.widthThArr.length > 0) {
         const selectionWidth = this.selection === "selection" ? 50 : 0;
-        this.root.minWidth = this.widthThArr.reduce((a2, b2) => Number(a2) + Number(b2)) + selectionWidth;
+        this.root.minWidth = this.widthThArr.reduce((a2, b) => Number(a2) + Number(b)) + selectionWidth;
       }
     },
     unmounted() {
@@ -372,6 +372,7 @@ if (uni.restoreGlobal) {
       minWidthUpdate(width) {
         this.widthThArr.push(width);
       },
+      // 选中
       checkboxSelected(e) {
         let rootData = this.root.data.find((v2) => v2[this.root.rowKey] === this.keyValue);
         this.checked = e.checked;
@@ -384,6 +385,9 @@ if (uni.restoreGlobal) {
           }
         });
       },
+      /**
+       * 获取父元素实例
+       */
       getTable(name = "uniTable") {
         let parent = this.$parent;
         let parentName = parent.$options.name;
@@ -397,25 +401,31 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$u(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_table_checkbox = vue.resolveComponent("table-checkbox");
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-table-tr" }, [
-      $data.selection === "selection" ? (vue.openBlock(), vue.createElementBlock("view", {
-        key: 0,
-        class: vue.normalizeClass(["checkbox", { "tr-table--border": $data.border }])
-      }, [
-        vue.createVNode(_component_table_checkbox, {
-          checked: $data.checked,
-          indeterminate: $data.indeterminate,
-          disabled: $props.disabled,
-          onCheckboxSelected: $options.checkboxSelected
-        }, null, 8, ["checked", "indeterminate", "disabled", "onCheckboxSelected"])
-      ], 2)) : vue.createCommentVNode("v-if", true),
+      $data.selection === "selection" ? (vue.openBlock(), vue.createElementBlock(
+        "view",
+        {
+          key: 0,
+          class: vue.normalizeClass(["checkbox", { "tr-table--border": $data.border }])
+        },
+        [
+          vue.createVNode(_component_table_checkbox, {
+            checked: $data.checked,
+            indeterminate: $data.indeterminate,
+            disabled: $props.disabled,
+            onCheckboxSelected: $options.checkboxSelected
+          }, null, 8, ["checked", "indeterminate", "disabled", "onCheckboxSelected"])
+        ],
+        2
+        /* CLASS */
+      )) : vue.createCommentVNode("v-if", true),
       vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
     ]);
   }
-  var __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$f], ["__scopeId", "data-v-c2c83a8e"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-table/components/uni-tr/uni-tr.vue"]]);
-  const _sfc_main$j = {
+  const __easycom_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$u], ["__scopeId", "data-v-b48b3e32"], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/uni_modules/uni-table/components/uni-tr/uni-tr.vue"]]);
+  const _sfc_main$y = {
     name: "uniTd",
     options: {
       virtualHost: true
@@ -448,6 +458,9 @@ if (uni.restoreGlobal) {
       this.border = this.root.border;
     },
     methods: {
+      /**
+       * 获取父元素实例
+       */
       getTable() {
         let parent = this.$parent;
         let parentName = parent.$options.name;
@@ -461,19 +474,31 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
-      vue.createCommentVNode(` :class="{'table--border':border}"  `),
-      vue.createElementVNode("view", {
-        class: vue.normalizeClass(["uni-table-td", { "table--border": $data.border }]),
-        style: vue.normalizeStyle({ width: $props.width + "px", "text-align": $props.align })
-      }, [
-        vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
-      ], 6)
-    ], 2112);
+  function _sfc_render$t(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock(
+      vue.Fragment,
+      null,
+      [
+        vue.createCommentVNode(` :class="{'table--border':border}"  `),
+        vue.createElementVNode(
+          "view",
+          {
+            class: vue.normalizeClass(["uni-table-td", { "table--border": $data.border }]),
+            style: vue.normalizeStyle({ width: $props.width + "px", "text-align": $props.align })
+          },
+          [
+            vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+          ],
+          6
+          /* CLASS, STYLE */
+        )
+      ],
+      2112
+      /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
+    );
   }
-  var __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$e], ["__scopeId", "data-v-321f8e79"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-table/components/uni-td/uni-td.vue"]]);
-  const _sfc_main$i = {
+  const __easycom_2$2 = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$t], ["__scopeId", "data-v-edae4802"], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/uni_modules/uni-table/components/uni-td/uni-td.vue"]]);
+  const _sfc_main$x = {
     name: "uniTable",
     options: {
       virtualHost: true
@@ -486,21 +511,25 @@ if (uni.restoreGlobal) {
           return [];
         }
       },
+      // 是否有竖线
       border: {
         type: Boolean,
         default: false
       },
+      // 是否显示斑马线
       stripe: {
         type: Boolean,
         default: false
       },
+      // 多选
       type: {
         type: String,
         default: ""
       },
+      // 没有更多数据
       emptyText: {
         type: String,
-        default: "\u6CA1\u6709\u66F4\u591A\u6570\u636E"
+        default: "没有更多数据"
       },
       loading: {
         type: Boolean,
@@ -545,6 +574,9 @@ if (uni.restoreGlobal) {
         }
         this.noData = this.trChildren.length - rowspan <= 0;
       },
+      /**
+       * 选中所有
+       */
       selectionAll() {
         let startIndex = 1;
         let theadChildren = this.theadChildren;
@@ -577,6 +609,9 @@ if (uni.restoreGlobal) {
           }
         });
       },
+      /**
+       * 用于多选表格，切换某一行的选中状态，如果使用了第二个参数，则是设置这一行选中与否（selected 为 true 则选中）
+       */
       toggleRowSelection(row, selected) {
         row = [].concat(row);
         this.trChildren.forEach((item, index) => {
@@ -606,6 +641,9 @@ if (uni.restoreGlobal) {
           }
         });
       },
+      /**
+       * 用于多选表格，清空用户的选择
+       */
       clearSelection() {
         let theadChildren = this.theadChildren;
         if (!this.theadChildren) {
@@ -625,6 +663,9 @@ if (uni.restoreGlobal) {
           }
         });
       },
+      /**
+       * 用于多选表格，切换所有行的选中状态
+       */
       toggleAllSelection() {
         let list = [];
         let startIndex = 1;
@@ -643,6 +684,12 @@ if (uni.restoreGlobal) {
         });
         this.toggleRowSelection(list);
       },
+      /**
+       * 选中\取消选中
+       * @param {Object} child
+       * @param {Object} check
+       * @param {Object} rowValue
+       */
       check(child, check, keyValue, emit) {
         let theadChildren = this.theadChildren;
         if (!this.theadChildren) {
@@ -692,33 +739,57 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", {
-      class: vue.normalizeClass(["uni-table-scroll", { "table--border": $props.border, "border-none": !$data.noData }])
-    }, [
-      vue.createElementVNode("view", {
-        class: vue.normalizeClass(["uni-table", { "table--stripe": $props.stripe }]),
-        style: vue.normalizeStyle({ "min-width": $data.minWidth + "px" })
-      }, [
-        vue.renderSlot(_ctx.$slots, "default", {}, void 0, true),
-        $data.noData ? (vue.openBlock(), vue.createElementBlock("view", {
-          key: 0,
-          class: "uni-table-loading"
-        }, [
-          vue.createElementVNode("view", {
-            class: vue.normalizeClass(["uni-table-text", { "empty-border": $props.border }])
-          }, vue.toDisplayString($props.emptyText), 3)
-        ])) : vue.createCommentVNode("v-if", true),
-        $props.loading ? (vue.openBlock(), vue.createElementBlock("view", {
-          key: 1,
-          class: vue.normalizeClass(["uni-table-mask", { "empty-border": $props.border }])
-        }, [
-          vue.createElementVNode("div", { class: "uni-table--loader" })
-        ], 2)) : vue.createCommentVNode("v-if", true)
-      ], 6)
-    ], 2);
+  function _sfc_render$s(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        class: vue.normalizeClass(["uni-table-scroll", { "table--border": $props.border, "border-none": !$data.noData }])
+      },
+      [
+        vue.createElementVNode(
+          "view",
+          {
+            class: vue.normalizeClass(["uni-table", { "table--stripe": $props.stripe }]),
+            style: vue.normalizeStyle({ "min-width": $data.minWidth + "px" })
+          },
+          [
+            vue.renderSlot(_ctx.$slots, "default", {}, void 0, true),
+            $data.noData ? (vue.openBlock(), vue.createElementBlock("view", {
+              key: 0,
+              class: "uni-table-loading"
+            }, [
+              vue.createElementVNode(
+                "view",
+                {
+                  class: vue.normalizeClass(["uni-table-text", { "empty-border": $props.border }])
+                },
+                vue.toDisplayString($props.emptyText),
+                3
+                /* TEXT, CLASS */
+              )
+            ])) : vue.createCommentVNode("v-if", true),
+            $props.loading ? (vue.openBlock(), vue.createElementBlock(
+              "view",
+              {
+                key: 1,
+                class: vue.normalizeClass(["uni-table-mask", { "empty-border": $props.border }])
+              },
+              [
+                vue.createElementVNode("div", { class: "uni-table--loader" })
+              ],
+              2
+              /* CLASS */
+            )) : vue.createCommentVNode("v-if", true)
+          ],
+          6
+          /* CLASS, STYLE */
+        )
+      ],
+      2
+      /* CLASS */
+    );
   }
-  var __easycom_3$1 = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$d], ["__scopeId", "data-v-6cd49106"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-table/components/uni-table/uni-table.vue"]]);
+  const __easycom_3$2 = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$s], ["__scopeId", "data-v-c1ea9b5d"], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/uni_modules/uni-table/components/uni-table/uni-table.vue"]]);
   const isObject = (val) => val !== null && typeof val === "object";
   const defaultDelimiters = ["{", "}"];
   class BaseFormatter {
@@ -1027,6 +1098,79 @@ if (uni.restoreGlobal) {
       path: "pages/self-manage/self-manage",
       style: {
         navigationBarTitleText: "",
+        navigationStyle: "custom",
+        enablePullDownRefresh: false
+      }
+    },
+    {
+      path: "pages/self-manage/sport/add_new_sport",
+      style: {
+        navigationBarTitleText: "",
+        enablePullDownRefresh: false
+      }
+    },
+    {
+      path: "pages/self-manage/sport/sport_analyse",
+      style: {
+        navigationBarTitleText: "",
+        enablePullDownRefresh: false,
+        navigationStyle: "custom"
+      }
+    },
+    {
+      path: "pages/self-manage/sleep/baizaoyin/baizaoyin",
+      style: {
+        navigationBarTitleText: "",
+        enablePullDownRefresh: false
+      }
+    },
+    {
+      path: "pages/self-manage/sleep/shuiqianstory/shuiqianstory",
+      style: {
+        navigationBarTitleText: "",
+        enablePullDownRefresh: false
+      }
+    },
+    {
+      path: "pages/self-manage/sleep/piano/piano",
+      style: {
+        navigationBarTitleText: "",
+        enablePullDownRefresh: false
+      }
+    },
+    {
+      path: "pages/self-manage/sleep/other_music/other_music",
+      style: {
+        navigationBarTitleText: "",
+        enablePullDownRefresh: false
+      }
+    },
+    {
+      path: "pages/self-manage/sleep/sleep_tips/sleep_tips",
+      style: {
+        navigationBarTitleText: "睡个好觉",
+        enablePullDownRefresh: false
+      }
+    },
+    {
+      path: "pages/self-manage/sleep/sleep_analyse/sleep_analyse",
+      style: {
+        navigationBarTitleText: "",
+        enablePullDownRefresh: false,
+        navigationStyle: "custom"
+      }
+    },
+    {
+      path: "pages/self-manage/component/sleep/sleep",
+      style: {
+        navigationBarTitleText: "",
+        enablePullDownRefresh: false
+      }
+    },
+    {
+      path: "pages/self-manage/component/sport/sport",
+      style: {
+        navigationBarTitleText: "",
         enablePullDownRefresh: false
       }
     }
@@ -1047,30 +1191,30 @@ if (uni.restoreGlobal) {
         pagePath: "pages/index/index",
         iconPath: "static/schedule.png",
         selectedIconPath: "static/schedule.png",
-        text: "\u8BFE\u7A0B\u8868"
+        text: "课程表"
       },
       {
         pagePath: "pages/todolist/todolist",
         iconPath: "static/todolist.png",
         selectedIconPath: "static/todolist.png",
-        text: "\u5F85\u529E"
+        text: "待办"
       },
       {
         pagePath: "pages/self-record/self-record",
         iconPath: "static/self-record.png",
         selectedIconPath: "static/self-record.png",
-        text: "\u4E2A\u4EBA\u8BB0\u5F55"
+        text: "个人记录"
       },
       {
         pagePath: "pages/self-manage/self-manage",
         iconPath: "static/self-manage.png",
         selectedIconPath: "static/self-manage.png",
-        text: "\u81EA\u6211\u7BA1\u7406"
+        text: "自我管理"
       }
     ]
   };
   const uniIdRouter = {};
-  var t = {
+  const t = {
     pages,
     globalStyle,
     tabBar,
@@ -1083,10 +1227,10 @@ if (uni.restoreGlobal) {
     return e(n2 = { path: t2, exports: {}, require: function(e2, t3) {
       return function() {
         throw new Error("Dynamic requires are not currently supported by @rollup/plugin-commonjs");
-      }(t3 == null && n2.path);
+      }(null == t3 && n2.path);
     } }, n2.exports), n2.exports;
   }
-  var o = s(function(e, t2) {
+  var r = s(function(e, t2) {
     var n2;
     e.exports = (n2 = n2 || function(e2, t3) {
       var n3 = Object.create || function() {
@@ -1096,7 +1240,7 @@ if (uni.restoreGlobal) {
           var n4;
           return e3.prototype = t4, n4 = new e3(), e3.prototype = null, n4;
         };
-      }(), s2 = {}, o2 = s2.lib = {}, r2 = o2.Base = { extend: function(e3) {
+      }(), s2 = {}, r2 = s2.lib = {}, i2 = r2.Base = { extend: function(e3) {
         var t4 = n3(this);
         return e3 && t4.mixIn(e3), t4.hasOwnProperty("init") && this.init !== t4.init || (t4.init = function() {
           t4.$super.init.apply(this, arguments);
@@ -1111,60 +1255,60 @@ if (uni.restoreGlobal) {
         e3.hasOwnProperty("toString") && (this.toString = e3.toString);
       }, clone: function() {
         return this.init.prototype.extend(this);
-      } }, i2 = o2.WordArray = r2.extend({ init: function(e3, n4) {
+      } }, o2 = r2.WordArray = i2.extend({ init: function(e3, n4) {
         e3 = this.words = e3 || [], this.sigBytes = n4 != t3 ? n4 : 4 * e3.length;
       }, toString: function(e3) {
         return (e3 || c2).stringify(this);
       }, concat: function(e3) {
-        var t4 = this.words, n4 = e3.words, s3 = this.sigBytes, o3 = e3.sigBytes;
+        var t4 = this.words, n4 = e3.words, s3 = this.sigBytes, r3 = e3.sigBytes;
         if (this.clamp(), s3 % 4)
-          for (var r3 = 0; r3 < o3; r3++) {
-            var i3 = n4[r3 >>> 2] >>> 24 - r3 % 4 * 8 & 255;
-            t4[s3 + r3 >>> 2] |= i3 << 24 - (s3 + r3) % 4 * 8;
+          for (var i3 = 0; i3 < r3; i3++) {
+            var o3 = n4[i3 >>> 2] >>> 24 - i3 % 4 * 8 & 255;
+            t4[s3 + i3 >>> 2] |= o3 << 24 - (s3 + i3) % 4 * 8;
           }
         else
-          for (r3 = 0; r3 < o3; r3 += 4)
-            t4[s3 + r3 >>> 2] = n4[r3 >>> 2];
-        return this.sigBytes += o3, this;
+          for (i3 = 0; i3 < r3; i3 += 4)
+            t4[s3 + i3 >>> 2] = n4[i3 >>> 2];
+        return this.sigBytes += r3, this;
       }, clamp: function() {
         var t4 = this.words, n4 = this.sigBytes;
         t4[n4 >>> 2] &= 4294967295 << 32 - n4 % 4 * 8, t4.length = e2.ceil(n4 / 4);
       }, clone: function() {
-        var e3 = r2.clone.call(this);
+        var e3 = i2.clone.call(this);
         return e3.words = this.words.slice(0), e3;
       }, random: function(t4) {
-        for (var n4, s3 = [], o3 = function(t5) {
+        for (var n4, s3 = [], r3 = function(t5) {
           t5 = t5;
           var n5 = 987654321, s4 = 4294967295;
           return function() {
-            var o4 = ((n5 = 36969 * (65535 & n5) + (n5 >> 16) & s4) << 16) + (t5 = 18e3 * (65535 & t5) + (t5 >> 16) & s4) & s4;
-            return o4 /= 4294967296, (o4 += 0.5) * (e2.random() > 0.5 ? 1 : -1);
+            var r4 = ((n5 = 36969 * (65535 & n5) + (n5 >> 16) & s4) << 16) + (t5 = 18e3 * (65535 & t5) + (t5 >> 16) & s4) & s4;
+            return r4 /= 4294967296, (r4 += 0.5) * (e2.random() > 0.5 ? 1 : -1);
           };
-        }, r3 = 0; r3 < t4; r3 += 4) {
-          var a3 = o3(4294967296 * (n4 || e2.random()));
+        }, i3 = 0; i3 < t4; i3 += 4) {
+          var a3 = r3(4294967296 * (n4 || e2.random()));
           n4 = 987654071 * a3(), s3.push(4294967296 * a3() | 0);
         }
-        return new i2.init(s3, t4);
+        return new o2.init(s3, t4);
       } }), a2 = s2.enc = {}, c2 = a2.Hex = { stringify: function(e3) {
-        for (var t4 = e3.words, n4 = e3.sigBytes, s3 = [], o3 = 0; o3 < n4; o3++) {
-          var r3 = t4[o3 >>> 2] >>> 24 - o3 % 4 * 8 & 255;
-          s3.push((r3 >>> 4).toString(16)), s3.push((15 & r3).toString(16));
+        for (var t4 = e3.words, n4 = e3.sigBytes, s3 = [], r3 = 0; r3 < n4; r3++) {
+          var i3 = t4[r3 >>> 2] >>> 24 - r3 % 4 * 8 & 255;
+          s3.push((i3 >>> 4).toString(16)), s3.push((15 & i3).toString(16));
         }
         return s3.join("");
       }, parse: function(e3) {
         for (var t4 = e3.length, n4 = [], s3 = 0; s3 < t4; s3 += 2)
           n4[s3 >>> 3] |= parseInt(e3.substr(s3, 2), 16) << 24 - s3 % 8 * 4;
-        return new i2.init(n4, t4 / 2);
+        return new o2.init(n4, t4 / 2);
       } }, u2 = a2.Latin1 = { stringify: function(e3) {
-        for (var t4 = e3.words, n4 = e3.sigBytes, s3 = [], o3 = 0; o3 < n4; o3++) {
-          var r3 = t4[o3 >>> 2] >>> 24 - o3 % 4 * 8 & 255;
-          s3.push(String.fromCharCode(r3));
+        for (var t4 = e3.words, n4 = e3.sigBytes, s3 = [], r3 = 0; r3 < n4; r3++) {
+          var i3 = t4[r3 >>> 2] >>> 24 - r3 % 4 * 8 & 255;
+          s3.push(String.fromCharCode(i3));
         }
         return s3.join("");
       }, parse: function(e3) {
         for (var t4 = e3.length, n4 = [], s3 = 0; s3 < t4; s3++)
           n4[s3 >>> 2] |= (255 & e3.charCodeAt(s3)) << 24 - s3 % 4 * 8;
-        return new i2.init(n4, t4);
+        return new o2.init(n4, t4);
       } }, l2 = a2.Utf8 = { stringify: function(e3) {
         try {
           return decodeURIComponent(escape(u2.stringify(e3)));
@@ -1173,24 +1317,24 @@ if (uni.restoreGlobal) {
         }
       }, parse: function(e3) {
         return u2.parse(unescape(encodeURIComponent(e3)));
-      } }, h2 = o2.BufferedBlockAlgorithm = r2.extend({ reset: function() {
-        this._data = new i2.init(), this._nDataBytes = 0;
+      } }, h2 = r2.BufferedBlockAlgorithm = i2.extend({ reset: function() {
+        this._data = new o2.init(), this._nDataBytes = 0;
       }, _append: function(e3) {
-        typeof e3 == "string" && (e3 = l2.parse(e3)), this._data.concat(e3), this._nDataBytes += e3.sigBytes;
+        "string" == typeof e3 && (e3 = l2.parse(e3)), this._data.concat(e3), this._nDataBytes += e3.sigBytes;
       }, _process: function(t4) {
-        var n4 = this._data, s3 = n4.words, o3 = n4.sigBytes, r3 = this.blockSize, a3 = o3 / (4 * r3), c3 = (a3 = t4 ? e2.ceil(a3) : e2.max((0 | a3) - this._minBufferSize, 0)) * r3, u3 = e2.min(4 * c3, o3);
+        var n4 = this._data, s3 = n4.words, r3 = n4.sigBytes, i3 = this.blockSize, a3 = r3 / (4 * i3), c3 = (a3 = t4 ? e2.ceil(a3) : e2.max((0 | a3) - this._minBufferSize, 0)) * i3, u3 = e2.min(4 * c3, r3);
         if (c3) {
-          for (var l3 = 0; l3 < c3; l3 += r3)
+          for (var l3 = 0; l3 < c3; l3 += i3)
             this._doProcessBlock(s3, l3);
           var h3 = s3.splice(0, c3);
           n4.sigBytes -= u3;
         }
-        return new i2.init(h3, u3);
+        return new o2.init(h3, u3);
       }, clone: function() {
-        var e3 = r2.clone.call(this);
+        var e3 = i2.clone.call(this);
         return e3._data = this._data.clone(), e3;
       }, _minBufferSize: 0 });
-      o2.Hasher = h2.extend({ cfg: r2.extend(), init: function(e3) {
+      r2.Hasher = h2.extend({ cfg: i2.extend(), init: function(e3) {
         this.cfg = this.cfg.extend(e3), this.reset();
       }, reset: function() {
         h2.reset.call(this), this._doReset();
@@ -1210,238 +1354,276 @@ if (uni.restoreGlobal) {
       var d2 = s2.algo = {};
       return s2;
     }(Math), n2);
-  }), r = (s(function(e, t2) {
+  }), i = r, o = (s(function(e, t2) {
     var n2;
-    e.exports = (n2 = o, function(e2) {
-      var t3 = n2, s2 = t3.lib, o2 = s2.WordArray, r2 = s2.Hasher, i2 = t3.algo, a2 = [];
+    e.exports = (n2 = i, function(e2) {
+      var t3 = n2, s2 = t3.lib, r2 = s2.WordArray, i2 = s2.Hasher, o2 = t3.algo, a2 = [];
       !function() {
         for (var t4 = 0; t4 < 64; t4++)
           a2[t4] = 4294967296 * e2.abs(e2.sin(t4 + 1)) | 0;
       }();
-      var c2 = i2.MD5 = r2.extend({ _doReset: function() {
-        this._hash = new o2.init([1732584193, 4023233417, 2562383102, 271733878]);
+      var c2 = o2.MD5 = i2.extend({ _doReset: function() {
+        this._hash = new r2.init([1732584193, 4023233417, 2562383102, 271733878]);
       }, _doProcessBlock: function(e3, t4) {
         for (var n3 = 0; n3 < 16; n3++) {
-          var s3 = t4 + n3, o3 = e3[s3];
-          e3[s3] = 16711935 & (o3 << 8 | o3 >>> 24) | 4278255360 & (o3 << 24 | o3 >>> 8);
+          var s3 = t4 + n3, r3 = e3[s3];
+          e3[s3] = 16711935 & (r3 << 8 | r3 >>> 24) | 4278255360 & (r3 << 24 | r3 >>> 8);
         }
-        var r3 = this._hash.words, i3 = e3[t4 + 0], c3 = e3[t4 + 1], f2 = e3[t4 + 2], p2 = e3[t4 + 3], g2 = e3[t4 + 4], m2 = e3[t4 + 5], y2 = e3[t4 + 6], _2 = e3[t4 + 7], w = e3[t4 + 8], v2 = e3[t4 + 9], k2 = e3[t4 + 10], T2 = e3[t4 + 11], S2 = e3[t4 + 12], A2 = e3[t4 + 13], P2 = e3[t4 + 14], I2 = e3[t4 + 15], b2 = r3[0], O2 = r3[1], C2 = r3[2], E2 = r3[3];
-        b2 = u2(b2, O2, C2, E2, i3, 7, a2[0]), E2 = u2(E2, b2, O2, C2, c3, 12, a2[1]), C2 = u2(C2, E2, b2, O2, f2, 17, a2[2]), O2 = u2(O2, C2, E2, b2, p2, 22, a2[3]), b2 = u2(b2, O2, C2, E2, g2, 7, a2[4]), E2 = u2(E2, b2, O2, C2, m2, 12, a2[5]), C2 = u2(C2, E2, b2, O2, y2, 17, a2[6]), O2 = u2(O2, C2, E2, b2, _2, 22, a2[7]), b2 = u2(b2, O2, C2, E2, w, 7, a2[8]), E2 = u2(E2, b2, O2, C2, v2, 12, a2[9]), C2 = u2(C2, E2, b2, O2, k2, 17, a2[10]), O2 = u2(O2, C2, E2, b2, T2, 22, a2[11]), b2 = u2(b2, O2, C2, E2, S2, 7, a2[12]), E2 = u2(E2, b2, O2, C2, A2, 12, a2[13]), C2 = u2(C2, E2, b2, O2, P2, 17, a2[14]), b2 = l2(b2, O2 = u2(O2, C2, E2, b2, I2, 22, a2[15]), C2, E2, c3, 5, a2[16]), E2 = l2(E2, b2, O2, C2, y2, 9, a2[17]), C2 = l2(C2, E2, b2, O2, T2, 14, a2[18]), O2 = l2(O2, C2, E2, b2, i3, 20, a2[19]), b2 = l2(b2, O2, C2, E2, m2, 5, a2[20]), E2 = l2(E2, b2, O2, C2, k2, 9, a2[21]), C2 = l2(C2, E2, b2, O2, I2, 14, a2[22]), O2 = l2(O2, C2, E2, b2, g2, 20, a2[23]), b2 = l2(b2, O2, C2, E2, v2, 5, a2[24]), E2 = l2(E2, b2, O2, C2, P2, 9, a2[25]), C2 = l2(C2, E2, b2, O2, p2, 14, a2[26]), O2 = l2(O2, C2, E2, b2, w, 20, a2[27]), b2 = l2(b2, O2, C2, E2, A2, 5, a2[28]), E2 = l2(E2, b2, O2, C2, f2, 9, a2[29]), C2 = l2(C2, E2, b2, O2, _2, 14, a2[30]), b2 = h2(b2, O2 = l2(O2, C2, E2, b2, S2, 20, a2[31]), C2, E2, m2, 4, a2[32]), E2 = h2(E2, b2, O2, C2, w, 11, a2[33]), C2 = h2(C2, E2, b2, O2, T2, 16, a2[34]), O2 = h2(O2, C2, E2, b2, P2, 23, a2[35]), b2 = h2(b2, O2, C2, E2, c3, 4, a2[36]), E2 = h2(E2, b2, O2, C2, g2, 11, a2[37]), C2 = h2(C2, E2, b2, O2, _2, 16, a2[38]), O2 = h2(O2, C2, E2, b2, k2, 23, a2[39]), b2 = h2(b2, O2, C2, E2, A2, 4, a2[40]), E2 = h2(E2, b2, O2, C2, i3, 11, a2[41]), C2 = h2(C2, E2, b2, O2, p2, 16, a2[42]), O2 = h2(O2, C2, E2, b2, y2, 23, a2[43]), b2 = h2(b2, O2, C2, E2, v2, 4, a2[44]), E2 = h2(E2, b2, O2, C2, S2, 11, a2[45]), C2 = h2(C2, E2, b2, O2, I2, 16, a2[46]), b2 = d2(b2, O2 = h2(O2, C2, E2, b2, f2, 23, a2[47]), C2, E2, i3, 6, a2[48]), E2 = d2(E2, b2, O2, C2, _2, 10, a2[49]), C2 = d2(C2, E2, b2, O2, P2, 15, a2[50]), O2 = d2(O2, C2, E2, b2, m2, 21, a2[51]), b2 = d2(b2, O2, C2, E2, S2, 6, a2[52]), E2 = d2(E2, b2, O2, C2, p2, 10, a2[53]), C2 = d2(C2, E2, b2, O2, k2, 15, a2[54]), O2 = d2(O2, C2, E2, b2, c3, 21, a2[55]), b2 = d2(b2, O2, C2, E2, w, 6, a2[56]), E2 = d2(E2, b2, O2, C2, I2, 10, a2[57]), C2 = d2(C2, E2, b2, O2, y2, 15, a2[58]), O2 = d2(O2, C2, E2, b2, A2, 21, a2[59]), b2 = d2(b2, O2, C2, E2, g2, 6, a2[60]), E2 = d2(E2, b2, O2, C2, T2, 10, a2[61]), C2 = d2(C2, E2, b2, O2, f2, 15, a2[62]), O2 = d2(O2, C2, E2, b2, v2, 21, a2[63]), r3[0] = r3[0] + b2 | 0, r3[1] = r3[1] + O2 | 0, r3[2] = r3[2] + C2 | 0, r3[3] = r3[3] + E2 | 0;
+        var i3 = this._hash.words, o3 = e3[t4 + 0], c3 = e3[t4 + 1], f2 = e3[t4 + 2], p2 = e3[t4 + 3], g2 = e3[t4 + 4], m2 = e3[t4 + 5], y2 = e3[t4 + 6], _2 = e3[t4 + 7], w = e3[t4 + 8], v2 = e3[t4 + 9], S2 = e3[t4 + 10], k2 = e3[t4 + 11], I2 = e3[t4 + 12], b = e3[t4 + 13], T2 = e3[t4 + 14], A2 = e3[t4 + 15], C2 = i3[0], P2 = i3[1], E2 = i3[2], O2 = i3[3];
+        C2 = u2(C2, P2, E2, O2, o3, 7, a2[0]), O2 = u2(O2, C2, P2, E2, c3, 12, a2[1]), E2 = u2(E2, O2, C2, P2, f2, 17, a2[2]), P2 = u2(P2, E2, O2, C2, p2, 22, a2[3]), C2 = u2(C2, P2, E2, O2, g2, 7, a2[4]), O2 = u2(O2, C2, P2, E2, m2, 12, a2[5]), E2 = u2(E2, O2, C2, P2, y2, 17, a2[6]), P2 = u2(P2, E2, O2, C2, _2, 22, a2[7]), C2 = u2(C2, P2, E2, O2, w, 7, a2[8]), O2 = u2(O2, C2, P2, E2, v2, 12, a2[9]), E2 = u2(E2, O2, C2, P2, S2, 17, a2[10]), P2 = u2(P2, E2, O2, C2, k2, 22, a2[11]), C2 = u2(C2, P2, E2, O2, I2, 7, a2[12]), O2 = u2(O2, C2, P2, E2, b, 12, a2[13]), E2 = u2(E2, O2, C2, P2, T2, 17, a2[14]), C2 = l2(C2, P2 = u2(P2, E2, O2, C2, A2, 22, a2[15]), E2, O2, c3, 5, a2[16]), O2 = l2(O2, C2, P2, E2, y2, 9, a2[17]), E2 = l2(E2, O2, C2, P2, k2, 14, a2[18]), P2 = l2(P2, E2, O2, C2, o3, 20, a2[19]), C2 = l2(C2, P2, E2, O2, m2, 5, a2[20]), O2 = l2(O2, C2, P2, E2, S2, 9, a2[21]), E2 = l2(E2, O2, C2, P2, A2, 14, a2[22]), P2 = l2(P2, E2, O2, C2, g2, 20, a2[23]), C2 = l2(C2, P2, E2, O2, v2, 5, a2[24]), O2 = l2(O2, C2, P2, E2, T2, 9, a2[25]), E2 = l2(E2, O2, C2, P2, p2, 14, a2[26]), P2 = l2(P2, E2, O2, C2, w, 20, a2[27]), C2 = l2(C2, P2, E2, O2, b, 5, a2[28]), O2 = l2(O2, C2, P2, E2, f2, 9, a2[29]), E2 = l2(E2, O2, C2, P2, _2, 14, a2[30]), C2 = h2(C2, P2 = l2(P2, E2, O2, C2, I2, 20, a2[31]), E2, O2, m2, 4, a2[32]), O2 = h2(O2, C2, P2, E2, w, 11, a2[33]), E2 = h2(E2, O2, C2, P2, k2, 16, a2[34]), P2 = h2(P2, E2, O2, C2, T2, 23, a2[35]), C2 = h2(C2, P2, E2, O2, c3, 4, a2[36]), O2 = h2(O2, C2, P2, E2, g2, 11, a2[37]), E2 = h2(E2, O2, C2, P2, _2, 16, a2[38]), P2 = h2(P2, E2, O2, C2, S2, 23, a2[39]), C2 = h2(C2, P2, E2, O2, b, 4, a2[40]), O2 = h2(O2, C2, P2, E2, o3, 11, a2[41]), E2 = h2(E2, O2, C2, P2, p2, 16, a2[42]), P2 = h2(P2, E2, O2, C2, y2, 23, a2[43]), C2 = h2(C2, P2, E2, O2, v2, 4, a2[44]), O2 = h2(O2, C2, P2, E2, I2, 11, a2[45]), E2 = h2(E2, O2, C2, P2, A2, 16, a2[46]), C2 = d2(C2, P2 = h2(P2, E2, O2, C2, f2, 23, a2[47]), E2, O2, o3, 6, a2[48]), O2 = d2(O2, C2, P2, E2, _2, 10, a2[49]), E2 = d2(E2, O2, C2, P2, T2, 15, a2[50]), P2 = d2(P2, E2, O2, C2, m2, 21, a2[51]), C2 = d2(C2, P2, E2, O2, I2, 6, a2[52]), O2 = d2(O2, C2, P2, E2, p2, 10, a2[53]), E2 = d2(E2, O2, C2, P2, S2, 15, a2[54]), P2 = d2(P2, E2, O2, C2, c3, 21, a2[55]), C2 = d2(C2, P2, E2, O2, w, 6, a2[56]), O2 = d2(O2, C2, P2, E2, A2, 10, a2[57]), E2 = d2(E2, O2, C2, P2, y2, 15, a2[58]), P2 = d2(P2, E2, O2, C2, b, 21, a2[59]), C2 = d2(C2, P2, E2, O2, g2, 6, a2[60]), O2 = d2(O2, C2, P2, E2, k2, 10, a2[61]), E2 = d2(E2, O2, C2, P2, f2, 15, a2[62]), P2 = d2(P2, E2, O2, C2, v2, 21, a2[63]), i3[0] = i3[0] + C2 | 0, i3[1] = i3[1] + P2 | 0, i3[2] = i3[2] + E2 | 0, i3[3] = i3[3] + O2 | 0;
       }, _doFinalize: function() {
-        var t4 = this._data, n3 = t4.words, s3 = 8 * this._nDataBytes, o3 = 8 * t4.sigBytes;
-        n3[o3 >>> 5] |= 128 << 24 - o3 % 32;
-        var r3 = e2.floor(s3 / 4294967296), i3 = s3;
-        n3[15 + (o3 + 64 >>> 9 << 4)] = 16711935 & (r3 << 8 | r3 >>> 24) | 4278255360 & (r3 << 24 | r3 >>> 8), n3[14 + (o3 + 64 >>> 9 << 4)] = 16711935 & (i3 << 8 | i3 >>> 24) | 4278255360 & (i3 << 24 | i3 >>> 8), t4.sigBytes = 4 * (n3.length + 1), this._process();
+        var t4 = this._data, n3 = t4.words, s3 = 8 * this._nDataBytes, r3 = 8 * t4.sigBytes;
+        n3[r3 >>> 5] |= 128 << 24 - r3 % 32;
+        var i3 = e2.floor(s3 / 4294967296), o3 = s3;
+        n3[15 + (r3 + 64 >>> 9 << 4)] = 16711935 & (i3 << 8 | i3 >>> 24) | 4278255360 & (i3 << 24 | i3 >>> 8), n3[14 + (r3 + 64 >>> 9 << 4)] = 16711935 & (o3 << 8 | o3 >>> 24) | 4278255360 & (o3 << 24 | o3 >>> 8), t4.sigBytes = 4 * (n3.length + 1), this._process();
         for (var a3 = this._hash, c3 = a3.words, u3 = 0; u3 < 4; u3++) {
           var l3 = c3[u3];
           c3[u3] = 16711935 & (l3 << 8 | l3 >>> 24) | 4278255360 & (l3 << 24 | l3 >>> 8);
         }
         return a3;
       }, clone: function() {
-        var e3 = r2.clone.call(this);
+        var e3 = i2.clone.call(this);
         return e3._hash = this._hash.clone(), e3;
       } });
-      function u2(e3, t4, n3, s3, o3, r3, i3) {
-        var a3 = e3 + (t4 & n3 | ~t4 & s3) + o3 + i3;
-        return (a3 << r3 | a3 >>> 32 - r3) + t4;
+      function u2(e3, t4, n3, s3, r3, i3, o3) {
+        var a3 = e3 + (t4 & n3 | ~t4 & s3) + r3 + o3;
+        return (a3 << i3 | a3 >>> 32 - i3) + t4;
       }
-      function l2(e3, t4, n3, s3, o3, r3, i3) {
-        var a3 = e3 + (t4 & s3 | n3 & ~s3) + o3 + i3;
-        return (a3 << r3 | a3 >>> 32 - r3) + t4;
+      function l2(e3, t4, n3, s3, r3, i3, o3) {
+        var a3 = e3 + (t4 & s3 | n3 & ~s3) + r3 + o3;
+        return (a3 << i3 | a3 >>> 32 - i3) + t4;
       }
-      function h2(e3, t4, n3, s3, o3, r3, i3) {
-        var a3 = e3 + (t4 ^ n3 ^ s3) + o3 + i3;
-        return (a3 << r3 | a3 >>> 32 - r3) + t4;
+      function h2(e3, t4, n3, s3, r3, i3, o3) {
+        var a3 = e3 + (t4 ^ n3 ^ s3) + r3 + o3;
+        return (a3 << i3 | a3 >>> 32 - i3) + t4;
       }
-      function d2(e3, t4, n3, s3, o3, r3, i3) {
-        var a3 = e3 + (n3 ^ (t4 | ~s3)) + o3 + i3;
-        return (a3 << r3 | a3 >>> 32 - r3) + t4;
+      function d2(e3, t4, n3, s3, r3, i3, o3) {
+        var a3 = e3 + (n3 ^ (t4 | ~s3)) + r3 + o3;
+        return (a3 << i3 | a3 >>> 32 - i3) + t4;
       }
-      t3.MD5 = r2._createHelper(c2), t3.HmacMD5 = r2._createHmacHelper(c2);
+      t3.MD5 = i2._createHelper(c2), t3.HmacMD5 = i2._createHmacHelper(c2);
     }(Math), n2.MD5);
   }), s(function(e, t2) {
-    var n2, s2, r2;
-    e.exports = (s2 = (n2 = o).lib.Base, r2 = n2.enc.Utf8, void (n2.algo.HMAC = s2.extend({ init: function(e2, t3) {
-      e2 = this._hasher = new e2.init(), typeof t3 == "string" && (t3 = r2.parse(t3));
-      var n3 = e2.blockSize, s3 = 4 * n3;
-      t3.sigBytes > s3 && (t3 = e2.finalize(t3)), t3.clamp();
-      for (var o2 = this._oKey = t3.clone(), i2 = this._iKey = t3.clone(), a2 = o2.words, c2 = i2.words, u2 = 0; u2 < n3; u2++)
-        a2[u2] ^= 1549556828, c2[u2] ^= 909522486;
-      o2.sigBytes = i2.sigBytes = s3, this.reset();
-    }, reset: function() {
-      var e2 = this._hasher;
-      e2.reset(), e2.update(this._iKey);
-    }, update: function(e2) {
-      return this._hasher.update(e2), this;
-    }, finalize: function(e2) {
-      var t3 = this._hasher, n3 = t3.finalize(e2);
-      return t3.reset(), t3.finalize(this._oKey.clone().concat(n3));
-    } })));
-  }), s(function(e, t2) {
-    e.exports = o.HmacMD5;
-  })), i = s(function(e, t2) {
-    e.exports = o.enc.Utf8;
-  }), a = s(function(e, t2) {
     var n2;
-    e.exports = (n2 = o, function() {
+    e.exports = (n2 = i, void function() {
+      var e2 = n2, t3 = e2.lib.Base, s2 = e2.enc.Utf8;
+      e2.algo.HMAC = t3.extend({ init: function(e3, t4) {
+        e3 = this._hasher = new e3.init(), "string" == typeof t4 && (t4 = s2.parse(t4));
+        var n3 = e3.blockSize, r2 = 4 * n3;
+        t4.sigBytes > r2 && (t4 = e3.finalize(t4)), t4.clamp();
+        for (var i2 = this._oKey = t4.clone(), o2 = this._iKey = t4.clone(), a2 = i2.words, c2 = o2.words, u2 = 0; u2 < n3; u2++)
+          a2[u2] ^= 1549556828, c2[u2] ^= 909522486;
+        i2.sigBytes = o2.sigBytes = r2, this.reset();
+      }, reset: function() {
+        var e3 = this._hasher;
+        e3.reset(), e3.update(this._iKey);
+      }, update: function(e3) {
+        return this._hasher.update(e3), this;
+      }, finalize: function(e3) {
+        var t4 = this._hasher, n3 = t4.finalize(e3);
+        return t4.reset(), t4.finalize(this._oKey.clone().concat(n3));
+      } });
+    }());
+  }), s(function(e, t2) {
+    e.exports = i.HmacMD5;
+  })), a = s(function(e, t2) {
+    e.exports = i.enc.Utf8;
+  }), c = s(function(e, t2) {
+    var n2;
+    e.exports = (n2 = i, function() {
       var e2 = n2, t3 = e2.lib.WordArray;
       function s2(e3, n3, s3) {
-        for (var o2 = [], r2 = 0, i2 = 0; i2 < n3; i2++)
-          if (i2 % 4) {
-            var a2 = s3[e3.charCodeAt(i2 - 1)] << i2 % 4 * 2, c2 = s3[e3.charCodeAt(i2)] >>> 6 - i2 % 4 * 2;
-            o2[r2 >>> 2] |= (a2 | c2) << 24 - r2 % 4 * 8, r2++;
+        for (var r2 = [], i2 = 0, o2 = 0; o2 < n3; o2++)
+          if (o2 % 4) {
+            var a2 = s3[e3.charCodeAt(o2 - 1)] << o2 % 4 * 2, c2 = s3[e3.charCodeAt(o2)] >>> 6 - o2 % 4 * 2;
+            r2[i2 >>> 2] |= (a2 | c2) << 24 - i2 % 4 * 8, i2++;
           }
-        return t3.create(o2, r2);
+        return t3.create(r2, i2);
       }
       e2.enc.Base64 = { stringify: function(e3) {
         var t4 = e3.words, n3 = e3.sigBytes, s3 = this._map;
         e3.clamp();
-        for (var o2 = [], r2 = 0; r2 < n3; r2 += 3)
-          for (var i2 = (t4[r2 >>> 2] >>> 24 - r2 % 4 * 8 & 255) << 16 | (t4[r2 + 1 >>> 2] >>> 24 - (r2 + 1) % 4 * 8 & 255) << 8 | t4[r2 + 2 >>> 2] >>> 24 - (r2 + 2) % 4 * 8 & 255, a2 = 0; a2 < 4 && r2 + 0.75 * a2 < n3; a2++)
-            o2.push(s3.charAt(i2 >>> 6 * (3 - a2) & 63));
+        for (var r2 = [], i2 = 0; i2 < n3; i2 += 3)
+          for (var o2 = (t4[i2 >>> 2] >>> 24 - i2 % 4 * 8 & 255) << 16 | (t4[i2 + 1 >>> 2] >>> 24 - (i2 + 1) % 4 * 8 & 255) << 8 | t4[i2 + 2 >>> 2] >>> 24 - (i2 + 2) % 4 * 8 & 255, a2 = 0; a2 < 4 && i2 + 0.75 * a2 < n3; a2++)
+            r2.push(s3.charAt(o2 >>> 6 * (3 - a2) & 63));
         var c2 = s3.charAt(64);
         if (c2)
-          for (; o2.length % 4; )
-            o2.push(c2);
-        return o2.join("");
+          for (; r2.length % 4; )
+            r2.push(c2);
+        return r2.join("");
       }, parse: function(e3) {
-        var t4 = e3.length, n3 = this._map, o2 = this._reverseMap;
-        if (!o2) {
-          o2 = this._reverseMap = [];
-          for (var r2 = 0; r2 < n3.length; r2++)
-            o2[n3.charCodeAt(r2)] = r2;
+        var t4 = e3.length, n3 = this._map, r2 = this._reverseMap;
+        if (!r2) {
+          r2 = this._reverseMap = [];
+          for (var i2 = 0; i2 < n3.length; i2++)
+            r2[n3.charCodeAt(i2)] = i2;
         }
-        var i2 = n3.charAt(64);
-        if (i2) {
-          var a2 = e3.indexOf(i2);
-          a2 !== -1 && (t4 = a2);
+        var o2 = n3.charAt(64);
+        if (o2) {
+          var a2 = e3.indexOf(o2);
+          -1 !== a2 && (t4 = a2);
         }
-        return s2(e3, t4, o2);
+        return s2(e3, t4, r2);
       }, _map: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=" };
     }(), n2.enc.Base64);
   });
-  const c = "FUNCTION", u = "OBJECT", l = "CLIENT_DB";
-  function h(e) {
+  const u = "FUNCTION", l = "OBJECT", h = "CLIENT_DB";
+  function d(e) {
     return Object.prototype.toString.call(e).slice(8, -1).toLowerCase();
   }
-  function d(e) {
-    return h(e) === "object";
-  }
   function f(e) {
-    return e && typeof e == "string" ? JSON.parse(e) : e;
+    return "object" === d(e);
   }
-  const p = true, g = "app";
-  let m;
-  m = g;
-  const y = f('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "192.168.1.106"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "local",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "C:/HBuilderX.3.6.5.20221121/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), _ = f('[{"provider":"aliyun","spaceName":"show","spaceId":"mp-6b936a4d-0e84-4456-a9db-5840cda294c8","clientSecret":"VncPDYAUTzq0NXvZLRCShQ==","endpoint":"https://api.next.bspapp.com"}]') || [];
-  let v = "";
+  function p(e) {
+    return "function" == typeof e;
+  }
+  function g(e) {
+    return function() {
+      try {
+        return e.apply(e, arguments);
+      } catch (e2) {
+        console.error(e2);
+      }
+    };
+  }
+  function m(e) {
+    return e && "string" == typeof e ? JSON.parse(e) : e;
+  }
+  const y = true, _ = "app", v = m([]), S = _, k = m('{\n    "address": [\n        "127.0.0.1",\n        "192.168.56.1",\n        "172.19.83.237",\n        "192.168.1.102"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "local",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "D:/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), I = m('[{"provider":"aliyun","spaceName":"show","spaceId":"mp-6b936a4d-0e84-4456-a9db-5840cda294c8","clientSecret":"VncPDYAUTzq0NXvZLRCShQ==","endpoint":"https://api.next.bspapp.com"}]') || [];
+  let T = "";
   try {
-    v = "__UNI__5176808";
+    T = "__UNI__5176808";
   } catch (e) {
   }
-  let k = {};
-  function T(e, t2 = {}) {
+  let A = {};
+  function C(e, t2 = {}) {
     var n2, s2;
-    return n2 = k, s2 = e, Object.prototype.hasOwnProperty.call(n2, s2) || (k[e] = t2), k[e];
+    return n2 = A, s2 = e, Object.prototype.hasOwnProperty.call(n2, s2) || (A[e] = t2), A[e];
   }
-  m === "app" && (k = uni._globalUniCloudObj ? uni._globalUniCloudObj : uni._globalUniCloudObj = {});
-  const S = ["invoke", "success", "fail", "complete"], A = T("_globalUniCloudInterceptor");
-  function P(e, t2) {
-    A[e] || (A[e] = {}), d(t2) && Object.keys(t2).forEach((n2) => {
-      S.indexOf(n2) > -1 && function(e2, t3, n3) {
-        let s2 = A[e2][t3];
-        s2 || (s2 = A[e2][t3] = []), s2.indexOf(n3) === -1 && typeof n3 == "function" && s2.push(n3);
+  A = uni._globalUniCloudObj ? uni._globalUniCloudObj : uni._globalUniCloudObj = {};
+  const P = ["invoke", "success", "fail", "complete"], E = C("_globalUniCloudInterceptor");
+  function O(e, t2) {
+    E[e] || (E[e] = {}), f(t2) && Object.keys(t2).forEach((n2) => {
+      P.indexOf(n2) > -1 && function(e2, t3, n3) {
+        let s2 = E[e2][t3];
+        s2 || (s2 = E[e2][t3] = []), -1 === s2.indexOf(n3) && p(n3) && s2.push(n3);
       }(e, n2, t2[n2]);
     });
   }
-  function I(e, t2) {
-    A[e] || (A[e] = {}), d(t2) ? Object.keys(t2).forEach((n2) => {
-      S.indexOf(n2) > -1 && function(e2, t3, n3) {
-        const s2 = A[e2][t3];
+  function x(e, t2) {
+    E[e] || (E[e] = {}), f(t2) ? Object.keys(t2).forEach((n2) => {
+      P.indexOf(n2) > -1 && function(e2, t3, n3) {
+        const s2 = E[e2][t3];
         if (!s2)
           return;
-        const o2 = s2.indexOf(n3);
-        o2 > -1 && s2.splice(o2, 1);
+        const r2 = s2.indexOf(n3);
+        r2 > -1 && s2.splice(r2, 1);
       }(e, n2, t2[n2]);
-    }) : delete A[e];
+    }) : delete E[e];
   }
-  function b(e, t2) {
-    return e && e.length !== 0 ? e.reduce((e2, n2) => e2.then(() => n2(t2)), Promise.resolve()) : Promise.resolve();
+  function U(e, t2) {
+    return e && 0 !== e.length ? e.reduce((e2, n2) => e2.then(() => n2(t2)), Promise.resolve()) : Promise.resolve();
   }
-  function O(e, t2) {
-    return A[e] && A[e][t2] || [];
+  function R(e, t2) {
+    return E[e] && E[e][t2] || [];
   }
-  function C(e) {
-    P("callObject", e);
+  function L(e) {
+    O("callObject", e);
   }
-  const E = T("_globalUniCloudListener"), R = "response", U = "needLogin", x = "refreshToken", L = "clientdb", D = "cloudfunction", N = "cloudobject";
-  function q(e) {
-    return E[e] || (E[e] = []), E[e];
+  const N = C("_globalUniCloudListener"), D = "response", F = "needLogin", q = "refreshToken", K = "clientdb", j = "cloudfunction", M = "cloudobject";
+  function B(e) {
+    return N[e] || (N[e] = []), N[e];
   }
-  function F(e, t2) {
-    const n2 = q(e);
+  function $(e, t2) {
+    const n2 = B(e);
     n2.includes(t2) || n2.push(t2);
   }
-  function M(e, t2) {
-    const n2 = q(e), s2 = n2.indexOf(t2);
-    s2 !== -1 && n2.splice(s2, 1);
+  function W(e, t2) {
+    const n2 = B(e), s2 = n2.indexOf(t2);
+    -1 !== s2 && n2.splice(s2, 1);
   }
-  function j(e, t2) {
-    const n2 = q(e);
+  function z(e, t2) {
+    const n2 = B(e);
     for (let e2 = 0; e2 < n2.length; e2++) {
       (0, n2[e2])(t2);
     }
   }
-  let $ = false;
-  const B = new Promise((e) => {
-    $ && e(), function t2() {
-      if (typeof getCurrentPages == "function") {
-        const t3 = getCurrentPages();
-        t3 && t3[0] && ($ = true, e());
-      }
-      $ || setTimeout(() => {
-        t2();
-      }, 30);
-    }();
-  });
-  function K() {
-    return B;
+  let J, H = false;
+  function G() {
+    return J || (J = new Promise((e) => {
+      H && e(), function t2() {
+        if ("function" == typeof getCurrentPages) {
+          const t3 = getCurrentPages();
+          t3 && t3[0] && (H = true, e());
+        }
+        H || setTimeout(() => {
+          t2();
+        }, 30);
+      }();
+    }), J);
   }
-  function W(e, t2) {
+  function V(e) {
+    const t2 = {};
+    for (const n2 in e) {
+      const s2 = e[n2];
+      p(s2) && (t2[n2] = g(s2));
+    }
+    return t2;
+  }
+  function Y(e, t2) {
     return t2 ? function(n2) {
       let s2 = false;
-      if (t2 === "callFunction") {
-        const e2 = n2 && n2.type || c;
-        s2 = e2 !== c;
+      if ("callFunction" === t2) {
+        const e2 = n2 && n2.type || u;
+        s2 = e2 !== u;
       }
-      const o2 = t2 === "callFunction" && !s2;
-      let r2;
-      r2 = this.isReady ? Promise.resolve() : this.initUniCloud, n2 = n2 || {};
-      const i2 = r2.then(() => s2 ? Promise.resolve() : b(O(t2, "invoke"), n2)).then(() => e.call(this, n2)).then((e2) => s2 ? Promise.resolve(e2) : b(O(t2, "success"), e2).then(() => b(O(t2, "complete"), e2)).then(() => (o2 && j(R, { type: D, content: e2 }), Promise.resolve(e2))), (e2) => s2 ? Promise.reject(e2) : b(O(t2, "fail"), e2).then(() => b(O(t2, "complete"), e2)).then(() => (j(R, { type: D, content: e2 }), Promise.reject(e2))));
-      if (!(n2.success || n2.fail || n2.complete))
-        return i2;
-      i2.then((e2) => {
-        n2.success && n2.success(e2), n2.complete && n2.complete(e2), o2 && j(R, { type: D, content: e2 });
+      const r2 = "callFunction" === t2 && !s2;
+      let i2;
+      i2 = this.isReady ? Promise.resolve() : this.initUniCloud, n2 = n2 || {};
+      const { success: o2, fail: a2, complete: c2 } = V(n2), l2 = i2.then(() => s2 ? Promise.resolve() : U(R(t2, "invoke"), n2)).then(() => e.call(this, n2)).then((e2) => s2 ? Promise.resolve(e2) : U(R(t2, "success"), e2).then(() => U(R(t2, "complete"), e2)).then(() => (r2 && z(D, { type: j, content: e2 }), Promise.resolve(e2))), (e2) => s2 ? Promise.reject(e2) : U(R(t2, "fail"), e2).then(() => U(R(t2, "complete"), e2)).then(() => (z(D, { type: j, content: e2 }), Promise.reject(e2))));
+      if (!(o2 || a2 || c2))
+        return l2;
+      l2.then((e2) => {
+        o2 && o2(e2), c2 && c2(e2), r2 && z(D, { type: j, content: e2 });
       }, (e2) => {
-        n2.fail && n2.fail(e2), n2.complete && n2.complete(e2), o2 && j(R, { type: D, content: e2 });
+        a2 && a2(e2), c2 && c2(e2), r2 && z(D, { type: j, content: e2 });
       });
     } : function(t3) {
-      if (!((t3 = t3 || {}).success || t3.fail || t3.complete))
+      t3 = t3 || {};
+      const { success: n2, fail: s2, complete: r2 } = V(t3);
+      if (!(n2 || s2 || r2))
         return e.call(this, t3);
       e.call(this, t3).then((e2) => {
-        t3.success && t3.success(e2), t3.complete && t3.complete(e2);
+        n2 && n2(e2), r2 && r2(e2);
       }, (e2) => {
-        t3.fail && t3.fail(e2), t3.complete && t3.complete(e2);
+        s2 && s2(e2), r2 && r2(e2);
       });
     };
   }
-  class H extends Error {
+  class Q extends Error {
     constructor(e) {
-      const t2 = e.code || "SYSTEM_ERROR", n2 = e.message || "unknown system error";
-      super(n2), this.errMsg = n2, this.errCode = this.code = t2, this.requestId = e.requestId;
+      super(e.message), this.errMsg = e.message || e.errMsg || "unknown system error", this.code = this.errCode = e.code || e.errCode || "SYSTEM_ERROR", this.errSubject = this.subject = e.subject || e.errSubject, this.cause = e.cause, this.requestId = e.requestId;
+    }
+    toJson(e = 0) {
+      if (!(e >= 10))
+        return e++, { errCode: this.errCode, errMsg: this.errMsg, errSubject: this.errSubject, cause: this.cause && this.cause.toJson ? this.cause.toJson(e) : this.cause };
     }
   }
-  function z() {
+  var X = { request: (e) => uni.request(e), uploadFile: (e) => uni.uploadFile(e), setStorageSync: (e, t2) => uni.setStorageSync(e, t2), getStorageSync: (e) => uni.getStorageSync(e), removeStorageSync: (e) => uni.removeStorageSync(e), clearStorageSync: () => uni.clearStorageSync() };
+  function Z(e) {
+    return e && Z(e.__v_raw) || e;
+  }
+  function ee() {
+    return { token: X.getStorageSync("uni_id_token") || X.getStorageSync("uniIdToken"), tokenExpired: X.getStorageSync("uni_id_token_expired") };
+  }
+  function te({ token: e, tokenExpired: t2 } = {}) {
+    e && X.setStorageSync("uni_id_token", e), t2 && X.setStorageSync("uni_id_token_expired", t2);
+  }
+  let se, re;
+  function ie() {
+    return se || (se = uni.getSystemInfoSync()), se;
+  }
+  function oe() {
     let e, t2;
     try {
       if (uni.getLaunchOptionsSync) {
@@ -1454,45 +1636,43 @@ if (uni.restoreGlobal) {
     }
     return { channel: e, scene: t2 };
   }
-  let J;
-  function V() {
+  function ae() {
     const e = uni.getLocale && uni.getLocale() || "en";
-    if (J)
-      return __spreadProps(__spreadValues({}, J), { locale: e, LOCALE: e });
-    const t2 = uni.getSystemInfoSync(), { deviceId: n2, osName: s2, uniPlatform: o2, appId: r2 } = t2, i2 = ["pixelRatio", "brand", "model", "system", "language", "version", "platform", "host", "SDKVersion", "swanNativeVersion", "app", "AppPlatform", "fontSizeSetting"];
-    for (let e2 = 0; e2 < i2.length; e2++) {
-      delete t2[i2[e2]];
+    if (re)
+      return { ...re, locale: e, LOCALE: e };
+    const t2 = ie(), { deviceId: n2, osName: s2, uniPlatform: r2, appId: i2 } = t2, o2 = ["pixelRatio", "brand", "model", "system", "language", "version", "platform", "host", "SDKVersion", "swanNativeVersion", "app", "AppPlatform", "fontSizeSetting"];
+    for (let e2 = 0; e2 < o2.length; e2++) {
+      delete t2[o2[e2]];
     }
-    return J = __spreadValues(__spreadValues({ PLATFORM: o2, OS: s2, APPID: r2, DEVICEID: n2 }, z()), t2), __spreadProps(__spreadValues({}, J), { locale: e, LOCALE: e });
+    return re = { PLATFORM: r2, OS: s2, APPID: i2, DEVICEID: n2, ...oe(), ...t2 }, { ...re, locale: e, LOCALE: e };
   }
-  var Y = { sign: function(e, t2) {
+  var ce = { sign: function(e, t2) {
     let n2 = "";
     return Object.keys(e).sort().forEach(function(t3) {
       e[t3] && (n2 = n2 + "&" + t3 + "=" + e[t3]);
-    }), n2 = n2.slice(1), r(n2, t2).toString();
+    }), n2 = n2.slice(1), o(n2, t2).toString();
   }, wrappedRequest: function(e, t2) {
     return new Promise((n2, s2) => {
       t2(Object.assign(e, { complete(e2) {
-        e2 || (e2 = {}), m === "web" && e2.errMsg && e2.errMsg.indexOf("request:fail") === 0 && console.warn("\u53D1\u5E03H5\uFF0C\u9700\u8981\u5728uniCloud\u540E\u53F0\u64CD\u4F5C\uFF0C\u7ED1\u5B9A\u5B89\u5168\u57DF\u540D\uFF0C\u5426\u5219\u4F1A\u56E0\u4E3A\u8DE8\u57DF\u95EE\u9898\u800C\u65E0\u6CD5\u8BBF\u95EE\u3002\u6559\u7A0B\u53C2\u8003\uFF1Ahttps://uniapp.dcloud.io/uniCloud/quickstart?id=useinh5");
+        e2 || (e2 = {});
         const t3 = e2.data && e2.data.header && e2.data.header["x-serverless-request-id"] || e2.header && e2.header["request-id"];
         if (!e2.statusCode || e2.statusCode >= 400)
-          return s2(new H({ code: "SYS_ERR", message: e2.errMsg || "request:fail", requestId: t3 }));
-        const o2 = e2.data;
-        if (o2.error)
-          return s2(new H({ code: o2.error.code, message: o2.error.message, requestId: t3 }));
-        o2.result = o2.data, o2.requestId = t3, delete o2.data, n2(o2);
+          return s2(new Q({ code: "SYS_ERR", message: e2.errMsg || "request:fail", requestId: t3 }));
+        const r2 = e2.data;
+        if (r2.error)
+          return s2(new Q({ code: r2.error.code, message: r2.error.message, requestId: t3 }));
+        r2.result = r2.data, r2.requestId = t3, delete r2.data, n2(r2);
       } }));
     });
   }, toBase64: function(e) {
-    return a.stringify(i.parse(e));
-  } };
-  var X = { request: (e) => uni.request(e), uploadFile: (e) => uni.uploadFile(e), setStorageSync: (e, t2) => uni.setStorageSync(e, t2), getStorageSync: (e) => uni.getStorageSync(e), removeStorageSync: (e) => uni.removeStorageSync(e), clearStorageSync: () => uni.clearStorageSync() }, G = { "uniCloud.init.paramRequired": "{param} required", "uniCloud.uploadFile.fileError": "filePath should be instance of File" };
-  const { t: Q } = initVueI18n({ "zh-Hans": { "uniCloud.init.paramRequired": "\u7F3A\u5C11\u53C2\u6570\uFF1A{param}", "uniCloud.uploadFile.fileError": "filePath\u5E94\u4E3AFile\u5BF9\u8C61" }, "zh-Hant": { "uniCloud.init.paramRequired": "\u7F3A\u5C11\u53C2\u6570\uFF1A{param}", "uniCloud.uploadFile.fileError": "filePath\u5E94\u4E3AFile\u5BF9\u8C61" }, en: G, fr: { "uniCloud.init.paramRequired": "{param} required", "uniCloud.uploadFile.fileError": "filePath should be instance of File" }, es: { "uniCloud.init.paramRequired": "{param} required", "uniCloud.uploadFile.fileError": "filePath should be instance of File" }, ja: G }, "zh-Hans");
-  var Z = class {
+    return c.stringify(a.parse(e));
+  } }, ue = { "uniCloud.init.paramRequired": "{param} required", "uniCloud.uploadFile.fileError": "filePath should be instance of File" };
+  const { t: le } = initVueI18n({ "zh-Hans": { "uniCloud.init.paramRequired": "缺少参数：{param}", "uniCloud.uploadFile.fileError": "filePath应为File对象" }, "zh-Hant": { "uniCloud.init.paramRequired": "缺少参数：{param}", "uniCloud.uploadFile.fileError": "filePath应为File对象" }, en: ue, fr: { "uniCloud.init.paramRequired": "{param} required", "uniCloud.uploadFile.fileError": "filePath should be instance of File" }, es: { "uniCloud.init.paramRequired": "{param} required", "uniCloud.uploadFile.fileError": "filePath should be instance of File" }, ja: ue }, "zh-Hans");
+  var he = class {
     constructor(e) {
       ["spaceId", "clientSecret"].forEach((t2) => {
         if (!Object.prototype.hasOwnProperty.call(e, t2))
-          throw new Error(Q("uniCloud.init.paramRequired", { param: t2 }));
+          throw new Error(le("uniCloud.init.paramRequired", { param: t2 }));
       }), this.config = Object.assign({}, { endpoint: "https://api.bspapp.com" }, e), this.config.provider = "aliyun", this.config.requestUrl = this.config.endpoint + "/client", this.config.envType = this.config.envType || "public", this.config.accessTokenKey = "access_token_" + this.config.spaceId, this.adapter = X, this._getAccessTokenPromise = null, this._getAccessTokenPromiseStatus = null;
     }
     get hasAccessToken() {
@@ -1502,14 +1682,14 @@ if (uni.restoreGlobal) {
       this.accessToken = e;
     }
     requestWrapped(e) {
-      return Y.wrappedRequest(e, this.adapter.request);
+      return ce.wrappedRequest(e, this.adapter.request);
     }
     requestAuth(e) {
       return this.requestWrapped(e);
     }
     request(e, t2) {
       return Promise.resolve().then(() => this.hasAccessToken ? t2 ? this.requestWrapped(e) : this.requestWrapped(e).catch((t3) => new Promise((e2, n2) => {
-        !t3 || t3.code !== "GATEWAY_INVALID_TOKEN" && t3.code !== "InvalidParameter.InvalidToken" ? n2(t3) : e2();
+        !t3 || "GATEWAY_INVALID_TOKEN" !== t3.code && "InvalidParameter.InvalidToken" !== t3.code ? n2(t3) : e2();
       }).then(() => this.getAccessToken()).then(() => {
         const t4 = this.rebuildRequest(e);
         return this.request(t4, true);
@@ -1520,18 +1700,18 @@ if (uni.restoreGlobal) {
     }
     rebuildRequest(e) {
       const t2 = Object.assign({}, e);
-      return t2.data.token = this.accessToken, t2.header["x-basement-token"] = this.accessToken, t2.header["x-serverless-sign"] = Y.sign(t2.data, this.config.clientSecret), t2;
+      return t2.data.token = this.accessToken, t2.header["x-basement-token"] = this.accessToken, t2.header["x-serverless-sign"] = ce.sign(t2.data, this.config.clientSecret), t2;
     }
     setupRequest(e, t2) {
       const n2 = Object.assign({}, e, { spaceId: this.config.spaceId, timestamp: Date.now() }), s2 = { "Content-Type": "application/json" };
-      return t2 !== "auth" && (n2.token = this.accessToken, s2["x-basement-token"] = this.accessToken), s2["x-serverless-sign"] = Y.sign(n2, this.config.clientSecret), { url: this.config.requestUrl, method: "POST", data: n2, dataType: "json", header: s2 };
+      return "auth" !== t2 && (n2.token = this.accessToken, s2["x-basement-token"] = this.accessToken), s2["x-serverless-sign"] = ce.sign(n2, this.config.clientSecret), { url: this.config.requestUrl, method: "POST", data: n2, dataType: "json", header: s2 };
     }
     getAccessToken() {
-      if (this._getAccessTokenPromiseStatus === "pending")
+      if ("pending" === this._getAccessTokenPromiseStatus)
         return this._getAccessTokenPromise;
       this._getAccessTokenPromiseStatus = "pending";
       return this._getAccessTokenPromise = this.requestAuth(this.setupRequest({ method: "serverless.auth.user.anonymousAuthorize", params: "{}" }, "auth")).then((e) => new Promise((t2, n2) => {
-        e.result && e.result.accessToken ? (this.setAccessToken(e.result.accessToken), this._getAccessTokenPromiseStatus = "fulfilled", t2(this.accessToken)) : (this._getAccessTokenPromiseStatus = "rejected", n2(new H({ code: "AUTH_FAILED", message: "\u83B7\u53D6accessToken\u5931\u8D25" })));
+        e.result && e.result.accessToken ? (this.setAccessToken(e.result.accessToken), this._getAccessTokenPromiseStatus = "fulfilled", t2(this.accessToken)) : (this._getAccessTokenPromiseStatus = "rejected", n2(new Q({ code: "AUTH_FAILED", message: "获取accessToken失败" })));
       }), (e) => (this._getAccessTokenPromiseStatus = "rejected", Promise.reject(e))), this._getAccessTokenPromise;
     }
     authorize() {
@@ -1545,15 +1725,15 @@ if (uni.restoreGlobal) {
       const t2 = { method: "serverless.file.resource.generateProximalSign", params: JSON.stringify(e) };
       return this.request(this.setupRequest(t2));
     }
-    uploadFileToOSS({ url: e, formData: t2, name: n2, filePath: s2, fileType: o2, onUploadProgress: r2 }) {
-      return new Promise((i2, a2) => {
-        const c2 = this.adapter.uploadFile({ url: e, formData: t2, name: n2, filePath: s2, fileType: o2, header: { "X-OSS-server-side-encrpytion": "AES256" }, success(e2) {
-          e2 && e2.statusCode < 400 ? i2(e2) : a2(new H({ code: "UPLOAD_FAILED", message: "\u6587\u4EF6\u4E0A\u4F20\u5931\u8D25" }));
+    uploadFileToOSS({ url: e, formData: t2, name: n2, filePath: s2, fileType: r2, onUploadProgress: i2 }) {
+      return new Promise((o2, a2) => {
+        const c2 = this.adapter.uploadFile({ url: e, formData: t2, name: n2, filePath: s2, fileType: r2, header: { "X-OSS-server-side-encrpytion": "AES256" }, success(e2) {
+          e2 && e2.statusCode < 400 ? o2(e2) : a2(new Q({ code: "UPLOAD_FAILED", message: "文件上传失败" }));
         }, fail(e2) {
-          a2(new H({ code: e2.code || "UPLOAD_FAILED", message: e2.message || e2.errMsg || "\u6587\u4EF6\u4E0A\u4F20\u5931\u8D25" }));
+          a2(new Q({ code: e2.code || "UPLOAD_FAILED", message: e2.message || e2.errMsg || "文件上传失败" }));
         } });
-        typeof r2 == "function" && c2 && typeof c2.onProgressUpdate == "function" && c2.onProgressUpdate((e2) => {
-          r2({ loaded: e2.totalBytesSent, total: e2.totalBytesExpectedToSend });
+        "function" == typeof i2 && c2 && "function" == typeof c2.onProgressUpdate && c2.onProgressUpdate((e2) => {
+          i2({ loaded: e2.totalBytesSent, total: e2.totalBytesExpectedToSend });
         });
       });
     }
@@ -1561,43 +1741,39 @@ if (uni.restoreGlobal) {
       const t2 = { method: "serverless.file.resource.report", params: JSON.stringify(e) };
       return this.request(this.setupRequest(t2));
     }
-    async uploadFile({ filePath: e, cloudPath: t2, fileType: n2 = "image", onUploadProgress: s2, config: o2 }) {
-      if (h(t2) !== "string")
-        throw new H({ code: "INVALID_PARAM", message: "cloudPath\u5FC5\u987B\u4E3A\u5B57\u7B26\u4E32\u7C7B\u578B" });
+    async uploadFile({ filePath: e, cloudPath: t2, fileType: n2 = "image", onUploadProgress: s2, config: r2 }) {
+      if ("string" !== d(t2))
+        throw new Q({ code: "INVALID_PARAM", message: "cloudPath必须为字符串类型" });
       if (!(t2 = t2.trim()))
-        throw new H({ code: "CLOUDPATH_REQUIRED", message: "cloudPath\u4E0D\u53EF\u4E3A\u7A7A" });
+        throw new Q({ code: "CLOUDPATH_REQUIRED", message: "cloudPath不可为空" });
       if (/:\/\//.test(t2))
-        throw new H({ code: "INVALID_PARAM", message: "cloudPath\u4E0D\u5408\u6CD5" });
-      const r2 = o2 && o2.envType || this.config.envType, i2 = (await this.getOSSUploadOptionsFromPath({ env: r2, filename: t2 })).result, a2 = "https://" + i2.cdnDomain + "/" + i2.ossPath, { securityToken: c2, accessKeyId: u2, signature: l2, host: d2, ossPath: f2, id: p2, policy: g2, ossCallbackUrl: m2 } = i2, y2 = { "Cache-Control": "max-age=2592000", "Content-Disposition": "attachment", OSSAccessKeyId: u2, Signature: l2, host: d2, id: p2, key: f2, policy: g2, success_action_status: 200 };
+        throw new Q({ code: "INVALID_PARAM", message: "cloudPath不合法" });
+      const i2 = r2 && r2.envType || this.config.envType, o2 = (await this.getOSSUploadOptionsFromPath({ env: i2, filename: t2 })).result, a2 = "https://" + o2.cdnDomain + "/" + o2.ossPath, { securityToken: c2, accessKeyId: u2, signature: l2, host: h2, ossPath: f2, id: p2, policy: g2, ossCallbackUrl: m2 } = o2, y2 = { "Cache-Control": "max-age=2592000", "Content-Disposition": "attachment", OSSAccessKeyId: u2, Signature: l2, host: h2, id: p2, key: f2, policy: g2, success_action_status: 200 };
       if (c2 && (y2["x-oss-security-token"] = c2), m2) {
         const e2 = JSON.stringify({ callbackUrl: m2, callbackBody: JSON.stringify({ fileId: p2, spaceId: this.config.spaceId }), callbackBodyType: "application/json" });
-        y2.callback = Y.toBase64(e2);
+        y2.callback = ce.toBase64(e2);
       }
-      const _2 = { url: "https://" + i2.host, formData: y2, fileName: "file", name: "file", filePath: e, fileType: n2 };
+      const _2 = { url: "https://" + o2.host, formData: y2, fileName: "file", name: "file", filePath: e, fileType: n2 };
       if (await this.uploadFileToOSS(Object.assign({}, _2, { onUploadProgress: s2 })), m2)
         return { success: true, filePath: e, fileID: a2 };
       if ((await this.reportOSSUpload({ id: p2 })).success)
         return { success: true, filePath: e, fileID: a2 };
-      throw new H({ code: "UPLOAD_FAILED", message: "\u6587\u4EF6\u4E0A\u4F20\u5931\u8D25" });
-    }
-    deleteFile({ fileList: e }) {
-      const t2 = { method: "serverless.file.resource.delete", params: JSON.stringify({ id: e[0] }) };
-      return this.request(this.setupRequest(t2));
+      throw new Q({ code: "UPLOAD_FAILED", message: "文件上传失败" });
     }
     getTempFileURL({ fileList: e } = {}) {
       return new Promise((t2, n2) => {
-        Array.isArray(e) && e.length !== 0 || n2(new H({ code: "INVALID_PARAM", message: "fileList\u7684\u5143\u7D20\u5FC5\u987B\u662F\u975E\u7A7A\u7684\u5B57\u7B26\u4E32" })), t2({ fileList: e.map((e2) => ({ fileID: e2, tempFileURL: e2 })) });
+        Array.isArray(e) && 0 !== e.length || n2(new Q({ code: "INVALID_PARAM", message: "fileList的元素必须是非空的字符串" })), t2({ fileList: e.map((e2) => ({ fileID: e2, tempFileURL: e2 })) });
       });
     }
     async getFileInfo({ fileList: e } = {}) {
-      if (!Array.isArray(e) || e.length === 0)
-        throw new H({ code: "INVALID_PARAM", message: "fileList\u7684\u5143\u7D20\u5FC5\u987B\u662F\u975E\u7A7A\u7684\u5B57\u7B26\u4E32" });
+      if (!Array.isArray(e) || 0 === e.length)
+        throw new Q({ code: "INVALID_PARAM", message: "fileList的元素必须是非空的字符串" });
       const t2 = { method: "serverless.file.resource.info", params: JSON.stringify({ id: e.map((e2) => e2.split("?")[0]).join(",") }) };
       return { fileList: (await this.request(this.setupRequest(t2))).result };
     }
   };
-  var ee = { init(e) {
-    const t2 = new Z(e), n2 = { signInAnonymously: function() {
+  var de = { init(e) {
+    const t2 = new he(e), n2 = { signInAnonymously: function() {
       return t2.authorize();
     }, getLoginState: function() {
       return Promise.resolve(false);
@@ -1606,20 +1782,20 @@ if (uni.restoreGlobal) {
       return n2;
     }, t2.customAuth = t2.auth, t2;
   } };
-  const te = typeof location != "undefined" && location.protocol === "http:" ? "http:" : "https:";
-  var ne;
+  const fe = "undefined" != typeof location && "http:" === location.protocol ? "http:" : "https:";
+  var pe;
   !function(e) {
     e.local = "local", e.none = "none", e.session = "session";
-  }(ne || (ne = {}));
-  var se = function() {
+  }(pe || (pe = {}));
+  var ge = function() {
   };
-  const oe = () => {
+  const me = () => {
     let e;
     if (!Promise) {
       e = () => {
       }, e.promise = {};
       const t3 = () => {
-        throw new H({ message: 'Your Node runtime does support ES6 Promises. Set "global.Promise" to your preferred implementation of promises.' });
+        throw new Q({ message: 'Your Node runtime does support ES6 Promises. Set "global.Promise" to your preferred implementation of promises.' });
       };
       return Object.defineProperty(e.promise, "then", { get: t3 }), Object.defineProperty(e.promise, "catch", { get: t3 }), e;
     }
@@ -1628,15 +1804,15 @@ if (uni.restoreGlobal) {
     });
     return e.promise = t2, e;
   };
-  function re(e) {
-    return e === void 0;
+  function ye(e) {
+    return void 0 === e;
   }
-  function ie(e) {
-    return Object.prototype.toString.call(e) === "[object Null]";
+  function _e(e) {
+    return "[object Null]" === Object.prototype.toString.call(e);
   }
-  var ae;
-  function ce(e) {
-    const t2 = (n2 = e, Object.prototype.toString.call(n2) === "[object Array]" ? e : [e]);
+  var we;
+  function ve(e) {
+    const t2 = (n2 = e, "[object Array]" === Object.prototype.toString.call(n2) ? e : [e]);
     var n2;
     for (const e2 of t2) {
       const { isMatch: t3, genAdapter: n3, runtime: s2 } = e2;
@@ -1646,64 +1822,64 @@ if (uni.restoreGlobal) {
   }
   !function(e) {
     e.WEB = "web", e.WX_MP = "wx_mp";
-  }(ae || (ae = {}));
-  const ue = { adapter: null, runtime: void 0 }, le = ["anonymousUuidKey"];
-  class he extends se {
+  }(we || (we = {}));
+  const Se = { adapter: null, runtime: void 0 }, ke = ["anonymousUuidKey"];
+  class Ie extends ge {
     constructor() {
-      super(), ue.adapter.root.tcbObject || (ue.adapter.root.tcbObject = {});
+      super(), Se.adapter.root.tcbObject || (Se.adapter.root.tcbObject = {});
     }
     setItem(e, t2) {
-      ue.adapter.root.tcbObject[e] = t2;
+      Se.adapter.root.tcbObject[e] = t2;
     }
     getItem(e) {
-      return ue.adapter.root.tcbObject[e];
+      return Se.adapter.root.tcbObject[e];
     }
     removeItem(e) {
-      delete ue.adapter.root.tcbObject[e];
+      delete Se.adapter.root.tcbObject[e];
     }
     clear() {
-      delete ue.adapter.root.tcbObject;
+      delete Se.adapter.root.tcbObject;
     }
   }
-  function de(e, t2) {
+  function be(e, t2) {
     switch (e) {
       case "local":
-        return t2.localStorage || new he();
+        return t2.localStorage || new Ie();
       case "none":
-        return new he();
+        return new Ie();
       default:
-        return t2.sessionStorage || new he();
+        return t2.sessionStorage || new Ie();
     }
   }
-  class fe {
+  class Te {
     constructor(e) {
       if (!this._storage) {
-        this._persistence = ue.adapter.primaryStorage || e.persistence, this._storage = de(this._persistence, ue.adapter);
-        const t2 = `access_token_${e.env}`, n2 = `access_token_expire_${e.env}`, s2 = `refresh_token_${e.env}`, o2 = `anonymous_uuid_${e.env}`, r2 = `login_type_${e.env}`, i2 = `user_info_${e.env}`;
-        this.keys = { accessTokenKey: t2, accessTokenExpireKey: n2, refreshTokenKey: s2, anonymousUuidKey: o2, loginTypeKey: r2, userInfoKey: i2 };
+        this._persistence = Se.adapter.primaryStorage || e.persistence, this._storage = be(this._persistence, Se.adapter);
+        const t2 = `access_token_${e.env}`, n2 = `access_token_expire_${e.env}`, s2 = `refresh_token_${e.env}`, r2 = `anonymous_uuid_${e.env}`, i2 = `login_type_${e.env}`, o2 = `user_info_${e.env}`;
+        this.keys = { accessTokenKey: t2, accessTokenExpireKey: n2, refreshTokenKey: s2, anonymousUuidKey: r2, loginTypeKey: i2, userInfoKey: o2 };
       }
     }
     updatePersistence(e) {
       if (e === this._persistence)
         return;
-      const t2 = this._persistence === "local";
+      const t2 = "local" === this._persistence;
       this._persistence = e;
-      const n2 = de(e, ue.adapter);
+      const n2 = be(e, Se.adapter);
       for (const e2 in this.keys) {
         const s2 = this.keys[e2];
-        if (t2 && le.includes(e2))
+        if (t2 && ke.includes(e2))
           continue;
-        const o2 = this._storage.getItem(s2);
-        re(o2) || ie(o2) || (n2.setItem(s2, o2), this._storage.removeItem(s2));
+        const r2 = this._storage.getItem(s2);
+        ye(r2) || _e(r2) || (n2.setItem(s2, r2), this._storage.removeItem(s2));
       }
       this._storage = n2;
     }
     setStore(e, t2, n2) {
       if (!this._storage)
         return;
-      const s2 = { version: n2 || "localCachev1", content: t2 }, o2 = JSON.stringify(s2);
+      const s2 = { version: n2 || "localCachev1", content: t2 }, r2 = JSON.stringify(s2);
       try {
-        this._storage.setItem(e, o2);
+        this._storage.setItem(e, r2);
       } catch (e2) {
         throw e2;
       }
@@ -1728,21 +1904,21 @@ if (uni.restoreGlobal) {
       this._storage.removeItem(e);
     }
   }
-  const pe = {}, ge = {};
-  function me(e) {
-    return pe[e];
+  const Ae = {}, Ce = {};
+  function Pe(e) {
+    return Ae[e];
   }
-  class ye {
+  class Ee {
     constructor(e, t2) {
       this.data = t2 || null, this.name = e;
     }
   }
-  class _e extends ye {
+  class Oe extends Ee {
     constructor(e, t2) {
       super("error", { error: e, data: t2 }), this.error = e;
     }
   }
-  const we = new class {
+  const xe = new class {
     constructor() {
       this._listeners = {};
     }
@@ -1755,14 +1931,14 @@ if (uni.restoreGlobal) {
       return function(e2, t3, n2) {
         if (n2 && n2[e2]) {
           const s2 = n2[e2].indexOf(t3);
-          s2 !== -1 && n2[e2].splice(s2, 1);
+          -1 !== s2 && n2[e2].splice(s2, 1);
         }
       }(e, t2, this._listeners), this;
     }
     fire(e, t2) {
-      if (e instanceof _e)
+      if (e instanceof Oe)
         return console.error(e.error), this;
-      const n2 = typeof e == "string" ? new ye(e, t2 || {}) : e;
+      const n2 = "string" == typeof e ? new Ee(e, t2 || {}) : e;
       const s2 = n2.name;
       if (this._listens(s2)) {
         n2.target = this;
@@ -1776,48 +1952,48 @@ if (uni.restoreGlobal) {
       return this._listeners[e] && this._listeners[e].length > 0;
     }
   }();
-  function ve(e, t2) {
-    we.on(e, t2);
+  function Ue(e, t2) {
+    xe.on(e, t2);
   }
-  function ke(e, t2 = {}) {
-    we.fire(e, t2);
+  function Re(e, t2 = {}) {
+    xe.fire(e, t2);
   }
-  function Te(e, t2) {
-    we.off(e, t2);
+  function Le(e, t2) {
+    xe.off(e, t2);
   }
-  const Se = "loginStateChanged", Ae = "loginStateExpire", Pe = "loginTypeChanged", Ie = "anonymousConverted", be = "refreshAccessToken";
-  var Oe;
+  const Ne = "loginStateChanged", De = "loginStateExpire", Fe = "loginTypeChanged", qe = "anonymousConverted", Ke = "refreshAccessToken";
+  var je;
   !function(e) {
     e.ANONYMOUS = "ANONYMOUS", e.WECHAT = "WECHAT", e.WECHAT_PUBLIC = "WECHAT-PUBLIC", e.WECHAT_OPEN = "WECHAT-OPEN", e.CUSTOM = "CUSTOM", e.EMAIL = "EMAIL", e.USERNAME = "USERNAME", e.NULL = "NULL";
-  }(Oe || (Oe = {}));
-  const Ce = ["auth.getJwt", "auth.logout", "auth.signInWithTicket", "auth.signInAnonymously", "auth.signIn", "auth.fetchAccessTokenWithRefreshToken", "auth.signUpWithEmailAndPassword", "auth.activateEndUserMail", "auth.sendPasswordResetEmail", "auth.resetPasswordWithToken", "auth.isUsernameRegistered"], Ee = { "X-SDK-Version": "1.3.5" };
-  function Re(e, t2, n2) {
+  }(je || (je = {}));
+  const Me = ["auth.getJwt", "auth.logout", "auth.signInWithTicket", "auth.signInAnonymously", "auth.signIn", "auth.fetchAccessTokenWithRefreshToken", "auth.signUpWithEmailAndPassword", "auth.activateEndUserMail", "auth.sendPasswordResetEmail", "auth.resetPasswordWithToken", "auth.isUsernameRegistered"], Be = { "X-SDK-Version": "1.3.5" };
+  function $e(e, t2, n2) {
     const s2 = e[t2];
     e[t2] = function(t3) {
-      const o2 = {}, r2 = {};
+      const r2 = {}, i2 = {};
       n2.forEach((n3) => {
-        const { data: s3, headers: i3 } = n3.call(e, t3);
-        Object.assign(o2, s3), Object.assign(r2, i3);
+        const { data: s3, headers: o3 } = n3.call(e, t3);
+        Object.assign(r2, s3), Object.assign(i2, o3);
       });
-      const i2 = t3.data;
-      return i2 && (() => {
+      const o2 = t3.data;
+      return o2 && (() => {
         var e2;
-        if (e2 = i2, Object.prototype.toString.call(e2) !== "[object FormData]")
-          t3.data = __spreadValues(__spreadValues({}, i2), o2);
+        if (e2 = o2, "[object FormData]" !== Object.prototype.toString.call(e2))
+          t3.data = { ...o2, ...r2 };
         else
-          for (const e3 in o2)
-            i2.append(e3, o2[e3]);
-      })(), t3.headers = __spreadValues(__spreadValues({}, t3.headers || {}), r2), s2.call(e, t3);
+          for (const e3 in r2)
+            o2.append(e3, r2[e3]);
+      })(), t3.headers = { ...t3.headers || {}, ...i2 }, s2.call(e, t3);
     };
   }
-  function Ue() {
+  function We() {
     const e = Math.random().toString(16).slice(2);
-    return { data: { seqId: e }, headers: __spreadProps(__spreadValues({}, Ee), { "x-seqid": e }) };
+    return { data: { seqId: e }, headers: { ...Be, "x-seqid": e } };
   }
-  class xe {
+  class ze {
     constructor(e = {}) {
       var t2;
-      this.config = e, this._reqClass = new ue.adapter.reqClass({ timeout: this.config.timeout, timeoutMsg: `\u8BF7\u6C42\u5728${this.config.timeout / 1e3}s\u5185\u672A\u5B8C\u6210\uFF0C\u5DF2\u4E2D\u65AD`, restrictedMethods: ["post"] }), this._cache = me(this.config.env), this._localCache = (t2 = this.config.env, ge[t2]), Re(this._reqClass, "post", [Ue]), Re(this._reqClass, "upload", [Ue]), Re(this._reqClass, "download", [Ue]);
+      this.config = e, this._reqClass = new Se.adapter.reqClass({ timeout: this.config.timeout, timeoutMsg: `请求在${this.config.timeout / 1e3}s内未完成，已中断`, restrictedMethods: ["post"] }), this._cache = Pe(this.config.env), this._localCache = (t2 = this.config.env, Ce[t2]), $e(this._reqClass, "post", [We]), $e(this._reqClass, "upload", [We]), $e(this._reqClass, "download", [We]);
     }
     async post(e) {
       return await this._reqClass.post(e);
@@ -1841,84 +2017,84 @@ if (uni.restoreGlobal) {
       return e;
     }
     async _refreshAccessToken() {
-      const { accessTokenKey: e, accessTokenExpireKey: t2, refreshTokenKey: n2, loginTypeKey: s2, anonymousUuidKey: o2 } = this._cache.keys;
+      const { accessTokenKey: e, accessTokenExpireKey: t2, refreshTokenKey: n2, loginTypeKey: s2, anonymousUuidKey: r2 } = this._cache.keys;
       this._cache.removeStore(e), this._cache.removeStore(t2);
-      let r2 = this._cache.getStore(n2);
-      if (!r2)
-        throw new H({ message: "\u672A\u767B\u5F55CloudBase" });
-      const i2 = { refresh_token: r2 }, a2 = await this.request("auth.fetchAccessTokenWithRefreshToken", i2);
+      let i2 = this._cache.getStore(n2);
+      if (!i2)
+        throw new Q({ message: "未登录CloudBase" });
+      const o2 = { refresh_token: i2 }, a2 = await this.request("auth.fetchAccessTokenWithRefreshToken", o2);
       if (a2.data.code) {
         const { code: e2 } = a2.data;
-        if (e2 === "SIGN_PARAM_INVALID" || e2 === "REFRESH_TOKEN_EXPIRED" || e2 === "INVALID_REFRESH_TOKEN") {
-          if (this._cache.getStore(s2) === Oe.ANONYMOUS && e2 === "INVALID_REFRESH_TOKEN") {
-            const e3 = this._cache.getStore(o2), t3 = this._cache.getStore(n2), s3 = await this.send("auth.signInAnonymously", { anonymous_uuid: e3, refresh_token: t3 });
+        if ("SIGN_PARAM_INVALID" === e2 || "REFRESH_TOKEN_EXPIRED" === e2 || "INVALID_REFRESH_TOKEN" === e2) {
+          if (this._cache.getStore(s2) === je.ANONYMOUS && "INVALID_REFRESH_TOKEN" === e2) {
+            const e3 = this._cache.getStore(r2), t3 = this._cache.getStore(n2), s3 = await this.send("auth.signInAnonymously", { anonymous_uuid: e3, refresh_token: t3 });
             return this.setRefreshToken(s3.refresh_token), this._refreshAccessToken();
           }
-          ke(Ae), this._cache.removeStore(n2);
+          Re(De), this._cache.removeStore(n2);
         }
-        throw new H({ code: a2.data.code, message: `\u5237\u65B0access token\u5931\u8D25\uFF1A${a2.data.code}` });
+        throw new Q({ code: a2.data.code, message: `刷新access token失败：${a2.data.code}` });
       }
       if (a2.data.access_token)
-        return ke(be), this._cache.setStore(e, a2.data.access_token), this._cache.setStore(t2, a2.data.access_token_expire + Date.now()), { accessToken: a2.data.access_token, accessTokenExpire: a2.data.access_token_expire };
+        return Re(Ke), this._cache.setStore(e, a2.data.access_token), this._cache.setStore(t2, a2.data.access_token_expire + Date.now()), { accessToken: a2.data.access_token, accessTokenExpire: a2.data.access_token_expire };
       a2.data.refresh_token && (this._cache.removeStore(n2), this._cache.setStore(n2, a2.data.refresh_token), this._refreshAccessToken());
     }
     async getAccessToken() {
       const { accessTokenKey: e, accessTokenExpireKey: t2, refreshTokenKey: n2 } = this._cache.keys;
       if (!this._cache.getStore(n2))
-        throw new H({ message: "refresh token\u4E0D\u5B58\u5728\uFF0C\u767B\u5F55\u72B6\u6001\u5F02\u5E38" });
-      let s2 = this._cache.getStore(e), o2 = this._cache.getStore(t2), r2 = true;
-      return this._shouldRefreshAccessTokenHook && !await this._shouldRefreshAccessTokenHook(s2, o2) && (r2 = false), (!s2 || !o2 || o2 < Date.now()) && r2 ? this.refreshAccessToken() : { accessToken: s2, accessTokenExpire: o2 };
+        throw new Q({ message: "refresh token不存在，登录状态异常" });
+      let s2 = this._cache.getStore(e), r2 = this._cache.getStore(t2), i2 = true;
+      return this._shouldRefreshAccessTokenHook && !await this._shouldRefreshAccessTokenHook(s2, r2) && (i2 = false), (!s2 || !r2 || r2 < Date.now()) && i2 ? this.refreshAccessToken() : { accessToken: s2, accessTokenExpire: r2 };
     }
     async request(e, t2, n2) {
       const s2 = `x-tcb-trace_${this.config.env}`;
-      let o2 = "application/x-www-form-urlencoded";
-      const r2 = __spreadValues({ action: e, env: this.config.env, dataVersion: "2019-08-16" }, t2);
-      if (Ce.indexOf(e) === -1) {
+      let r2 = "application/x-www-form-urlencoded";
+      const i2 = { action: e, env: this.config.env, dataVersion: "2019-08-16", ...t2 };
+      if (-1 === Me.indexOf(e)) {
         const { refreshTokenKey: e2 } = this._cache.keys;
-        this._cache.getStore(e2) && (r2.access_token = (await this.getAccessToken()).accessToken);
+        this._cache.getStore(e2) && (i2.access_token = (await this.getAccessToken()).accessToken);
       }
-      let i2;
-      if (e === "storage.uploadFile") {
-        i2 = new FormData();
-        for (let e2 in i2)
-          i2.hasOwnProperty(e2) && i2[e2] !== void 0 && i2.append(e2, r2[e2]);
-        o2 = "multipart/form-data";
+      let o2;
+      if ("storage.uploadFile" === e) {
+        o2 = new FormData();
+        for (let e2 in o2)
+          o2.hasOwnProperty(e2) && void 0 !== o2[e2] && o2.append(e2, i2[e2]);
+        r2 = "multipart/form-data";
       } else {
-        o2 = "application/json", i2 = {};
-        for (let e2 in r2)
-          r2[e2] !== void 0 && (i2[e2] = r2[e2]);
+        r2 = "application/json", o2 = {};
+        for (let e2 in i2)
+          void 0 !== i2[e2] && (o2[e2] = i2[e2]);
       }
-      let a2 = { headers: { "content-type": o2 } };
+      let a2 = { headers: { "content-type": r2 } };
       n2 && n2.onUploadProgress && (a2.onUploadProgress = n2.onUploadProgress);
       const c2 = this._localCache.getStore(s2);
       c2 && (a2.headers["X-TCB-Trace"] = c2);
       const { parse: u2, inQuery: l2, search: h2 } = t2;
       let d2 = { env: this.config.env };
-      u2 && (d2.parse = true), l2 && (d2 = __spreadValues(__spreadValues({}, l2), d2));
+      u2 && (d2.parse = true), l2 && (d2 = { ...l2, ...d2 });
       let f2 = function(e2, t3, n3 = {}) {
         const s3 = /\?/.test(t3);
-        let o3 = "";
+        let r3 = "";
         for (let e3 in n3)
-          o3 === "" ? !s3 && (t3 += "?") : o3 += "&", o3 += `${e3}=${encodeURIComponent(n3[e3])}`;
-        return /^http(s)?\:\/\//.test(t3 += o3) ? t3 : `${e2}${t3}`;
-      }(te, "//tcb-api.tencentcloudapi.com/web", d2);
+          "" === r3 ? !s3 && (t3 += "?") : r3 += "&", r3 += `${e3}=${encodeURIComponent(n3[e3])}`;
+        return /^http(s)?\:\/\//.test(t3 += r3) ? t3 : `${e2}${t3}`;
+      }(fe, "//tcb-api.tencentcloudapi.com/web", d2);
       h2 && (f2 += h2);
-      const p2 = await this.post(__spreadValues({ url: f2, data: i2 }, a2)), g2 = p2.header && p2.header["x-tcb-trace"];
-      if (g2 && this._localCache.setStore(s2, g2), Number(p2.status) !== 200 && Number(p2.statusCode) !== 200 || !p2.data)
-        throw new H({ code: "NETWORK_ERROR", message: "network request error" });
+      const p2 = await this.post({ url: f2, data: o2, ...a2 }), g2 = p2.header && p2.header["x-tcb-trace"];
+      if (g2 && this._localCache.setStore(s2, g2), 200 !== Number(p2.status) && 200 !== Number(p2.statusCode) || !p2.data)
+        throw new Q({ code: "NETWORK_ERROR", message: "network request error" });
       return p2;
     }
     async send(e, t2 = {}) {
       const n2 = await this.request(e, t2, { onUploadProgress: t2.onUploadProgress });
-      if (n2.data.code === "ACCESS_TOKEN_EXPIRED" && Ce.indexOf(e) === -1) {
+      if ("ACCESS_TOKEN_EXPIRED" === n2.data.code && -1 === Me.indexOf(e)) {
         await this.refreshAccessToken();
         const n3 = await this.request(e, t2, { onUploadProgress: t2.onUploadProgress });
         if (n3.data.code)
-          throw new H({ code: n3.data.code, message: n3.data.message });
+          throw new Q({ code: n3.data.code, message: n3.data.message });
         return n3.data;
       }
       if (n2.data.code)
-        throw new H({ code: n2.data.code, message: n2.data.message });
+        throw new Q({ code: n2.data.code, message: n2.data.message });
       return n2.data;
     }
     setRefreshToken(e) {
@@ -1926,13 +2102,13 @@ if (uni.restoreGlobal) {
       this._cache.removeStore(t2), this._cache.removeStore(n2), this._cache.setStore(s2, e);
     }
   }
-  const Le = {};
-  function De(e) {
-    return Le[e];
+  const Je = {};
+  function He(e) {
+    return Je[e];
   }
-  class Ne {
+  class Ge {
     constructor(e) {
-      this.config = e, this._cache = me(e.env), this._request = De(e.env);
+      this.config = e, this._cache = Pe(e.env), this._request = He(e.env);
     }
     setRefreshToken(e) {
       const { accessTokenKey: t2, accessTokenExpireKey: n2, refreshTokenKey: s2 } = this._cache.keys;
@@ -1951,15 +2127,15 @@ if (uni.restoreGlobal) {
       this._cache.setStore(t2, e);
     }
   }
-  class qe {
+  class Ve {
     constructor(e) {
       if (!e)
-        throw new H({ code: "PARAM_ERROR", message: "envId is not defined" });
-      this._envId = e, this._cache = me(this._envId), this._request = De(this._envId), this.setUserInfo();
+        throw new Q({ code: "PARAM_ERROR", message: "envId is not defined" });
+      this._envId = e, this._cache = Pe(this._envId), this._request = He(this._envId), this.setUserInfo();
     }
     linkWithTicket(e) {
-      if (typeof e != "string")
-        throw new H({ code: "PARAM_ERROR", message: "ticket must be string" });
+      if ("string" != typeof e)
+        throw new Q({ code: "PARAM_ERROR", message: "ticket must be string" });
       return this._request.send("auth.linkWithTicket", { ticket: e });
     }
     linkWithRedirect(e) {
@@ -1972,8 +2148,8 @@ if (uni.restoreGlobal) {
       return this._request.send("auth.updateEmail", { newEmail: e });
     }
     updateUsername(e) {
-      if (typeof e != "string")
-        throw new H({ code: "PARAM_ERROR", message: "username must be a string" });
+      if ("string" != typeof e)
+        throw new Q({ code: "PARAM_ERROR", message: "username must be a string" });
       return this._request.send("auth.updateUsername", { username: e });
     }
     async getLinkedUidList() {
@@ -1991,7 +2167,7 @@ if (uni.restoreGlobal) {
       return this._request.send("auth.unlink", { platform: e });
     }
     async update(e) {
-      const { nickName: t2, gender: n2, avatarUrl: s2, province: o2, country: r2, city: i2 } = e, { data: a2 } = await this._request.send("auth.updateUserInfo", { nickName: t2, gender: n2, avatarUrl: s2, province: o2, country: r2, city: i2 });
+      const { nickName: t2, gender: n2, avatarUrl: s2, province: r2, country: i2, city: o2 } = e, { data: a2 } = await this._request.send("auth.updateUserInfo", { nickName: t2, gender: n2, avatarUrl: s2, province: r2, country: i2, city: o2 });
       this.setLocalUserInfo(a2);
     }
     async refresh() {
@@ -2009,70 +2185,70 @@ if (uni.restoreGlobal) {
       this._cache.setStore(t2, e), this.setUserInfo();
     }
   }
-  class Fe {
+  class Ye {
     constructor(e) {
       if (!e)
-        throw new H({ code: "PARAM_ERROR", message: "envId is not defined" });
-      this._cache = me(e);
-      const { refreshTokenKey: t2, accessTokenKey: n2, accessTokenExpireKey: s2 } = this._cache.keys, o2 = this._cache.getStore(t2), r2 = this._cache.getStore(n2), i2 = this._cache.getStore(s2);
-      this.credential = { refreshToken: o2, accessToken: r2, accessTokenExpire: i2 }, this.user = new qe(e);
+        throw new Q({ code: "PARAM_ERROR", message: "envId is not defined" });
+      this._cache = Pe(e);
+      const { refreshTokenKey: t2, accessTokenKey: n2, accessTokenExpireKey: s2 } = this._cache.keys, r2 = this._cache.getStore(t2), i2 = this._cache.getStore(n2), o2 = this._cache.getStore(s2);
+      this.credential = { refreshToken: r2, accessToken: i2, accessTokenExpire: o2 }, this.user = new Ve(e);
     }
     get isAnonymousAuth() {
-      return this.loginType === Oe.ANONYMOUS;
+      return this.loginType === je.ANONYMOUS;
     }
     get isCustomAuth() {
-      return this.loginType === Oe.CUSTOM;
+      return this.loginType === je.CUSTOM;
     }
     get isWeixinAuth() {
-      return this.loginType === Oe.WECHAT || this.loginType === Oe.WECHAT_OPEN || this.loginType === Oe.WECHAT_PUBLIC;
+      return this.loginType === je.WECHAT || this.loginType === je.WECHAT_OPEN || this.loginType === je.WECHAT_PUBLIC;
     }
     get loginType() {
       return this._cache.getStore(this._cache.keys.loginTypeKey);
     }
   }
-  class Me extends Ne {
+  class Qe extends Ge {
     async signIn() {
       this._cache.updatePersistence("local");
-      const { anonymousUuidKey: e, refreshTokenKey: t2 } = this._cache.keys, n2 = this._cache.getStore(e) || void 0, s2 = this._cache.getStore(t2) || void 0, o2 = await this._request.send("auth.signInAnonymously", { anonymous_uuid: n2, refresh_token: s2 });
-      if (o2.uuid && o2.refresh_token) {
-        this._setAnonymousUUID(o2.uuid), this.setRefreshToken(o2.refresh_token), await this._request.refreshAccessToken(), ke(Se), ke(Pe, { env: this.config.env, loginType: Oe.ANONYMOUS, persistence: "local" });
-        const e2 = new Fe(this.config.env);
+      const { anonymousUuidKey: e, refreshTokenKey: t2 } = this._cache.keys, n2 = this._cache.getStore(e) || void 0, s2 = this._cache.getStore(t2) || void 0, r2 = await this._request.send("auth.signInAnonymously", { anonymous_uuid: n2, refresh_token: s2 });
+      if (r2.uuid && r2.refresh_token) {
+        this._setAnonymousUUID(r2.uuid), this.setRefreshToken(r2.refresh_token), await this._request.refreshAccessToken(), Re(Ne), Re(Fe, { env: this.config.env, loginType: je.ANONYMOUS, persistence: "local" });
+        const e2 = new Ye(this.config.env);
         return await e2.user.refresh(), e2;
       }
-      throw new H({ message: "\u533F\u540D\u767B\u5F55\u5931\u8D25" });
+      throw new Q({ message: "匿名登录失败" });
     }
     async linkAndRetrieveDataWithTicket(e) {
-      const { anonymousUuidKey: t2, refreshTokenKey: n2 } = this._cache.keys, s2 = this._cache.getStore(t2), o2 = this._cache.getStore(n2), r2 = await this._request.send("auth.linkAndRetrieveDataWithTicket", { anonymous_uuid: s2, refresh_token: o2, ticket: e });
-      if (r2.refresh_token)
-        return this._clearAnonymousUUID(), this.setRefreshToken(r2.refresh_token), await this._request.refreshAccessToken(), ke(Ie, { env: this.config.env }), ke(Pe, { loginType: Oe.CUSTOM, persistence: "local" }), { credential: { refreshToken: r2.refresh_token } };
-      throw new H({ message: "\u533F\u540D\u8F6C\u5316\u5931\u8D25" });
+      const { anonymousUuidKey: t2, refreshTokenKey: n2 } = this._cache.keys, s2 = this._cache.getStore(t2), r2 = this._cache.getStore(n2), i2 = await this._request.send("auth.linkAndRetrieveDataWithTicket", { anonymous_uuid: s2, refresh_token: r2, ticket: e });
+      if (i2.refresh_token)
+        return this._clearAnonymousUUID(), this.setRefreshToken(i2.refresh_token), await this._request.refreshAccessToken(), Re(qe, { env: this.config.env }), Re(Fe, { loginType: je.CUSTOM, persistence: "local" }), { credential: { refreshToken: i2.refresh_token } };
+      throw new Q({ message: "匿名转化失败" });
     }
     _setAnonymousUUID(e) {
       const { anonymousUuidKey: t2, loginTypeKey: n2 } = this._cache.keys;
-      this._cache.removeStore(t2), this._cache.setStore(t2, e), this._cache.setStore(n2, Oe.ANONYMOUS);
+      this._cache.removeStore(t2), this._cache.setStore(t2, e), this._cache.setStore(n2, je.ANONYMOUS);
     }
     _clearAnonymousUUID() {
       this._cache.removeStore(this._cache.keys.anonymousUuidKey);
     }
   }
-  class je extends Ne {
+  class Xe extends Ge {
     async signIn(e) {
-      if (typeof e != "string")
-        throw new H({ param: "PARAM_ERROR", message: "ticket must be a string" });
+      if ("string" != typeof e)
+        throw new Q({ code: "PARAM_ERROR", message: "ticket must be a string" });
       const { refreshTokenKey: t2 } = this._cache.keys, n2 = await this._request.send("auth.signInWithTicket", { ticket: e, refresh_token: this._cache.getStore(t2) || "" });
       if (n2.refresh_token)
-        return this.setRefreshToken(n2.refresh_token), await this._request.refreshAccessToken(), ke(Se), ke(Pe, { env: this.config.env, loginType: Oe.CUSTOM, persistence: this.config.persistence }), await this.refreshUserInfo(), new Fe(this.config.env);
-      throw new H({ message: "\u81EA\u5B9A\u4E49\u767B\u5F55\u5931\u8D25" });
+        return this.setRefreshToken(n2.refresh_token), await this._request.refreshAccessToken(), Re(Ne), Re(Fe, { env: this.config.env, loginType: je.CUSTOM, persistence: this.config.persistence }), await this.refreshUserInfo(), new Ye(this.config.env);
+      throw new Q({ message: "自定义登录失败" });
     }
   }
-  class $e extends Ne {
+  class Ze extends Ge {
     async signIn(e, t2) {
-      if (typeof e != "string")
-        throw new H({ code: "PARAM_ERROR", message: "email must be a string" });
-      const { refreshTokenKey: n2 } = this._cache.keys, s2 = await this._request.send("auth.signIn", { loginType: "EMAIL", email: e, password: t2, refresh_token: this._cache.getStore(n2) || "" }), { refresh_token: o2, access_token: r2, access_token_expire: i2 } = s2;
-      if (o2)
-        return this.setRefreshToken(o2), r2 && i2 ? this.setAccessToken(r2, i2) : await this._request.refreshAccessToken(), await this.refreshUserInfo(), ke(Se), ke(Pe, { env: this.config.env, loginType: Oe.EMAIL, persistence: this.config.persistence }), new Fe(this.config.env);
-      throw s2.code ? new H({ code: s2.code, message: `\u90AE\u7BB1\u767B\u5F55\u5931\u8D25: ${s2.message}` }) : new H({ message: "\u90AE\u7BB1\u767B\u5F55\u5931\u8D25" });
+      if ("string" != typeof e)
+        throw new Q({ code: "PARAM_ERROR", message: "email must be a string" });
+      const { refreshTokenKey: n2 } = this._cache.keys, s2 = await this._request.send("auth.signIn", { loginType: "EMAIL", email: e, password: t2, refresh_token: this._cache.getStore(n2) || "" }), { refresh_token: r2, access_token: i2, access_token_expire: o2 } = s2;
+      if (r2)
+        return this.setRefreshToken(r2), i2 && o2 ? this.setAccessToken(i2, o2) : await this._request.refreshAccessToken(), await this.refreshUserInfo(), Re(Ne), Re(Fe, { env: this.config.env, loginType: je.EMAIL, persistence: this.config.persistence }), new Ye(this.config.env);
+      throw s2.code ? new Q({ code: s2.code, message: `邮箱登录失败: ${s2.message}` }) : new Q({ message: "邮箱登录失败" });
     }
     async activate(e) {
       return this._request.send("auth.activateEndUserMail", { token: e });
@@ -2081,20 +2257,20 @@ if (uni.restoreGlobal) {
       return this._request.send("auth.resetPasswordWithToken", { token: e, newPassword: t2 });
     }
   }
-  class Be extends Ne {
+  class et extends Ge {
     async signIn(e, t2) {
-      if (typeof e != "string")
-        throw new H({ code: "PARAM_ERROR", message: "username must be a string" });
-      typeof t2 != "string" && (t2 = "", console.warn("password is empty"));
-      const { refreshTokenKey: n2 } = this._cache.keys, s2 = await this._request.send("auth.signIn", { loginType: Oe.USERNAME, username: e, password: t2, refresh_token: this._cache.getStore(n2) || "" }), { refresh_token: o2, access_token_expire: r2, access_token: i2 } = s2;
-      if (o2)
-        return this.setRefreshToken(o2), i2 && r2 ? this.setAccessToken(i2, r2) : await this._request.refreshAccessToken(), await this.refreshUserInfo(), ke(Se), ke(Pe, { env: this.config.env, loginType: Oe.USERNAME, persistence: this.config.persistence }), new Fe(this.config.env);
-      throw s2.code ? new H({ code: s2.code, message: `\u7528\u6237\u540D\u5BC6\u7801\u767B\u5F55\u5931\u8D25: ${s2.message}` }) : new H({ message: "\u7528\u6237\u540D\u5BC6\u7801\u767B\u5F55\u5931\u8D25" });
+      if ("string" != typeof e)
+        throw new Q({ code: "PARAM_ERROR", message: "username must be a string" });
+      "string" != typeof t2 && (t2 = "", console.warn("password is empty"));
+      const { refreshTokenKey: n2 } = this._cache.keys, s2 = await this._request.send("auth.signIn", { loginType: je.USERNAME, username: e, password: t2, refresh_token: this._cache.getStore(n2) || "" }), { refresh_token: r2, access_token_expire: i2, access_token: o2 } = s2;
+      if (r2)
+        return this.setRefreshToken(r2), o2 && i2 ? this.setAccessToken(o2, i2) : await this._request.refreshAccessToken(), await this.refreshUserInfo(), Re(Ne), Re(Fe, { env: this.config.env, loginType: je.USERNAME, persistence: this.config.persistence }), new Ye(this.config.env);
+      throw s2.code ? new Q({ code: s2.code, message: `用户名密码登录失败: ${s2.message}` }) : new Q({ message: "用户名密码登录失败" });
     }
   }
-  class Ke {
+  class tt {
     constructor(e) {
-      this.config = e, this._cache = me(e.env), this._request = De(e.env), this._onAnonymousConverted = this._onAnonymousConverted.bind(this), this._onLoginTypeChanged = this._onLoginTypeChanged.bind(this), ve(Pe, this._onLoginTypeChanged);
+      this.config = e, this._cache = Pe(e.env), this._request = He(e.env), this._onAnonymousConverted = this._onAnonymousConverted.bind(this), this._onLoginTypeChanged = this._onLoginTypeChanged.bind(this), Ue(Fe, this._onLoginTypeChanged);
     }
     get currentUser() {
       const e = this.hasLoginState();
@@ -2104,38 +2280,38 @@ if (uni.restoreGlobal) {
       return this._cache.getStore(this._cache.keys.loginTypeKey);
     }
     anonymousAuthProvider() {
-      return new Me(this.config);
+      return new Qe(this.config);
     }
     customAuthProvider() {
-      return new je(this.config);
+      return new Xe(this.config);
     }
     emailAuthProvider() {
-      return new $e(this.config);
+      return new Ze(this.config);
     }
     usernameAuthProvider() {
-      return new Be(this.config);
+      return new et(this.config);
     }
     async signInAnonymously() {
-      return new Me(this.config).signIn();
+      return new Qe(this.config).signIn();
     }
     async signInWithEmailAndPassword(e, t2) {
-      return new $e(this.config).signIn(e, t2);
+      return new Ze(this.config).signIn(e, t2);
     }
     signInWithUsernameAndPassword(e, t2) {
-      return new Be(this.config).signIn(e, t2);
+      return new et(this.config).signIn(e, t2);
     }
     async linkAndRetrieveDataWithTicket(e) {
-      this._anonymousAuthProvider || (this._anonymousAuthProvider = new Me(this.config)), ve(Ie, this._onAnonymousConverted);
+      this._anonymousAuthProvider || (this._anonymousAuthProvider = new Qe(this.config)), Ue(qe, this._onAnonymousConverted);
       return await this._anonymousAuthProvider.linkAndRetrieveDataWithTicket(e);
     }
     async signOut() {
-      if (this.loginType === Oe.ANONYMOUS)
-        throw new H({ message: "\u533F\u540D\u7528\u6237\u4E0D\u652F\u6301\u767B\u51FA\u64CD\u4F5C" });
+      if (this.loginType === je.ANONYMOUS)
+        throw new Q({ message: "匿名用户不支持登出操作" });
       const { refreshTokenKey: e, accessTokenKey: t2, accessTokenExpireKey: n2 } = this._cache.keys, s2 = this._cache.getStore(e);
       if (!s2)
         return;
-      const o2 = await this._request.send("auth.logout", { refresh_token: s2 });
-      return this._cache.removeStore(e), this._cache.removeStore(t2), this._cache.removeStore(n2), ke(Se), ke(Pe, { env: this.config.env, loginType: Oe.NULL, persistence: this.config.persistence }), o2;
+      const r2 = await this._request.send("auth.logout", { refresh_token: s2 });
+      return this._cache.removeStore(e), this._cache.removeStore(t2), this._cache.removeStore(n2), Re(Ne), Re(Fe, { env: this.config.env, loginType: je.NULL, persistence: this.config.persistence }), r2;
     }
     async signUpWithEmailAndPassword(e, t2) {
       return this._request.send("auth.signUpWithEmailAndPassword", { email: e, password: t2 });
@@ -2144,7 +2320,7 @@ if (uni.restoreGlobal) {
       return this._request.send("auth.sendPasswordResetEmail", { email: e });
     }
     onLoginStateChanged(e) {
-      ve(Se, () => {
+      Ue(Ne, () => {
         const t3 = this.hasLoginState();
         e.call(this, t3);
       });
@@ -2152,16 +2328,16 @@ if (uni.restoreGlobal) {
       e.call(this, t2);
     }
     onLoginStateExpired(e) {
-      ve(Ae, e.bind(this));
+      Ue(De, e.bind(this));
     }
     onAccessTokenRefreshed(e) {
-      ve(be, e.bind(this));
+      Ue(Ke, e.bind(this));
     }
     onAnonymousConverted(e) {
-      ve(Ie, e.bind(this));
+      Ue(qe, e.bind(this));
     }
     onLoginTypeChanged(e) {
-      ve(Pe, () => {
+      Ue(Fe, () => {
         const t2 = this.hasLoginState();
         e.call(this, t2);
       });
@@ -2171,11 +2347,11 @@ if (uni.restoreGlobal) {
     }
     hasLoginState() {
       const { refreshTokenKey: e } = this._cache.keys;
-      return this._cache.getStore(e) ? new Fe(this.config.env) : null;
+      return this._cache.getStore(e) ? new Ye(this.config.env) : null;
     }
     async isUsernameRegistered(e) {
-      if (typeof e != "string")
-        throw new H({ code: "PARAM_ERROR", message: "username must be a string" });
+      if ("string" != typeof e)
+        throw new Q({ code: "PARAM_ERROR", message: "username must be a string" });
       const { data: t2 } = await this._request.send("auth.isUsernameRegistered", { username: e });
       return t2 && t2.isRegistered;
     }
@@ -2183,13 +2359,13 @@ if (uni.restoreGlobal) {
       return Promise.resolve(this.hasLoginState());
     }
     async signInWithTicket(e) {
-      return new je(this.config).signIn(e);
+      return new Xe(this.config).signIn(e);
     }
     shouldRefreshAccessToken(e) {
       this._request._shouldRefreshAccessTokenHook = e.bind(this);
     }
     getUserInfo() {
-      return this._request.send("auth.getUserInfo", {}).then((e) => e.code ? e : __spreadProps(__spreadValues({}, e.data), { requestId: e.seqId }));
+      return this._request.send("auth.getUserInfo", {}).then((e) => e.code ? e : { ...e.data, requestId: e.seqId });
     }
     getAuthHeader() {
       const { refreshTokenKey: e, accessTokenKey: t2 } = this._cache.keys, n2 = this._cache.getStore(e);
@@ -2204,63 +2380,63 @@ if (uni.restoreGlobal) {
       s2 === this.config.env && (this._cache.updatePersistence(n2), this._cache.setStore(this._cache.keys.loginTypeKey, t2));
     }
   }
-  const We = function(e, t2) {
-    t2 = t2 || oe();
-    const n2 = De(this.config.env), { cloudPath: s2, filePath: o2, onUploadProgress: r2, fileType: i2 = "image" } = e;
+  const nt = function(e, t2) {
+    t2 = t2 || me();
+    const n2 = He(this.config.env), { cloudPath: s2, filePath: r2, onUploadProgress: i2, fileType: o2 = "image" } = e;
     return n2.send("storage.getUploadMetadata", { path: s2 }).then((e2) => {
       const { data: { url: a2, authorization: c2, token: u2, fileId: l2, cosFileId: h2 }, requestId: d2 } = e2, f2 = { key: s2, signature: c2, "x-cos-meta-fileid": h2, success_action_status: "201", "x-cos-security-token": u2 };
-      n2.upload({ url: a2, data: f2, file: o2, name: s2, fileType: i2, onUploadProgress: r2 }).then((e3) => {
-        e3.statusCode === 201 ? t2(null, { fileID: l2, requestId: d2 }) : t2(new H({ code: "STORAGE_REQUEST_FAIL", message: `STORAGE_REQUEST_FAIL: ${e3.data}` }));
+      n2.upload({ url: a2, data: f2, file: r2, name: s2, fileType: o2, onUploadProgress: i2 }).then((e3) => {
+        201 === e3.statusCode ? t2(null, { fileID: l2, requestId: d2 }) : t2(new Q({ code: "STORAGE_REQUEST_FAIL", message: `STORAGE_REQUEST_FAIL: ${e3.data}` }));
       }).catch((e3) => {
         t2(e3);
       });
     }).catch((e2) => {
       t2(e2);
     }), t2.promise;
-  }, He = function(e, t2) {
-    t2 = t2 || oe();
-    const n2 = De(this.config.env), { cloudPath: s2 } = e;
+  }, st = function(e, t2) {
+    t2 = t2 || me();
+    const n2 = He(this.config.env), { cloudPath: s2 } = e;
     return n2.send("storage.getUploadMetadata", { path: s2 }).then((e2) => {
       t2(null, e2);
     }).catch((e2) => {
       t2(e2);
     }), t2.promise;
-  }, ze = function({ fileList: e }, t2) {
-    if (t2 = t2 || oe(), !e || !Array.isArray(e))
-      return { code: "INVALID_PARAM", message: "fileList\u5FC5\u987B\u662F\u975E\u7A7A\u7684\u6570\u7EC4" };
+  }, rt = function({ fileList: e }, t2) {
+    if (t2 = t2 || me(), !e || !Array.isArray(e))
+      return { code: "INVALID_PARAM", message: "fileList必须是非空的数组" };
     for (let t3 of e)
-      if (!t3 || typeof t3 != "string")
-        return { code: "INVALID_PARAM", message: "fileList\u7684\u5143\u7D20\u5FC5\u987B\u662F\u975E\u7A7A\u7684\u5B57\u7B26\u4E32" };
+      if (!t3 || "string" != typeof t3)
+        return { code: "INVALID_PARAM", message: "fileList的元素必须是非空的字符串" };
     const n2 = { fileid_list: e };
-    return De(this.config.env).send("storage.batchDeleteFile", n2).then((e2) => {
+    return He(this.config.env).send("storage.batchDeleteFile", n2).then((e2) => {
       e2.code ? t2(null, e2) : t2(null, { fileList: e2.data.delete_list, requestId: e2.requestId });
     }).catch((e2) => {
       t2(e2);
     }), t2.promise;
-  }, Je = function({ fileList: e }, t2) {
-    t2 = t2 || oe(), e && Array.isArray(e) || t2(null, { code: "INVALID_PARAM", message: "fileList\u5FC5\u987B\u662F\u975E\u7A7A\u7684\u6570\u7EC4" });
+  }, it = function({ fileList: e }, t2) {
+    t2 = t2 || me(), e && Array.isArray(e) || t2(null, { code: "INVALID_PARAM", message: "fileList必须是非空的数组" });
     let n2 = [];
     for (let s3 of e)
-      typeof s3 == "object" ? (s3.hasOwnProperty("fileID") && s3.hasOwnProperty("maxAge") || t2(null, { code: "INVALID_PARAM", message: "fileList\u7684\u5143\u7D20\u5FC5\u987B\u662F\u5305\u542BfileID\u548CmaxAge\u7684\u5BF9\u8C61" }), n2.push({ fileid: s3.fileID, max_age: s3.maxAge })) : typeof s3 == "string" ? n2.push({ fileid: s3 }) : t2(null, { code: "INVALID_PARAM", message: "fileList\u7684\u5143\u7D20\u5FC5\u987B\u662F\u5B57\u7B26\u4E32" });
+      "object" == typeof s3 ? (s3.hasOwnProperty("fileID") && s3.hasOwnProperty("maxAge") || t2(null, { code: "INVALID_PARAM", message: "fileList的元素必须是包含fileID和maxAge的对象" }), n2.push({ fileid: s3.fileID, max_age: s3.maxAge })) : "string" == typeof s3 ? n2.push({ fileid: s3 }) : t2(null, { code: "INVALID_PARAM", message: "fileList的元素必须是字符串" });
     const s2 = { file_list: n2 };
-    return De(this.config.env).send("storage.batchGetDownloadUrl", s2).then((e2) => {
+    return He(this.config.env).send("storage.batchGetDownloadUrl", s2).then((e2) => {
       e2.code ? t2(null, e2) : t2(null, { fileList: e2.data.download_list, requestId: e2.requestId });
     }).catch((e2) => {
       t2(e2);
     }), t2.promise;
-  }, Ve = async function({ fileID: e }, t2) {
-    const n2 = (await Je.call(this, { fileList: [{ fileID: e, maxAge: 600 }] })).fileList[0];
-    if (n2.code !== "SUCCESS")
+  }, ot = async function({ fileID: e }, t2) {
+    const n2 = (await it.call(this, { fileList: [{ fileID: e, maxAge: 600 }] })).fileList[0];
+    if ("SUCCESS" !== n2.code)
       return t2 ? t2(n2) : new Promise((e2) => {
         e2(n2);
       });
-    const s2 = De(this.config.env);
-    let o2 = n2.download_url;
-    if (o2 = encodeURI(o2), !t2)
-      return s2.download({ url: o2 });
-    t2(await s2.download({ url: o2 }));
-  }, Ye = function({ name: e, data: t2, query: n2, parse: s2, search: o2 }, r2) {
-    const i2 = r2 || oe();
+    const s2 = He(this.config.env);
+    let r2 = n2.download_url;
+    if (r2 = encodeURI(r2), !t2)
+      return s2.download({ url: r2 });
+    t2(await s2.download({ url: r2 }));
+  }, at = function({ name: e, data: t2, query: n2, parse: s2, search: r2 }, i2) {
+    const o2 = i2 || me();
     let a2;
     try {
       a2 = t2 ? JSON.stringify(t2) : "";
@@ -2268,164 +2444,150 @@ if (uni.restoreGlobal) {
       return Promise.reject(e2);
     }
     if (!e)
-      return Promise.reject(new H({ code: "PARAM_ERROR", message: "\u51FD\u6570\u540D\u4E0D\u80FD\u4E3A\u7A7A" }));
-    const c2 = { inQuery: n2, parse: s2, search: o2, function_name: e, request_data: a2 };
-    return De(this.config.env).send("functions.invokeFunction", c2).then((e2) => {
+      return Promise.reject(new Q({ code: "PARAM_ERROR", message: "函数名不能为空" }));
+    const c2 = { inQuery: n2, parse: s2, search: r2, function_name: e, request_data: a2 };
+    return He(this.config.env).send("functions.invokeFunction", c2).then((e2) => {
       if (e2.code)
-        i2(null, e2);
+        o2(null, e2);
       else {
         let t3 = e2.data.response_data;
         if (s2)
-          i2(null, { result: t3, requestId: e2.requestId });
+          o2(null, { result: t3, requestId: e2.requestId });
         else
           try {
-            t3 = JSON.parse(e2.data.response_data), i2(null, { result: t3, requestId: e2.requestId });
+            t3 = JSON.parse(e2.data.response_data), o2(null, { result: t3, requestId: e2.requestId });
           } catch (e3) {
-            i2(new H({ message: "response data must be json" }));
+            o2(new Q({ message: "response data must be json" }));
           }
       }
-      return i2.promise;
+      return o2.promise;
     }).catch((e2) => {
-      i2(e2);
-    }), i2.promise;
-  }, Xe = { timeout: 15e3, persistence: "session" }, Ge = {};
-  class Qe {
+      o2(e2);
+    }), o2.promise;
+  }, ct = { timeout: 15e3, persistence: "session" }, ut = {};
+  class lt {
     constructor(e) {
       this.config = e || this.config, this.authObj = void 0;
     }
     init(e) {
-      switch (ue.adapter || (this.requestClient = new ue.adapter.reqClass({ timeout: e.timeout || 5e3, timeoutMsg: `\u8BF7\u6C42\u5728${(e.timeout || 5e3) / 1e3}s\u5185\u672A\u5B8C\u6210\uFF0C\u5DF2\u4E2D\u65AD` })), this.config = __spreadValues(__spreadValues({}, Xe), e), true) {
+      switch (Se.adapter || (this.requestClient = new Se.adapter.reqClass({ timeout: e.timeout || 5e3, timeoutMsg: `请求在${(e.timeout || 5e3) / 1e3}s内未完成，已中断` })), this.config = { ...ct, ...e }, true) {
         case this.config.timeout > 6e5:
-          console.warn("timeout\u5927\u4E8E\u53EF\u914D\u7F6E\u4E0A\u9650[10\u5206\u949F]\uFF0C\u5DF2\u91CD\u7F6E\u4E3A\u4E0A\u9650\u6570\u503C"), this.config.timeout = 6e5;
+          console.warn("timeout大于可配置上限[10分钟]，已重置为上限数值"), this.config.timeout = 6e5;
           break;
         case this.config.timeout < 100:
-          console.warn("timeout\u5C0F\u4E8E\u53EF\u914D\u7F6E\u4E0B\u9650[100ms]\uFF0C\u5DF2\u91CD\u7F6E\u4E3A\u4E0B\u9650\u6570\u503C"), this.config.timeout = 100;
+          console.warn("timeout小于可配置下限[100ms]，已重置为下限数值"), this.config.timeout = 100;
       }
-      return new Qe(this.config);
+      return new lt(this.config);
     }
     auth({ persistence: e } = {}) {
       if (this.authObj)
         return this.authObj;
-      const t2 = e || ue.adapter.primaryStorage || Xe.persistence;
+      const t2 = e || Se.adapter.primaryStorage || ct.persistence;
       var n2;
       return t2 !== this.config.persistence && (this.config.persistence = t2), function(e2) {
         const { env: t3 } = e2;
-        pe[t3] = new fe(e2), ge[t3] = new fe(__spreadProps(__spreadValues({}, e2), { persistence: "local" }));
-      }(this.config), n2 = this.config, Le[n2.env] = new xe(n2), this.authObj = new Ke(this.config), this.authObj;
+        Ae[t3] = new Te(e2), Ce[t3] = new Te({ ...e2, persistence: "local" });
+      }(this.config), n2 = this.config, Je[n2.env] = new ze(n2), this.authObj = new tt(this.config), this.authObj;
     }
     on(e, t2) {
-      return ve.apply(this, [e, t2]);
+      return Ue.apply(this, [e, t2]);
     }
     off(e, t2) {
-      return Te.apply(this, [e, t2]);
+      return Le.apply(this, [e, t2]);
     }
     callFunction(e, t2) {
-      return Ye.apply(this, [e, t2]);
+      return at.apply(this, [e, t2]);
     }
     deleteFile(e, t2) {
-      return ze.apply(this, [e, t2]);
+      return rt.apply(this, [e, t2]);
     }
     getTempFileURL(e, t2) {
-      return Je.apply(this, [e, t2]);
+      return it.apply(this, [e, t2]);
     }
     downloadFile(e, t2) {
-      return Ve.apply(this, [e, t2]);
+      return ot.apply(this, [e, t2]);
     }
     uploadFile(e, t2) {
-      return We.apply(this, [e, t2]);
+      return nt.apply(this, [e, t2]);
     }
     getUploadMetadata(e, t2) {
-      return He.apply(this, [e, t2]);
+      return st.apply(this, [e, t2]);
     }
     registerExtension(e) {
-      Ge[e.name] = e;
+      ut[e.name] = e;
     }
     async invokeExtension(e, t2) {
-      const n2 = Ge[e];
+      const n2 = ut[e];
       if (!n2)
-        throw new H({ message: `\u6269\u5C55${e} \u5FC5\u987B\u5148\u6CE8\u518C` });
+        throw new Q({ message: `扩展${e} 必须先注册` });
       return await n2.invoke(t2, this);
     }
     useAdapters(e) {
-      const { adapter: t2, runtime: n2 } = ce(e) || {};
-      t2 && (ue.adapter = t2), n2 && (ue.runtime = n2);
+      const { adapter: t2, runtime: n2 } = ve(e) || {};
+      t2 && (Se.adapter = t2), n2 && (Se.runtime = n2);
     }
   }
-  var Ze = new Qe();
-  function et(e, t2, n2) {
-    n2 === void 0 && (n2 = {});
-    var s2 = /\?/.test(t2), o2 = "";
-    for (var r2 in n2)
-      o2 === "" ? !s2 && (t2 += "?") : o2 += "&", o2 += r2 + "=" + encodeURIComponent(n2[r2]);
-    return /^http(s)?:\/\//.test(t2 += o2) ? t2 : "" + e + t2;
+  var ht = new lt();
+  function dt(e, t2, n2) {
+    void 0 === n2 && (n2 = {});
+    var s2 = /\?/.test(t2), r2 = "";
+    for (var i2 in n2)
+      "" === r2 ? !s2 && (t2 += "?") : r2 += "&", r2 += i2 + "=" + encodeURIComponent(n2[i2]);
+    return /^http(s)?:\/\//.test(t2 += r2) ? t2 : "" + e + t2;
   }
-  class tt {
+  class ft {
     post(e) {
       const { url: t2, data: n2, headers: s2 } = e;
-      return new Promise((e2, o2) => {
-        X.request({ url: et("https:", t2), data: n2, method: "POST", header: s2, success(t3) {
+      return new Promise((e2, r2) => {
+        X.request({ url: dt("https:", t2), data: n2, method: "POST", header: s2, success(t3) {
           e2(t3);
         }, fail(e3) {
-          o2(e3);
+          r2(e3);
         } });
       });
     }
     upload(e) {
       return new Promise((t2, n2) => {
-        const { url: s2, file: o2, data: r2, headers: i2, fileType: a2 } = e, c2 = X.uploadFile({ url: et("https:", s2), name: "file", formData: Object.assign({}, r2), filePath: o2, fileType: a2, header: i2, success(e2) {
+        const { url: s2, file: r2, data: i2, headers: o2, fileType: a2 } = e, c2 = X.uploadFile({ url: dt("https:", s2), name: "file", formData: Object.assign({}, i2), filePath: r2, fileType: a2, header: o2, success(e2) {
           const n3 = { statusCode: e2.statusCode, data: e2.data || {} };
-          e2.statusCode === 200 && r2.success_action_status && (n3.statusCode = parseInt(r2.success_action_status, 10)), t2(n3);
+          200 === e2.statusCode && i2.success_action_status && (n3.statusCode = parseInt(i2.success_action_status, 10)), t2(n3);
         }, fail(e2) {
           n2(new Error(e2.errMsg || "uploadFile:fail"));
         } });
-        typeof e.onUploadProgress == "function" && c2 && typeof c2.onProgressUpdate == "function" && c2.onProgressUpdate((t3) => {
+        "function" == typeof e.onUploadProgress && c2 && "function" == typeof c2.onProgressUpdate && c2.onProgressUpdate((t3) => {
           e.onUploadProgress({ loaded: t3.totalBytesSent, total: t3.totalBytesExpectedToSend });
         });
       });
     }
   }
-  const nt = { setItem(e, t2) {
+  const pt = { setItem(e, t2) {
     X.setStorageSync(e, t2);
   }, getItem: (e) => X.getStorageSync(e), removeItem(e) {
     X.removeStorageSync(e);
   }, clear() {
     X.clearStorageSync();
   } };
-  var st = { genAdapter: function() {
-    return { root: {}, reqClass: tt, localStorage: nt, primaryStorage: "local" };
+  var gt = { genAdapter: function() {
+    return { root: {}, reqClass: ft, localStorage: pt, primaryStorage: "local" };
   }, isMatch: function() {
     return true;
   }, runtime: "uni_app" };
-  Ze.useAdapters(st);
-  const ot = Ze, rt = ot.init;
-  ot.init = function(e) {
+  ht.useAdapters(gt);
+  const mt = ht, yt = mt.init;
+  mt.init = function(e) {
     e.env = e.spaceId;
-    const t2 = rt.call(this, e);
+    const t2 = yt.call(this, e);
     t2.config.provider = "tencent", t2.config.spaceId = e.spaceId;
     const n2 = t2.auth;
     return t2.auth = function(e2) {
       const t3 = n2.call(this, e2);
       return ["linkAndRetrieveDataWithTicket", "signInAnonymously", "signOut", "getAccessToken", "getLoginState", "signInWithTicket", "getUserInfo"].forEach((e3) => {
-        t3[e3] = W(t3[e3]).bind(t3);
+        t3[e3] = Y(t3[e3]).bind(t3);
       }), t3;
     }, t2.customAuth = t2.auth, t2;
   };
-  var it = ot;
-  function at(e) {
-    return e && at(e.__v_raw) || e;
-  }
-  function ct() {
-    return { token: X.getStorageSync("uni_id_token") || X.getStorageSync("uniIdToken"), tokenExpired: X.getStorageSync("uni_id_token_expired") };
-  }
-  function ut({ token: e, tokenExpired: t2 } = {}) {
-    e && X.setStorageSync("uni_id_token", e), t2 && X.setStorageSync("uni_id_token_expired", t2);
-  }
-  function lt() {
-    if (m !== "web")
-      return;
-    uni.getStorageSync("__LAST_DCLOUD_APPID") !== v && (uni.setStorageSync("__LAST_DCLOUD_APPID", v), console.warn("\u68C0\u6D4B\u5230\u5F53\u524D\u9879\u76EE\u4E0E\u4E0A\u6B21\u8FD0\u884C\u5230\u6B64\u7AEF\u53E3\u7684\u9879\u76EE\u4E0D\u4E00\u81F4\uFF0C\u81EA\u52A8\u6E05\u7406uni-id\u4FDD\u5B58\u7684token\u4FE1\u606F\uFF08\u4EC5\u5F00\u53D1\u8C03\u8BD5\u65F6\u751F\u6548\uFF09"), X.removeStorageSync("uni_id_token"), X.removeStorageSync("uniIdToken"), X.removeStorageSync("uni_id_token_expired"));
-  }
-  var ht = class extends Z {
+  var _t = mt;
+  var wt = class extends he {
     getAccessToken() {
       return new Promise((e, t2) => {
         const n2 = "Anonymous_Access_token";
@@ -2434,48 +2596,58 @@ if (uni.restoreGlobal) {
     }
     setupRequest(e, t2) {
       const n2 = Object.assign({}, e, { spaceId: this.config.spaceId, timestamp: Date.now() }), s2 = { "Content-Type": "application/json" };
-      t2 !== "auth" && (n2.token = this.accessToken, s2["x-basement-token"] = this.accessToken), s2["x-serverless-sign"] = Y.sign(n2, this.config.clientSecret);
-      const o2 = V();
-      s2["x-client-info"] = encodeURIComponent(JSON.stringify(o2));
-      const { token: r2 } = ct();
-      return s2["x-client-token"] = r2, { url: this.config.requestUrl, method: "POST", data: n2, dataType: "json", header: JSON.parse(JSON.stringify(s2)) };
+      "auth" !== t2 && (n2.token = this.accessToken, s2["x-basement-token"] = this.accessToken), s2["x-serverless-sign"] = ce.sign(n2, this.config.clientSecret);
+      const r2 = ae();
+      s2["x-client-info"] = encodeURIComponent(JSON.stringify(r2));
+      const { token: i2 } = ee();
+      return s2["x-client-token"] = i2, { url: this.config.requestUrl, method: "POST", data: n2, dataType: "json", header: JSON.parse(JSON.stringify(s2)) };
     }
-    uploadFileToOSS({ url: e, formData: t2, name: n2, filePath: s2, fileType: o2, onUploadProgress: r2 }) {
-      return new Promise((i2, a2) => {
-        const c2 = this.adapter.uploadFile({ url: e, formData: t2, name: n2, filePath: s2, fileType: o2, success(e2) {
-          e2 && e2.statusCode < 400 ? i2(e2) : a2(new H({ code: "UPLOAD_FAILED", message: "\u6587\u4EF6\u4E0A\u4F20\u5931\u8D25" }));
+    uploadFileToOSS({ url: e, formData: t2, name: n2, filePath: s2, fileType: r2, onUploadProgress: i2 }) {
+      return new Promise((o2, a2) => {
+        const c2 = this.adapter.uploadFile({ url: e, formData: t2, name: n2, filePath: s2, fileType: r2, success(e2) {
+          e2 && e2.statusCode < 400 ? o2(e2) : a2(new Q({ code: "UPLOAD_FAILED", message: "文件上传失败" }));
         }, fail(e2) {
-          a2(new H({ code: e2.code || "UPLOAD_FAILED", message: e2.message || e2.errMsg || "\u6587\u4EF6\u4E0A\u4F20\u5931\u8D25" }));
+          a2(new Q({ code: e2.code || "UPLOAD_FAILED", message: e2.message || e2.errMsg || "文件上传失败" }));
         } });
-        typeof r2 == "function" && c2 && typeof c2.onProgressUpdate == "function" && c2.onProgressUpdate((e2) => {
-          r2({ loaded: e2.totalBytesSent, total: e2.totalBytesExpectedToSend });
+        "function" == typeof i2 && c2 && "function" == typeof c2.onProgressUpdate && c2.onProgressUpdate((e2) => {
+          i2({ loaded: e2.totalBytesSent, total: e2.totalBytesExpectedToSend });
         });
       });
     }
     uploadFile({ filePath: e, cloudPath: t2, fileType: n2 = "image", onUploadProgress: s2 }) {
       if (!t2)
-        throw new H({ code: "CLOUDPATH_REQUIRED", message: "cloudPath\u4E0D\u53EF\u4E3A\u7A7A" });
-      let o2;
+        throw new Q({ code: "CLOUDPATH_REQUIRED", message: "cloudPath不可为空" });
+      let r2;
       return this.getOSSUploadOptionsFromPath({ cloudPath: t2 }).then((t3) => {
-        const { url: r2, formData: i2, name: a2 } = t3.result;
-        o2 = t3.result.fileUrl;
-        const c2 = { url: r2, formData: i2, name: a2, filePath: e, fileType: n2 };
+        const { url: i2, formData: o2, name: a2 } = t3.result;
+        r2 = t3.result.fileUrl;
+        const c2 = { url: i2, formData: o2, name: a2, filePath: e, fileType: n2 };
         return this.uploadFileToOSS(Object.assign({}, c2, { onUploadProgress: s2 }));
       }).then(() => this.reportOSSUpload({ cloudPath: t2 })).then((t3) => new Promise((n3, s3) => {
-        t3.success ? n3({ success: true, filePath: e, fileID: o2 }) : s3(new H({ code: "UPLOAD_FAILED", message: "\u6587\u4EF6\u4E0A\u4F20\u5931\u8D25" }));
+        t3.success ? n3({ success: true, filePath: e, fileID: r2 }) : s3(new Q({ code: "UPLOAD_FAILED", message: "文件上传失败" }));
       }));
     }
     deleteFile({ fileList: e }) {
       const t2 = { method: "serverless.file.resource.delete", params: JSON.stringify({ fileList: e }) };
-      return this.request(this.setupRequest(t2));
+      return this.request(this.setupRequest(t2)).then((e2) => {
+        if (e2.success)
+          return e2.result;
+        throw new Q({ code: "DELETE_FILE_FAILED", message: "删除文件失败" });
+      });
     }
     getTempFileURL({ fileList: e } = {}) {
+      if (!Array.isArray(e) || 0 === e.length)
+        throw new Q({ code: "INVALID_PARAM", message: "fileList的元素必须是非空的字符串" });
       const t2 = { method: "serverless.file.resource.getTempFileURL", params: JSON.stringify({ fileList: e }) };
-      return this.request(this.setupRequest(t2));
+      return this.request(this.setupRequest(t2)).then((e2) => {
+        if (e2.success)
+          return { fileList: e2.result.fileList.map((e3) => ({ fileID: e3.fileID, tempFileURL: e3.tempFileURL })) };
+        throw new Q({ code: "GET_TEMP_FILE_URL_FAILED", message: "获取临时文件链接失败" });
+      });
     }
   };
-  var dt = { init(e) {
-    const t2 = new ht(e), n2 = { signInAnonymously: function() {
+  var vt = { init(e) {
+    const t2 = new wt(e), n2 = { signInAnonymously: function() {
       return t2.authorize();
     }, getLoginState: function() {
       return Promise.resolve(false);
@@ -2484,131 +2656,191 @@ if (uni.restoreGlobal) {
       return n2;
     }, t2.customAuth = t2.auth, t2;
   } };
-  function ft({ data: e }) {
+  function St({ data: e }) {
     let t2;
-    t2 = V();
+    t2 = ae();
     const n2 = JSON.parse(JSON.stringify(e || {}));
     if (Object.assign(n2, { clientInfo: t2 }), !n2.uniIdToken) {
-      const { token: e2 } = ct();
+      const { token: e2 } = ee();
       e2 && (n2.uniIdToken = e2);
     }
     return n2;
   }
-  function pt({ name: e, data: t2 } = {}) {
-    const { localAddress: n2, localPort: s2 } = this.__dev__, o2 = { aliyun: "aliyun", tencent: "tcb" }[this.config.provider], r2 = this.config.spaceId, i2 = `http://${n2}:${s2}/system/check-function`, a2 = `http://${n2}:${s2}/cloudfunctions/${e}`;
+  function kt({ name: e, data: t2 } = {}) {
+    const { localAddress: n2, localPort: s2 } = this.__dev__, r2 = { aliyun: "aliyun", tencent: "tcb" }[this.config.provider], i2 = this.config.spaceId, o2 = `http://${n2}:${s2}/system/check-function`, a2 = `http://${n2}:${s2}/cloudfunctions/${e}`;
     return new Promise((t3, n3) => {
-      X.request({ method: "POST", url: i2, data: { name: e, platform: m, provider: o2, spaceId: r2 }, timeout: 3e3, success(e2) {
+      X.request({ method: "POST", url: o2, data: { name: e, platform: S, provider: r2, spaceId: i2 }, timeout: 3e3, success(e2) {
         t3(e2);
       }, fail() {
-        t3({ data: { code: "NETWORK_ERROR", message: "\u8FDE\u63A5\u672C\u5730\u8C03\u8BD5\u670D\u52A1\u5931\u8D25\uFF0C\u8BF7\u68C0\u67E5\u5BA2\u6237\u7AEF\u662F\u5426\u548C\u4E3B\u673A\u5728\u540C\u4E00\u5C40\u57DF\u7F51\u4E0B\uFF0C\u81EA\u52A8\u5207\u6362\u4E3A\u5DF2\u90E8\u7F72\u7684\u4E91\u51FD\u6570\u3002" } });
+        t3({ data: { code: "NETWORK_ERROR", message: "连接本地调试服务失败，请检查客户端是否和主机在同一局域网下，自动切换为已部署的云函数。" } });
       } });
     }).then(({ data: e2 } = {}) => {
       const { code: t3, message: n3 } = e2 || {};
-      return { code: t3 === 0 ? 0 : t3 || "SYS_ERR", message: n3 || "SYS_ERR" };
+      return { code: 0 === t3 ? 0 : t3 || "SYS_ERR", message: n3 || "SYS_ERR" };
     }).then(({ code: n3, message: s3 }) => {
-      if (n3 !== 0) {
+      if (0 !== n3) {
         switch (n3) {
           case "MODULE_ENCRYPTED":
-            console.error(`\u6B64\u4E91\u51FD\u6570\uFF08${e}\uFF09\u4F9D\u8D56\u52A0\u5BC6\u516C\u5171\u6A21\u5757\u4E0D\u53EF\u672C\u5730\u8C03\u8BD5\uFF0C\u81EA\u52A8\u5207\u6362\u4E3A\u4E91\u7AEF\u5DF2\u90E8\u7F72\u7684\u4E91\u51FD\u6570`);
+            console.error(`此云函数（${e}）依赖加密公共模块不可本地调试，自动切换为云端已部署的云函数`);
             break;
           case "FUNCTION_ENCRYPTED":
-            console.error(`\u6B64\u4E91\u51FD\u6570\uFF08${e}\uFF09\u5DF2\u52A0\u5BC6\u4E0D\u53EF\u672C\u5730\u8C03\u8BD5\uFF0C\u81EA\u52A8\u5207\u6362\u4E3A\u4E91\u7AEF\u5DF2\u90E8\u7F72\u7684\u4E91\u51FD\u6570`);
+            console.error(`此云函数（${e}）已加密不可本地调试，自动切换为云端已部署的云函数`);
             break;
           case "ACTION_ENCRYPTED":
-            console.error(s3 || "\u9700\u8981\u8BBF\u95EE\u52A0\u5BC6\u7684uni-clientDB-action\uFF0C\u81EA\u52A8\u5207\u6362\u4E3A\u4E91\u7AEF\u73AF\u5883");
+            console.error(s3 || "需要访问加密的uni-clientDB-action，自动切换为云端环境");
             break;
           case "NETWORK_ERROR": {
-            const e2 = "\u8FDE\u63A5\u672C\u5730\u8C03\u8BD5\u670D\u52A1\u5931\u8D25\uFF0C\u8BF7\u68C0\u67E5\u5BA2\u6237\u7AEF\u662F\u5426\u548C\u4E3B\u673A\u5728\u540C\u4E00\u5C40\u57DF\u7F51\u4E0B";
+            const e2 = "连接本地调试服务失败，请检查客户端是否和主机在同一局域网下";
             throw console.error(e2), new Error(e2);
           }
           case "SWITCH_TO_CLOUD":
             break;
           default: {
-            const e2 = `\u68C0\u6D4B\u672C\u5730\u8C03\u8BD5\u670D\u52A1\u51FA\u73B0\u9519\u8BEF\uFF1A${s3}\uFF0C\u8BF7\u68C0\u67E5\u7F51\u7EDC\u73AF\u5883\u6216\u91CD\u542F\u5BA2\u6237\u7AEF\u518D\u8BD5`;
+            const e2 = `检测本地调试服务出现错误：${s3}，请检查网络环境或重启客户端再试`;
             throw console.error(e2), new Error(e2);
           }
         }
         return this._callCloudFunction({ name: e, data: t2 });
       }
       return new Promise((e2, n4) => {
-        const s4 = ft.call(this, { data: t2 });
-        X.request({ method: "POST", url: a2, data: { provider: o2, platform: m, param: s4 }, success: ({ statusCode: t3, data: s5 } = {}) => !t3 || t3 >= 400 ? n4(new H({ code: s5.code || "SYS_ERR", message: s5.message || "request:fail" })) : e2({ result: s5 }), fail(e3) {
-          n4(new H({ code: e3.code || e3.errCode || "SYS_ERR", message: e3.message || e3.errMsg || "request:fail" }));
+        const s4 = St.call(this, { data: t2 });
+        X.request({ method: "POST", url: a2, data: { provider: r2, platform: S, param: s4 }, success: ({ statusCode: t3, data: s5 } = {}) => !t3 || t3 >= 400 ? n4(new Q({ code: s5.code || "SYS_ERR", message: s5.message || "request:fail" })) : e2({ result: s5 }), fail(e3) {
+          n4(new Q({ code: e3.code || e3.errCode || "SYS_ERR", message: e3.message || e3.errMsg || "request:fail" }));
         } });
       });
     });
   }
-  const gt = [{ rule: /fc_function_not_found|FUNCTION_NOT_FOUND/, content: "\uFF0C\u4E91\u51FD\u6570[{functionName}]\u5728\u4E91\u7AEF\u4E0D\u5B58\u5728\uFF0C\u8BF7\u68C0\u67E5\u6B64\u4E91\u51FD\u6570\u540D\u79F0\u662F\u5426\u6B63\u786E\u4EE5\u53CA\u8BE5\u4E91\u51FD\u6570\u662F\u5426\u5DF2\u4E0A\u4F20\u5230\u670D\u52A1\u7A7A\u95F4", mode: "append" }];
-  var mt = /[\\^$.*+?()[\]{}|]/g, yt = RegExp(mt.source);
-  function _t(e, t2, n2) {
-    return e.replace(new RegExp((s2 = t2) && yt.test(s2) ? s2.replace(mt, "\\$&") : s2, "g"), n2);
+  const It = [{ rule: /fc_function_not_found|FUNCTION_NOT_FOUND/, content: "，云函数[{functionName}]在云端不存在，请检查此云函数名称是否正确以及该云函数是否已上传到服务空间", mode: "append" }];
+  var bt = /[\\^$.*+?()[\]{}|]/g, Tt = RegExp(bt.source);
+  function At(e, t2, n2) {
+    return e.replace(new RegExp((s2 = t2) && Tt.test(s2) ? s2.replace(bt, "\\$&") : s2, "g"), n2);
     var s2;
   }
-  function wt({ functionName: e, result: t2, logPvd: n2 }) {
+  const Pt = "request", Et = "response", Ot = "both";
+  const fn = { code: 2e4, message: "System error" }, pn = { code: 20101, message: "Invalid client" };
+  function yn(e) {
+    const { errSubject: t2, subject: n2, errCode: s2, errMsg: r2, code: i2, message: o2, cause: a2 } = e || {};
+    return new Q({ subject: t2 || n2 || "uni-secure-network", code: s2 || i2 || fn.code, message: r2 || o2, cause: a2 });
+  }
+  let wn;
+  function bn({ secretType: e } = {}) {
+    return e === Pt || e === Et || e === Ot;
+  }
+  function Tn({ name: e, data: t2 = {} } = {}) {
+    return "DCloud-clientDB" === e && "encryption" === t2.redirectTo && "getAppClientKey" === t2.action;
+  }
+  function An({ provider: e, spaceId: t2, functionName: n2 } = {}) {
+    const { appId: s2, uniPlatform: r2, osName: i2 } = ie();
+    let o2 = r2;
+    "app" === r2 && (o2 = i2);
+    const a2 = function({ provider: e2, spaceId: t3 } = {}) {
+      const n3 = v;
+      if (!n3)
+        return {};
+      e2 = function(e3) {
+        return "tencent" === e3 ? "tcb" : e3;
+      }(e2);
+      const s3 = n3.find((n4) => n4.provider === e2 && n4.spaceId === t3);
+      return s3 && s3.config;
+    }({ provider: e, spaceId: t2 });
+    if (!a2 || !a2.accessControl || !a2.accessControl.enable)
+      return false;
+    const c2 = a2.accessControl.function || {}, u2 = Object.keys(c2);
+    if (0 === u2.length)
+      return true;
+    const l2 = function(e2, t3) {
+      let n3, s3, r3;
+      for (let i3 = 0; i3 < e2.length; i3++) {
+        const o3 = e2[i3];
+        o3 !== t3 ? "*" !== o3 ? o3.split(",").map((e3) => e3.trim()).indexOf(t3) > -1 && (s3 = o3) : r3 = o3 : n3 = o3;
+      }
+      return n3 || s3 || r3;
+    }(u2, n2);
+    if (!l2)
+      return false;
+    if ((c2[l2] || []).find((e2 = {}) => e2.appId === s2 && (e2.platform || "").toLowerCase() === o2.toLowerCase()))
+      return true;
+    throw console.error(`此应用[appId: ${s2}, platform: ${o2}]不在云端配置的允许访问的应用列表内，参考：https://uniapp.dcloud.net.cn/uniCloud/secure-network.html#verify-client`), yn(pn);
+  }
+  function Cn({ functionName: e, result: t2, logPvd: n2 }) {
     if (this.__dev__.debugLog && t2 && t2.requestId) {
       const s2 = JSON.stringify({ spaceId: this.config.spaceId, functionName: e, requestId: t2.requestId });
       console.log(`[${n2}-request]${s2}[/${n2}-request]`);
     }
   }
-  function vt(e) {
+  function Pn(e) {
     const t2 = e.callFunction, n2 = function(n3) {
       const s2 = n3.name;
-      n3.data = ft.call(e, { data: n3.data });
-      const o2 = { aliyun: "aliyun", tencent: "tcb", tcb: "tcb" }[this.config.provider];
-      return t2.call(this, n3).then((e2) => (e2.errCode = 0, wt.call(this, { functionName: s2, result: e2, logPvd: o2 }), Promise.resolve(e2)), (e2) => (wt.call(this, { functionName: s2, result: e2, logPvd: o2 }), e2 && e2.message && (e2.message = function({ message: e3 = "", extraInfo: t3 = {}, formatter: n4 = [] } = {}) {
+      n3.data = St.call(e, { data: n3.data });
+      const r2 = { aliyun: "aliyun", tencent: "tcb", tcb: "tcb" }[this.config.provider], i2 = bn(n3), o2 = Tn(n3), a2 = i2 || o2;
+      return t2.call(this, n3).then((e2) => (e2.errCode = 0, !a2 && Cn.call(this, { functionName: s2, result: e2, logPvd: r2 }), Promise.resolve(e2)), (e2) => (!a2 && Cn.call(this, { functionName: s2, result: e2, logPvd: r2 }), e2 && e2.message && (e2.message = function({ message: e3 = "", extraInfo: t3 = {}, formatter: n4 = [] } = {}) {
         for (let s3 = 0; s3 < n4.length; s3++) {
-          const { rule: o3, content: r2, mode: i2 } = n4[s3], a2 = e3.match(o3);
-          if (!a2)
+          const { rule: r3, content: i3, mode: o3 } = n4[s3], a3 = e3.match(r3);
+          if (!a3)
             continue;
-          let c2 = r2;
-          for (let e4 = 1; e4 < a2.length; e4++)
-            c2 = _t(c2, `{$${e4}}`, a2[e4]);
+          let c2 = i3;
+          for (let e4 = 1; e4 < a3.length; e4++)
+            c2 = At(c2, `{$${e4}}`, a3[e4]);
           for (const e4 in t3)
-            c2 = _t(c2, `{${e4}}`, t3[e4]);
-          return i2 === "replace" ? c2 : e3 + c2;
+            c2 = At(c2, `{${e4}}`, t3[e4]);
+          return "replace" === o3 ? c2 : e3 + c2;
         }
         return e3;
-      }({ message: `[${n3.name}]: ${e2.message}`, formatter: gt, extraInfo: { functionName: s2 } })), Promise.reject(e2)));
+      }({ message: `[${n3.name}]: ${e2.message}`, formatter: It, extraInfo: { functionName: s2 } })), Promise.reject(e2)));
     };
     e.callFunction = function(t3) {
-      let s2;
-      e.__dev__.debugInfo && !e.__dev__.debugInfo.forceRemote && _ ? (e._callCloudFunction || (e._callCloudFunction = n2, e._callLocalFunction = pt), s2 = pt) : s2 = n2, s2 = s2.bind(e);
-      const o2 = s2(t3);
-      return Object.defineProperty(o2, "result", { get: () => (console.warn("\u5F53\u524D\u8FD4\u56DE\u7ED3\u679C\u4E3APromise\u7C7B\u578B\uFF0C\u4E0D\u53EF\u76F4\u63A5\u8BBF\u95EE\u5176result\u5C5E\u6027\uFF0C\u8BE6\u60C5\u8BF7\u53C2\u8003\uFF1Ahttps://uniapp.dcloud.net.cn/uniCloud/faq?id=promise"), {}) }), o2;
+      const { provider: s2, spaceId: r2 } = e.config, i2 = t3.name;
+      let o2, a2;
+      if (t3.data = t3.data || {}, e.__dev__.debugInfo && !e.__dev__.debugInfo.forceRemote && I ? (e._callCloudFunction || (e._callCloudFunction = n2, e._callLocalFunction = kt), o2 = kt) : o2 = n2, o2 = o2.bind(e), Tn(t3))
+        a2 = n2.call(e, t3);
+      else if (bn(t3)) {
+        a2 = new wn({ secretType: t3.secretType, uniCloudIns: e }).wrapEncryptDataCallFunction(n2.bind(e))(t3);
+      } else if (An({ provider: s2, spaceId: r2, functionName: i2 })) {
+        a2 = new wn({ secretType: t3.secretType, uniCloudIns: e }).wrapVerifyClientCallFunction(n2.bind(e))(t3);
+      } else
+        a2 = o2(t3);
+      return Object.defineProperty(a2, "result", { get: () => (console.warn("当前返回结果为Promise类型，不可直接访问其result属性，详情请参考：https://uniapp.dcloud.net.cn/uniCloud/faq?id=promise"), {}) }), a2;
     };
   }
-  const kt = Symbol("CLIENT_DB_INTERNAL");
-  function Tt(e, t2) {
-    return e.then = "DoNotReturnProxyWithAFunctionNamedThen", e._internalType = kt, e.__v_raw = void 0, new Proxy(e, { get(e2, n2, s2) {
-      if (n2 === "_uniClient")
+  wn = class {
+    constructor() {
+      throw yn({ message: `Platform ${S} is not enabled, please check whether secure network module is enabled in your manifest.json` });
+    }
+  };
+  const En = Symbol("CLIENT_DB_INTERNAL");
+  function On(e, t2) {
+    return e.then = "DoNotReturnProxyWithAFunctionNamedThen", e._internalType = En, e.inspect = null, e.__v_raw = void 0, new Proxy(e, { get(e2, n2, s2) {
+      if ("_uniClient" === n2)
         return null;
-      if (n2 in e2 || typeof n2 != "string") {
+      if ("symbol" == typeof n2)
+        return e2[n2];
+      if (n2 in e2 || "string" != typeof n2) {
         const t3 = e2[n2];
-        return typeof t3 == "function" ? t3.bind(e2) : t3;
+        return "function" == typeof t3 ? t3.bind(e2) : t3;
       }
       return t2.get(e2, n2, s2);
     } });
   }
-  function St(e) {
+  function xn(e) {
     return { on: (t2, n2) => {
       e[t2] = e[t2] || [], e[t2].indexOf(n2) > -1 || e[t2].push(n2);
     }, off: (t2, n2) => {
       e[t2] = e[t2] || [];
       const s2 = e[t2].indexOf(n2);
-      s2 !== -1 && e[t2].splice(s2, 1);
+      -1 !== s2 && e[t2].splice(s2, 1);
     } };
   }
-  const At = ["db.Geo", "db.command", "command.aggregate"];
-  function Pt(e, t2) {
-    return At.indexOf(`${e}.${t2}`) > -1;
+  const Un = ["db.Geo", "db.command", "command.aggregate"];
+  function Rn(e, t2) {
+    return Un.indexOf(`${e}.${t2}`) > -1;
   }
-  function It(e) {
-    switch (h(e = at(e))) {
+  function Ln(e) {
+    switch (d(e = Z(e))) {
       case "array":
-        return e.map((e2) => It(e2));
+        return e.map((e2) => Ln(e2));
       case "object":
-        return e._internalType === kt || Object.keys(e).forEach((t2) => {
-          e[t2] = It(e[t2]);
+        return e._internalType === En || Object.keys(e).forEach((t2) => {
+          e[t2] = Ln(e[t2]);
         }), e;
       case "regexp":
         return { $regexp: { source: e.source, flags: e.flags } };
@@ -2618,10 +2850,10 @@ if (uni.restoreGlobal) {
         return e;
     }
   }
-  function bt(e) {
+  function Nn(e) {
     return e && e.content && e.content.$method;
   }
-  class Ot {
+  class Dn {
     constructor(e, t2, n2) {
       this.content = e, this.prevStage = t2 || null, this.udb = null, this._database = n2;
     }
@@ -2630,20 +2862,20 @@ if (uni.restoreGlobal) {
       const t2 = [e.content];
       for (; e.prevStage; )
         e = e.prevStage, t2.push(e.content);
-      return { $db: t2.reverse().map((e2) => ({ $method: e2.$method, $param: It(e2.$param) })) };
+      return { $db: t2.reverse().map((e2) => ({ $method: e2.$method, $param: Ln(e2.$param) })) };
     }
     getAction() {
-      const e = this.toJSON().$db.find((e2) => e2.$method === "action");
+      const e = this.toJSON().$db.find((e2) => "action" === e2.$method);
       return e && e.$param && e.$param[0];
     }
     getCommand() {
-      return { $db: this.toJSON().$db.filter((e) => e.$method !== "action") };
+      return { $db: this.toJSON().$db.filter((e) => "action" !== e.$method) };
     }
     get isAggregate() {
       let e = this;
       for (; e; ) {
-        const t2 = bt(e), n2 = bt(e.prevStage);
-        if (t2 === "aggregate" && n2 === "collection" || t2 === "pipeline")
+        const t2 = Nn(e), n2 = Nn(e.prevStage);
+        if ("aggregate" === t2 && "collection" === n2 || "pipeline" === t2)
           return true;
         e = e.prevStage;
       }
@@ -2652,7 +2884,7 @@ if (uni.restoreGlobal) {
     get isCommand() {
       let e = this;
       for (; e; ) {
-        if (bt(e) === "command")
+        if ("command" === Nn(e))
           return true;
         e = e.prevStage;
       }
@@ -2661,38 +2893,36 @@ if (uni.restoreGlobal) {
     get isAggregateCommand() {
       let e = this;
       for (; e; ) {
-        const t2 = bt(e), n2 = bt(e.prevStage);
-        if (t2 === "aggregate" && n2 === "command")
+        const t2 = Nn(e), n2 = Nn(e.prevStage);
+        if ("aggregate" === t2 && "command" === n2)
           return true;
         e = e.prevStage;
       }
       return false;
     }
-    get count() {
-      if (!this.isAggregate)
-        return function() {
-          return this._send("count", Array.from(arguments));
-        };
-      const e = this;
+    getNextStageFn(e) {
+      const t2 = this;
       return function() {
-        return Ct({ $method: "count", $param: It(Array.from(arguments)) }, e, this._database);
+        return Fn({ $method: e, $param: Ln(Array.from(arguments)) }, t2, t2._database);
+      };
+    }
+    get count() {
+      return this.isAggregate ? this.getNextStageFn("count") : function() {
+        return this._send("count", Array.from(arguments));
       };
     }
     get remove() {
-      if (!this.isCommand)
-        return function() {
-          return this._send("remove", Array.from(arguments));
-        };
-      const e = this;
-      return function() {
-        return Ct({ $method: "remove", $param: It(Array.from(arguments)) }, e, this._database);
+      return this.isCommand ? this.getNextStageFn("remove") : function() {
+        return this._send("remove", Array.from(arguments));
       };
     }
     get() {
       return this._send("get", Array.from(arguments));
     }
-    add() {
-      return this._send("add", Array.from(arguments));
+    get add() {
+      return this.isCommand ? this.getNextStageFn("add") : function() {
+        return this._send("add", Array.from(arguments));
+      };
     }
     update() {
       return this._send("update", Array.from(arguments));
@@ -2701,33 +2931,28 @@ if (uni.restoreGlobal) {
       return this._send("end", Array.from(arguments));
     }
     get set() {
-      if (!this.isCommand)
-        return function() {
-          throw new Error("JQL\u7981\u6B62\u4F7F\u7528set\u65B9\u6CD5");
-        };
-      const e = this;
-      return function() {
-        return Ct({ $method: "set", $param: It(Array.from(arguments)) }, e, this._database);
+      return this.isCommand ? this.getNextStageFn("set") : function() {
+        throw new Error("JQL禁止使用set方法");
       };
     }
     _send(e, t2) {
       const n2 = this.getAction(), s2 = this.getCommand();
-      if (s2.$db.push({ $method: e, $param: It(t2) }), p) {
-        const e2 = s2.$db.find((e3) => e3.$method === "collection"), t3 = e2 && e2.$param;
-        t3 && t3.length === 1 && typeof e2.$param[0] == "string" && e2.$param[0].indexOf(",") > -1 && console.warn("\u68C0\u6D4B\u5230\u4F7F\u7528JQL\u8BED\u6CD5\u8054\u8868\u67E5\u8BE2\u65F6\uFF0C\u672A\u4F7F\u7528getTemp\u5148\u8FC7\u6EE4\u4E3B\u8868\u6570\u636E\uFF0C\u5728\u4E3B\u8868\u6570\u636E\u91CF\u5927\u7684\u60C5\u51B5\u4E0B\u53EF\u80FD\u4F1A\u67E5\u8BE2\u7F13\u6162\u3002\n- \u5982\u4F55\u4F18\u5316\u8BF7\u53C2\u8003\u6B64\u6587\u6863\uFF1Ahttps://uniapp.dcloud.net.cn/uniCloud/jql?id=lookup-with-temp \n- \u5982\u679C\u4E3B\u8868\u6570\u636E\u91CF\u5F88\u5C0F\u8BF7\u5FFD\u7565\u6B64\u4FE1\u606F\uFF0C\u9879\u76EE\u53D1\u884C\u65F6\u4E0D\u4F1A\u51FA\u73B0\u6B64\u63D0\u793A\u3002");
+      if (s2.$db.push({ $method: e, $param: Ln(t2) }), y) {
+        const e2 = s2.$db.find((e3) => "collection" === e3.$method), t3 = e2 && e2.$param;
+        t3 && 1 === t3.length && "string" == typeof e2.$param[0] && e2.$param[0].indexOf(",") > -1 && console.warn("检测到使用JQL语法联表查询时，未使用getTemp先过滤主表数据，在主表数据量大的情况下可能会查询缓慢。\n- 如何优化请参考此文档：https://uniapp.dcloud.net.cn/uniCloud/jql?id=lookup-with-temp \n- 如果主表数据量很小请忽略此信息，项目发行时不会出现此提示。");
       }
       return this._database._callCloudFunction({ action: n2, command: s2 });
     }
   }
-  function Ct(e, t2, n2) {
-    return Tt(new Ot(e, t2, n2), { get(e2, t3) {
+  function Fn(e, t2, n2) {
+    return On(new Dn(e, t2, n2), { get(e2, t3) {
       let s2 = "db";
-      return e2 && e2.content && (s2 = e2.content.$method), Pt(s2, t3) ? Ct({ $method: t3 }, e2, n2) : function() {
-        return Ct({ $method: t3, $param: It(Array.from(arguments)) }, e2, n2);
+      return e2 && e2.content && (s2 = e2.content.$method), Rn(s2, t3) ? Fn({ $method: t3 }, e2, n2) : function() {
+        return Fn({ $method: t3, $param: Ln(Array.from(arguments)) }, e2, n2);
       };
     } });
   }
-  function Et({ path: e, method: t2 }) {
+  function qn({ path: e, method: t2 }) {
     return class {
       constructor() {
         this.param = Array.from(arguments);
@@ -2737,13 +2962,18 @@ if (uni.restoreGlobal) {
       }
     };
   }
-  class Rt extends class {
-    constructor({ uniClient: e = {} } = {}) {
-      this._uniClient = e, this._authCallBacks = {}, this._dbCallBacks = {}, e.isDefault && (this._dbCallBacks = T("_globalUniCloudDatabaseCallback")), this.auth = St(this._authCallBacks), Object.assign(this, St(this._dbCallBacks)), this.env = Tt({}, { get: (e2, t2) => ({ $env: t2 }) }), this.Geo = Tt({}, { get: (e2, t2) => Et({ path: ["Geo"], method: t2 }) }), this.serverDate = Et({ path: [], method: "serverDate" }), this.RegExp = Et({ path: [], method: "RegExp" });
+  function Kn(e, t2 = {}) {
+    return On(new e(t2), { get: (e2, t3) => Rn("db", t3) ? Fn({ $method: t3 }, null, e2) : function() {
+      return Fn({ $method: t3, $param: Ln(Array.from(arguments)) }, null, e2);
+    } });
+  }
+  class jn extends class {
+    constructor({ uniClient: e = {}, isJQL: t2 = false } = {}) {
+      this._uniClient = e, this._authCallBacks = {}, this._dbCallBacks = {}, e.isDefault && (this._dbCallBacks = C("_globalUniCloudDatabaseCallback")), t2 || (this.auth = xn(this._authCallBacks)), this._isJQL = t2, Object.assign(this, xn(this._dbCallBacks)), this.env = On({}, { get: (e2, t3) => ({ $env: t3 }) }), this.Geo = On({}, { get: (e2, t3) => qn({ path: ["Geo"], method: t3 }) }), this.serverDate = qn({ path: [], method: "serverDate" }), this.RegExp = qn({ path: [], method: "RegExp" });
     }
     getCloudEnv(e) {
-      if (typeof e != "string" || !e.trim())
-        throw new Error("getCloudEnv\u53C2\u6570\u9519\u8BEF");
+      if ("string" != typeof e || !e.trim())
+        throw new Error("getCloudEnv参数错误");
       return { $env: e.replace("$cloudEnv_", "") };
     }
     _callback(e, t2) {
@@ -2761,341 +2991,341 @@ if (uni.restoreGlobal) {
     multiSend() {
       const e = Array.from(arguments), t2 = e.map((e2) => {
         const t3 = e2.getAction(), n2 = e2.getCommand();
-        if (n2.$db[n2.$db.length - 1].$method !== "getTemp")
-          throw new Error("multiSend\u53EA\u652F\u6301\u5B50\u547D\u4EE4\u5185\u4F7F\u7528getTemp");
+        if ("getTemp" !== n2.$db[n2.$db.length - 1].$method)
+          throw new Error("multiSend只支持子命令内使用getTemp");
         return { action: t3, command: n2 };
       });
       return this._callCloudFunction({ multiCommand: t2, queryList: e });
     }
   } {
+    _parseResult(e) {
+      return this._isJQL ? e.result : e;
+    }
     _callCloudFunction({ action: e, command: t2, multiCommand: n2, queryList: s2 }) {
-      function o2(e2, t3) {
+      function r2(e2, t3) {
         if (n2 && s2)
           for (let n3 = 0; n3 < s2.length; n3++) {
-            const o3 = s2[n3];
-            o3.udb && typeof o3.udb.setResult == "function" && (t3 ? o3.udb.setResult(t3) : o3.udb.setResult(e2.result.dataList[n3]));
+            const r3 = s2[n3];
+            r3.udb && "function" == typeof r3.udb.setResult && (t3 ? r3.udb.setResult(t3) : r3.udb.setResult(e2.result.dataList[n3]));
           }
       }
-      const r2 = this;
-      function i2(e2) {
-        return r2._callback("error", [e2]), b(O("database", "fail"), e2).then(() => b(O("database", "complete"), e2)).then(() => (o2(null, e2), j(R, { type: L, content: e2 }), Promise.reject(e2)));
+      const i2 = this, o2 = this._isJQL ? "databaseForJQL" : "database";
+      function a2(e2) {
+        return i2._callback("error", [e2]), U(R(o2, "fail"), e2).then(() => U(R(o2, "complete"), e2)).then(() => (r2(null, e2), z(D, { type: K, content: e2 }), Promise.reject(e2)));
       }
-      const a2 = b(O("database", "invoke")), c2 = this._uniClient;
-      return a2.then(() => c2.callFunction({ name: "DCloud-clientDB", type: l, data: { action: e, command: t2, multiCommand: n2 } })).then((e2) => {
-        const { code: t3, message: n3, token: s3, tokenExpired: r3, systemInfo: a3 = [] } = e2.result;
-        if (a3)
-          for (let e3 = 0; e3 < a3.length; e3++) {
-            const { level: t4, message: n4, detail: s4 } = a3[e3], o3 = console[m === "app" && t4 === "warn" ? "error" : t4] || console.log;
-            let r4 = "[System Info]" + n4;
-            s4 && (r4 = `${r4}
-\u8BE6\u7EC6\u4FE1\u606F\uFF1A${s4}`), o3(r4);
+      const c2 = U(R(o2, "invoke")), u2 = this._uniClient;
+      return c2.then(() => u2.callFunction({ name: "DCloud-clientDB", type: h, data: { action: e, command: t2, multiCommand: n2 } })).then((e2) => {
+        const { code: t3, message: n3, token: s3, tokenExpired: c3, systemInfo: u3 = [] } = e2.result;
+        if (u3)
+          for (let e3 = 0; e3 < u3.length; e3++) {
+            const { level: t4, message: n4, detail: s4 } = u3[e3], r3 = console["warn" === t4 ? "error" : t4] || console.log;
+            let i3 = "[System Info]" + n4;
+            s4 && (i3 = `${i3}
+详细信息：${s4}`), r3(i3);
           }
         if (t3) {
-          return i2(new H({ code: t3, message: n3, requestId: e2.requestId }));
+          return a2(new Q({ code: t3, message: n3, requestId: e2.requestId }));
         }
-        e2.result.errCode = e2.result.code, e2.result.errMsg = e2.result.message, s3 && r3 && (ut({ token: s3, tokenExpired: r3 }), this._callbackAuth("refreshToken", [{ token: s3, tokenExpired: r3 }]), this._callback("refreshToken", [{ token: s3, tokenExpired: r3 }]), j(x, { token: s3, tokenExpired: r3 }));
-        const c3 = [{ prop: "affectedDocs", tips: "affectedDocs\u4E0D\u518D\u63A8\u8350\u4F7F\u7528\uFF0C\u8BF7\u4F7F\u7528inserted/deleted/updated/data.length\u66FF\u4EE3" }, { prop: "code", tips: "code\u4E0D\u518D\u63A8\u8350\u4F7F\u7528\uFF0C\u8BF7\u4F7F\u7528errCode\u66FF\u4EE3" }, { prop: "message", tips: "message\u4E0D\u518D\u63A8\u8350\u4F7F\u7528\uFF0C\u8BF7\u4F7F\u7528errMsg\u66FF\u4EE3" }];
-        for (let t4 = 0; t4 < c3.length; t4++) {
-          const { prop: n4, tips: s4 } = c3[t4];
+        e2.result.errCode = e2.result.errCode || e2.result.code, e2.result.errMsg = e2.result.errMsg || e2.result.message, s3 && c3 && (te({ token: s3, tokenExpired: c3 }), this._callbackAuth("refreshToken", [{ token: s3, tokenExpired: c3 }]), this._callback("refreshToken", [{ token: s3, tokenExpired: c3 }]), z(q, { token: s3, tokenExpired: c3 }));
+        const l2 = [{ prop: "affectedDocs", tips: "affectedDocs不再推荐使用，请使用inserted/deleted/updated/data.length替代" }, { prop: "code", tips: "code不再推荐使用，请使用errCode替代" }, { prop: "message", tips: "message不再推荐使用，请使用errMsg替代" }];
+        for (let t4 = 0; t4 < l2.length; t4++) {
+          const { prop: n4, tips: s4 } = l2[t4];
           if (n4 in e2.result) {
             const t5 = e2.result[n4];
             Object.defineProperty(e2.result, n4, { get: () => (console.warn(s4), t5) });
           }
         }
         return function(e3) {
-          return b(O("database", "success"), e3).then(() => b(O("database", "complete"), e3)).then(() => (o2(e3, null), j(R, { type: L, content: e3 }), Promise.resolve(e3)));
+          return U(R(o2, "success"), e3).then(() => U(R(o2, "complete"), e3)).then(() => {
+            r2(e3, null);
+            const t4 = i2._parseResult(e3);
+            return z(D, { type: K, content: t4 }), Promise.resolve(t4);
+          });
         }(e2);
       }, (e2) => {
-        /fc_function_not_found|FUNCTION_NOT_FOUND/g.test(e2.message) && console.warn("clientDB\u672A\u521D\u59CB\u5316\uFF0C\u8BF7\u5728web\u63A7\u5236\u53F0\u4FDD\u5B58\u4E00\u6B21schema\u4EE5\u5F00\u542FclientDB");
-        return i2(new H({ code: e2.code || "SYSTEM_ERROR", message: e2.message, requestId: e2.requestId }));
+        /fc_function_not_found|FUNCTION_NOT_FOUND/g.test(e2.message) && console.warn("clientDB未初始化，请在web控制台保存一次schema以开启clientDB");
+        return a2(new Q({ code: e2.code || "SYSTEM_ERROR", message: e2.message, requestId: e2.requestId }));
       });
     }
   }
-  function Ut(e) {
-    e.database = function(t2) {
-      if (t2 && Object.keys(t2).length > 0)
-        return e.init(t2).database();
-      if (this._database)
-        return this._database;
-      const n2 = function(e2, t3 = {}) {
-        return Tt(new e2(t3), { get: (e3, t4) => Pt("db", t4) ? Ct({ $method: t4 }, null, e3) : function() {
-          return Ct({ $method: t4, $param: It(Array.from(arguments)) }, null, e3);
-        } });
-      }(Rt, { uniClient: e });
-      return this._database = n2, n2;
-    };
-  }
-  const xt = "token\u65E0\u6548\uFF0C\u8DF3\u8F6C\u767B\u5F55\u9875\u9762", Lt = "token\u8FC7\u671F\uFF0C\u8DF3\u8F6C\u767B\u5F55\u9875\u9762", Dt = { TOKEN_INVALID_TOKEN_EXPIRED: Lt, TOKEN_INVALID_INVALID_CLIENTID: xt, TOKEN_INVALID: xt, TOKEN_INVALID_WRONG_TOKEN: xt, TOKEN_INVALID_ANONYMOUS_USER: xt }, Nt = { "uni-id-token-expired": Lt, "uni-id-check-token-failed": xt, "uni-id-token-not-exist": xt, "uni-id-check-device-feature-failed": xt };
-  function qt(e, t2) {
+  const Mn = "token无效，跳转登录页面", Bn = "token过期，跳转登录页面", $n = { TOKEN_INVALID_TOKEN_EXPIRED: Bn, TOKEN_INVALID_INVALID_CLIENTID: Mn, TOKEN_INVALID: Mn, TOKEN_INVALID_WRONG_TOKEN: Mn, TOKEN_INVALID_ANONYMOUS_USER: Mn }, Wn = { "uni-id-token-expired": Bn, "uni-id-check-token-failed": Mn, "uni-id-token-not-exist": Mn, "uni-id-check-device-feature-failed": Mn };
+  function zn(e, t2) {
     let n2 = "";
     return n2 = e ? `${e}/${t2}` : t2, n2.replace(/^\//, "");
   }
-  function Ft(e = [], t2 = "") {
+  function Jn(e = [], t2 = "") {
     const n2 = [], s2 = [];
     return e.forEach((e2) => {
-      e2.needLogin === true ? n2.push(qt(t2, e2.path)) : e2.needLogin === false && s2.push(qt(t2, e2.path));
+      true === e2.needLogin ? n2.push(zn(t2, e2.path)) : false === e2.needLogin && s2.push(zn(t2, e2.path));
     }), { needLoginPage: n2, notNeedLoginPage: s2 };
   }
-  function Mt(e) {
+  function Hn(e) {
     return e.split("?")[0].replace(/^\//, "");
   }
-  function jt() {
+  function Gn() {
     return function(e) {
       let t2 = e && e.$page && e.$page.fullPath || "";
-      return t2 ? (t2.charAt(0) !== "/" && (t2 = "/" + t2), t2) : t2;
+      return t2 ? ("/" !== t2.charAt(0) && (t2 = "/" + t2), t2) : t2;
     }(function() {
       const e = getCurrentPages();
       return e[e.length - 1];
     }());
   }
-  function $t() {
-    return Mt(jt());
+  function Vn() {
+    return Hn(Gn());
   }
-  function Bt(e = "", t2 = {}) {
+  function Yn(e = "", t2 = {}) {
     if (!e)
       return false;
     if (!(t2 && t2.list && t2.list.length))
       return false;
-    const n2 = t2.list, s2 = Mt(e);
+    const n2 = t2.list, s2 = Hn(e);
     return n2.some((e2) => e2.pagePath === s2);
   }
-  const Kt = !!t.uniIdRouter;
-  const { loginPage: Wt, routerNeedLogin: Ht, resToLogin: zt, needLoginPage: Jt, notNeedLoginPage: Vt, loginPageInTabBar: Yt } = function({ pages: e = [], subPackages: n2 = [], uniIdRouter: s2 = {}, tabBar: o2 = {} } = t) {
-    const { loginPage: r2, needLogin: i2 = [], resToLogin: a2 = true } = s2, { needLoginPage: c2, notNeedLoginPage: u2 } = Ft(e), { needLoginPage: l2, notNeedLoginPage: h2 } = function(e2 = []) {
+  const Qn = !!t.uniIdRouter;
+  const { loginPage: Xn, routerNeedLogin: Zn, resToLogin: es, needLoginPage: ts, notNeedLoginPage: ns, loginPageInTabBar: ss } = function({ pages: e = [], subPackages: n2 = [], uniIdRouter: s2 = {}, tabBar: r2 = {} } = t) {
+    const { loginPage: i2, needLogin: o2 = [], resToLogin: a2 = true } = s2, { needLoginPage: c2, notNeedLoginPage: u2 } = Jn(e), { needLoginPage: l2, notNeedLoginPage: h2 } = function(e2 = []) {
       const t2 = [], n3 = [];
       return e2.forEach((e3) => {
-        const { root: s3, pages: o3 = [] } = e3, { needLoginPage: r3, notNeedLoginPage: i3 } = Ft(o3, s3);
-        t2.push(...r3), n3.push(...i3);
+        const { root: s3, pages: r3 = [] } = e3, { needLoginPage: i3, notNeedLoginPage: o3 } = Jn(r3, s3);
+        t2.push(...i3), n3.push(...o3);
       }), { needLoginPage: t2, notNeedLoginPage: n3 };
     }(n2);
-    return { loginPage: r2, routerNeedLogin: i2, resToLogin: a2, needLoginPage: [...c2, ...l2], notNeedLoginPage: [...u2, ...h2], loginPageInTabBar: Bt(r2, o2) };
+    return { loginPage: i2, routerNeedLogin: o2, resToLogin: a2, needLoginPage: [...c2, ...l2], notNeedLoginPage: [...u2, ...h2], loginPageInTabBar: Yn(i2, r2) };
   }();
-  if (Jt.indexOf(Wt) > -1)
-    throw new Error(`Login page [${Wt}] should not be "needLogin", please check your pages.json`);
-  function Xt(e) {
-    const t2 = Mt(function(e2) {
-      const t3 = $t(), n2 = e2.charAt(0), s2 = e2.split("?")[0];
-      if (n2 === "/")
-        return s2;
-      const o2 = s2.replace(/^\//, "").split("/"), r2 = t3.split("/");
-      r2.pop();
-      for (let e3 = 0; e3 < o2.length; e3++) {
-        const t4 = o2[e3];
-        t4 === ".." ? r2.pop() : t4 !== "." && r2.push(t4);
-      }
-      return r2[0] === "" && r2.shift(), r2.join("/");
-    }(e));
-    return !(Vt.indexOf(t2) > -1) && (Jt.indexOf(t2) > -1 || Ht.some((t3) => function(e2, t4) {
+  if (ts.indexOf(Xn) > -1)
+    throw new Error(`Login page [${Xn}] should not be "needLogin", please check your pages.json`);
+  function rs(e) {
+    const t2 = Vn();
+    if ("/" === e.charAt(0))
+      return e;
+    const [n2, s2] = e.split("?"), r2 = n2.replace(/^\//, "").split("/"), i2 = t2.split("/");
+    i2.pop();
+    for (let e2 = 0; e2 < r2.length; e2++) {
+      const t3 = r2[e2];
+      ".." === t3 ? i2.pop() : "." !== t3 && i2.push(t3);
+    }
+    return "" === i2[0] && i2.shift(), "/" + i2.join("/") + (s2 ? "?" + s2 : "");
+  }
+  function is(e) {
+    const t2 = Hn(rs(e));
+    return !(ns.indexOf(t2) > -1) && (ts.indexOf(t2) > -1 || Zn.some((t3) => function(e2, t4) {
       return new RegExp(t4).test(e2);
     }(e, t3)));
   }
-  function Gt({ redirect: e }) {
-    const t2 = Mt(e), n2 = Mt(Wt);
-    return $t() !== n2 && t2 !== n2;
+  function os({ redirect: e }) {
+    const t2 = Hn(e), n2 = Hn(Xn);
+    return Vn() !== n2 && t2 !== n2;
   }
-  function Qt({ api: e, redirect: t2 } = {}) {
-    if (!t2 || !Gt({ redirect: t2 }))
+  function as({ api: e, redirect: t2 } = {}) {
+    if (!t2 || !os({ redirect: t2 }))
       return;
     const n2 = function(e2, t3) {
-      return e2.charAt(0) !== "/" && (e2 = "/" + e2), t3 ? e2.indexOf("?") > -1 ? e2 + `&uniIdRedirectUrl=${encodeURIComponent(t3)}` : e2 + `?uniIdRedirectUrl=${encodeURIComponent(t3)}` : e2;
-    }(Wt, t2);
-    Yt ? e !== "navigateTo" && e !== "redirectTo" || (e = "switchTab") : e === "switchTab" && (e = "navigateTo"), setTimeout(() => {
-      uni[e]({ url: n2 });
+      return "/" !== e2.charAt(0) && (e2 = "/" + e2), t3 ? e2.indexOf("?") > -1 ? e2 + `&uniIdRedirectUrl=${encodeURIComponent(t3)}` : e2 + `?uniIdRedirectUrl=${encodeURIComponent(t3)}` : e2;
+    }(Xn, t2);
+    ss ? "navigateTo" !== e && "redirectTo" !== e || (e = "switchTab") : "switchTab" === e && (e = "navigateTo");
+    const s2 = { navigateTo: uni.navigateTo, redirectTo: uni.redirectTo, switchTab: uni.switchTab, reLaunch: uni.reLaunch };
+    setTimeout(() => {
+      s2[e]({ url: n2 });
     });
   }
-  function Zt({ url: e } = {}) {
+  function cs({ url: e } = {}) {
     const t2 = { abortLoginPageJump: false, autoToLoginPage: false }, n2 = function() {
-      const { token: e2, tokenExpired: t3 } = ct();
+      const { token: e2, tokenExpired: t3 } = ee();
       let n3;
       if (e2) {
         if (t3 < Date.now()) {
           const e3 = "uni-id-token-expired";
-          n3 = { errCode: e3, errMsg: Nt[e3] };
+          n3 = { errCode: e3, errMsg: Wn[e3] };
         }
       } else {
         const e3 = "uni-id-check-token-failed";
-        n3 = { errCode: e3, errMsg: Nt[e3] };
+        n3 = { errCode: e3, errMsg: Wn[e3] };
       }
       return n3;
     }();
-    if (Xt(e) && n2) {
+    if (is(e) && n2) {
       n2.uniIdRedirectUrl = e;
-      if (q(U).length > 0)
+      if (B(F).length > 0)
         return setTimeout(() => {
-          j(U, n2);
+          z(F, n2);
         }, 0), t2.abortLoginPageJump = true, t2;
       t2.autoToLoginPage = true;
     }
     return t2;
   }
-  function en() {
+  function us() {
     !function() {
-      const e2 = jt(), { abortLoginPageJump: t2, autoToLoginPage: n2 } = Zt({ url: e2 });
-      t2 || n2 && Qt({ api: "redirectTo", redirect: e2 });
+      const e2 = Gn(), { abortLoginPageJump: t2, autoToLoginPage: n2 } = cs({ url: e2 });
+      t2 || n2 && as({ api: "redirectTo", redirect: e2 });
     }();
     const e = ["navigateTo", "redirectTo", "reLaunch", "switchTab"];
     for (let t2 = 0; t2 < e.length; t2++) {
       const n2 = e[t2];
       uni.addInterceptor(n2, { invoke(e2) {
-        const { abortLoginPageJump: t3, autoToLoginPage: s2 } = Zt({ url: e2.url });
-        return t3 ? e2 : s2 ? (Qt({ api: n2, redirect: e2.url }), false) : e2;
+        const { abortLoginPageJump: t3, autoToLoginPage: s2 } = cs({ url: e2.url });
+        return t3 ? e2 : s2 ? (as({ api: n2, redirect: rs(e2.url) }), false) : e2;
       } });
     }
   }
-  function tn() {
+  function ls() {
     this.onResponse((e) => {
       const { type: t2, content: n2 } = e;
       let s2 = false;
       switch (t2) {
         case "cloudobject":
           s2 = function(e2) {
-            const { errCode: t3 } = e2;
-            return t3 in Nt;
+            if ("object" != typeof e2)
+              return false;
+            const { errCode: t3 } = e2 || {};
+            return t3 in Wn;
           }(n2);
           break;
         case "clientdb":
           s2 = function(e2) {
-            const { errCode: t3 } = e2;
-            return t3 in Dt;
+            if ("object" != typeof e2)
+              return false;
+            const { errCode: t3 } = e2 || {};
+            return t3 in $n;
           }(n2);
       }
       s2 && function(e2 = {}) {
-        const t3 = q(U);
-        K().then(() => {
-          const n3 = jt();
-          if (n3 && Gt({ redirect: n3 }))
-            return t3.length > 0 ? j(U, Object.assign({ uniIdRedirectUrl: n3 }, e2)) : void (Wt && Qt({ api: "navigateTo", redirect: n3 }));
+        const t3 = B(F);
+        G().then(() => {
+          const n3 = Gn();
+          if (n3 && os({ redirect: n3 }))
+            return t3.length > 0 ? z(F, Object.assign({ uniIdRedirectUrl: n3 }, e2)) : void (Xn && as({ api: "navigateTo", redirect: n3 }));
         });
       }(n2);
     });
   }
-  function nn(e) {
+  function hs(e) {
     !function(e2) {
       e2.onResponse = function(e3) {
-        F(R, e3);
+        $(D, e3);
       }, e2.offResponse = function(e3) {
-        M(R, e3);
+        W(D, e3);
       };
     }(e), function(e2) {
       e2.onNeedLogin = function(e3) {
-        F(U, e3);
+        $(F, e3);
       }, e2.offNeedLogin = function(e3) {
-        M(U, e3);
-      }, Kt && (T("uni-cloud-status").needLoginInit || (T("uni-cloud-status").needLoginInit = true, K().then(() => {
-        en.call(e2);
-      }), zt && tn.call(e2)));
+        W(F, e3);
+      }, Qn && (C("_globalUniCloudStatus").needLoginInit || (C("_globalUniCloudStatus").needLoginInit = true, G().then(() => {
+        us.call(e2);
+      }), es && ls.call(e2)));
     }(e), function(e2) {
       e2.onRefreshToken = function(e3) {
-        F(x, e3);
+        $(q, e3);
       }, e2.offRefreshToken = function(e3) {
-        M(x, e3);
+        W(q, e3);
       };
     }(e);
   }
-  let sn;
-  const on = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", rn = /^(?:[A-Za-z\d+/]{4})*?(?:[A-Za-z\d+/]{2}(?:==)?|[A-Za-z\d+/]{3}=?)?$/;
-  function an() {
-    const e = ct().token || "", t2 = e.split(".");
-    if (!e || t2.length !== 3)
+  let ds;
+  const fs = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", ps = /^(?:[A-Za-z\d+/]{4})*?(?:[A-Za-z\d+/]{2}(?:==)?|[A-Za-z\d+/]{3}=?)?$/;
+  function gs() {
+    const e = ee().token || "", t2 = e.split(".");
+    if (!e || 3 !== t2.length)
       return { uid: null, role: [], permission: [], tokenExpired: 0 };
     let n2;
     try {
-      n2 = JSON.parse((s2 = t2[1], decodeURIComponent(sn(s2).split("").map(function(e2) {
+      n2 = JSON.parse((s2 = t2[1], decodeURIComponent(ds(s2).split("").map(function(e2) {
         return "%" + ("00" + e2.charCodeAt(0).toString(16)).slice(-2);
       }).join(""))));
     } catch (e2) {
-      throw new Error("\u83B7\u53D6\u5F53\u524D\u7528\u6237\u4FE1\u606F\u51FA\u9519\uFF0C\u8BE6\u7EC6\u9519\u8BEF\u4FE1\u606F\u4E3A\uFF1A" + e2.message);
+      throw new Error("获取当前用户信息出错，详细错误信息为：" + e2.message);
     }
     var s2;
     return n2.tokenExpired = 1e3 * n2.exp, delete n2.exp, delete n2.iat, n2;
   }
-  sn = typeof atob != "function" ? function(e) {
-    if (e = String(e).replace(/[\t\n\f\r ]+/g, ""), !rn.test(e))
+  ds = "function" != typeof atob ? function(e) {
+    if (e = String(e).replace(/[\t\n\f\r ]+/g, ""), !ps.test(e))
       throw new Error("Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded.");
     var t2;
     e += "==".slice(2 - (3 & e.length));
-    for (var n2, s2, o2 = "", r2 = 0; r2 < e.length; )
-      t2 = on.indexOf(e.charAt(r2++)) << 18 | on.indexOf(e.charAt(r2++)) << 12 | (n2 = on.indexOf(e.charAt(r2++))) << 6 | (s2 = on.indexOf(e.charAt(r2++))), o2 += n2 === 64 ? String.fromCharCode(t2 >> 16 & 255) : s2 === 64 ? String.fromCharCode(t2 >> 16 & 255, t2 >> 8 & 255) : String.fromCharCode(t2 >> 16 & 255, t2 >> 8 & 255, 255 & t2);
-    return o2;
+    for (var n2, s2, r2 = "", i2 = 0; i2 < e.length; )
+      t2 = fs.indexOf(e.charAt(i2++)) << 18 | fs.indexOf(e.charAt(i2++)) << 12 | (n2 = fs.indexOf(e.charAt(i2++))) << 6 | (s2 = fs.indexOf(e.charAt(i2++))), r2 += 64 === n2 ? String.fromCharCode(t2 >> 16 & 255) : 64 === s2 ? String.fromCharCode(t2 >> 16 & 255, t2 >> 8 & 255) : String.fromCharCode(t2 >> 16 & 255, t2 >> 8 & 255, 255 & t2);
+    return r2;
   } : atob;
-  var cn = s(function(e, t2) {
+  var ms = s(function(e, t2) {
     Object.defineProperty(t2, "__esModule", { value: true });
     const n2 = "chooseAndUploadFile:ok", s2 = "chooseAndUploadFile:fail";
-    function o2(e2, t3) {
+    function r2(e2, t3) {
       return e2.tempFiles.forEach((e3, n3) => {
         e3.name || (e3.name = e3.path.substring(e3.path.lastIndexOf("/") + 1)), t3 && (e3.fileType = t3), e3.cloudPath = Date.now() + "_" + n3 + e3.name.substring(e3.name.lastIndexOf("."));
       }), e2.tempFilePaths || (e2.tempFilePaths = e2.tempFiles.map((e3) => e3.path)), e2;
     }
-    function r2(e2, t3, { onChooseFile: s3, onUploadProgress: o3 }) {
+    function i2(e2, t3, { onChooseFile: s3, onUploadProgress: r3 }) {
       return t3.then((e3) => {
         if (s3) {
           const t4 = s3(e3);
-          if (t4 !== void 0)
-            return Promise.resolve(t4).then((t5) => t5 === void 0 ? e3 : t5);
+          if (void 0 !== t4)
+            return Promise.resolve(t4).then((t5) => void 0 === t5 ? e3 : t5);
         }
         return e3;
-      }).then((t4) => t4 === false ? { errMsg: n2, tempFilePaths: [], tempFiles: [] } : function(e3, t5, s4 = 5, o4) {
+      }).then((t4) => false === t4 ? { errMsg: n2, tempFilePaths: [], tempFiles: [] } : function(e3, t5, s4 = 5, r4) {
         (t5 = Object.assign({}, t5)).errMsg = n2;
-        const r3 = t5.tempFiles, i2 = r3.length;
+        const i3 = t5.tempFiles, o2 = i3.length;
         let a2 = 0;
         return new Promise((n3) => {
           for (; a2 < s4; )
             c2();
           function c2() {
             const s5 = a2++;
-            if (s5 >= i2)
-              return void (!r3.find((e4) => !e4.url && !e4.errMsg) && n3(t5));
-            const u2 = r3[s5];
+            if (s5 >= o2)
+              return void (!i3.find((e4) => !e4.url && !e4.errMsg) && n3(t5));
+            const u2 = i3[s5];
             e3.uploadFile({ filePath: u2.path, cloudPath: u2.cloudPath, fileType: u2.fileType, onUploadProgress(e4) {
-              e4.index = s5, e4.tempFile = u2, e4.tempFilePath = u2.path, o4 && o4(e4);
+              e4.index = s5, e4.tempFile = u2, e4.tempFilePath = u2.path, r4 && r4(e4);
             } }).then((e4) => {
-              u2.url = e4.fileID, s5 < i2 && c2();
+              u2.url = e4.fileID, s5 < o2 && c2();
             }).catch((e4) => {
-              u2.errMsg = e4.errMsg || e4.message, s5 < i2 && c2();
+              u2.errMsg = e4.errMsg || e4.message, s5 < o2 && c2();
             });
           }
         });
-      }(e2, t4, 5, o3));
+      }(e2, t4, 5, r3));
     }
     t2.initChooseAndUploadFile = function(e2) {
       return function(t3 = { type: "all" }) {
-        return t3.type === "image" ? r2(e2, function(e3) {
-          const { count: t4, sizeType: n3, sourceType: r3 = ["album", "camera"], extension: i2 } = e3;
+        return "image" === t3.type ? i2(e2, function(e3) {
+          const { count: t4, sizeType: n3, sourceType: i3 = ["album", "camera"], extension: o2 } = e3;
           return new Promise((e4, a2) => {
-            uni.chooseImage({ count: t4, sizeType: n3, sourceType: r3, extension: i2, success(t5) {
-              e4(o2(t5, "image"));
+            uni.chooseImage({ count: t4, sizeType: n3, sourceType: i3, extension: o2, success(t5) {
+              e4(r2(t5, "image"));
             }, fail(e5) {
               a2({ errMsg: e5.errMsg.replace("chooseImage:fail", s2) });
             } });
           });
-        }(t3), t3) : t3.type === "video" ? r2(e2, function(e3) {
-          const { camera: t4, compressed: n3, maxDuration: r3, sourceType: i2 = ["album", "camera"], extension: a2 } = e3;
+        }(t3), t3) : "video" === t3.type ? i2(e2, function(e3) {
+          const { camera: t4, compressed: n3, maxDuration: i3, sourceType: o2 = ["album", "camera"], extension: a2 } = e3;
           return new Promise((e4, c2) => {
-            uni.chooseVideo({ camera: t4, compressed: n3, maxDuration: r3, sourceType: i2, extension: a2, success(t5) {
-              const { tempFilePath: n4, duration: s3, size: r4, height: i3, width: a3 } = t5;
-              e4(o2({ errMsg: "chooseVideo:ok", tempFilePaths: [n4], tempFiles: [{ name: t5.tempFile && t5.tempFile.name || "", path: n4, size: r4, type: t5.tempFile && t5.tempFile.type || "", width: a3, height: i3, duration: s3, fileType: "video", cloudPath: "" }] }, "video"));
+            uni.chooseVideo({ camera: t4, compressed: n3, maxDuration: i3, sourceType: o2, extension: a2, success(t5) {
+              const { tempFilePath: n4, duration: s3, size: i4, height: o3, width: a3 } = t5;
+              e4(r2({ errMsg: "chooseVideo:ok", tempFilePaths: [n4], tempFiles: [{ name: t5.tempFile && t5.tempFile.name || "", path: n4, size: i4, type: t5.tempFile && t5.tempFile.type || "", width: a3, height: o3, duration: s3, fileType: "video", cloudPath: "" }] }, "video"));
             }, fail(e5) {
               c2({ errMsg: e5.errMsg.replace("chooseVideo:fail", s2) });
             } });
           });
-        }(t3), t3) : r2(e2, function(e3) {
+        }(t3), t3) : i2(e2, function(e3) {
           const { count: t4, extension: n3 } = e3;
-          return new Promise((e4, r3) => {
-            let i2 = uni.chooseFile;
-            if (typeof wx != "undefined" && typeof wx.chooseMessageFile == "function" && (i2 = wx.chooseMessageFile), typeof i2 != "function")
-              return r3({ errMsg: s2 + " \u8BF7\u6307\u5B9A type \u7C7B\u578B\uFF0C\u8BE5\u5E73\u53F0\u4EC5\u652F\u6301\u9009\u62E9 image \u6216 video\u3002" });
-            i2({ type: "all", count: t4, extension: n3, success(t5) {
-              e4(o2(t5));
+          return new Promise((e4, i3) => {
+            let o2 = uni.chooseFile;
+            if ("undefined" != typeof wx && "function" == typeof wx.chooseMessageFile && (o2 = wx.chooseMessageFile), "function" != typeof o2)
+              return i3({ errMsg: s2 + " 请指定 type 类型，该平台仅支持选择 image 或 video。" });
+            o2({ type: "all", count: t4, extension: n3, success(t5) {
+              e4(r2(t5));
             }, fail(e5) {
-              r3({ errMsg: e5.errMsg.replace("chooseFile:fail", s2) });
+              i3({ errMsg: e5.errMsg.replace("chooseFile:fail", s2) });
             } });
           });
         }(t3), t3);
       };
     };
-  }), un = n(cn);
-  const ln = "manual";
-  function hn(e) {
+  }), ys = n(ms);
+  const _s = "manual";
+  function ws(e) {
     return { props: { localdata: { type: Array, default: () => [] }, options: { type: [Object, Array], default: () => ({}) }, spaceInfo: { type: Object, default: () => ({}) }, collection: { type: [String, Array], default: "" }, action: { type: String, default: "" }, field: { type: String, default: "" }, orderby: { type: String, default: "" }, where: { type: [String, Object], default: "" }, pageData: { type: String, default: "add" }, pageCurrent: { type: Number, default: 1 }, pageSize: { type: Number, default: 20 }, getcount: { type: [Boolean, String], default: false }, gettree: { type: [Boolean, String], default: false }, gettreepath: { type: [Boolean, String], default: false }, startwith: { type: String, default: "" }, limitlevel: { type: Number, default: 10 }, groupby: { type: String, default: "" }, groupField: { type: String, default: "" }, distinct: { type: [Boolean, String], default: false }, foreignKey: { type: String, default: "" }, loadtime: { type: String, default: "auto" }, manual: { type: Boolean, default: false } }, data: () => ({ mixinDatacomLoading: false, mixinDatacomHasMore: false, mixinDatacomResData: [], mixinDatacomErrorMessage: "", mixinDatacomPage: {} }), created() {
       this.mixinDatacomPage = { current: this.pageCurrent, size: this.pageSize, count: 0 }, this.$watch(() => {
         var e2 = [];
@@ -3103,22 +3333,22 @@ if (uni.restoreGlobal) {
           e2.push(this[t2]);
         }), e2;
       }, (e2, t2) => {
-        if (this.loadtime === ln)
+        if (this.loadtime === _s)
           return;
         let n2 = false;
         const s2 = [];
-        for (let o2 = 2; o2 < e2.length; o2++)
-          e2[o2] !== t2[o2] && (s2.push(e2[o2]), n2 = true);
+        for (let r2 = 2; r2 < e2.length; r2++)
+          e2[r2] !== t2[r2] && (s2.push(e2[r2]), n2 = true);
         e2[0] !== t2[0] && (this.mixinDatacomPage.current = this.pageCurrent), this.mixinDatacomPage.size = this.pageSize, this.onMixinDatacomPropsChange(n2, s2);
       });
     }, methods: { onMixinDatacomPropsChange(e2, t2) {
     }, mixinDatacomEasyGet({ getone: e2 = false, success: t2, fail: n2 } = {}) {
       this.mixinDatacomLoading || (this.mixinDatacomLoading = true, this.mixinDatacomErrorMessage = "", this.mixinDatacomGet().then((n3) => {
         this.mixinDatacomLoading = false;
-        const { data: s2, count: o2 } = n3.result;
-        this.getcount && (this.mixinDatacomPage.count = o2), this.mixinDatacomHasMore = s2.length < this.pageSize;
-        const r2 = e2 ? s2.length ? s2[0] : void 0 : s2;
-        this.mixinDatacomResData = r2, t2 && t2(r2);
+        const { data: s2, count: r2 } = n3.result;
+        this.getcount && (this.mixinDatacomPage.count = r2), this.mixinDatacomHasMore = s2.length < this.pageSize;
+        const i2 = e2 ? s2.length ? s2[0] : void 0 : s2;
+        this.mixinDatacomResData = i2, t2 && t2(i2);
       }).catch((e3) => {
         this.mixinDatacomLoading = false, this.mixinDatacomErrorMessage = e3, n2 && n2(e3);
       }));
@@ -3126,132 +3356,153 @@ if (uni.restoreGlobal) {
       let n2 = e.database(this.spaceInfo);
       const s2 = t2.action || this.action;
       s2 && (n2 = n2.action(s2));
-      const o2 = t2.collection || this.collection;
-      n2 = Array.isArray(o2) ? n2.collection(...o2) : n2.collection(o2);
-      const r2 = t2.where || this.where;
-      r2 && Object.keys(r2).length && (n2 = n2.where(r2));
-      const i2 = t2.field || this.field;
-      i2 && (n2 = n2.field(i2));
+      const r2 = t2.collection || this.collection;
+      n2 = Array.isArray(r2) ? n2.collection(...r2) : n2.collection(r2);
+      const i2 = t2.where || this.where;
+      i2 && Object.keys(i2).length && (n2 = n2.where(i2));
+      const o2 = t2.field || this.field;
+      o2 && (n2 = n2.field(o2));
       const a2 = t2.foreignKey || this.foreignKey;
       a2 && (n2 = n2.foreignKey(a2));
       const c2 = t2.groupby || this.groupby;
       c2 && (n2 = n2.groupBy(c2));
       const u2 = t2.groupField || this.groupField;
       u2 && (n2 = n2.groupField(u2));
-      (t2.distinct !== void 0 ? t2.distinct : this.distinct) === true && (n2 = n2.distinct());
+      true === (void 0 !== t2.distinct ? t2.distinct : this.distinct) && (n2 = n2.distinct());
       const l2 = t2.orderby || this.orderby;
       l2 && (n2 = n2.orderBy(l2));
-      const h2 = t2.pageCurrent !== void 0 ? t2.pageCurrent : this.mixinDatacomPage.current, d2 = t2.pageSize !== void 0 ? t2.pageSize : this.mixinDatacomPage.size, f2 = t2.getcount !== void 0 ? t2.getcount : this.getcount, p2 = t2.gettree !== void 0 ? t2.gettree : this.gettree, g2 = t2.gettreepath !== void 0 ? t2.gettreepath : this.gettreepath, m2 = { getCount: f2 }, y2 = { limitLevel: t2.limitlevel !== void 0 ? t2.limitlevel : this.limitlevel, startWith: t2.startwith !== void 0 ? t2.startwith : this.startwith };
+      const h2 = void 0 !== t2.pageCurrent ? t2.pageCurrent : this.mixinDatacomPage.current, d2 = void 0 !== t2.pageSize ? t2.pageSize : this.mixinDatacomPage.size, f2 = void 0 !== t2.getcount ? t2.getcount : this.getcount, p2 = void 0 !== t2.gettree ? t2.gettree : this.gettree, g2 = void 0 !== t2.gettreepath ? t2.gettreepath : this.gettreepath, m2 = { getCount: f2 }, y2 = { limitLevel: void 0 !== t2.limitlevel ? t2.limitlevel : this.limitlevel, startWith: void 0 !== t2.startwith ? t2.startwith : this.startwith };
       return p2 && (m2.getTree = y2), g2 && (m2.getTreePath = y2), n2 = n2.skip(d2 * (h2 - 1)).limit(d2).get(m2), n2;
     } } };
   }
-  function dn(e) {
+  function vs(e) {
     return function(t2, n2 = {}) {
       n2 = function(e2, t3 = {}) {
-        return e2.customUI = t3.customUI || e2.customUI, Object.assign(e2.loadingOptions, t3.loadingOptions), Object.assign(e2.errorOptions, t3.errorOptions), typeof t3.secretMethods == "object" && (e2.secretMethods = t3.secretMethods), e2;
-      }({ customUI: false, loadingOptions: { title: "\u52A0\u8F7D\u4E2D...", mask: true }, errorOptions: { type: "modal", retry: false } }, n2);
-      const { customUI: s2, loadingOptions: o2, errorOptions: r2 } = n2, i2 = !s2;
-      return new Proxy({}, { get: (s3, a2) => function({ fn: e2, interceptorName: t3, getCallbackArgs: n3 } = {}) {
+        return e2.customUI = t3.customUI || e2.customUI, e2.parseSystemError = t3.parseSystemError || e2.parseSystemError, Object.assign(e2.loadingOptions, t3.loadingOptions), Object.assign(e2.errorOptions, t3.errorOptions), "object" == typeof t3.secretMethods && (e2.secretMethods = t3.secretMethods), e2;
+      }({ customUI: false, loadingOptions: { title: "加载中...", mask: true }, errorOptions: { type: "modal", retry: false } }, n2);
+      const { customUI: s2, loadingOptions: r2, errorOptions: i2, parseSystemError: o2 } = n2, a2 = !s2;
+      return new Proxy({}, { get: (s3, c2) => function({ fn: e2, interceptorName: t3, getCallbackArgs: n3 } = {}) {
         return async function(...s4) {
-          const o3 = n3 ? n3({ params: s4 }) : {};
-          let r3, i3;
+          const r3 = n3 ? n3({ params: s4 }) : {};
+          let i3, o3;
           try {
-            return await b(O(t3, "invoke"), __spreadValues({}, o3)), r3 = await e2(...s4), await b(O(t3, "success"), __spreadProps(__spreadValues({}, o3), { result: r3 })), r3;
+            return await U(R(t3, "invoke"), { ...r3 }), i3 = await e2(...s4), await U(R(t3, "success"), { ...r3, result: i3 }), i3;
           } catch (e3) {
-            throw i3 = e3, await b(O(t3, "fail"), __spreadProps(__spreadValues({}, o3), { error: i3 })), i3;
+            throw o3 = e3, await U(R(t3, "fail"), { ...r3, error: o3 }), o3;
           } finally {
-            await b(O(t3, "complete"), i3 ? __spreadProps(__spreadValues({}, o3), { error: i3 }) : __spreadProps(__spreadValues({}, o3), { result: r3 }));
+            await U(R(t3, "complete"), o3 ? { ...r3, error: o3 } : { ...r3, result: i3 });
           }
         };
-      }({ fn: async function s4(...c2) {
-        let l2;
-        i2 && uni.showLoading({ title: o2.title, mask: o2.mask });
-        const h2 = { name: t2, type: u, data: { method: a2, params: c2 } };
-        typeof n2.secretMethods == "object" && function(e2, t3) {
-          const n3 = t3.data.method, s5 = e2.secretMethods || {}, o3 = s5[n3] || s5["*"];
-          o3 && (t3.secret = o3);
-        }(n2, h2);
+      }({ fn: async function s4(...u2) {
+        let h2;
+        a2 && uni.showLoading({ title: r2.title, mask: r2.mask });
+        const d2 = { name: t2, type: l, data: { method: c2, params: u2 } };
+        "object" == typeof n2.secretMethods && function(e2, t3) {
+          const n3 = t3.data.method, s5 = e2.secretMethods || {}, r3 = s5[n3] || s5["*"];
+          r3 && (t3.secretType = r3);
+        }(n2, d2);
+        let f2 = false;
         try {
-          l2 = await e.callFunction(h2);
+          h2 = await e.callFunction(d2);
         } catch (e2) {
-          l2 = { result: e2 };
+          f2 = true, h2 = { result: new Q(e2) };
         }
-        const { errCode: d2, errMsg: f2, newToken: p2 } = l2.result || {};
-        if (i2 && uni.hideLoading(), p2 && p2.token && p2.tokenExpired && (ut(p2), j(x, __spreadValues({}, p2))), d2) {
-          if (i2)
-            if (r2.type === "toast")
-              uni.showToast({ title: f2, icon: "none" });
+        const { errSubject: p2, errCode: g2, errMsg: m2, newToken: y2 } = h2.result || {};
+        if (a2 && uni.hideLoading(), y2 && y2.token && y2.tokenExpired && (te(y2), z(q, { ...y2 })), g2) {
+          let e2 = m2;
+          if (f2 && o2) {
+            e2 = (await o2({ objectName: t2, methodName: c2, params: u2, errSubject: p2, errCode: g2, errMsg: m2 })).errMsg || m2;
+          }
+          if (a2)
+            if ("toast" === i2.type)
+              uni.showToast({ title: e2, icon: "none" });
             else {
-              if (r2.type !== "modal")
-                throw new Error(`Invalid errorOptions.type: ${r2.type}`);
+              if ("modal" !== i2.type)
+                throw new Error(`Invalid errorOptions.type: ${i2.type}`);
               {
-                const { confirm: e3 } = await async function({ title: e4, content: t3, showCancel: n3, cancelText: s5, confirmText: o3 } = {}) {
-                  return new Promise((r3, i3) => {
-                    uni.showModal({ title: e4, content: t3, showCancel: n3, cancelText: s5, confirmText: o3, success(e5) {
-                      r3(e5);
+                const { confirm: t3 } = await async function({ title: e3, content: t4, showCancel: n4, cancelText: s5, confirmText: r3 } = {}) {
+                  return new Promise((i3, o3) => {
+                    uni.showModal({ title: e3, content: t4, showCancel: n4, cancelText: s5, confirmText: r3, success(e4) {
+                      i3(e4);
                     }, fail() {
-                      r3({ confirm: false, cancel: true });
+                      i3({ confirm: false, cancel: true });
                     } });
                   });
-                }({ title: "\u63D0\u793A", content: f2, showCancel: r2.retry, cancelText: "\u53D6\u6D88", confirmText: r2.retry ? "\u91CD\u8BD5" : "\u786E\u5B9A" });
-                if (r2.retry && e3)
-                  return s4(...c2);
+                }({ title: "提示", content: e2, showCancel: i2.retry, cancelText: "取消", confirmText: i2.retry ? "重试" : "确定" });
+                if (i2.retry && t3)
+                  return s4(...u2);
               }
             }
-          const e2 = new H({ code: d2, message: f2, requestId: l2.requestId });
-          throw e2.detail = l2.result, j(R, { type: N, content: e2 }), e2;
+          const n3 = new Q({ subject: p2, code: g2, message: m2, requestId: h2.requestId });
+          throw n3.detail = h2.result, z(D, { type: M, content: n3 }), n3;
         }
-        return j(R, { type: N, content: l2.result }), l2.result;
+        return z(D, { type: M, content: h2.result }), h2.result;
       }, interceptorName: "callObject", getCallbackArgs: function({ params: e2 } = {}) {
-        return { objectName: t2, methodName: a2, params: e2 };
+        return { objectName: t2, methodName: c2, params: e2 };
       } }) });
     };
   }
-  async function fn(e, t2) {
+  function Ss(e) {
+    return C("_globalUniCloudSecureNetworkCache__{spaceId}".replace("{spaceId}", e.config.spaceId));
+  }
+  async function ks({ callLoginByWeixin: e = false } = {}) {
+    Ss(this);
+    throw new Error(`[SecureNetwork] API \`initSecureNetworkByWeixin\` is not supported on platform \`${S}\``);
+  }
+  async function Is(e) {
+    const t2 = Ss(this);
+    return t2.initPromise || (t2.initPromise = ks.call(this, e)), t2.initPromise;
+  }
+  function bs(e) {
+    return function({ callLoginByWeixin: t2 = false } = {}) {
+      return Is.call(e, { callLoginByWeixin: t2 });
+    };
+  }
+  async function Ts(e, t2) {
     const n2 = `http://${e}:${t2}/system/ping`;
     try {
       const e2 = await (s2 = { url: n2, timeout: 500 }, new Promise((e3, t3) => {
-        X.request(__spreadProps(__spreadValues({}, s2), { success(t4) {
+        X.request({ ...s2, success(t4) {
           e3(t4);
         }, fail(e4) {
           t3(e4);
-        } }));
+        } });
       }));
-      return !(!e2.data || e2.data.code !== 0);
+      return !(!e2.data || 0 !== e2.data.code);
     } catch (e2) {
       return false;
     }
     var s2;
   }
-  function pn(e) {
-    if (e.initUniCloudStatus && e.initUniCloudStatus !== "rejected")
+  function As(e) {
+    if (e.initUniCloudStatus && "rejected" !== e.initUniCloudStatus)
       return;
     let t2 = Promise.resolve();
     var n2;
-    n2 = 1, t2 = new Promise((e2, t3) => {
+    n2 = 1, t2 = new Promise((e2) => {
       setTimeout(() => {
         e2();
       }, n2);
     }), e.isReady = false, e.isDefault = false;
     const s2 = e.auth();
     e.initUniCloudStatus = "pending", e.initUniCloud = t2.then(() => s2.getLoginState()).then((e2) => e2 ? Promise.resolve() : s2.signInAnonymously()).then(() => {
-      if (m === "app") {
-        const { osName: e2, osVersion: t3 } = uni.getSystemInfoSync();
-        e2 === "ios" && function(e3) {
-          if (!e3 || typeof e3 != "string")
+      {
+        const { osName: e2, osVersion: t3 } = ie();
+        "ios" === e2 && function(e3) {
+          if (!e3 || "string" != typeof e3)
             return 0;
           const t4 = e3.match(/^(\d+)./);
           return t4 && t4[1] ? parseInt(t4[1]) : 0;
-        }(t3) >= 14 && console.warn("iOS 14\u53CA\u4EE5\u4E0A\u7248\u672C\u8FDE\u63A5uniCloud\u672C\u5730\u8C03\u8BD5\u670D\u52A1\u9700\u8981\u5141\u8BB8\u5BA2\u6237\u7AEF\u67E5\u627E\u5E76\u8FDE\u63A5\u5230\u672C\u5730\u7F51\u7EDC\u4E0A\u7684\u8BBE\u5907\uFF08\u4EC5\u5F00\u53D1\u6A21\u5F0F\u751F\u6548\uFF0C\u53D1\u884C\u6A21\u5F0F\u4F1A\u8FDE\u63A5uniCloud\u4E91\u7AEF\u670D\u52A1\uFF09");
+        }(t3) >= 14 && console.warn("iOS 14及以上版本连接uniCloud本地调试服务需要允许客户端查找并连接到本地网络上的设备（仅开发模式生效，发行模式会连接uniCloud云端服务）");
       }
       if (e.__dev__.debugInfo) {
         const { address: t3, servePort: n3 } = e.__dev__.debugInfo;
         return async function(e2, t4) {
           let n4;
           for (let s3 = 0; s3 < e2.length; s3++) {
-            const o2 = e2[s3];
-            if (await fn(o2, t4)) {
-              n4 = o2;
+            const r2 = e2[s3];
+            if (await Ts(r2, t4)) {
+              n4 = r2;
               break;
             }
           }
@@ -3259,39 +3510,55 @@ if (uni.restoreGlobal) {
         }(t3, n3);
       }
     }).then(({ address: t3, port: n3 } = {}) => {
-      const s3 = console[m === "app" ? "error" : "warn"];
+      const s3 = console["error"];
       if (t3)
         e.__dev__.localAddress = t3, e.__dev__.localPort = n3;
       else if (e.__dev__.debugInfo) {
         let t4 = "";
-        e.__dev__.debugInfo.initialLaunchType === "remote" ? (e.__dev__.debugInfo.forceRemote = true, t4 = "\u5F53\u524D\u5BA2\u6237\u7AEF\u548CHBuilderX\u4E0D\u5728\u540C\u4E00\u5C40\u57DF\u7F51\u4E0B\uFF08\u6216\u5176\u4ED6\u7F51\u7EDC\u539F\u56E0\u65E0\u6CD5\u8FDE\u63A5HBuilderX\uFF09\uFF0CuniCloud\u672C\u5730\u8C03\u8BD5\u670D\u52A1\u4E0D\u5BF9\u5F53\u524D\u5BA2\u6237\u7AEF\u751F\u6548\u3002\n- \u5982\u679C\u4E0D\u4F7F\u7528uniCloud\u672C\u5730\u8C03\u8BD5\u670D\u52A1\uFF0C\u8BF7\u76F4\u63A5\u5FFD\u7565\u6B64\u4FE1\u606F\u3002\n- \u5982\u9700\u4F7F\u7528uniCloud\u672C\u5730\u8C03\u8BD5\u670D\u52A1\uFF0C\u8BF7\u5C06\u5BA2\u6237\u7AEF\u4E0E\u4E3B\u673A\u8FDE\u63A5\u5230\u540C\u4E00\u5C40\u57DF\u7F51\u4E0B\u5E76\u91CD\u65B0\u8FD0\u884C\u5230\u5BA2\u6237\u7AEF\u3002\n- \u5982\u679C\u5728HBuilderX\u5F00\u542F\u7684\u72B6\u6001\u4E0B\u5207\u6362\u8FC7\u7F51\u7EDC\u73AF\u5883\uFF0C\u8BF7\u91CD\u542FHBuilderX\u540E\u518D\u8BD5\n- \u68C0\u67E5\u7CFB\u7EDF\u9632\u706B\u5899\u662F\u5426\u62E6\u622A\u4E86HBuilderX\u81EA\u5E26\u7684nodejs") : t4 = "\u65E0\u6CD5\u8FDE\u63A5uniCloud\u672C\u5730\u8C03\u8BD5\u670D\u52A1\uFF0C\u8BF7\u68C0\u67E5\u5F53\u524D\u5BA2\u6237\u7AEF\u662F\u5426\u4E0E\u4E3B\u673A\u5728\u540C\u4E00\u5C40\u57DF\u7F51\u4E0B\u3002\n- \u5982\u9700\u4F7F\u7528uniCloud\u672C\u5730\u8C03\u8BD5\u670D\u52A1\uFF0C\u8BF7\u5C06\u5BA2\u6237\u7AEF\u4E0E\u4E3B\u673A\u8FDE\u63A5\u5230\u540C\u4E00\u5C40\u57DF\u7F51\u4E0B\u5E76\u91CD\u65B0\u8FD0\u884C\u5230\u5BA2\u6237\u7AEF\u3002\n- \u5982\u679C\u5728HBuilderX\u5F00\u542F\u7684\u72B6\u6001\u4E0B\u5207\u6362\u8FC7\u7F51\u7EDC\u73AF\u5883\uFF0C\u8BF7\u91CD\u542FHBuilderX\u540E\u518D\u8BD5\n- \u68C0\u67E5\u7CFB\u7EDF\u9632\u706B\u5899\u662F\u5426\u62E6\u622A\u4E86HBuilderX\u81EA\u5E26\u7684nodejs", m === "web" && (t4 += "\n- \u90E8\u5206\u6D4F\u89C8\u5668\u5F00\u542F\u8282\u6D41\u6A21\u5F0F\u4E4B\u540E\u8BBF\u95EE\u672C\u5730\u5730\u5740\u53D7\u9650\uFF0C\u8BF7\u68C0\u67E5\u662F\u5426\u542F\u7528\u4E86\u8282\u6D41\u6A21\u5F0F"), m.indexOf("mp-") === 0 && (t4 += "\n- \u5C0F\u7A0B\u5E8F\u4E2D\u5982\u4F55\u4F7F\u7528uniCloud\uFF0C\u8BF7\u53C2\u8003\uFF1Ahttps://uniapp.dcloud.net.cn/uniCloud/publish.html#useinmp"), s3(t4);
+        "remote" === e.__dev__.debugInfo.initialLaunchType ? (e.__dev__.debugInfo.forceRemote = true, t4 = "当前客户端和HBuilderX不在同一局域网下（或其他网络原因无法连接HBuilderX），uniCloud本地调试服务不对当前客户端生效。\n- 如果不使用uniCloud本地调试服务，请直接忽略此信息。\n- 如需使用uniCloud本地调试服务，请将客户端与主机连接到同一局域网下并重新运行到客户端。") : t4 = "无法连接uniCloud本地调试服务，请检查当前客户端是否与主机在同一局域网下。\n- 如需使用uniCloud本地调试服务，请将客户端与主机连接到同一局域网下并重新运行到客户端。", t4 += "\n- 如果在HBuilderX开启的状态下切换过网络环境，请重启HBuilderX后再试\n- 检查系统防火墙是否拦截了HBuilderX自带的nodejs\n- 检查是否错误的使用拦截器修改uni.request方法的参数", 0 === S.indexOf("mp-") && (t4 += "\n- 小程序中如何使用uniCloud，请参考：https://uniapp.dcloud.net.cn/uniCloud/publish.html#useinmp"), s3(t4);
       }
     }).then(() => {
-      lt(), e.isReady = true, e.initUniCloudStatus = "fulfilled";
+      e.isReady = true, e.initUniCloudStatus = "fulfilled";
     }).catch((t3) => {
       console.error(t3), e.initUniCloudStatus = "rejected";
     });
   }
-  const gn = { tcb: it, tencent: it, aliyun: ee, private: dt };
-  let mn = new class {
+  const Cs = { tcb: _t, tencent: _t, aliyun: de, private: vt };
+  let Ps = new class {
     init(e) {
       let t2 = {};
-      const n2 = gn[e.provider];
+      const n2 = Cs[e.provider];
       if (!n2)
-        throw new Error("\u672A\u63D0\u4F9B\u6B63\u786E\u7684provider\u53C2\u6570");
-      t2 = n2.init(e), t2.__dev__ = {}, t2.__dev__.debugLog = m === "web" && navigator.userAgent.indexOf("HBuilderX") > 0 || m === "app";
-      const s2 = y;
-      s2 && !s2.code && (t2.__dev__.debugInfo = s2), pn(t2), t2.reInit = function() {
-        pn(this);
-      }, vt(t2), function(e2) {
+        throw new Error("未提供正确的provider参数");
+      t2 = n2.init(e), t2.__dev__ = {}, t2.__dev__.debugLog = "app" === S;
+      const s2 = k;
+      s2 && !s2.code && (t2.__dev__.debugInfo = s2), As(t2), t2.reInit = function() {
+        As(this);
+      }, Pn(t2), function(e2) {
         const t3 = e2.uploadFile;
         e2.uploadFile = function(e3) {
           return t3.call(this, e3);
         };
-      }(t2), Ut(t2), function(e2) {
-        e2.getCurrentUserInfo = an, e2.chooseAndUploadFile = un.initChooseAndUploadFile(e2), Object.assign(e2, { get mixinDatacom() {
-          return hn(e2);
-        } }), e2.importObject = dn(e2);
+      }(t2), function(e2) {
+        e2.database = function(t3) {
+          if (t3 && Object.keys(t3).length > 0)
+            return e2.init(t3).database();
+          if (this._database)
+            return this._database;
+          const n3 = Kn(jn, { uniClient: e2 });
+          return this._database = n3, n3;
+        }, e2.databaseForJQL = function(t3) {
+          if (t3 && Object.keys(t3).length > 0)
+            return e2.init(t3).databaseForJQL();
+          if (this._databaseForJQL)
+            return this._databaseForJQL;
+          const n3 = Kn(jn, { uniClient: e2, isJQL: true });
+          return this._databaseForJQL = n3, n3;
+        };
+      }(t2), function(e2) {
+        e2.getCurrentUserInfo = gs, e2.chooseAndUploadFile = ys.initChooseAndUploadFile(e2), Object.assign(e2, { get mixinDatacom() {
+          return ws(e2);
+        } }), e2.importObject = vs(e2), e2.initSecureNetworkByWeixin = bs(e2);
       }(t2);
       return ["callFunction", "uploadFile", "deleteFile", "getTempFileURL", "downloadFile", "chooseAndUploadFile"].forEach((e2) => {
         if (!t2[e2])
@@ -3299,32 +3566,32 @@ if (uni.restoreGlobal) {
         const n3 = t2[e2];
         t2[e2] = function() {
           return t2.reInit(), n3.apply(t2, Array.from(arguments));
-        }, t2[e2] = W(t2[e2], e2).bind(t2);
+        }, t2[e2] = Y(t2[e2], e2).bind(t2);
       }), t2.init = this.init, t2;
     }
   }();
   (() => {
-    const e = _;
+    const e = I;
     let t2 = {};
-    if (e && e.length === 1)
-      t2 = e[0], mn = mn.init(t2), mn.isDefault = true;
+    if (e && 1 === e.length)
+      t2 = e[0], Ps = Ps.init(t2), Ps.isDefault = true;
     else {
       const t3 = ["auth", "callFunction", "uploadFile", "deleteFile", "getTempFileURL", "downloadFile", "database", "getCurrentUSerInfo", "importObject"];
       let n2;
-      n2 = e && e.length > 0 ? "\u5E94\u7528\u6709\u591A\u4E2A\u670D\u52A1\u7A7A\u95F4\uFF0C\u8BF7\u901A\u8FC7uniCloud.init\u65B9\u6CD5\u6307\u5B9A\u8981\u4F7F\u7528\u7684\u670D\u52A1\u7A7A\u95F4" : "\u5E94\u7528\u672A\u5173\u8054\u670D\u52A1\u7A7A\u95F4\uFF0C\u8BF7\u5728uniCloud\u76EE\u5F55\u53F3\u952E\u5173\u8054\u670D\u52A1\u7A7A\u95F4", t3.forEach((e2) => {
-        mn[e2] = function() {
-          return console.error(n2), Promise.reject(new H({ code: "SYS_ERR", message: n2 }));
+      n2 = e && e.length > 0 ? "应用有多个服务空间，请通过uniCloud.init方法指定要使用的服务空间" : "应用未关联服务空间，请在uniCloud目录右键关联服务空间", t3.forEach((e2) => {
+        Ps[e2] = function() {
+          return console.error(n2), Promise.reject(new Q({ code: "SYS_ERR", message: n2 }));
         };
       });
     }
-    Object.assign(mn, { get mixinDatacom() {
-      return hn(mn);
-    } }), nn(mn), mn.addInterceptor = P, mn.removeInterceptor = I, mn.interceptObject = C, m === "web" && (window.uniCloud = mn);
+    Object.assign(Ps, { get mixinDatacom() {
+      return ws(Ps);
+    } }), hs(Ps), Ps.addInterceptor = O, Ps.removeInterceptor = x, Ps.interceptObject = L;
   })();
-  var yn = mn;
+  var Es = Ps;
   function uniHttpGet(name) {
     return new Promise((resolve, reject) => {
-      yn.callFunction({
+      Es.callFunction({
         name
       }).then((res) => {
         resolve(res.result);
@@ -3336,7 +3603,7 @@ if (uni.restoreGlobal) {
   }
   function uniHttpPost(name, body) {
     return new Promise((resolve, reject) => {
-      yn.callFunction({
+      Es.callFunction({
         name,
         data: body
       }).then((res) => {
@@ -3395,29 +3662,29 @@ if (uni.restoreGlobal) {
     }
     return [data, setInitialData, editSchedule, addSchedule];
   }
-  var weekdays = [
+  const weekdays = [
     {
       id: 1,
-      title: "\u5468\u4E00"
+      title: "周一"
     },
     {
       id: 2,
-      title: "\u5468\u4E8C"
+      title: "周二"
     },
     {
       id: 3,
-      title: "\u5468\u4E09"
+      title: "周三"
     },
     {
       id: 4,
-      title: "\u5468\u56DB"
+      title: "周四"
     },
     {
       id: 5,
-      title: "\u5468\u4E94"
+      title: "周五"
     }
   ];
-  const _sfc_main$h = {
+  const _sfc_main$w = {
     name: "UniCard",
     emits: ["click"],
     props: {
@@ -3454,10 +3721,12 @@ if (uni.restoreGlobal) {
         default: ""
       },
       isFull: {
+        // 内容区域是否通栏
         type: Boolean,
         default: false
       },
       isShadow: {
+        // 是否开启阴影
         type: Boolean,
         default: true
       },
@@ -3476,106 +3745,161 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", {
-      class: vue.normalizeClass(["uni-card", { "uni-card--full": $props.isFull, "uni-card--shadow": $props.isShadow, "uni-card--border": $props.border }]),
-      style: vue.normalizeStyle({ "margin": $props.isFull ? 0 : $props.margin, "padding": $props.spacing, "box-shadow": $props.isShadow ? $props.shadow : "" })
-    }, [
-      vue.createCommentVNode(" \u5C01\u9762 "),
-      vue.renderSlot(_ctx.$slots, "cover", {}, () => [
-        $props.cover ? (vue.openBlock(), vue.createElementBlock("view", {
-          key: 0,
-          class: "uni-card__cover"
-        }, [
-          vue.createElementVNode("image", {
-            class: "uni-card__cover-image",
-            mode: "widthFix",
-            onClick: _cache[0] || (_cache[0] = ($event) => $options.onClick("cover")),
-            src: $props.cover
-          }, null, 8, ["src"])
-        ])) : vue.createCommentVNode("v-if", true)
-      ], true),
-      vue.renderSlot(_ctx.$slots, "title", {}, () => [
-        $props.title || $props.extra ? (vue.openBlock(), vue.createElementBlock("view", {
-          key: 0,
-          class: "uni-card__header"
-        }, [
-          vue.createCommentVNode(" \u5361\u7247\u6807\u9898 "),
-          vue.createElementVNode("view", {
-            class: "uni-card__header-box",
-            onClick: _cache[1] || (_cache[1] = ($event) => $options.onClick("title"))
+  function _sfc_render$r(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        class: vue.normalizeClass(["uni-card", { "uni-card--full": $props.isFull, "uni-card--shadow": $props.isShadow, "uni-card--border": $props.border }]),
+        style: vue.normalizeStyle({ "margin": $props.isFull ? 0 : $props.margin, "padding": $props.spacing, "box-shadow": $props.isShadow ? $props.shadow : "" })
+      },
+      [
+        vue.createCommentVNode(" 封面 "),
+        vue.renderSlot(_ctx.$slots, "cover", {}, () => [
+          $props.cover ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 0,
+            class: "uni-card__cover"
           }, [
-            $props.thumbnail ? (vue.openBlock(), vue.createElementBlock("view", {
-              key: 0,
-              class: "uni-card__header-avatar"
+            vue.createElementVNode("image", {
+              class: "uni-card__cover-image",
+              mode: "widthFix",
+              onClick: _cache[0] || (_cache[0] = ($event) => $options.onClick("cover")),
+              src: $props.cover
+            }, null, 8, ["src"])
+          ])) : vue.createCommentVNode("v-if", true)
+        ], true),
+        vue.renderSlot(_ctx.$slots, "title", {}, () => [
+          $props.title || $props.extra ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 0,
+            class: "uni-card__header"
+          }, [
+            vue.createCommentVNode(" 卡片标题 "),
+            vue.createElementVNode("view", {
+              class: "uni-card__header-box",
+              onClick: _cache[1] || (_cache[1] = ($event) => $options.onClick("title"))
             }, [
-              vue.createElementVNode("image", {
-                class: "uni-card__header-avatar-image",
-                src: $props.thumbnail,
-                mode: "aspectFit"
-              }, null, 8, ["src"])
-            ])) : vue.createCommentVNode("v-if", true),
-            vue.createElementVNode("view", { class: "uni-card__header-content" }, [
-              vue.createElementVNode("text", { class: "uni-card__header-content-title uni-ellipsis" }, vue.toDisplayString($props.title), 1),
-              $props.title && $props.subTitle ? (vue.openBlock(), vue.createElementBlock("text", {
+              $props.thumbnail ? (vue.openBlock(), vue.createElementBlock("view", {
                 key: 0,
-                class: "uni-card__header-content-subtitle uni-ellipsis"
-              }, vue.toDisplayString($props.subTitle), 1)) : vue.createCommentVNode("v-if", true)
+                class: "uni-card__header-avatar"
+              }, [
+                vue.createElementVNode("image", {
+                  class: "uni-card__header-avatar-image",
+                  src: $props.thumbnail,
+                  mode: "aspectFit"
+                }, null, 8, ["src"])
+              ])) : vue.createCommentVNode("v-if", true),
+              vue.createElementVNode("view", { class: "uni-card__header-content" }, [
+                vue.createElementVNode(
+                  "text",
+                  { class: "uni-card__header-content-title uni-ellipsis" },
+                  vue.toDisplayString($props.title),
+                  1
+                  /* TEXT */
+                ),
+                $props.title && $props.subTitle ? (vue.openBlock(), vue.createElementBlock(
+                  "text",
+                  {
+                    key: 0,
+                    class: "uni-card__header-content-subtitle uni-ellipsis"
+                  },
+                  vue.toDisplayString($props.subTitle),
+                  1
+                  /* TEXT */
+                )) : vue.createCommentVNode("v-if", true)
+              ])
+            ]),
+            vue.createElementVNode("view", {
+              class: "uni-card__header-extra",
+              onClick: _cache[2] || (_cache[2] = ($event) => $options.onClick("extra"))
+            }, [
+              vue.createElementVNode(
+                "text",
+                { class: "uni-card__header-extra-text" },
+                vue.toDisplayString($props.extra),
+                1
+                /* TEXT */
+              )
             ])
-          ]),
-          vue.createElementVNode("view", {
-            class: "uni-card__header-extra",
-            onClick: _cache[2] || (_cache[2] = ($event) => $options.onClick("extra"))
-          }, [
-            vue.createElementVNode("text", { class: "uni-card__header-extra-text" }, vue.toDisplayString($props.extra), 1)
-          ])
-        ])) : vue.createCommentVNode("v-if", true)
-      ], true),
-      vue.createCommentVNode(" \u5361\u7247\u5185\u5BB9 "),
-      vue.createElementVNode("view", {
-        class: "uni-card__content",
-        style: vue.normalizeStyle({ padding: $props.padding }),
-        onClick: _cache[3] || (_cache[3] = ($event) => $options.onClick("content"))
-      }, [
-        vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
-      ], 4),
-      vue.createElementVNode("view", {
-        class: "uni-card__actions",
-        onClick: _cache[4] || (_cache[4] = ($event) => $options.onClick("actions"))
-      }, [
-        vue.renderSlot(_ctx.$slots, "actions", {}, void 0, true)
-      ])
-    ], 6);
+          ])) : vue.createCommentVNode("v-if", true)
+        ], true),
+        vue.createCommentVNode(" 卡片内容 "),
+        vue.createElementVNode(
+          "view",
+          {
+            class: "uni-card__content",
+            style: vue.normalizeStyle({ padding: $props.padding }),
+            onClick: _cache[3] || (_cache[3] = ($event) => $options.onClick("content"))
+          },
+          [
+            vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+          ],
+          4
+          /* STYLE */
+        ),
+        vue.createElementVNode("view", {
+          class: "uni-card__actions",
+          onClick: _cache[4] || (_cache[4] = ($event) => $options.onClick("actions"))
+        }, [
+          vue.renderSlot(_ctx.$slots, "actions", {}, void 0, true)
+        ])
+      ],
+      6
+      /* CLASS, STYLE */
+    );
   }
-  var __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$c], ["__scopeId", "data-v-19622063"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-card/components/uni-card/uni-card.vue"]]);
-  const _sfc_main$g = {
+  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$r], ["__scopeId", "data-v-ae4bee67"], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/uni_modules/uni-card/components/uni-card/uni-card.vue"]]);
+  const _sfc_main$v = {
     __name: "Card",
     props: {
       data: Object
     },
     setup(__props) {
       return (_ctx, _cache) => {
-        const _component_uni_card = resolveEasycom(vue.resolveDynamicComponent("uni-card"), __easycom_0$2);
+        const _component_uni_card = resolveEasycom(vue.resolveDynamicComponent("uni-card"), __easycom_0$3);
         return vue.openBlock(), vue.createBlock(_component_uni_card, {
           "is-full": true,
           padding: "2px 0"
         }, {
           default: vue.withCtx(() => [
-            vue.createElementVNode("text", { class: "course" }, vue.toDisplayString(__props.data.course), 1),
+            vue.createElementVNode(
+              "text",
+              { class: "course" },
+              vue.toDisplayString(__props.data.course),
+              1
+              /* TEXT */
+            ),
             vue.createElementVNode("br"),
-            vue.createElementVNode("text", { class: "teacher" }, vue.toDisplayString(__props.data.teacher), 1),
+            vue.createElementVNode(
+              "text",
+              { class: "teacher" },
+              vue.toDisplayString(__props.data.teacher),
+              1
+              /* TEXT */
+            ),
             vue.createElementVNode("br"),
-            vue.createElementVNode("text", { class: "adress" }, vue.toDisplayString(__props.data.adress), 1),
+            vue.createElementVNode(
+              "text",
+              { class: "adress" },
+              vue.toDisplayString(__props.data.adress),
+              1
+              /* TEXT */
+            ),
             vue.createElementVNode("br"),
-            vue.createElementVNode("text", { class: "score" }, vue.toDisplayString(__props.data.score) + "\u5B66\u5206", 1)
+            vue.createElementVNode(
+              "text",
+              { class: "score" },
+              vue.toDisplayString(__props.data.score) + "学分",
+              1
+              /* TEXT */
+            )
           ]),
           _: 1
+          /* STABLE */
         });
       };
     }
   };
-  var Card = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["__scopeId", "data-v-08e6c3ef"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/pages/index/components/SchedduleTable/Card.vue"]]);
-  const _sfc_main$f = {
+  const Card = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["__scopeId", "data-v-03ea17ee"], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/pages/index/components/SchedduleTable/Card.vue"]]);
+  const _sfc_main$u = {
     __name: "index",
     setup(__props) {
       const [
@@ -3588,7 +3912,7 @@ if (uni.restoreGlobal) {
         setInitialData(await getInitialData());
       });
       vue.onUpdated(() => {
-        formatAppLog("log", "at pages/index/components/SchedduleTable/index.vue:57", \u89E6\u53D1onUpdated);
+        formatAppLog("log", "at pages/index/components/SchedduleTable/index.vue:57", 触发onUpdated);
       });
       vue.reactive({
         course: "",
@@ -3605,8 +3929,8 @@ if (uni.restoreGlobal) {
             formType,
             weekday,
             index,
-            btnCancelText: "\u53D6\u6D88",
-            btnConfirmText: "\u786E\u5B9A"
+            btnCancelText: "取消",
+            btnConfirmText: "确定"
           }
         });
       };
@@ -3623,9 +3947,9 @@ if (uni.restoreGlobal) {
             teacher: singleBoxData.teacher,
             adress: singleBoxData.adress,
             score: singleBoxData.score,
-            btnCancelText: "\u53D6\u6D88",
-            btnConfirmText: "\u786E\u5B9A",
-            btnDeleteText: "\u5220\u9664"
+            btnCancelText: "取消",
+            btnConfirmText: "确定",
+            btnDeleteText: "删除"
           }
         });
       };
@@ -3634,83 +3958,135 @@ if (uni.restoreGlobal) {
         singleBox
       } = vue.toRefs(data2);
       return (_ctx, _cache) => {
-        const _component_uni_th = resolveEasycom(vue.resolveDynamicComponent("uni-th"), __easycom_0$3);
-        const _component_uni_tr = resolveEasycom(vue.resolveDynamicComponent("uni-tr"), __easycom_1$1);
-        const _component_uni_td = resolveEasycom(vue.resolveDynamicComponent("uni-td"), __easycom_2$1);
-        const _component_uni_table = resolveEasycom(vue.resolveDynamicComponent("uni-table"), __easycom_3$1);
+        const _component_uni_th = resolveEasycom(vue.resolveDynamicComponent("uni-th"), __easycom_0$4);
+        const _component_uni_tr = resolveEasycom(vue.resolveDynamicComponent("uni-tr"), __easycom_1$3);
+        const _component_uni_td = resolveEasycom(vue.resolveDynamicComponent("uni-td"), __easycom_2$2);
+        const _component_uni_table = resolveEasycom(vue.resolveDynamicComponent("uni-table"), __easycom_3$2);
         return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
           vue.createVNode(_component_uni_table, {
             border: "",
             stripe: "",
-            emptyText: "\u6682\u65E0\u66F4\u591A\u6570\u636E"
+            emptyText: "暂无更多数据"
           }, {
             default: vue.withCtx(() => [
-              vue.createCommentVNode(" \u661F\u671F "),
+              vue.createCommentVNode(" 星期 "),
               vue.createVNode(_component_uni_tr, null, {
                 default: vue.withCtx(() => [
                   vue.createVNode(_component_uni_th, { width: "1" }),
-                  (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(weekdays), (item) => {
-                    return vue.openBlock(), vue.createBlock(_component_uni_th, {
-                      align: "center",
-                      keyt: item.id,
-                      width: "1"
-                    }, {
-                      default: vue.withCtx(() => [
-                        vue.createTextVNode(vue.toDisplayString(item.title), 1)
-                      ]),
-                      _: 2
-                    }, 1032, ["keyt"]);
-                  }), 256))
-                ]),
-                _: 1
-              }),
-              vue.createCommentVNode(" \u8868\u683C\u6570\u636E\u884C "),
-              (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(duration), (item) => {
-                return vue.openBlock(), vue.createBlock(_component_uni_tr, null, {
-                  default: vue.withCtx(() => [
-                    vue.createVNode(_component_uni_td, { style: { "font-size": "8px" } }, {
-                      default: vue.withCtx(() => [
-                        vue.createElementVNode("view", null, "\u7B2C" + vue.toDisplayString(item.index) + "\u8282", 1),
-                        vue.createElementVNode("view", null, vue.toDisplayString(item.title), 1)
-                      ]),
-                      _: 2
-                    }, 1024),
-                    (vue.openBlock(), vue.createElementBlock(vue.Fragment, null, vue.renderList(5, (n2) => {
-                      return vue.createVNode(_component_uni_td, {
-                        key: n2,
-                        onClick: ($event) => addCourse(item.index, n2, "\u65B0\u589E\u8BFE\u7A0B"),
-                        style: { "padding": "0", "margin": "0" }
+                  (vue.openBlock(true), vue.createElementBlock(
+                    vue.Fragment,
+                    null,
+                    vue.renderList(vue.unref(weekdays), (item) => {
+                      return vue.openBlock(), vue.createBlock(_component_uni_th, {
+                        align: "center",
+                        keyt: item.id,
+                        width: "1"
                       }, {
                         default: vue.withCtx(() => [
-                          vue.createElementVNode("view", {
-                            onClick: _cache[0] || (_cache[0] = vue.withModifiers(() => {
-                            }, ["stop"]))
-                          }, [
-                            vue.unref(singleBox)[item.index + "_" + n2] ? (vue.openBlock(), vue.createBlock(Card, {
-                              key: 0,
-                              data: vue.unref(singleBox)[item.index + "_" + n2],
-                              onClick: ($event) => editCourse(item.index, n2, "\u7F16\u8F91\u8BFE\u7A0B", vue.unref(singleBox)[item.index + "_" + n2])
-                            }, null, 8, ["data", "onClick"])) : vue.createCommentVNode("v-if", true)
-                          ])
+                          vue.createTextVNode(
+                            vue.toDisplayString(item.title),
+                            1
+                            /* TEXT */
+                          )
                         ]),
                         _: 2
-                      }, 1032, ["onClick"]);
-                    }), 64))
-                  ]),
-                  _: 2
-                }, 1024);
-              }), 256))
+                        /* DYNAMIC */
+                      }, 1032, ["keyt"]);
+                    }),
+                    256
+                    /* UNKEYED_FRAGMENT */
+                  ))
+                ]),
+                _: 1
+                /* STABLE */
+              }),
+              vue.createCommentVNode(" 表格数据行 "),
+              (vue.openBlock(true), vue.createElementBlock(
+                vue.Fragment,
+                null,
+                vue.renderList(vue.unref(duration), (item) => {
+                  return vue.openBlock(), vue.createBlock(
+                    _component_uni_tr,
+                    null,
+                    {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(
+                          _component_uni_td,
+                          { style: { "font-size": "8px" } },
+                          {
+                            default: vue.withCtx(() => [
+                              vue.createElementVNode(
+                                "view",
+                                null,
+                                "第" + vue.toDisplayString(item.index) + "节",
+                                1
+                                /* TEXT */
+                              ),
+                              vue.createElementVNode(
+                                "view",
+                                null,
+                                vue.toDisplayString(item.title),
+                                1
+                                /* TEXT */
+                              )
+                            ]),
+                            _: 2
+                            /* DYNAMIC */
+                          },
+                          1024
+                          /* DYNAMIC_SLOTS */
+                        ),
+                        (vue.openBlock(), vue.createElementBlock(
+                          vue.Fragment,
+                          null,
+                          vue.renderList(5, (n2) => {
+                            return vue.createVNode(_component_uni_td, {
+                              key: n2,
+                              onClick: ($event) => addCourse(item.index, n2, "新增课程"),
+                              style: { "padding": "0", "margin": "0" }
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createElementVNode("view", {
+                                  onClick: _cache[0] || (_cache[0] = vue.withModifiers(() => {
+                                  }, ["stop"]))
+                                }, [
+                                  vue.unref(singleBox)[item.index + "_" + n2] ? (vue.openBlock(), vue.createBlock(Card, {
+                                    key: 0,
+                                    data: vue.unref(singleBox)[item.index + "_" + n2],
+                                    onClick: ($event) => editCourse(item.index, n2, "编辑课程", vue.unref(singleBox)[item.index + "_" + n2])
+                                  }, null, 8, ["data", "onClick"])) : vue.createCommentVNode("v-if", true)
+                                ])
+                              ]),
+                              _: 2
+                              /* DYNAMIC */
+                            }, 1032, ["onClick"]);
+                          }),
+                          64
+                          /* STABLE_FRAGMENT */
+                        ))
+                      ]),
+                      _: 2
+                      /* DYNAMIC */
+                    },
+                    1024
+                    /* DYNAMIC_SLOTS */
+                  );
+                }),
+                256
+                /* UNKEYED_FRAGMENT */
+              ))
             ]),
             _: 1
+            /* STABLE */
           })
         ]);
       };
     }
   };
-  var ScheduleTable = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/pages/index/components/SchedduleTable/index.vue"]]);
-  var icons = {
+  const ScheduleTable = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/pages/index/components/SchedduleTable/index.vue"]]);
+  const icons = {
     "id": "2852637",
-    "name": "uniui\u56FE\u6807\u5E93",
+    "name": "uniui图标库",
     "font_family": "uniicons",
     "css_prefix_text": "uniui-",
     "description": "",
@@ -4883,7 +5259,7 @@ if (uni.restoreGlobal) {
     const reg = /^[0-9]*$/g;
     return typeof val === "number" || reg.test(val) ? val + "px" : val;
   };
-  const _sfc_main$e = {
+  const _sfc_main$t = {
     name: "UniIcons",
     emits: ["click"],
     props: {
@@ -4927,14 +5303,20 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("text", {
-      style: vue.normalizeStyle({ color: $props.color, "font-size": $options.iconSize }),
-      class: vue.normalizeClass(["uni-icons", ["uniui-" + $props.type, $props.customPrefix, $props.customPrefix ? $props.type : ""]]),
-      onClick: _cache[0] || (_cache[0] = (...args) => $options._onClick && $options._onClick(...args))
-    }, null, 6);
+  function _sfc_render$q(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock(
+      "text",
+      {
+        style: vue.normalizeStyle({ color: $props.color, "font-size": $options.iconSize }),
+        class: vue.normalizeClass(["uni-icons", ["uniui-" + $props.type, $props.customPrefix, $props.customPrefix ? $props.type : ""]]),
+        onClick: _cache[0] || (_cache[0] = (...args) => $options._onClick && $options._onClick(...args))
+      },
+      null,
+      6
+      /* CLASS, STYLE */
+    );
   }
-  var __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$b], ["__scopeId", "data-v-a2e81f6e"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$q], ["__scopeId", "data-v-d31e1c47"], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
   function obj2strClass(obj) {
     let classess = "";
     for (let key in obj) {
@@ -4953,7 +5335,7 @@ if (uni.restoreGlobal) {
     }
     return style;
   }
-  const _sfc_main$d = {
+  const _sfc_main$s = {
     name: "uni-easyinput",
     emits: ["click", "iconClick", "update:modelValue", "input", "focus", "blur", "confirm", "clear", "eyes", "change"],
     model: {
@@ -5066,9 +5448,11 @@ if (uni.restoreGlobal) {
         focusShow: false,
         localMsg: "",
         isEnter: false
+        // 用于判断当前是否是使用回车操作
       };
     },
     computed: {
+      // 输入框内是否有值
       isVal() {
         const val = this.val;
         if (val || val === 0) {
@@ -5079,12 +5463,15 @@ if (uni.restoreGlobal) {
       msg() {
         return this.localMsg || this.errorMessage;
       },
+      // 因为uniapp的input组件的maxlength组件必须要数值，这里转为数值，用户可以传入字符串数值
       inputMaxlength() {
         return Number(this.maxlength);
       },
+      // 处理外层样式的style
       boxStyle() {
         return `color:${this.inputBorder && this.msg ? "#e43d33" : this.styles.color};`;
       },
+      // input 内容的类和样式处理
       inputContentClass() {
         return obj2strClass({
           "is-input-border": this.inputBorder,
@@ -5102,6 +5489,7 @@ if (uni.restoreGlobal) {
           "background-color": this.disabled ? this.styles.disableColor : this.styles.backgroundColor
         });
       },
+      // input右侧样式
       inputStyle() {
         const paddingRight = this.type === "password" || this.clearable || this.prefixIcon ? "" : "10px";
         return obj2strStyle({
@@ -5139,6 +5527,9 @@ if (uni.restoreGlobal) {
       });
     },
     methods: {
+      /**
+       * 初始化变量值
+       */
       init() {
         if (this.value || this.value === 0) {
           this.val = this.value;
@@ -5148,13 +5539,24 @@ if (uni.restoreGlobal) {
           this.val = null;
         }
       },
+      /**
+       * 点击图标时触发
+       * @param {Object} type
+       */
       onClickIcon(type) {
         this.$emit("iconClick", type);
       },
+      /**
+       * 显示隐藏内容，密码框时生效
+       */
       onEyes() {
         this.showPassword = !this.showPassword;
         this.$emit("eyes", this.showPassword);
       },
+      /**
+       * 输入时触发
+       * @param {Object} event
+       */
       onInput(event) {
         let value = event.detail.value;
         if (this.trim) {
@@ -5171,6 +5573,11 @@ if (uni.restoreGlobal) {
         this.$emit("input", value);
         this.$emit("update:modelValue", value);
       },
+      /**
+       * 外部调用方法
+       * 获取焦点时触发
+       * @param {Object} event
+       */
       onFocus() {
         this.$nextTick(() => {
           this.focused = true;
@@ -5181,6 +5588,11 @@ if (uni.restoreGlobal) {
         this.focusShow = true;
         this.$emit("focus", event);
       },
+      /**
+       * 外部调用方法
+       * 失去焦点时触发
+       * @param {Object} event
+       */
       onBlur() {
         this.focused = false;
         this.$emit("focus", null);
@@ -5199,6 +5611,10 @@ if (uni.restoreGlobal) {
           }
         }
       },
+      /**
+       * 按下键盘的发送键
+       * @param {Object} e
+       */
       onConfirm(e) {
         this.$emit("confirm", this.val);
         this.isEnter = true;
@@ -5207,15 +5623,27 @@ if (uni.restoreGlobal) {
           this.isEnter = false;
         });
       },
+      /**
+       * 清理内容
+       * @param {Object} event
+       */
       onClear(event) {
         this.val = "";
         this.$emit("input", "");
         this.$emit("update:modelValue", "");
         this.$emit("clear");
       },
+      /**
+       * 键盘高度发生变化的时候触发此事件
+       * 兼容性：微信小程序2.7.0+、App 3.1.0+
+       * @param {Object} event
+       */
       onkeyboardheightchange(event) {
         this.$emit("keyboardheightchange", event);
       },
+      /**
+       * 去除空格
+       */
       trimStr(str, pos = "both") {
         if (pos === "both") {
           return str.trim();
@@ -5236,97 +5664,127 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$1);
-    return vue.openBlock(), vue.createElementBlock("view", {
-      class: vue.normalizeClass(["uni-easyinput", { "uni-easyinput-error": $options.msg }]),
-      style: vue.normalizeStyle($options.boxStyle)
-    }, [
-      vue.createElementVNode("view", {
-        class: vue.normalizeClass(["uni-easyinput__content", $options.inputContentClass]),
-        style: vue.normalizeStyle($options.inputContentStyle)
-      }, [
-        $props.prefixIcon ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
-          key: 0,
-          class: "content-clear-icon",
-          type: $props.prefixIcon,
-          color: "#c0c4cc",
-          onClick: _cache[0] || (_cache[0] = ($event) => $options.onClickIcon("prefix")),
-          size: "22"
-        }, null, 8, ["type"])) : vue.createCommentVNode("v-if", true),
-        $props.type === "textarea" ? (vue.openBlock(), vue.createElementBlock("textarea", {
-          key: 1,
-          class: vue.normalizeClass(["uni-easyinput__content-textarea", { "input-padding": $props.inputBorder }]),
-          name: $props.name,
-          value: $data.val,
-          placeholder: $props.placeholder,
-          placeholderStyle: $props.placeholderStyle,
-          disabled: $props.disabled,
-          "placeholder-class": "uni-easyinput__placeholder-class",
-          maxlength: $options.inputMaxlength,
-          focus: $data.focused,
-          autoHeight: $props.autoHeight,
-          onInput: _cache[1] || (_cache[1] = (...args) => $options.onInput && $options.onInput(...args)),
-          onBlur: _cache[2] || (_cache[2] = (...args) => $options._Blur && $options._Blur(...args)),
-          onFocus: _cache[3] || (_cache[3] = (...args) => $options._Focus && $options._Focus(...args)),
-          onConfirm: _cache[4] || (_cache[4] = (...args) => $options.onConfirm && $options.onConfirm(...args)),
-          onKeyboardheightchange: _cache[5] || (_cache[5] = (...args) => $options.onkeyboardheightchange && $options.onkeyboardheightchange(...args))
-        }, null, 42, ["name", "value", "placeholder", "placeholderStyle", "disabled", "maxlength", "focus", "autoHeight"])) : (vue.openBlock(), vue.createElementBlock("input", {
-          key: 2,
-          type: $props.type === "password" ? "text" : $props.type,
-          class: "uni-easyinput__content-input",
-          style: vue.normalizeStyle($options.inputStyle),
-          name: $props.name,
-          value: $data.val,
-          password: !$data.showPassword && $props.type === "password",
-          placeholder: $props.placeholder,
-          placeholderStyle: $props.placeholderStyle,
-          "placeholder-class": "uni-easyinput__placeholder-class",
-          disabled: $props.disabled,
-          maxlength: $options.inputMaxlength,
-          focus: $data.focused,
-          confirmType: $props.confirmType,
-          onFocus: _cache[6] || (_cache[6] = (...args) => $options._Focus && $options._Focus(...args)),
-          onBlur: _cache[7] || (_cache[7] = (...args) => $options._Blur && $options._Blur(...args)),
-          onInput: _cache[8] || (_cache[8] = (...args) => $options.onInput && $options.onInput(...args)),
-          onConfirm: _cache[9] || (_cache[9] = (...args) => $options.onConfirm && $options.onConfirm(...args)),
-          onKeyboardheightchange: _cache[10] || (_cache[10] = (...args) => $options.onkeyboardheightchange && $options.onkeyboardheightchange(...args))
-        }, null, 44, ["type", "name", "value", "password", "placeholder", "placeholderStyle", "disabled", "maxlength", "focus", "confirmType"])),
-        $props.type === "password" && $props.passwordIcon ? (vue.openBlock(), vue.createElementBlock(vue.Fragment, { key: 3 }, [
-          vue.createCommentVNode(" \u5F00\u542F\u5BC6\u7801\u65F6\u663E\u793A\u5C0F\u773C\u775B "),
-          $options.isVal ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
-            key: 0,
-            class: vue.normalizeClass(["content-clear-icon", { "is-textarea-icon": $props.type === "textarea" }]),
-            type: $data.showPassword ? "eye-slash-filled" : "eye-filled",
-            size: 22,
-            color: $data.focusShow ? $props.primaryColor : "#c0c4cc",
-            onClick: $options.onEyes
-          }, null, 8, ["class", "type", "color", "onClick"])) : vue.createCommentVNode("v-if", true)
-        ], 64)) : $props.suffixIcon ? (vue.openBlock(), vue.createElementBlock(vue.Fragment, { key: 4 }, [
-          $props.suffixIcon ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
-            key: 0,
-            class: "content-clear-icon",
-            type: $props.suffixIcon,
-            color: "#c0c4cc",
-            onClick: _cache[11] || (_cache[11] = ($event) => $options.onClickIcon("suffix")),
-            size: "22"
-          }, null, 8, ["type"])) : vue.createCommentVNode("v-if", true)
-        ], 64)) : (vue.openBlock(), vue.createElementBlock(vue.Fragment, { key: 5 }, [
-          $props.clearable && $options.isVal && !$props.disabled && $props.type !== "textarea" ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
-            key: 0,
-            class: vue.normalizeClass(["content-clear-icon", { "is-textarea-icon": $props.type === "textarea" }]),
-            type: "clear",
-            size: $props.clearSize,
-            color: $options.msg ? "#dd524d" : $data.focusShow ? $props.primaryColor : "#c0c4cc",
-            onClick: $options.onClear
-          }, null, 8, ["class", "size", "color", "onClick"])) : vue.createCommentVNode("v-if", true)
-        ], 64)),
-        vue.renderSlot(_ctx.$slots, "right", {}, void 0, true)
-      ], 6)
-    ], 6);
+  function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
+    return vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        class: vue.normalizeClass(["uni-easyinput", { "uni-easyinput-error": $options.msg }]),
+        style: vue.normalizeStyle($options.boxStyle)
+      },
+      [
+        vue.createElementVNode(
+          "view",
+          {
+            class: vue.normalizeClass(["uni-easyinput__content", $options.inputContentClass]),
+            style: vue.normalizeStyle($options.inputContentStyle)
+          },
+          [
+            $props.prefixIcon ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
+              key: 0,
+              class: "content-clear-icon",
+              type: $props.prefixIcon,
+              color: "#c0c4cc",
+              onClick: _cache[0] || (_cache[0] = ($event) => $options.onClickIcon("prefix")),
+              size: "22"
+            }, null, 8, ["type"])) : vue.createCommentVNode("v-if", true),
+            $props.type === "textarea" ? (vue.openBlock(), vue.createElementBlock("textarea", {
+              key: 1,
+              class: vue.normalizeClass(["uni-easyinput__content-textarea", { "input-padding": $props.inputBorder }]),
+              name: $props.name,
+              value: $data.val,
+              placeholder: $props.placeholder,
+              placeholderStyle: $props.placeholderStyle,
+              disabled: $props.disabled,
+              "placeholder-class": "uni-easyinput__placeholder-class",
+              maxlength: $options.inputMaxlength,
+              focus: $data.focused,
+              autoHeight: $props.autoHeight,
+              onInput: _cache[1] || (_cache[1] = (...args) => $options.onInput && $options.onInput(...args)),
+              onBlur: _cache[2] || (_cache[2] = (...args) => $options._Blur && $options._Blur(...args)),
+              onFocus: _cache[3] || (_cache[3] = (...args) => $options._Focus && $options._Focus(...args)),
+              onConfirm: _cache[4] || (_cache[4] = (...args) => $options.onConfirm && $options.onConfirm(...args)),
+              onKeyboardheightchange: _cache[5] || (_cache[5] = (...args) => $options.onkeyboardheightchange && $options.onkeyboardheightchange(...args))
+            }, null, 42, ["name", "value", "placeholder", "placeholderStyle", "disabled", "maxlength", "focus", "autoHeight"])) : (vue.openBlock(), vue.createElementBlock("input", {
+              key: 2,
+              type: $props.type === "password" ? "text" : $props.type,
+              class: "uni-easyinput__content-input",
+              style: vue.normalizeStyle($options.inputStyle),
+              name: $props.name,
+              value: $data.val,
+              password: !$data.showPassword && $props.type === "password",
+              placeholder: $props.placeholder,
+              placeholderStyle: $props.placeholderStyle,
+              "placeholder-class": "uni-easyinput__placeholder-class",
+              disabled: $props.disabled,
+              maxlength: $options.inputMaxlength,
+              focus: $data.focused,
+              confirmType: $props.confirmType,
+              onFocus: _cache[6] || (_cache[6] = (...args) => $options._Focus && $options._Focus(...args)),
+              onBlur: _cache[7] || (_cache[7] = (...args) => $options._Blur && $options._Blur(...args)),
+              onInput: _cache[8] || (_cache[8] = (...args) => $options.onInput && $options.onInput(...args)),
+              onConfirm: _cache[9] || (_cache[9] = (...args) => $options.onConfirm && $options.onConfirm(...args)),
+              onKeyboardheightchange: _cache[10] || (_cache[10] = (...args) => $options.onkeyboardheightchange && $options.onkeyboardheightchange(...args))
+            }, null, 44, ["type", "name", "value", "password", "placeholder", "placeholderStyle", "disabled", "maxlength", "focus", "confirmType"])),
+            $props.type === "password" && $props.passwordIcon ? (vue.openBlock(), vue.createElementBlock(
+              vue.Fragment,
+              { key: 3 },
+              [
+                vue.createCommentVNode(" 开启密码时显示小眼睛 "),
+                $options.isVal ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
+                  key: 0,
+                  class: vue.normalizeClass(["content-clear-icon", { "is-textarea-icon": $props.type === "textarea" }]),
+                  type: $data.showPassword ? "eye-slash-filled" : "eye-filled",
+                  size: 22,
+                  color: $data.focusShow ? $props.primaryColor : "#c0c4cc",
+                  onClick: $options.onEyes
+                }, null, 8, ["class", "type", "color", "onClick"])) : vue.createCommentVNode("v-if", true)
+              ],
+              64
+              /* STABLE_FRAGMENT */
+            )) : $props.suffixIcon ? (vue.openBlock(), vue.createElementBlock(
+              vue.Fragment,
+              { key: 4 },
+              [
+                $props.suffixIcon ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
+                  key: 0,
+                  class: "content-clear-icon",
+                  type: $props.suffixIcon,
+                  color: "#c0c4cc",
+                  onClick: _cache[11] || (_cache[11] = ($event) => $options.onClickIcon("suffix")),
+                  size: "22"
+                }, null, 8, ["type"])) : vue.createCommentVNode("v-if", true)
+              ],
+              64
+              /* STABLE_FRAGMENT */
+            )) : (vue.openBlock(), vue.createElementBlock(
+              vue.Fragment,
+              { key: 5 },
+              [
+                $props.clearable && $options.isVal && !$props.disabled && $props.type !== "textarea" ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
+                  key: 0,
+                  class: vue.normalizeClass(["content-clear-icon", { "is-textarea-icon": $props.type === "textarea" }]),
+                  type: "clear",
+                  size: $props.clearSize,
+                  color: $options.msg ? "#dd524d" : $data.focusShow ? $props.primaryColor : "#c0c4cc",
+                  onClick: $options.onClear
+                }, null, 8, ["class", "size", "color", "onClick"])) : vue.createCommentVNode("v-if", true)
+              ],
+              64
+              /* STABLE_FRAGMENT */
+            )),
+            vue.renderSlot(_ctx.$slots, "right", {}, void 0, true)
+          ],
+          6
+          /* CLASS, STYLE */
+        )
+      ],
+      6
+      /* CLASS, STYLE */
+    );
   }
-  var __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$a], ["__scopeId", "data-v-abe12412"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue"]]);
-  const _sfc_main$c = {
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$p], ["__scopeId", "data-v-09fd5285"], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue"]]);
+  const _sfc_main$r = {
     name: "uniFormsItem",
     options: {
       virtualHost: true
@@ -5343,12 +5801,14 @@ if (uni.restoreGlobal) {
       }
     },
     props: {
+      // 表单校验规则
       rules: {
         type: Array,
         default() {
           return null;
         }
       },
+      // 表单域的属性名，在使用校验规则时必填
       name: {
         type: [String, Array],
         default: ""
@@ -5361,18 +5821,32 @@ if (uni.restoreGlobal) {
         type: String,
         default: ""
       },
+      // label的宽度 ，默认 80
       labelWidth: {
         type: [String, Number],
         default: ""
       },
+      // label 居中方式，默认 left 取值 left/center/right
       labelAlign: {
         type: String,
         default: ""
       },
+      // 强制显示错误信息
       errorMessage: {
         type: [String, Boolean],
         default: ""
       },
+      // 1.4.0 弃用，统一使用 form 的校验时机
+      // validateTrigger: {
+      // 	type: String,
+      // 	default: ''
+      // },
+      // 1.4.0 弃用，统一使用 form 的label 位置
+      // labelPosition: {
+      // 	type: String,
+      // 	default: ''
+      // },
+      // 1.4.0 以下属性已经废弃，请使用  #label 插槽代替
       leftIcon: String,
       iconColor: {
         type: String,
@@ -5391,11 +5865,13 @@ if (uni.restoreGlobal) {
       };
     },
     computed: {
+      // 处理错误信息
       msg() {
         return this.errorMessage || this.errMsg;
       }
     },
     watch: {
+      // 规则发生变化通知子组件更新
       "form.formRules"(val) {
         this.init();
       },
@@ -5411,18 +5887,22 @@ if (uni.restoreGlobal) {
     created() {
       this.init(true);
       if (this.name && this.form) {
-        this.$watch(() => {
-          const val = this.form._getDataValue(this.name, this.form.localData);
-          return val;
-        }, (value, oldVal) => {
-          const isEqual2 = this.form._isEqual(value, oldVal);
-          if (!isEqual2) {
-            const val = this.itemSetValue(value);
-            this.onFieldChange(val, false);
+        this.$watch(
+          () => {
+            const val = this.form._getDataValue(this.name, this.form.localData);
+            return val;
+          },
+          (value, oldVal) => {
+            const isEqual2 = this.form._isEqual(value, oldVal);
+            if (!isEqual2) {
+              const val = this.itemSetValue(value);
+              this.onFieldChange(val, false);
+            }
+          },
+          {
+            immediate: false
           }
-        }, {
-          immediate: false
-        });
+        );
       }
     },
     unmounted() {
@@ -5430,12 +5910,25 @@ if (uni.restoreGlobal) {
       this.unInit();
     },
     methods: {
+      /**
+       * 外部调用方法
+       * 设置规则 ，主要用于小程序自定义检验规则
+       * @param {Array} rules 规则源数据
+       */
       setRules(rules = null) {
         this.userRules = rules;
         this.init(false);
       },
+      // 兼容老版本表单组件
       setValue() {
       },
+      /**
+       * 外部调用方法
+       * 校验数据
+       * @param {any} value 需要校验的数据
+       * @param {boolean} 是否立即校验
+       * @return {Array|null} 校验内容
+       */
       async onFieldChange(value, formtrigger = true) {
         const {
           formData,
@@ -5456,9 +5949,12 @@ if (uni.restoreGlobal) {
         const isRequiredField2 = _isRequiredField(this.itemRules.rules || []);
         let result = null;
         if (validateTrigger === "bind" || formtrigger) {
-          result = await this.validator.validateUpdate({
-            [name]: value
-          }, formData);
+          result = await this.validator.validateUpdate(
+            {
+              [name]: value
+            },
+            formData
+          );
           if (!isRequiredField2 && (value === void 0 || value === "")) {
             result = null;
           }
@@ -5468,14 +5964,14 @@ if (uni.restoreGlobal) {
             }
             if (errShowType === "toast") {
               uni.showToast({
-                title: result.errorMessage || "\u6821\u9A8C\u9519\u8BEF",
+                title: result.errorMessage || "校验错误",
                 icon: "none"
               });
             }
             if (errShowType === "modal") {
               uni.showModal({
-                title: "\u63D0\u793A",
-                content: result.errorMessage || "\u6821\u9A8C\u9519\u8BEF"
+                title: "提示",
+                content: result.errorMessage || "校验错误"
               });
             }
           } else {
@@ -5487,6 +5983,9 @@ if (uni.restoreGlobal) {
         }
         return result ? result : null;
       },
+      /**
+       * 初始组件数据
+       */
       init(type = false) {
         const {
           validator,
@@ -5544,6 +6043,7 @@ if (uni.restoreGlobal) {
           });
         }
       },
+      // 设置item 的值
       itemSetValue(value) {
         const name = this.form._realName(this.name);
         const rules = this.itemRules.rules || [];
@@ -5551,12 +6051,17 @@ if (uni.restoreGlobal) {
         this.form._setDataValue(name, this.form.formData, val);
         return val;
       },
+      /**
+       * 移除该表单项的校验结果
+       */
       clearValidate() {
         this.errMsg = "";
       },
+      // 是否显示星号
       _isRequired() {
         return this.required;
       },
+      // 处理对齐方式
       _justifyContent() {
         if (this.form) {
           const {
@@ -5572,14 +6077,22 @@ if (uni.restoreGlobal) {
         }
         return "flex-start";
       },
+      // 处理 label宽度单位 ,继承父元素的值
       _labelWidthUnit(labelWidth) {
         return this.num2px(this.labelWidth ? this.labelWidth : labelWidth || (this.label ? 65 : "auto"));
       },
+      // 处理 label 位置
       _labelPosition() {
         if (this.form)
           return this.form.labelPosition || "left";
         return "left";
       },
+      /**
+       * 触发时机
+       * @param {Object} rule 当前规则内时机
+       * @param {Object} itemRlue 当前组件时机
+       * @param {Object} parentRule 父组件时机
+       */
       isTrigger(rule, itemRlue, parentRule) {
         if (rule === "submit" || !rule) {
           if (rule === void 0) {
@@ -5603,37 +6116,70 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", {
-      class: vue.normalizeClass(["uni-forms-item", ["is-direction-" + $data.localLabelPos, $data.border ? "uni-forms-item--border" : "", $data.border && $data.isFirstBorder ? "is-first-border" : ""]])
-    }, [
-      vue.renderSlot(_ctx.$slots, "label", {}, () => [
-        vue.createElementVNode("view", {
-          class: vue.normalizeClass(["uni-forms-item__label", { "no-label": !$props.label && !$props.required }]),
-          style: vue.normalizeStyle({ width: $data.localLabelWidth, justifyContent: $data.localLabelAlign })
-        }, [
-          $props.required ? (vue.openBlock(), vue.createElementBlock("text", {
-            key: 0,
-            class: "is-required"
-          }, "*")) : vue.createCommentVNode("v-if", true),
-          vue.createElementVNode("text", null, vue.toDisplayString($props.label), 1)
-        ], 6)
-      ], true),
-      vue.createElementVNode("view", { class: "uni-forms-item__content" }, [
-        vue.renderSlot(_ctx.$slots, "default", {}, void 0, true),
-        vue.createElementVNode("view", {
-          class: vue.normalizeClass(["uni-forms-item__error", { "msg--active": $options.msg }])
-        }, [
-          vue.createElementVNode("text", null, vue.toDisplayString($options.msg), 1)
-        ], 2)
-      ])
-    ], 2);
+  function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        class: vue.normalizeClass(["uni-forms-item", ["is-direction-" + $data.localLabelPos, $data.border ? "uni-forms-item--border" : "", $data.border && $data.isFirstBorder ? "is-first-border" : ""]])
+      },
+      [
+        vue.renderSlot(_ctx.$slots, "label", {}, () => [
+          vue.createElementVNode(
+            "view",
+            {
+              class: vue.normalizeClass(["uni-forms-item__label", { "no-label": !$props.label && !$props.required }]),
+              style: vue.normalizeStyle({ width: $data.localLabelWidth, justifyContent: $data.localLabelAlign })
+            },
+            [
+              $props.required ? (vue.openBlock(), vue.createElementBlock("text", {
+                key: 0,
+                class: "is-required"
+              }, "*")) : vue.createCommentVNode("v-if", true),
+              vue.createElementVNode(
+                "text",
+                null,
+                vue.toDisplayString($props.label),
+                1
+                /* TEXT */
+              )
+            ],
+            6
+            /* CLASS, STYLE */
+          )
+        ], true),
+        vue.createElementVNode("view", { class: "uni-forms-item__content" }, [
+          vue.renderSlot(_ctx.$slots, "default", {}, void 0, true),
+          vue.createElementVNode(
+            "view",
+            {
+              class: vue.normalizeClass(["uni-forms-item__error", { "msg--active": $options.msg }])
+            },
+            [
+              vue.createElementVNode(
+                "text",
+                null,
+                vue.toDisplayString($options.msg),
+                1
+                /* TEXT */
+              )
+            ],
+            2
+            /* CLASS */
+          )
+        ])
+      ],
+      2
+      /* CLASS */
+    );
   }
-  var __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$9], ["__scopeId", "data-v-61dfc0d0"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
+  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$o], ["__scopeId", "data-v-462874dd"], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
   var pattern = {
     email: /^\S+?@\S+?\.\S+?$/,
     idcard: /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
-    url: new RegExp("^(?!mailto:)(?:(?:http|https|ftp)://|//)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$", "i")
+    url: new RegExp(
+      "^(?!mailto:)(?:(?:http|https|ftp)://|//)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$",
+      "i"
+    )
   };
   const FORMAT_MAPPING = {
     "int": "integer",
@@ -5641,6 +6187,7 @@ if (uni.restoreGlobal) {
     "double": "number",
     "long": "number",
     "password": "string"
+    // "fileurls": 'array'
   };
   function formatMessage(args, resources = "") {
     var defaultMessage = ["label"];
@@ -6015,33 +6562,33 @@ if (uni.restoreGlobal) {
   function Message() {
     return {
       TAG: "",
-      default: "\u9A8C\u8BC1\u9519\u8BEF",
-      defaultInvalid: "\u63D0\u4EA4\u7684\u5B57\u6BB5{field}\u5728\u6570\u636E\u5E93\u4E2D\u5E76\u4E0D\u5B58\u5728",
-      validateFunction: "\u9A8C\u8BC1\u65E0\u6548",
-      required: "{label}\u5FC5\u586B",
-      "enum": "{label}\u8D85\u51FA\u8303\u56F4",
-      timestamp: "{label}\u683C\u5F0F\u65E0\u6548",
-      whitespace: "{label}\u4E0D\u80FD\u4E3A\u7A7A",
-      typeError: "{label}\u7C7B\u578B\u65E0\u6548",
+      default: "验证错误",
+      defaultInvalid: "提交的字段{field}在数据库中并不存在",
+      validateFunction: "验证无效",
+      required: "{label}必填",
+      "enum": "{label}超出范围",
+      timestamp: "{label}格式无效",
+      whitespace: "{label}不能为空",
+      typeError: "{label}类型无效",
       date: {
-        format: "{label}\u65E5\u671F{value}\u683C\u5F0F\u65E0\u6548",
-        parse: "{label}\u65E5\u671F\u65E0\u6CD5\u89E3\u6790,{value}\u65E0\u6548",
-        invalid: "{label}\u65E5\u671F{value}\u65E0\u6548"
+        format: "{label}日期{value}格式无效",
+        parse: "{label}日期无法解析,{value}无效",
+        invalid: "{label}日期{value}无效"
       },
       length: {
-        minLength: "{label}\u957F\u5EA6\u4E0D\u80FD\u5C11\u4E8E{minLength}",
-        maxLength: "{label}\u957F\u5EA6\u4E0D\u80FD\u8D85\u8FC7{maxLength}",
-        range: "{label}\u5FC5\u987B\u4ECB\u4E8E{minLength}\u548C{maxLength}\u4E4B\u95F4"
+        minLength: "{label}长度不能少于{minLength}",
+        maxLength: "{label}长度不能超过{maxLength}",
+        range: "{label}必须介于{minLength}和{maxLength}之间"
       },
       number: {
-        minimum: "{label}\u4E0D\u80FD\u5C0F\u4E8E{minimum}",
-        maximum: "{label}\u4E0D\u80FD\u5927\u4E8E{maximum}",
-        exclusiveMinimum: "{label}\u4E0D\u80FD\u5C0F\u4E8E\u7B49\u4E8E{minimum}",
-        exclusiveMaximum: "{label}\u4E0D\u80FD\u5927\u4E8E\u7B49\u4E8E{maximum}",
-        range: "{label}\u5FC5\u987B\u4ECB\u4E8E{minimum}and{maximum}\u4E4B\u95F4"
+        minimum: "{label}不能小于{minimum}",
+        maximum: "{label}不能大于{maximum}",
+        exclusiveMinimum: "{label}不能小于等于{minimum}",
+        exclusiveMaximum: "{label}不能大于等于{maximum}",
+        range: "{label}必须介于{minimum}and{maximum}之间"
       },
       pattern: {
-        mismatch: "{label}\u683C\u5F0F\u4E0D\u5339\u914D"
+        mismatch: "{label}格式不匹配"
       }
     };
   }
@@ -6077,7 +6624,7 @@ if (uni.restoreGlobal) {
   const realName = (name, data2 = {}) => {
     const base_name = _basePath(name);
     if (typeof base_name === "object" && Array.isArray(base_name) && base_name.length > 1) {
-      const realname = base_name.reduce((a2, b2) => a2 += `#${b2}`, "_formdata_");
+      const realname = base_name.reduce((a2, b) => a2 += `#${b}`, "_formdata_");
       return realname;
     }
     return base_name[0] || name;
@@ -6145,97 +6692,106 @@ if (uni.restoreGlobal) {
     }
     return isNoField;
   };
-  const isEqual = (a2, b2) => {
-    if (a2 === b2) {
-      return a2 !== 0 || 1 / a2 === 1 / b2;
+  const isEqual = (a2, b) => {
+    if (a2 === b) {
+      return a2 !== 0 || 1 / a2 === 1 / b;
     }
-    if (a2 == null || b2 == null) {
-      return a2 === b2;
+    if (a2 == null || b == null) {
+      return a2 === b;
     }
-    var classNameA = toString.call(a2), classNameB = toString.call(b2);
+    var classNameA = toString.call(a2), classNameB = toString.call(b);
     if (classNameA !== classNameB) {
       return false;
     }
     switch (classNameA) {
       case "[object RegExp]":
       case "[object String]":
-        return "" + a2 === "" + b2;
+        return "" + a2 === "" + b;
       case "[object Number]":
         if (+a2 !== +a2) {
-          return +b2 !== +b2;
+          return +b !== +b;
         }
-        return +a2 === 0 ? 1 / +a2 === 1 / b2 : +a2 === +b2;
+        return +a2 === 0 ? 1 / +a2 === 1 / b : +a2 === +b;
       case "[object Date]":
       case "[object Boolean]":
-        return +a2 === +b2;
+        return +a2 === +b;
     }
     if (classNameA == "[object Object]") {
-      var propsA = Object.getOwnPropertyNames(a2), propsB = Object.getOwnPropertyNames(b2);
+      var propsA = Object.getOwnPropertyNames(a2), propsB = Object.getOwnPropertyNames(b);
       if (propsA.length != propsB.length) {
         return false;
       }
       for (var i2 = 0; i2 < propsA.length; i2++) {
         var propName = propsA[i2];
-        if (a2[propName] !== b2[propName]) {
+        if (a2[propName] !== b[propName]) {
           return false;
         }
       }
       return true;
     }
     if (classNameA == "[object Array]") {
-      if (a2.toString() == b2.toString()) {
+      if (a2.toString() == b.toString()) {
         return true;
       }
       return false;
     }
   };
-  const _sfc_main$b = {
+  const _sfc_main$q = {
     name: "uniForms",
     emits: ["validate", "submit"],
     options: {
       virtualHost: true
     },
     props: {
+      // 即将弃用
       value: {
         type: Object,
         default() {
           return null;
         }
       },
+      // vue3 替换 value 属性
       modelValue: {
         type: Object,
         default() {
           return null;
         }
       },
+      // 1.4.0 开始将不支持 v-model ，且废弃 value 和 modelValue
       model: {
         type: Object,
         default() {
           return null;
         }
       },
+      // 表单校验规则
       rules: {
         type: Object,
         default() {
           return {};
         }
       },
+      //校验错误信息提示方式 默认 undertext 取值 [undertext|toast|modal]
       errShowType: {
         type: String,
         default: "undertext"
       },
+      // 校验触发器方式 默认 bind 取值 [bind|submit]
       validateTrigger: {
         type: String,
         default: "submit"
       },
+      // label 位置，默认 left 取值  top/left
       labelPosition: {
         type: String,
         default: "left"
       },
+      // label 宽度
       labelWidth: {
         type: [String, Number],
         default: ""
       },
+      // label 居中方式，默认 left 取值 left/center/right
       labelAlign: {
         type: String,
         default: "left"
@@ -6252,11 +6808,13 @@ if (uni.restoreGlobal) {
     },
     data() {
       return {
+        // 表单本地值的记录，不应该与传如的值进行关联
         formData: {},
         formRules: {}
       };
     },
     computed: {
+      // 计算数据源变化的
       localData() {
         const localVal = this.model || this.modelValue || this.value;
         if (localVal) {
@@ -6266,6 +6824,9 @@ if (uni.restoreGlobal) {
       }
     },
     watch: {
+      // 监听数据变化 ,暂时不使用，需要单独赋值
+      // localData: {},
+      // 监听规则变化
       rules: {
         handler: function(val, oldVal) {
           this.setRules(val);
@@ -6290,7 +6851,7 @@ if (uni.restoreGlobal) {
               }
             }
             if (!formVm)
-              return formatAppLog("error", "at uni_modules/uni-forms/components/uni-forms/uni-forms.vue:182", "\u5F53\u524D uni-froms \u7EC4\u4EF6\u7F3A\u5C11 ref \u5C5E\u6027");
+              return formatAppLog("error", "at uni_modules/uni-forms/components/uni-forms/uni-forms.vue:182", "当前 uni-froms 组件缺少 ref 属性");
             formVm.setValue(name, value);
           }
         };
@@ -6300,10 +6861,21 @@ if (uni.restoreGlobal) {
       this.setRules(this.rules);
     },
     methods: {
+      /**
+       * 外部调用方法
+       * 设置规则 ，主要用于小程序自定义检验规则
+       * @param {Array} rules 规则源数据
+       */
       setRules(rules) {
         this.formRules = Object.assign({}, this.formRules, rules);
         this.validator = new SchemaValidator(rules);
       },
+      /**
+       * 外部调用方法
+       * 设置数据，用于设置表单数据，公开给用户使用 ， 不支持在动态表单中使用
+       * @param {Object} key
+       * @param {Object} value
+       */
       setValue(key, value) {
         let example = this.childrens.find((child) => child.name === key);
         if (!example)
@@ -6311,9 +6883,22 @@ if (uni.restoreGlobal) {
         this.formData[key] = getValue(key, value, this.formRules[key] && this.formRules[key].rules || []);
         return example.onFieldChange(this.formData[key]);
       },
+      /**
+       * 外部调用方法
+       * 手动提交校验表单
+       * 对整个表单进行校验的方法，参数为一个回调函数。
+       * @param {Array} keepitem 保留不参与校验的字段
+       * @param {type} callback 方法回调
+       */
       validate(keepitem, callback) {
         return this.checkAll(this.formData, keepitem, callback);
       },
+      /**
+       * 外部调用方法
+       * 部分表单校验
+       * @param {Array|String} props 需要校验的字段
+       * @param {Function} 回调函数
+       */
       validateField(props = [], callback) {
         props = [].concat(props);
         let invalidFields = {};
@@ -6327,6 +6912,11 @@ if (uni.restoreGlobal) {
         });
         return this.checkAll(invalidFields, [], callback);
       },
+      /**
+       * 外部调用方法
+       * 移除表单项的校验结果。传入待移除的表单项的 prop 属性或者 prop 组成的数组，如不传则移除整个表单的校验结果
+       * @param {Array|String} props 需要移除校验的字段 ，不填为所有
+       */
       clearValidate(props = []) {
         props = [].concat(props);
         this.childrens.forEach((item) => {
@@ -6340,6 +6930,13 @@ if (uni.restoreGlobal) {
           }
         });
       },
+      /**
+       * 外部调用方法 ，即将废弃
+       * 手动提交校验表单
+       * 对整个表单进行校验的方法，参数为一个回调函数。
+       * @param {Array} keepitem 保留不参与校验的字段
+       * @param {type} callback 方法回调
+       */
       submit(keepitem, callback, type) {
         for (let i2 in this.dataValue) {
           const itemData = this.childrens.find((v2) => v2.name === i2);
@@ -6350,10 +6947,11 @@ if (uni.restoreGlobal) {
           }
         }
         if (!type) {
-          formatAppLog("warn", "at uni_modules/uni-forms/components/uni-forms/uni-forms.vue:289", "submit \u65B9\u6CD5\u5373\u5C06\u5E9F\u5F03\uFF0C\u8BF7\u4F7F\u7528validate\u65B9\u6CD5\u4EE3\u66FF\uFF01");
+          formatAppLog("warn", "at uni_modules/uni-forms/components/uni-forms/uni-forms.vue:289", "submit 方法即将废弃，请使用validate方法代替！");
         }
         return this.checkAll(this.formData, keepitem, callback, "submit");
       },
+      // 校验所有
       async checkAll(invalidFields, keepitem, callback, type) {
         if (!this.validator)
           return;
@@ -6419,6 +7017,10 @@ if (uni.restoreGlobal) {
           return null;
         }
       },
+      /**
+       * 返回validate事件
+       * @param {Object} result
+       */
       validateCheck(result) {
         this.$emit("validate", result);
       },
@@ -6431,15 +7033,15 @@ if (uni.restoreGlobal) {
       _isEqual: isEqual
     }
   };
-  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-forms" }, [
       vue.createElementVNode("form", null, [
         vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
       ])
     ]);
   }
-  var __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$8], ["__scopeId", "data-v-7ae0e404"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-forms/components/uni-forms/uni-forms.vue"]]);
-  const _sfc_main$a = {
+  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$n], ["__scopeId", "data-v-9a1e3c32"], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/uni_modules/uni-forms/components/uni-forms/uni-forms.vue"]]);
+  const _sfc_main$p = {
     name: "UniSection",
     emits: ["click"],
     props: {
@@ -6498,41 +7100,65 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-section" }, [
       vue.createElementVNode("view", {
         class: "uni-section-header",
         onClick: _cache[0] || (_cache[0] = (...args) => $options.onClick && $options.onClick(...args))
       }, [
-        $props.type ? (vue.openBlock(), vue.createElementBlock("view", {
-          key: 0,
-          class: vue.normalizeClass(["uni-section-header__decoration", $props.type])
-        }, null, 2)) : vue.renderSlot(_ctx.$slots, "decoration", { key: 1 }, void 0, true),
-        vue.createElementVNode("view", { class: "uni-section-header__content" }, [
-          vue.createElementVNode("text", {
-            style: vue.normalizeStyle({ "font-size": $props.titleFontSize, "color": $props.titleColor }),
-            class: vue.normalizeClass(["uni-section__content-title", { "distraction": !$props.subTitle }])
-          }, vue.toDisplayString($props.title), 7),
-          $props.subTitle ? (vue.openBlock(), vue.createElementBlock("text", {
+        $props.type ? (vue.openBlock(), vue.createElementBlock(
+          "view",
+          {
             key: 0,
-            style: vue.normalizeStyle({ "font-size": $props.subTitleFontSize, "color": $props.subTitleColor }),
-            class: "uni-section-header__content-sub"
-          }, vue.toDisplayString($props.subTitle), 5)) : vue.createCommentVNode("v-if", true)
+            class: vue.normalizeClass(["uni-section-header__decoration", $props.type])
+          },
+          null,
+          2
+          /* CLASS */
+        )) : vue.renderSlot(_ctx.$slots, "decoration", { key: 1 }, void 0, true),
+        vue.createElementVNode("view", { class: "uni-section-header__content" }, [
+          vue.createElementVNode(
+            "text",
+            {
+              style: vue.normalizeStyle({ "font-size": $props.titleFontSize, "color": $props.titleColor }),
+              class: vue.normalizeClass(["uni-section__content-title", { "distraction": !$props.subTitle }])
+            },
+            vue.toDisplayString($props.title),
+            7
+            /* TEXT, CLASS, STYLE */
+          ),
+          $props.subTitle ? (vue.openBlock(), vue.createElementBlock(
+            "text",
+            {
+              key: 0,
+              style: vue.normalizeStyle({ "font-size": $props.subTitleFontSize, "color": $props.subTitleColor }),
+              class: "uni-section-header__content-sub"
+            },
+            vue.toDisplayString($props.subTitle),
+            5
+            /* TEXT, STYLE */
+          )) : vue.createCommentVNode("v-if", true)
         ]),
         vue.createElementVNode("view", { class: "uni-section-header__slot-right" }, [
           vue.renderSlot(_ctx.$slots, "right", {}, void 0, true)
         ])
       ]),
-      vue.createElementVNode("view", {
-        class: "uni-section-content",
-        style: vue.normalizeStyle({ padding: $options._padding })
-      }, [
-        vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
-      ], 4)
+      vue.createElementVNode(
+        "view",
+        {
+          class: "uni-section-content",
+          style: vue.normalizeStyle({ padding: $options._padding })
+        },
+        [
+          vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+        ],
+        4
+        /* STYLE */
+      )
     ]);
   }
-  var __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$7], ["__scopeId", "data-v-f7ca1098"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-section/components/uni-section/uni-section.vue"]]);
-  const _sfc_main$9 = {
+  const __easycom_3$1 = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$m], ["__scopeId", "data-v-637fd36b"], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/uni_modules/uni-section/components/uni-section/uni-section.vue"]]);
+  const _sfc_main$o = {
     __name: "index",
     setup(__props) {
       let formType = vue.ref("");
@@ -6566,7 +7192,7 @@ if (uni.restoreGlobal) {
         course: {
           rules: [{
             required: true,
-            errorMessage: "\u8BFE\u7A0B\u540D\u4E0D\u80FD\u4E3A\u7A7A"
+            errorMessage: "课程名不能为空"
           }]
         },
         teacher: {
@@ -6583,7 +7209,7 @@ if (uni.restoreGlobal) {
           rules: [{
             required: false,
             pattern: /-?[1-9]\d*/,
-            errorMessage: "\u5B66\u5206\u4E3A\u6570\u5B57"
+            errorMessage: "学分为数字"
           }]
         }
       });
@@ -6615,10 +7241,10 @@ if (uni.restoreGlobal) {
         uni.navigateBack();
       }
       return (_ctx, _cache) => {
-        const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_0);
-        const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_1);
-        const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_2);
-        const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_3);
+        const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_0$1);
+        const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_1$2);
+        const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_2$1);
+        const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_3$1);
         return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
           vue.createVNode(_component_uni_section, {
             title: vue.unref(formType),
@@ -6634,7 +7260,7 @@ if (uni.restoreGlobal) {
                 }, {
                   default: vue.withCtx(() => [
                     vue.createVNode(_component_uni_forms_item, {
-                      label: "\u661F\u671F",
+                      label: "星期",
                       required: "",
                       name: "weekday"
                     }, {
@@ -6643,13 +7269,14 @@ if (uni.restoreGlobal) {
                           modelValue: customFormData.weekday,
                           "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => customFormData.weekday = $event),
                           value: customFormData.weekday,
-                          placeholder: "\u8BF7\u8F93\u5165\u8BFE\u7A0B\u540D"
+                          placeholder: "请输入课程名"
                         }, null, 8, ["modelValue", "value"])
                       ]),
                       _: 1
+                      /* STABLE */
                     }),
                     vue.createVNode(_component_uni_forms_item, {
-                      label: "\u8282\u6570",
+                      label: "节数",
                       required: "",
                       name: "index"
                     }, {
@@ -6658,13 +7285,14 @@ if (uni.restoreGlobal) {
                           modelValue: customFormData.index,
                           "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => customFormData.index = $event),
                           value: customFormData.index,
-                          placeholder: "\u8BF7\u8F93\u5165\u8BFE\u7A0B\u540D"
+                          placeholder: "请输入课程名"
                         }, null, 8, ["modelValue", "value"])
                       ]),
                       _: 1
+                      /* STABLE */
                     }),
                     vue.createVNode(_component_uni_forms_item, {
-                      label: "\u8BFE\u7A0B",
+                      label: "课程",
                       required: "",
                       name: "course"
                     }, {
@@ -6673,13 +7301,14 @@ if (uni.restoreGlobal) {
                           modelValue: customFormData.course,
                           "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => customFormData.course = $event),
                           value: customFormData.course,
-                          placeholder: "\u8BF7\u8F93\u5165\u8BFE\u7A0B\u540D"
+                          placeholder: "请输入课程名"
                         }, null, 8, ["modelValue", "value"])
                       ]),
                       _: 1
+                      /* STABLE */
                     }),
                     vue.createVNode(_component_uni_forms_item, {
-                      label: "\u8001\u5E08",
+                      label: "老师",
                       required: "",
                       name: "teacher"
                     }, {
@@ -6688,13 +7317,14 @@ if (uni.restoreGlobal) {
                           modelValue: customFormData.teacher,
                           "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => customFormData.teacher = $event),
                           value: customFormData.teacher,
-                          placeholder: "\u8BF7\u8F93\u5165\u8001\u5E08"
+                          placeholder: "请输入老师"
                         }, null, 8, ["modelValue", "value"])
                       ]),
                       _: 1
+                      /* STABLE */
                     }),
                     vue.createVNode(_component_uni_forms_item, {
-                      label: "\u6559\u5BA4",
+                      label: "教室",
                       required: "",
                       name: "adress"
                     }, {
@@ -6703,13 +7333,14 @@ if (uni.restoreGlobal) {
                           modelValue: customFormData.adress,
                           "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => customFormData.adress = $event),
                           value: customFormData.adress,
-                          placeholder: "\u8BF7\u8F93\u5165\u6559\u5BA4"
+                          placeholder: "请输入教室"
                         }, null, 8, ["modelValue", "value"])
                       ]),
                       _: 1
+                      /* STABLE */
                     }),
                     vue.createVNode(_component_uni_forms_item, {
-                      label: "\u5B66\u5206",
+                      label: "学分",
                       required: "",
                       name: "score"
                     }, {
@@ -6718,20 +7349,22 @@ if (uni.restoreGlobal) {
                           modelValue: customFormData.score,
                           "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => customFormData.score = $event),
                           value: customFormData.score,
-                          placeholder: "\u8BF7\u8F93\u5165\u5B66\u5206"
+                          placeholder: "请输入学分"
                         }, null, 8, ["modelValue", "value"])
                       ]),
                       _: 1
+                      /* STABLE */
                     })
                   ]),
                   _: 1
+                  /* STABLE */
                 }, 8, ["rules", "modelValue"]),
                 vue.createElementVNode("view", { class: "button-group" }, [
                   vue.createElementVNode("button", {
                     type: "default",
                     onClick: handleCancelClick
                   }),
-                  vue.unref(formType) === "\u7F16\u8F91\u8BFE\u7A0B" ? (vue.openBlock(), vue.createElementBlock("button", {
+                  vue.unref(formType) === "编辑课程" ? (vue.openBlock(), vue.createElementBlock("button", {
                     key: 0,
                     type: "warn",
                     onClick: handleDeleteClick
@@ -6744,13 +7377,14 @@ if (uni.restoreGlobal) {
               ])
             ]),
             _: 1
+            /* STABLE */
           }, 8, ["title"])
         ]);
       };
     }
   };
-  var PagesIndexComponentsMessageBoxIndex = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__scopeId", "data-v-0a55f2da"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/pages/index/components/MessageBox/index.vue"]]);
-  const _sfc_main$8 = {
+  const PagesIndexComponentsMessageBoxIndex = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["__scopeId", "data-v-bf748ebb"], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/pages/index/components/MessageBox/index.vue"]]);
+  const _sfc_main$n = {
     __name: "index",
     setup(__props) {
       return (_ctx, _cache) => {
@@ -6758,8 +7392,8 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  var PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/pages/index/index.vue"]]);
-  const _sfc_main$7 = {
+  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/pages/index/index.vue"]]);
+  const _sfc_main$m = {
     props: {
       border: {
         type: String,
@@ -6811,16 +7445,22 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", {
-      class: "t-table",
-      style: vue.normalizeStyle({ "border-width": $props.border + "px", "border-color": $props.borderColor })
-    }, [
-      vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
-    ], 4);
+  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        class: "t-table",
+        style: vue.normalizeStyle({ "border-width": $props.border + "px", "border-color": $props.borderColor })
+      },
+      [
+        vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+      ],
+      4
+      /* STYLE */
+    );
   }
-  var tTable = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__scopeId", "data-v-d527ddf8"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/pages/todolist/components/t-table/t-table.vue"]]);
-  const _sfc_main$6 = {
+  const tTable = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__scopeId", "data-v-e0977b8a"], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/pages/todolist/components/t-table/t-table.vue"]]);
+  const _sfc_main$l = {
     props: {
       align: String
     },
@@ -6866,16 +7506,22 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", {
-      class: "t-th",
-      style: vue.normalizeStyle({ "border-width": $data.thBorder + "px", "border-color": $data.borderColor, "font-size": $data.fontSize + "px", "color": $data.color, "justify-content": $options.thAlignCpd })
-    }, [
-      vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
-    ], 4);
+  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        class: "t-th",
+        style: vue.normalizeStyle({ "border-width": $data.thBorder + "px", "border-color": $data.borderColor, "font-size": $data.fontSize + "px", "color": $data.color, "justify-content": $options.thAlignCpd })
+      },
+      [
+        vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+      ],
+      4
+      /* STYLE */
+    );
   }
-  var tTh = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__scopeId", "data-v-54bc422e"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/pages/todolist/components/t-table/t-th.vue"]]);
-  const _sfc_main$5 = {
+  const tTh = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__scopeId", "data-v-88cfe1bb"], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/pages/todolist/components/t-table/t-th.vue"]]);
+  const _sfc_main$k = {
     props: {
       fontSize: String,
       color: String,
@@ -6914,27 +7560,39 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "t-tr" }, [
-      $data.isCheck ? (vue.openBlock(), vue.createElementBlock("view", {
-        key: 0,
-        class: "t-check-box",
-        style: vue.normalizeStyle({ "border-width": $data.thBorder + "px", "border-color": $data.borderColor })
-      }, [
-        vue.createElementVNode("checkbox-group", {
-          onChange: _cache[0] || (_cache[0] = (...args) => $options.checkboxChange && $options.checkboxChange(...args))
-        }, [
-          vue.createElementVNode("checkbox", {
-            value: $data.checkboxData.value + "",
-            checked: $data.checkboxData.checked
-          }, null, 8, ["value", "checked"])
-        ], 32)
-      ], 4)) : vue.createCommentVNode("v-if", true),
+      $data.isCheck ? (vue.openBlock(), vue.createElementBlock(
+        "view",
+        {
+          key: 0,
+          class: "t-check-box",
+          style: vue.normalizeStyle({ "border-width": $data.thBorder + "px", "border-color": $data.borderColor })
+        },
+        [
+          vue.createElementVNode(
+            "checkbox-group",
+            {
+              onChange: _cache[0] || (_cache[0] = (...args) => $options.checkboxChange && $options.checkboxChange(...args))
+            },
+            [
+              vue.createElementVNode("checkbox", {
+                value: $data.checkboxData.value + "",
+                checked: $data.checkboxData.checked
+              }, null, 8, ["value", "checked"])
+            ],
+            32
+            /* HYDRATE_EVENTS */
+          )
+        ],
+        4
+        /* STYLE */
+      )) : vue.createCommentVNode("v-if", true),
       vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
     ]);
   }
-  var tTr = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__scopeId", "data-v-55492d38"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/pages/todolist/components/t-table/t-tr.vue"]]);
-  const _sfc_main$4 = {
+  const tTr = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__scopeId", "data-v-342a0ab0"], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/pages/todolist/components/t-table/t-tr.vue"]]);
+  const _sfc_main$j = {
     props: {
       align: String
     },
@@ -6980,16 +7638,22 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", {
-      class: "t-td",
-      style: vue.normalizeStyle({ "border-width": $data.thBorder + "px", "border-color": $data.borderColor, "font-size": $data.fontSize + "px", "color": $data.color, "justify-content": $options.tdAlignCpd })
-    }, [
-      vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
-    ], 4);
+  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        class: "t-td",
+        style: vue.normalizeStyle({ "border-width": $data.thBorder + "px", "border-color": $data.borderColor, "font-size": $data.fontSize + "px", "color": $data.color, "justify-content": $options.tdAlignCpd })
+      },
+      [
+        vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+      ],
+      4
+      /* STYLE */
+    );
   }
-  var tTd = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__scopeId", "data-v-5483e42a"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/pages/todolist/components/t-table/t-td.vue"]]);
-  const _sfc_main$3 = {
+  const tTd = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__scopeId", "data-v-1a96aff9"], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/pages/todolist/components/t-table/t-td.vue"]]);
+  const _sfc_main$i = {
     data() {
       return {
         user: {
@@ -7061,24 +7725,30 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_t_th = vue.resolveComponent("t-th");
     const _component_t_tr = vue.resolveComponent("t-tr");
     const _component_t_td = vue.resolveComponent("t-td");
     const _component_t_table = vue.resolveComponent("t-table");
     return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
-      vue.createElementVNode("view", { class: "text" }, "\u6DFB\u52A0todo"),
+      vue.createElementVNode("view", { class: "text" }, "添加todo"),
       vue.createElementVNode("view", { class: "addDataBox" }, [
         $data.showUI ? (vue.openBlock(), vue.createElementBlock("view", {
           key: 0,
           class: "group"
         }, [
-          vue.createElementVNode("text", null, "\u65F6\u95F4:"),
-          vue.withDirectives(vue.createElementVNode("input", {
-            type: "text",
-            "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.user.time = $event),
-            placeholder: "\u65F6\u95F4"
-          }, null, 512), [
+          vue.createElementVNode("text", null, "时间:"),
+          vue.withDirectives(vue.createElementVNode(
+            "input",
+            {
+              type: "text",
+              "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.user.time = $event),
+              placeholder: "时间"
+            },
+            null,
+            512
+            /* NEED_PATCH */
+          ), [
             [vue.vModelText, $data.user.time]
           ])
         ])) : vue.createCommentVNode("v-if", true),
@@ -7086,12 +7756,18 @@ if (uni.restoreGlobal) {
           key: 1,
           class: "group"
         }, [
-          vue.createElementVNode("text", null, "\u5730\u70B9:"),
-          vue.withDirectives(vue.createElementVNode("input", {
-            type: "text",
-            "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $data.user.place = $event),
-            placeholder: "\u5730\u70B9"
-          }, null, 512), [
+          vue.createElementVNode("text", null, "地点:"),
+          vue.withDirectives(vue.createElementVNode(
+            "input",
+            {
+              type: "text",
+              "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $data.user.place = $event),
+              placeholder: "地点"
+            },
+            null,
+            512
+            /* NEED_PATCH */
+          ), [
             [vue.vModelText, $data.user.place]
           ])
         ])) : vue.createCommentVNode("v-if", true),
@@ -7099,25 +7775,31 @@ if (uni.restoreGlobal) {
           key: 2,
           class: "group"
         }, [
-          vue.createElementVNode("text", null, "\u4E8B\u4EF6:"),
-          vue.withDirectives(vue.createElementVNode("input", {
-            type: "text",
-            "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $data.user.event = $event),
-            placeholder: "\u4E8B\u4EF6"
-          }, null, 512), [
+          vue.createElementVNode("text", null, "事件:"),
+          vue.withDirectives(vue.createElementVNode(
+            "input",
+            {
+              type: "text",
+              "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $data.user.event = $event),
+              placeholder: "事件"
+            },
+            null,
+            512
+            /* NEED_PATCH */
+          ), [
             [vue.vModelText, $data.user.event]
           ])
         ])) : vue.createCommentVNode("v-if", true),
         vue.createElementVNode("button", {
           type: "primary",
           onClick: _cache[3] || (_cache[3] = (...args) => $options.addDate && $options.addDate(...args))
-        }, "\u6DFB\u52A0\u4E8B\u4EF6")
+        }, "添加事件")
       ]),
-      vue.createCommentVNode("\u8868\u5355\u63D2\u4EF6\uFF1A https://ext.dcloud.net.cn/plugin?id=413 "),
+      vue.createCommentVNode("表单插件： https://ext.dcloud.net.cn/plugin?id=413 "),
       vue.createElementVNode("view", { class: "userList" }, [
         vue.createElementVNode("view", { class: "warp" }, [
           vue.createElementVNode("view", { class: "box" }, [
-            vue.createElementVNode("view", { class: "title text" }, "\u4E8B\u4EF6\u5217\u8868"),
+            vue.createElementVNode("view", { class: "title text" }, "事件列表"),
             vue.createVNode(_component_t_table, {
               border: "2",
               "border-color": "#95b99e",
@@ -7133,91 +7815,158 @@ if (uni.restoreGlobal) {
                   default: vue.withCtx(() => [
                     vue.createVNode(_component_t_th, { align: "center" }, {
                       default: vue.withCtx(() => [
-                        vue.createTextVNode("\u65F6\u95F4")
+                        vue.createTextVNode("时间")
                       ]),
                       _: 1
+                      /* STABLE */
                     }),
                     vue.createVNode(_component_t_th, { align: "center" }, {
                       default: vue.withCtx(() => [
-                        vue.createTextVNode("\u5730\u70B9")
+                        vue.createTextVNode("地点")
                       ]),
                       _: 1
+                      /* STABLE */
                     }),
                     vue.createVNode(_component_t_th, { align: "center" }, {
                       default: vue.withCtx(() => [
-                        vue.createTextVNode("\u4E8B\u4EF6")
+                        vue.createTextVNode("事件")
                       ]),
                       _: 1
+                      /* STABLE */
                     }),
                     vue.createVNode(_component_t_th, { align: "center" }, {
                       default: vue.withCtx(() => [
-                        vue.createTextVNode("\u64CD\u4F5C")
+                        vue.createTextVNode("操作")
                       ]),
                       _: 1
+                      /* STABLE */
                     }),
                     vue.createVNode(_component_t_th, { align: "center" }, {
                       default: vue.withCtx(() => [
-                        vue.createTextVNode("\u64CD\u4F5C")
+                        vue.createTextVNode("操作")
                       ]),
                       _: 1
+                      /* STABLE */
                     })
                   ]),
                   _: 1
+                  /* STABLE */
                 }),
-                (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.tableList, (item) => {
-                  return vue.openBlock(), vue.createBlock(_component_t_tr, {
-                    "font-size": "14",
-                    color: "#9fbda5",
-                    align: "right",
-                    key: item.id
-                  }, {
-                    default: vue.withCtx(() => [
-                      vue.createVNode(_component_t_td, { align: "center" }, {
+                (vue.openBlock(true), vue.createElementBlock(
+                  vue.Fragment,
+                  null,
+                  vue.renderList($data.tableList, (item) => {
+                    return vue.openBlock(), vue.createBlock(
+                      _component_t_tr,
+                      {
+                        "font-size": "14",
+                        color: "#9fbda5",
+                        align: "right",
+                        key: item.id
+                      },
+                      {
                         default: vue.withCtx(() => [
-                          vue.createTextVNode(vue.toDisplayString(item.time), 1)
+                          vue.createVNode(
+                            _component_t_td,
+                            { align: "center" },
+                            {
+                              default: vue.withCtx(() => [
+                                vue.createTextVNode(
+                                  vue.toDisplayString(item.time),
+                                  1
+                                  /* TEXT */
+                                )
+                              ]),
+                              _: 2
+                              /* DYNAMIC */
+                            },
+                            1024
+                            /* DYNAMIC_SLOTS */
+                          ),
+                          vue.createVNode(
+                            _component_t_td,
+                            { align: "center" },
+                            {
+                              default: vue.withCtx(() => [
+                                vue.createTextVNode(
+                                  vue.toDisplayString(item.place),
+                                  1
+                                  /* TEXT */
+                                )
+                              ]),
+                              _: 2
+                              /* DYNAMIC */
+                            },
+                            1024
+                            /* DYNAMIC_SLOTS */
+                          ),
+                          vue.createVNode(
+                            _component_t_td,
+                            { align: "center" },
+                            {
+                              default: vue.withCtx(() => [
+                                vue.createTextVNode(
+                                  vue.toDisplayString(item.event),
+                                  1
+                                  /* TEXT */
+                                )
+                              ]),
+                              _: 2
+                              /* DYNAMIC */
+                            },
+                            1024
+                            /* DYNAMIC_SLOTS */
+                          ),
+                          vue.createVNode(
+                            _component_t_td,
+                            { align: "center" },
+                            {
+                              default: vue.withCtx(() => [
+                                vue.createElementVNode("button", {
+                                  style: { "height": "50upx", "line-height": "50upx" },
+                                  size: "mini",
+                                  type: "primary",
+                                  onClick: ($event) => $options.done(item)
+                                }, "已完成", 8, ["onClick"])
+                              ]),
+                              _: 2
+                              /* DYNAMIC */
+                            },
+                            1024
+                            /* DYNAMIC_SLOTS */
+                          ),
+                          vue.createVNode(
+                            _component_t_td,
+                            { align: "center" },
+                            {
+                              default: vue.withCtx(() => [
+                                vue.createElementVNode("button", {
+                                  style: { "height": "50upx", "line-height": "50upx" },
+                                  size: "mini",
+                                  type: "primary",
+                                  onClick: ($event) => $options.update(item)
+                                }, "修改", 8, ["onClick"])
+                              ]),
+                              _: 2
+                              /* DYNAMIC */
+                            },
+                            1024
+                            /* DYNAMIC_SLOTS */
+                          )
                         ]),
                         _: 2
-                      }, 1024),
-                      vue.createVNode(_component_t_td, { align: "center" }, {
-                        default: vue.withCtx(() => [
-                          vue.createTextVNode(vue.toDisplayString(item.place), 1)
-                        ]),
-                        _: 2
-                      }, 1024),
-                      vue.createVNode(_component_t_td, { align: "center" }, {
-                        default: vue.withCtx(() => [
-                          vue.createTextVNode(vue.toDisplayString(item.event), 1)
-                        ]),
-                        _: 2
-                      }, 1024),
-                      vue.createVNode(_component_t_td, { align: "center" }, {
-                        default: vue.withCtx(() => [
-                          vue.createElementVNode("button", {
-                            style: { "height": "50upx", "line-height": "50upx" },
-                            size: "mini",
-                            type: "primary",
-                            onClick: ($event) => $options.done(item)
-                          }, "\u5DF2\u5B8C\u6210", 8, ["onClick"])
-                        ]),
-                        _: 2
-                      }, 1024),
-                      vue.createVNode(_component_t_td, { align: "center" }, {
-                        default: vue.withCtx(() => [
-                          vue.createElementVNode("button", {
-                            style: { "height": "50upx", "line-height": "50upx" },
-                            size: "mini",
-                            type: "primary",
-                            onClick: ($event) => $options.update(item)
-                          }, "\u4FEE\u6539", 8, ["onClick"])
-                        ]),
-                        _: 2
-                      }, 1024)
-                    ]),
-                    _: 2
-                  }, 1024);
-                }), 128))
+                        /* DYNAMIC */
+                      },
+                      1024
+                      /* DYNAMIC_SLOTS */
+                    );
+                  }),
+                  128
+                  /* KEYED_FRAGMENT */
+                ))
               ]),
               _: 1
+              /* STABLE */
             }, 8, ["onChange"])
           ])
         ])
@@ -7226,52 +7975,1841 @@ if (uni.restoreGlobal) {
         vue.createElementVNode("button", {
           type: "warn",
           onClick: _cache[4] || (_cache[4] = (...args) => $options.allDel && $options.allDel(...args))
-        }, "\u6E05\u7A7A\u6570\u636E"),
+        }, "清空数据"),
         vue.createElementVNode("button", {
           type: "warn",
           onClick: _cache[5] || (_cache[5] = (...args) => $options.selectDel && $options.selectDel(...args))
-        }, "\u6279\u91CF\u5220\u9664")
+        }, "批量删除")
       ]),
-      vue.createCommentVNode(" \u4FEE\u6539\u6570\u636E\u7684\u5F39\u7A97 "),
+      vue.createCommentVNode(" 修改数据的弹窗 "),
       $data.show ? (vue.openBlock(), vue.createElementBlock("view", {
         key: 0,
         class: "popupWindow"
       }, [
-        vue.createElementVNode("text", null, "\u65F6\u95F4:"),
-        vue.withDirectives(vue.createElementVNode("input", {
-          class: "input",
-          type: "text",
-          "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => $data.Update.time = $event),
-          placeholder: "\u8BF7\u8F93\u5165\u65F6\u95F4"
-        }, null, 512), [
+        vue.createElementVNode("text", null, "时间:"),
+        vue.withDirectives(vue.createElementVNode(
+          "input",
+          {
+            class: "input",
+            type: "text",
+            "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => $data.Update.time = $event),
+            placeholder: "请输入时间"
+          },
+          null,
+          512
+          /* NEED_PATCH */
+        ), [
           [vue.vModelText, $data.Update.time]
         ]),
-        vue.createElementVNode("text", null, "\u5730\u70B9:"),
-        vue.withDirectives(vue.createElementVNode("input", {
-          class: "input",
-          type: "text",
-          "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => $data.Update.place = $event),
-          placeholder: "\u8BF7\u8F93\u5165\u5730\u70B9"
-        }, null, 512), [
+        vue.createElementVNode("text", null, "地点:"),
+        vue.withDirectives(vue.createElementVNode(
+          "input",
+          {
+            class: "input",
+            type: "text",
+            "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => $data.Update.place = $event),
+            placeholder: "请输入地点"
+          },
+          null,
+          512
+          /* NEED_PATCH */
+        ), [
           [vue.vModelText, $data.Update.place]
         ]),
-        vue.createElementVNode("text", null, "\u4E8B\u4EF6:"),
-        vue.withDirectives(vue.createElementVNode("input", {
-          class: "input",
-          type: "text",
-          "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => $data.Update.event = $event),
-          placeholder: "\u8BF7\u8F93\u5165\u4E8B\u4EF6"
-        }, null, 512), [
+        vue.createElementVNode("text", null, "事件:"),
+        vue.withDirectives(vue.createElementVNode(
+          "input",
+          {
+            class: "input",
+            type: "text",
+            "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => $data.Update.event = $event),
+            placeholder: "请输入事件"
+          },
+          null,
+          512
+          /* NEED_PATCH */
+        ), [
           [vue.vModelText, $data.Update.event]
         ]),
         vue.createElementVNode("button", {
           type: "primary",
           onClick: _cache[9] || (_cache[9] = (...args) => $options.confirm && $options.confirm(...args))
-        }, "\u786E\u8BA4")
+        }, "确认")
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  var PagesTodolistTodolist = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/pages/todolist/todolist.vue"]]);
+  const PagesTodolistTodolist = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/pages/todolist/todolist.vue"]]);
+  const _sfc_main$h = {
+    data() {
+      return {};
+    },
+    methods: {}
+  };
+  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view");
+  }
+  const PagesSelfRecordSelfRecord = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/pages/self-record/self-record.vue"]]);
+  const _sfc_main$g = {
+    name: "sport",
+    data() {
+      return {
+        activePopUp: false,
+        list: [{ title: "跳绳", times: "2", finish: false }, { title: "跑步", times: "", finish: false }]
+      };
+    },
+    methods: {
+      popUp() {
+        if (this.activePopUp) {
+          this.activePopUp = false;
+        } else {
+          this.activePopUp = true;
+        }
+      },
+      to_add() {
+        uni.navigateTo({
+          url: "/pages/self-manage/sport/add_new_sport"
+        });
+        this.activePopUp = false;
+      },
+      to_analyse() {
+        uni.navigateTo({
+          url: "/pages/self-manage/sport/sport_analyse"
+        });
+        this.activePopUp = false;
+      }
+    }
+  };
+  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "box" }, [
+      vue.createElementVNode("view", { class: "todo_box" }, [
+        (vue.openBlock(true), vue.createElementBlock(
+          vue.Fragment,
+          null,
+          vue.renderList($data.list, (item, index) => {
+            return vue.openBlock(), vue.createElementBlock("view", {
+              class: "todo_item",
+              key: item.title
+            }, [
+              vue.createCommentVNode("可计时,计时结束时完成一次该运动"),
+              vue.createElementVNode("view", { class: "todo_checkbox" }, [
+                item.times ? (vue.openBlock(), vue.createElementBlock(
+                  "view",
+                  {
+                    key: 0,
+                    style: { "color": "#8c8c8c" }
+                  },
+                  vue.toDisplayString(item.times),
+                  1
+                  /* TEXT */
+                )) : vue.createCommentVNode("v-if", true)
+              ]),
+              vue.createElementVNode(
+                "view",
+                { class: "todo_title" },
+                vue.toDisplayString(item.title),
+                1
+                /* TEXT */
+              )
+            ]);
+          }),
+          128
+          /* KEYED_FRAGMENT */
+        ))
+      ]),
+      vue.createElementVNode("view", { class: "select_pop" }, [
+        $data.activePopUp ? (vue.openBlock(), vue.createElementBlock("view", {
+          key: 0,
+          class: "select_box"
+        }, [
+          vue.createElementVNode("view", {
+            class: "select_item_1",
+            onClick: _cache[0] || (_cache[0] = (...args) => $options.to_add && $options.to_add(...args))
+          }, "添加"),
+          vue.createElementVNode("view", {
+            class: "select_item_2",
+            onClick: _cache[1] || (_cache[1] = (...args) => $options.to_analyse && $options.to_analyse(...args))
+          }, "统计")
+        ])) : vue.createCommentVNode("v-if", true),
+        vue.createElementVNode("view", {
+          class: "button",
+          onClick: _cache[2] || (_cache[2] = (...args) => $options.popUp && $options.popUp(...args))
+        })
+      ])
+    ]);
+  }
+  const PagesSelfManageComponentSportSport = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/pages/self-manage/component/sport/sport.vue"]]);
+  const _sfc_main$f = {
+    name: "UniBadge",
+    emits: ["click"],
+    props: {
+      type: {
+        type: String,
+        default: "error"
+      },
+      inverted: {
+        type: Boolean,
+        default: false
+      },
+      isDot: {
+        type: Boolean,
+        default: false
+      },
+      maxNum: {
+        type: Number,
+        default: 99
+      },
+      absolute: {
+        type: String,
+        default: ""
+      },
+      offset: {
+        type: Array,
+        default() {
+          return [0, 0];
+        }
+      },
+      text: {
+        type: [String, Number],
+        default: ""
+      },
+      size: {
+        type: String,
+        default: "small"
+      },
+      customStyle: {
+        type: Object,
+        default() {
+          return {};
+        }
+      }
+    },
+    data() {
+      return {};
+    },
+    computed: {
+      width() {
+        return String(this.text).length * 8 + 12;
+      },
+      classNames() {
+        const {
+          inverted,
+          type,
+          size,
+          absolute
+        } = this;
+        return [
+          inverted ? "uni-badge--" + type + "-inverted" : "",
+          "uni-badge--" + type,
+          "uni-badge--" + size,
+          absolute ? "uni-badge--absolute" : ""
+        ].join(" ");
+      },
+      positionStyle() {
+        if (!this.absolute)
+          return {};
+        let w = this.width / 2, h2 = 10;
+        if (this.isDot) {
+          w = 5;
+          h2 = 5;
+        }
+        const x2 = `${-w + this.offset[0]}px`;
+        const y2 = `${-h2 + this.offset[1]}px`;
+        const whiteList = {
+          rightTop: {
+            right: x2,
+            top: y2
+          },
+          rightBottom: {
+            right: x2,
+            bottom: y2
+          },
+          leftBottom: {
+            left: x2,
+            bottom: y2
+          },
+          leftTop: {
+            left: x2,
+            top: y2
+          }
+        };
+        const match = whiteList[this.absolute];
+        return match ? match : whiteList["rightTop"];
+      },
+      dotStyle() {
+        if (!this.isDot)
+          return {};
+        return {
+          width: "10px",
+          minWidth: "0",
+          height: "10px",
+          padding: "0",
+          borderRadius: "10px"
+        };
+      },
+      displayValue() {
+        const {
+          isDot,
+          text,
+          maxNum
+        } = this;
+        return isDot ? "" : Number(text) > maxNum ? `${maxNum}+` : text;
+      }
+    },
+    methods: {
+      onClick() {
+        this.$emit("click");
+      }
+    }
+  };
+  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-badge--x" }, [
+      vue.renderSlot(_ctx.$slots, "default", {}, void 0, true),
+      $props.text ? (vue.openBlock(), vue.createElementBlock(
+        "text",
+        {
+          key: 0,
+          class: vue.normalizeClass([$options.classNames, "uni-badge"]),
+          style: vue.normalizeStyle([$options.positionStyle, $props.customStyle, $options.dotStyle]),
+          onClick: _cache[0] || (_cache[0] = ($event) => $options.onClick())
+        },
+        vue.toDisplayString($options.displayValue),
+        7
+        /* TEXT, CLASS, STYLE */
+      )) : vue.createCommentVNode("v-if", true)
+    ]);
+  }
+  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__scopeId", "data-v-c97cb896"], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/uni_modules/uni-badge/components/uni-badge/uni-badge.vue"]]);
+  const _sfc_main$e = {
+    name: "UniListItem",
+    emits: ["click", "switchChange"],
+    props: {
+      direction: {
+        type: String,
+        default: "row"
+      },
+      title: {
+        type: String,
+        default: ""
+      },
+      note: {
+        type: String,
+        default: ""
+      },
+      ellipsis: {
+        type: [Number, String],
+        default: 0
+      },
+      disabled: {
+        type: [Boolean, String],
+        default: false
+      },
+      clickable: {
+        type: Boolean,
+        default: false
+      },
+      showArrow: {
+        type: [Boolean, String],
+        default: false
+      },
+      link: {
+        type: [Boolean, String],
+        default: false
+      },
+      to: {
+        type: String,
+        default: ""
+      },
+      showBadge: {
+        type: [Boolean, String],
+        default: false
+      },
+      showSwitch: {
+        type: [Boolean, String],
+        default: false
+      },
+      switchChecked: {
+        type: [Boolean, String],
+        default: false
+      },
+      badgeText: {
+        type: String,
+        default: ""
+      },
+      badgeType: {
+        type: String,
+        default: "success"
+      },
+      badgeStyle: {
+        type: Object,
+        default() {
+          return {};
+        }
+      },
+      rightText: {
+        type: String,
+        default: ""
+      },
+      thumb: {
+        type: String,
+        default: ""
+      },
+      thumbSize: {
+        type: String,
+        default: "base"
+      },
+      showExtraIcon: {
+        type: [Boolean, String],
+        default: false
+      },
+      extraIcon: {
+        type: Object,
+        default() {
+          return {
+            type: "",
+            color: "#000000",
+            size: 20,
+            customPrefix: ""
+          };
+        }
+      },
+      border: {
+        type: Boolean,
+        default: true
+      },
+      customStyle: {
+        type: Object,
+        default() {
+          return {
+            padding: "",
+            backgroundColor: "#FFFFFF"
+          };
+        }
+      },
+      keepScrollPosition: {
+        type: Boolean,
+        default: false
+      }
+    },
+    watch: {
+      "customStyle.padding": {
+        handler(padding) {
+          if (typeof padding == "number") {
+            padding += "";
+          }
+          let paddingArr = padding.split(" ");
+          if (paddingArr.length === 1) {
+            this.padding = {
+              "top": padding,
+              "right": padding,
+              "bottom": padding,
+              "left": padding
+            };
+          } else if (paddingArr.length === 2) {
+            this.padding = {
+              "top": padding[0],
+              "right": padding[1],
+              "bottom": padding[0],
+              "left": padding[1]
+            };
+          } else if (paddingArr.length === 4) {
+            this.padding = {
+              "top": padding[0],
+              "right": padding[1],
+              "bottom": padding[2],
+              "left": padding[3]
+            };
+          }
+        },
+        immediate: true
+      }
+    },
+    // inject: ['list'],
+    data() {
+      return {
+        isFirstChild: false,
+        padding: {
+          top: "",
+          right: "",
+          bottom: "",
+          left: ""
+        }
+      };
+    },
+    mounted() {
+      this.list = this.getForm();
+      if (this.list) {
+        if (!this.list.firstChildAppend) {
+          this.list.firstChildAppend = true;
+          this.isFirstChild = true;
+        }
+      }
+    },
+    methods: {
+      /**
+       * 获取父元素实例
+       */
+      getForm(name = "uniList") {
+        let parent = this.$parent;
+        let parentName = parent.$options.name;
+        while (parentName !== name) {
+          parent = parent.$parent;
+          if (!parent)
+            return false;
+          parentName = parent.$options.name;
+        }
+        return parent;
+      },
+      onClick() {
+        if (this.to !== "") {
+          this.openPage();
+          return;
+        }
+        if (this.clickable || this.link) {
+          this.$emit("click", {
+            data: {}
+          });
+        }
+      },
+      onSwitchChange(e) {
+        this.$emit("switchChange", e.detail);
+      },
+      openPage() {
+        if (["navigateTo", "redirectTo", "reLaunch", "switchTab"].indexOf(this.link) !== -1) {
+          this.pageApi(this.link);
+        } else {
+          this.pageApi("navigateTo");
+        }
+      },
+      pageApi(api) {
+        let callback = {
+          url: this.to,
+          success: (res) => {
+            this.$emit("click", {
+              data: res
+            });
+          },
+          fail: (err) => {
+            this.$emit("click", {
+              data: err
+            });
+          }
+        };
+        switch (api) {
+          case "navigateTo":
+            uni.navigateTo(callback);
+            break;
+          case "redirectTo":
+            uni.redirectTo(callback);
+            break;
+          case "reLaunch":
+            uni.reLaunch(callback);
+            break;
+          case "switchTab":
+            uni.switchTab(callback);
+            break;
+          default:
+            uni.navigateTo(callback);
+        }
+      }
+    }
+  };
+  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
+    const _component_uni_badge = resolveEasycom(vue.resolveDynamicComponent("uni-badge"), __easycom_1$1);
+    return vue.openBlock(), vue.createElementBlock("view", {
+      class: vue.normalizeClass([{ "uni-list-item--disabled": $props.disabled }, "uni-list-item"]),
+      style: vue.normalizeStyle({ "background-color": $props.customStyle.backgroundColor }),
+      "hover-class": !$props.clickable && !$props.link || $props.disabled || $props.showSwitch ? "" : "uni-list-item--hover",
+      onClick: _cache[1] || (_cache[1] = (...args) => $options.onClick && $options.onClick(...args))
+    }, [
+      !$data.isFirstChild ? (vue.openBlock(), vue.createElementBlock(
+        "view",
+        {
+          key: 0,
+          class: vue.normalizeClass(["border--left", { "uni-list--border": $props.border }])
+        },
+        null,
+        2
+        /* CLASS */
+      )) : vue.createCommentVNode("v-if", true),
+      vue.createElementVNode(
+        "view",
+        {
+          class: vue.normalizeClass(["uni-list-item__container", { "container--right": $props.showArrow || $props.link, "flex--direction": $props.direction === "column" }]),
+          style: vue.normalizeStyle({ paddingTop: $data.padding.top, paddingLeft: $data.padding.left, paddingRight: $data.padding.right, paddingBottom: $data.padding.bottom })
+        },
+        [
+          vue.renderSlot(_ctx.$slots, "header", {}, () => [
+            vue.createElementVNode("view", { class: "uni-list-item__header" }, [
+              $props.thumb ? (vue.openBlock(), vue.createElementBlock("view", {
+                key: 0,
+                class: "uni-list-item__icon"
+              }, [
+                vue.createElementVNode("image", {
+                  src: $props.thumb,
+                  class: vue.normalizeClass(["uni-list-item__icon-img", ["uni-list--" + $props.thumbSize]])
+                }, null, 10, ["src"])
+              ])) : $props.showExtraIcon ? (vue.openBlock(), vue.createElementBlock("view", {
+                key: 1,
+                class: "uni-list-item__icon"
+              }, [
+                vue.createVNode(_component_uni_icons, {
+                  customPrefix: $props.extraIcon.customPrefix,
+                  color: $props.extraIcon.color,
+                  size: $props.extraIcon.size,
+                  type: $props.extraIcon.type
+                }, null, 8, ["customPrefix", "color", "size", "type"])
+              ])) : vue.createCommentVNode("v-if", true)
+            ])
+          ], true),
+          vue.renderSlot(_ctx.$slots, "body", {}, () => [
+            vue.createElementVNode(
+              "view",
+              {
+                class: vue.normalizeClass(["uni-list-item__content", { "uni-list-item__content--center": $props.thumb || $props.showExtraIcon || $props.showBadge || $props.showSwitch }])
+              },
+              [
+                $props.title ? (vue.openBlock(), vue.createElementBlock(
+                  "text",
+                  {
+                    key: 0,
+                    class: vue.normalizeClass(["uni-list-item__content-title", [$props.ellipsis !== 0 && $props.ellipsis <= 2 ? "uni-ellipsis-" + $props.ellipsis : ""]])
+                  },
+                  vue.toDisplayString($props.title),
+                  3
+                  /* TEXT, CLASS */
+                )) : vue.createCommentVNode("v-if", true),
+                $props.note ? (vue.openBlock(), vue.createElementBlock(
+                  "text",
+                  {
+                    key: 1,
+                    class: "uni-list-item__content-note"
+                  },
+                  vue.toDisplayString($props.note),
+                  1
+                  /* TEXT */
+                )) : vue.createCommentVNode("v-if", true)
+              ],
+              2
+              /* CLASS */
+            )
+          ], true),
+          vue.renderSlot(_ctx.$slots, "footer", {}, () => [
+            $props.rightText || $props.showBadge || $props.showSwitch ? (vue.openBlock(), vue.createElementBlock(
+              "view",
+              {
+                key: 0,
+                class: vue.normalizeClass(["uni-list-item__extra", { "flex--justify": $props.direction === "column" }])
+              },
+              [
+                $props.rightText ? (vue.openBlock(), vue.createElementBlock(
+                  "text",
+                  {
+                    key: 0,
+                    class: "uni-list-item__extra-text"
+                  },
+                  vue.toDisplayString($props.rightText),
+                  1
+                  /* TEXT */
+                )) : vue.createCommentVNode("v-if", true),
+                $props.showBadge ? (vue.openBlock(), vue.createBlock(_component_uni_badge, {
+                  key: 1,
+                  type: $props.badgeType,
+                  text: $props.badgeText,
+                  "custom-style": $props.badgeStyle
+                }, null, 8, ["type", "text", "custom-style"])) : vue.createCommentVNode("v-if", true),
+                $props.showSwitch ? (vue.openBlock(), vue.createElementBlock("switch", {
+                  key: 2,
+                  disabled: $props.disabled,
+                  checked: $props.switchChecked,
+                  onChange: _cache[0] || (_cache[0] = (...args) => $options.onSwitchChange && $options.onSwitchChange(...args))
+                }, null, 40, ["disabled", "checked"])) : vue.createCommentVNode("v-if", true)
+              ],
+              2
+              /* CLASS */
+            )) : vue.createCommentVNode("v-if", true)
+          ], true)
+        ],
+        6
+        /* CLASS, STYLE */
+      ),
+      $props.showArrow || $props.link ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
+        key: 1,
+        size: 16,
+        class: "uni-icon-wrapper",
+        color: "#bbb",
+        type: "arrowright"
+      })) : vue.createCommentVNode("v-if", true)
+    ], 14, ["hover-class"]);
+  }
+  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d], ["__scopeId", "data-v-c7524739"], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/uni_modules/uni-list/components/uni-list-item/uni-list-item.vue"]]);
+  const _sfc_main$d = {
+    name: "uniList",
+    "mp-weixin": {
+      options: {
+        multipleSlots: false
+      }
+    },
+    props: {
+      stackFromEnd: {
+        type: Boolean,
+        default: false
+      },
+      enableBackToTop: {
+        type: [Boolean, String],
+        default: false
+      },
+      scrollY: {
+        type: [Boolean, String],
+        default: false
+      },
+      border: {
+        type: Boolean,
+        default: true
+      },
+      renderReverse: {
+        type: Boolean,
+        default: false
+      }
+    },
+    // provide() {
+    // 	return {
+    // 		list: this
+    // 	};
+    // },
+    created() {
+      this.firstChildAppend = false;
+    },
+    methods: {
+      loadMore(e) {
+        this.$emit("scrolltolower");
+      },
+      scroll(e) {
+        this.$emit("scroll", e);
+      }
+    }
+  };
+  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-list uni-border-top-bottom" }, [
+      $props.border ? (vue.openBlock(), vue.createElementBlock("view", {
+        key: 0,
+        class: "uni-list--border-top"
+      })) : vue.createCommentVNode("v-if", true),
+      vue.renderSlot(_ctx.$slots, "default", {}, void 0, true),
+      $props.border ? (vue.openBlock(), vue.createElementBlock("view", {
+        key: 1,
+        class: "uni-list--border-bottom"
+      })) : vue.createCommentVNode("v-if", true)
+    ]);
+  }
+  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__scopeId", "data-v-c2f1266a"], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/uni_modules/uni-list/components/uni-list/uni-list.vue"]]);
+  const _sfc_main$c = {
+    name: "uniCollapseItem",
+    props: {
+      // 列表标题
+      title: {
+        type: String,
+        default: ""
+      },
+      name: {
+        type: [Number, String],
+        default: ""
+      },
+      // 是否禁用
+      disabled: {
+        type: Boolean,
+        default: false
+      },
+      // 是否显示动画,app 端默认不开启动画，卡顿严重
+      showAnimation: {
+        type: Boolean,
+        default: false
+      },
+      // 是否展开
+      open: {
+        type: Boolean,
+        default: false
+      },
+      // 缩略图
+      thumb: {
+        type: String,
+        default: ""
+      },
+      // 标题分隔线显示类型
+      titleBorder: {
+        type: String,
+        default: "auto"
+      },
+      border: {
+        type: Boolean,
+        default: true
+      },
+      showArrow: {
+        type: Boolean,
+        default: true
+      }
+    },
+    data() {
+      const elId = `Uni_${Math.ceil(Math.random() * 1e6).toString(36)}`;
+      return {
+        isOpen: false,
+        isheight: null,
+        height: 0,
+        elId,
+        nameSync: 0
+      };
+    },
+    watch: {
+      open(val) {
+        this.isOpen = val;
+        this.onClick(val, "init");
+      }
+    },
+    updated(e) {
+      this.$nextTick(() => {
+        this.init(true);
+      });
+    },
+    created() {
+      this.collapse = this.getCollapse();
+      this.oldHeight = 0;
+      this.onClick(this.open, "init");
+    },
+    // TODO vue3
+    unmounted() {
+      this.__isUnmounted = true;
+      this.uninstall();
+    },
+    mounted() {
+      if (!this.collapse)
+        return;
+      if (this.name !== "") {
+        this.nameSync = this.name;
+      } else {
+        this.nameSync = this.collapse.childrens.length + "";
+      }
+      if (this.collapse.names.indexOf(this.nameSync) === -1) {
+        this.collapse.names.push(this.nameSync);
+      } else {
+        formatAppLog("warn", "at uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.vue:154", `name 值 ${this.nameSync} 重复`);
+      }
+      if (this.collapse.childrens.indexOf(this) === -1) {
+        this.collapse.childrens.push(this);
+      }
+      this.init();
+    },
+    methods: {
+      init(type) {
+        this.getCollapseHeight(type);
+      },
+      uninstall() {
+        if (this.collapse) {
+          this.collapse.childrens.forEach((item, index) => {
+            if (item === this) {
+              this.collapse.childrens.splice(index, 1);
+            }
+          });
+          this.collapse.names.forEach((item, index) => {
+            if (item === this.nameSync) {
+              this.collapse.names.splice(index, 1);
+            }
+          });
+        }
+      },
+      onClick(isOpen, type) {
+        if (this.disabled)
+          return;
+        this.isOpen = isOpen;
+        if (this.isOpen && this.collapse) {
+          this.collapse.setAccordion(this);
+        }
+        if (type !== "init") {
+          this.collapse.onChange(isOpen, this);
+        }
+      },
+      getCollapseHeight(type, index = 0) {
+        const views = uni.createSelectorQuery().in(this);
+        views.select(`#${this.elId}`).fields({
+          size: true
+        }, (data2) => {
+          if (index >= 10)
+            return;
+          if (!data2) {
+            index++;
+            this.getCollapseHeight(false, index);
+            return;
+          }
+          this.height = data2.height;
+          this.isheight = true;
+          if (type)
+            return;
+          this.onClick(this.isOpen, "init");
+        }).exec();
+      },
+      getNvueHwight(type) {
+        dom.getComponentRect(this.$refs["collapse--hook"], (option) => {
+          if (option && option.result && option.size) {
+            this.height = option.size.height;
+            this.isheight = true;
+            if (type)
+              return;
+            this.onClick(this.open, "init");
+          }
+        });
+      },
+      /**
+       * 获取父元素实例
+       */
+      getCollapse(name = "uniCollapse") {
+        let parent = this.$parent;
+        let parentName = parent.$options.name;
+        while (parentName !== name) {
+          parent = parent.$parent;
+          if (!parent)
+            return false;
+          parentName = parent.$options.name;
+        }
+        return parent;
+      }
+    }
+  };
+  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
+    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-collapse-item" }, [
+      vue.createCommentVNode(" onClick(!isOpen) "),
+      vue.createElementVNode(
+        "view",
+        {
+          onClick: _cache[0] || (_cache[0] = ($event) => $options.onClick(!$data.isOpen)),
+          class: vue.normalizeClass(["uni-collapse-item__title", { "is-open": $data.isOpen && $props.titleBorder === "auto", "uni-collapse-item-border": $props.titleBorder !== "none" }])
+        },
+        [
+          vue.createElementVNode("view", { class: "uni-collapse-item__title-wrap" }, [
+            vue.renderSlot(_ctx.$slots, "title", {}, () => [
+              vue.createElementVNode(
+                "view",
+                {
+                  class: vue.normalizeClass(["uni-collapse-item__title-box", { "is-disabled": $props.disabled }])
+                },
+                [
+                  $props.thumb ? (vue.openBlock(), vue.createElementBlock("image", {
+                    key: 0,
+                    src: $props.thumb,
+                    class: "uni-collapse-item__title-img"
+                  }, null, 8, ["src"])) : vue.createCommentVNode("v-if", true),
+                  vue.createElementVNode(
+                    "text",
+                    { class: "uni-collapse-item__title-text" },
+                    vue.toDisplayString($props.title),
+                    1
+                    /* TEXT */
+                  )
+                ],
+                2
+                /* CLASS */
+              )
+            ], true)
+          ]),
+          $props.showArrow ? (vue.openBlock(), vue.createElementBlock(
+            "view",
+            {
+              key: 0,
+              class: vue.normalizeClass([{ "uni-collapse-item__title-arrow-active": $data.isOpen, "uni-collapse-item--animation": $props.showAnimation === true }, "uni-collapse-item__title-arrow"])
+            },
+            [
+              vue.createVNode(_component_uni_icons, {
+                color: $props.disabled ? "#ddd" : "#bbb",
+                size: "14",
+                type: "bottom"
+              }, null, 8, ["color"])
+            ],
+            2
+            /* CLASS */
+          )) : vue.createCommentVNode("v-if", true)
+        ],
+        2
+        /* CLASS */
+      ),
+      vue.createElementVNode(
+        "view",
+        {
+          class: vue.normalizeClass(["uni-collapse-item__wrap", { "is--transition": $props.showAnimation }]),
+          style: vue.normalizeStyle({ height: ($data.isOpen ? $data.height : 0) + "px" })
+        },
+        [
+          vue.createElementVNode("view", {
+            id: $data.elId,
+            ref: "collapse--hook",
+            class: vue.normalizeClass(["uni-collapse-item__wrap-content", { open: $data.isheight, "uni-collapse-item--border": $props.border && $data.isOpen }])
+          }, [
+            vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+          ], 10, ["id"])
+        ],
+        6
+        /* CLASS, STYLE */
+      )
+    ]);
+  }
+  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__scopeId", "data-v-3d2dde9f"], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.vue"]]);
+  const _sfc_main$b = {
+    name: "uniCollapse",
+    emits: ["change", "activeItem", "input", "update:modelValue"],
+    props: {
+      value: {
+        type: [String, Array],
+        default: ""
+      },
+      modelValue: {
+        type: [String, Array],
+        default: ""
+      },
+      accordion: {
+        // 是否开启手风琴效果
+        type: [Boolean, String],
+        default: false
+      }
+    },
+    data() {
+      return {};
+    },
+    computed: {
+      // TODO 兼容 vue2 和 vue3
+      dataValue() {
+        let value = typeof this.value === "string" && this.value === "" || Array.isArray(this.value) && this.value.length === 0;
+        let modelValue = typeof this.modelValue === "string" && this.modelValue === "" || Array.isArray(this.modelValue) && this.modelValue.length === 0;
+        if (value) {
+          return this.modelValue;
+        }
+        if (modelValue) {
+          return this.value;
+        }
+        return this.value;
+      }
+    },
+    watch: {
+      dataValue(val) {
+        this.setOpen(val);
+      }
+    },
+    created() {
+      this.childrens = [];
+      this.names = [];
+    },
+    mounted() {
+      this.$nextTick(() => {
+        this.setOpen(this.dataValue);
+      });
+    },
+    methods: {
+      setOpen(val) {
+        let str = typeof val === "string";
+        let arr = Array.isArray(val);
+        this.childrens.forEach((vm, index) => {
+          if (str) {
+            if (val === vm.nameSync) {
+              if (!this.accordion) {
+                formatAppLog("warn", "at uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue:75", "accordion 属性为 false ,v-model 类型应该为 array");
+                return;
+              }
+              vm.isOpen = true;
+            }
+          }
+          if (arr) {
+            val.forEach((v2) => {
+              if (v2 === vm.nameSync) {
+                if (this.accordion) {
+                  formatAppLog("warn", "at uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue:85", "accordion 属性为 true ,v-model 类型应该为 string");
+                  return;
+                }
+                vm.isOpen = true;
+              }
+            });
+          }
+        });
+        this.emit(val);
+      },
+      setAccordion(self) {
+        if (!this.accordion)
+          return;
+        this.childrens.forEach((vm, index) => {
+          if (self !== vm) {
+            vm.isOpen = false;
+          }
+        });
+      },
+      resize() {
+        this.childrens.forEach((vm, index) => {
+          vm.getCollapseHeight();
+        });
+      },
+      onChange(isOpen, self) {
+        let activeItem = [];
+        if (this.accordion) {
+          activeItem = isOpen ? self.nameSync : "";
+        } else {
+          this.childrens.forEach((vm, index) => {
+            if (vm.isOpen) {
+              activeItem.push(vm.nameSync);
+            }
+          });
+        }
+        this.$emit("change", activeItem);
+        this.emit(activeItem);
+      },
+      emit(val) {
+        this.$emit("input", val);
+        this.$emit("update:modelValue", val);
+      }
+    }
+  };
+  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-collapse" }, [
+      vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+    ]);
+  }
+  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__scopeId", "data-v-3f050360"], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue"]]);
+  const _sfc_main$a = {
+    name: "sleep",
+    data() {
+      return {
+        getup_goal: "07:00",
+        sleep_goal: "23:00",
+        nowtime: [{ hour: "" }, { minute: "" }, { seconds: "" }],
+        getup_time: "",
+        sleep_time: ""
+      };
+    },
+    computed: {
+      DayTimeJudge() {
+        this.getNowTime();
+        if (this.nowtime.hour < 18 && this.nowtime.hour >= 6) {
+          return true;
+        }
+        return false;
+      }
+    },
+    methods: {
+      getNowTime() {
+        var time = new Date();
+        let h2 = time.getHours();
+        let m2 = time.getMinutes();
+        let s2 = time.getSeconds();
+        formatAppLog("log", "at pages/self-manage/component/sleep/sleep.vue:70", h2, m2, s2);
+        this.nowtime.hour = h2;
+        this.nowtime.minute = m2;
+        this.nowtime.seconds = s2;
+      },
+      bindTimeChange_g: function(e) {
+        this.getup_goal = e.detail.value;
+      },
+      bindTimeChange_s: function(e) {
+        this.sleep_goal = e.detail.value;
+      },
+      goto_baizaoyin() {
+        uni.navigateTo({
+          url: "/pages/self-manage/sleep/baizaoyin/baizaoyin"
+        });
+      },
+      goto_piano() {
+        uni.navigateTo({
+          url: "/pages/self-manage/sleep/piano/piano"
+        });
+      },
+      goto_shuiqianstory() {
+        uni.navigateTo({
+          url: "/pages/self-manage/sleep/shuiqianstory/shuiqianstory"
+        });
+      },
+      goto_other_music() {
+        uni.navigateTo({
+          url: "/pages/self-manage/sleep/other_music/other_music"
+        });
+      },
+      goto_tips() {
+        uni.navigateTo({
+          url: "/pages/self-manage/sleep/sleep_tips/sleep_tips"
+        });
+      },
+      goto_analyse() {
+        uni.navigateTo({
+          url: "/pages/self-manage/sleep/sleep_analyse/sleep_analyse"
+        });
+      }
+    }
+  };
+  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_list_item = resolveEasycom(vue.resolveDynamicComponent("uni-list-item"), __easycom_0);
+    const _component_uni_list = resolveEasycom(vue.resolveDynamicComponent("uni-list"), __easycom_1);
+    const _component_uni_collapse_item = resolveEasycom(vue.resolveDynamicComponent("uni-collapse-item"), __easycom_2);
+    const _component_uni_collapse = resolveEasycom(vue.resolveDynamicComponent("uni-collapse"), __easycom_3);
+    return vue.openBlock(), vue.createElementBlock("view", { class: "box" }, [
+      vue.createElementVNode("view", { class: "manage_box" }, [
+        vue.createCommentVNode("睡眠目标&打卡"),
+        vue.createElementVNode("view", { class: "goalTime_box" }, [
+          vue.createCommentVNode("目标设置"),
+          vue.createElementVNode("view", { class: "goalTime_item" }, [
+            vue.createElementVNode("picker", {
+              mode: "time",
+              value: $data.getup_goal,
+              start: "00:00",
+              end: "23:59",
+              onChange: _cache[0] || (_cache[0] = (...args) => $options.bindTimeChange_g && $options.bindTimeChange_g(...args))
+            }, [
+              vue.createElementVNode(
+                "view",
+                null,
+                vue.toDisplayString($data.getup_goal),
+                1
+                /* TEXT */
+              )
+            ], 40, ["value"]),
+            vue.createElementVNode("view", null, "起床目标")
+          ]),
+          vue.createElementVNode("view", { class: "goalTime_item" }, [
+            vue.createElementVNode("picker", {
+              mode: "time",
+              value: $data.sleep_goal,
+              start: "00:00",
+              end: "23:59",
+              onChange: _cache[1] || (_cache[1] = (...args) => $options.bindTimeChange_s && $options.bindTimeChange_s(...args))
+            }, [
+              vue.createElementVNode(
+                "view",
+                null,
+                vue.toDisplayString($data.sleep_goal),
+                1
+                /* TEXT */
+              )
+            ], 40, ["value"]),
+            vue.createElementVNode("view", null, "就寝目标")
+          ])
+        ]),
+        vue.createElementVNode("view", { class: "clock_box" }, [
+          vue.createCommentVNode("打卡"),
+          vue.createElementVNode("view", null, [
+            $options.DayTimeJudge ? (vue.openBlock(), vue.createElementBlock("image", {
+              key: 0,
+              class: "img",
+              src: "/static/sun.png",
+              mode: "heightFix"
+            })) : vue.createCommentVNode("v-if", true),
+            !$options.DayTimeJudge ? (vue.openBlock(), vue.createElementBlock("image", {
+              key: 1,
+              class: "img",
+              src: "/static/moon.png",
+              mode: "heightFix"
+            })) : vue.createCommentVNode("v-if", true)
+          ]),
+          vue.createElementVNode("view", { class: "clock_button" }, "打卡"),
+          vue.createCommentVNode("早于目标时间则点赞")
+        ])
+      ]),
+      vue.createVNode(_component_uni_list, {
+        class: "assitant_box",
+        border: false
+      }, {
+        default: vue.withCtx(() => [
+          vue.createCommentVNode("睡眠助手"),
+          vue.createVNode(_component_uni_collapse, {
+            class: "assitant_item",
+            style: { "width": "95%" }
+          }, {
+            default: vue.withCtx(() => [
+              vue.createVNode(_component_uni_collapse_item, { title: "助眠音乐" }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_uni_list, { style: { "margin-left": "20px" } }, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_uni_list_item, {
+                        title: "白噪音",
+                        showArrow: "",
+                        clickable: "",
+                        onClick: $options.goto_baizaoyin
+                      }, null, 8, ["onClick"]),
+                      vue.createVNode(_component_uni_list_item, {
+                        title: "钢琴曲",
+                        showArrow: "",
+                        clickable: "",
+                        onClick: $options.goto_piano
+                      }, null, 8, ["onClick"]),
+                      vue.createVNode(_component_uni_list_item, {
+                        title: "睡前故事",
+                        showArrow: "",
+                        clickable: "",
+                        onClick: $options.goto_shuiqianstory
+                      }, null, 8, ["onClick"]),
+                      vue.createVNode(_component_uni_list_item, {
+                        title: "其他",
+                        showArrow: "",
+                        clickable: "",
+                        onClick: $options.goto_other_music
+                      }, null, 8, ["onClick"])
+                    ]),
+                    _: 1
+                    /* STABLE */
+                  })
+                ]),
+                _: 1
+                /* STABLE */
+              })
+            ]),
+            _: 1
+            /* STABLE */
+          }),
+          vue.createVNode(_component_uni_list_item, {
+            class: "assitant_item",
+            title: "睡眠小tips",
+            showArrow: "",
+            clickable: "",
+            onClick: $options.goto_tips
+          }, null, 8, ["onClick"]),
+          vue.createVNode(_component_uni_list_item, {
+            class: "assitant_item",
+            title: "睡眠报告",
+            showArrow: "",
+            clickable: "",
+            onClick: $options.goto_analyse
+          }, null, 8, ["onClick"])
+        ]),
+        _: 1
+        /* STABLE */
+      })
+    ]);
+  }
+  const PagesSelfManageComponentSleepSleep = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/pages/self-manage/component/sleep/sleep.vue"]]);
+  const _sfc_main$9 = {
+    components: { sleep: PagesSelfManageComponentSleepSleep, sport: PagesSelfManageComponentSportSport },
+    data() {
+      return {
+        sport: true,
+        sleep: false,
+        play: false
+      };
+    },
+    methods: {
+      goToSport() {
+        this.sport = true;
+        this.sleep = false;
+        this.play = false;
+      },
+      goToSleep() {
+        this.sport = false;
+        this.sleep = true;
+        this.play = false;
+      },
+      goToPlay() {
+        this.sport = false;
+        this.sleep = false;
+        this.play = true;
+      }
+    }
+  };
+  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_sport = vue.resolveComponent("sport");
+    const _component_sleep = vue.resolveComponent("sleep");
+    return vue.openBlock(), vue.createElementBlock("view", null, [
+      vue.createElementVNode("view", { class: "navbar_box" }, [
+        vue.createElementVNode(
+          "view",
+          {
+            onClick: _cache[0] || (_cache[0] = (...args) => $options.goToSport && $options.goToSport(...args)),
+            class: "box_item",
+            style: vue.normalizeStyle([{ background: this.sport ? "#f5f5f5" : "white" }, { fontSize: this.sport ? "20px" : "" }])
+          },
+          "运动",
+          4
+          /* STYLE */
+        ),
+        vue.createElementVNode(
+          "view",
+          {
+            onClick: _cache[1] || (_cache[1] = (...args) => $options.goToSleep && $options.goToSleep(...args)),
+            class: "box_item",
+            style: vue.normalizeStyle([{ background: this.sleep ? "#f5f5f5" : "white" }, { fontSize: this.sleep ? "20px" : "" }])
+          },
+          "睡眠",
+          4
+          /* STYLE */
+        ),
+        vue.createElementVNode(
+          "view",
+          {
+            onClick: _cache[2] || (_cache[2] = (...args) => $options.goToPlay && $options.goToPlay(...args)),
+            class: "box_item",
+            style: vue.normalizeStyle([{ background: this.play ? "#f5f5f5" : "white" }, { fontSize: this.play ? "20px" : "" }])
+          },
+          "娱乐",
+          4
+          /* STYLE */
+        )
+      ]),
+      vue.createElementVNode("view", { style: { "height": "80px" } }),
+      vue.createElementVNode("view", { class: "item" }, [
+        $data.sport ? (vue.openBlock(), vue.createBlock(_component_sport, { key: 0 })) : vue.createCommentVNode("v-if", true),
+        $data.sleep ? (vue.openBlock(), vue.createBlock(_component_sleep, { key: 1 })) : vue.createCommentVNode("v-if", true)
+      ])
+    ]);
+  }
+  const PagesSelfManageSelfManage = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/pages/self-manage/self-manage.vue"]]);
+  const _sfc_main$8 = {
+    data() {
+      return {
+        item: { title: "", period_free: true, period: "", note: "", intensity: "低" }
+      };
+    },
+    methods: {
+      select_period_free() {
+        this.item.period_free = true;
+        this.item.period = false;
+      },
+      select_period() {
+        this.item.period_free = false;
+        this.item.period = true;
+      }
+    }
+  };
+  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_card = resolveEasycom(vue.resolveDynamicComponent("uni-card"), __easycom_0$3);
+    return vue.openBlock(), vue.createElementBlock("view", null, [
+      vue.createVNode(_component_uni_card, { title: "运动项目" }, {
+        default: vue.withCtx(() => [
+          vue.withDirectives(vue.createElementVNode(
+            "textarea",
+            {
+              maxlength: 20,
+              "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.item.title = $event),
+              "auto-height": "",
+              placeholder: "请输入运动项目"
+            },
+            null,
+            512
+            /* NEED_PATCH */
+          ), [
+            [vue.vModelText, $data.item.title]
+          ])
+        ]),
+        _: 1
+        /* STABLE */
+      }),
+      vue.createVNode(_component_uni_card, { title: "备注" }, {
+        default: vue.withCtx(() => [
+          vue.withDirectives(vue.createElementVNode(
+            "textarea",
+            {
+              "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $data.item.note = $event),
+              "auto-height": "",
+              placeholder: "请输入备注"
+            },
+            null,
+            512
+            /* NEED_PATCH */
+          ), [
+            [vue.vModelText, $data.item.note]
+          ])
+        ]),
+        _: 1
+        /* STABLE */
+      }),
+      vue.createVNode(_component_uni_card, { title: "周期" }, {
+        default: vue.withCtx(() => [
+          vue.createElementVNode("view", { class: "period_box" }, [
+            vue.createElementVNode(
+              "view",
+              {
+                class: vue.normalizeClass(["period_item", { "period_item_select": $data.item.period_free }]),
+                onClick: _cache[2] || (_cache[2] = (...args) => $options.select_period_free && $options.select_period_free(...args))
+              },
+              "自由",
+              2
+              /* CLASS */
+            ),
+            vue.createElementVNode(
+              "view",
+              {
+                class: vue.normalizeClass(["period_item", { "period_item_select": $data.item.period }]),
+                onClick: _cache[3] || (_cache[3] = (...args) => $options.select_period && $options.select_period(...args))
+              },
+              "定时",
+              2
+              /* CLASS */
+            )
+          ]),
+          $data.item.period ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 0,
+            class: "peroid"
+          }, " （周期设置 几天一次，每天几次 ")) : vue.createCommentVNode("v-if", true)
+        ]),
+        _: 1
+        /* STABLE */
+      }),
+      vue.createVNode(_component_uni_card, { title: "强度" }, {
+        default: vue.withCtx(() => [
+          vue.createElementVNode("radio-group", { class: "intensity_group" }, [
+            vue.createElementVNode("radio", null, "低"),
+            vue.createElementVNode("radio", null, "中"),
+            vue.createElementVNode("radio", null, "高")
+          ])
+        ]),
+        _: 1
+        /* STABLE */
+      }),
+      vue.createElementVNode("view", { class: "save_button" }, "√")
+    ]);
+  }
+  const PagesSelfManageSportAdd_new_sport = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/pages/self-manage/sport/add_new_sport.vue"]]);
+  const _sfc_main$7 = {
+    data() {
+      return {
+        week: true,
+        month: false,
+        year: "2023",
+        time: "2月5日-2月11日",
+        total_duration_h: "8",
+        //总时长
+        total_duration_m: "20",
+        total_times: "10",
+        //总次数
+        high_duration_h: "3",
+        //高强度运动时长
+        high_duration_m: "30",
+        high_times: "3",
+        //高强度运动次数
+        medium_duration_h: "3",
+        //中强度运动时长
+        medium_duration_m: "30",
+        medium_times: "3",
+        //中强度运动次数
+        low_duration_h: "3",
+        //低强度运动时长
+        low_duration_m: "30",
+        low_times: "3"
+        //低强度运动次数
+      };
+    },
+    methods: {
+      goback() {
+        uni.navigateBack();
+      },
+      gotoWeek() {
+        this.week = true;
+        this.month = false;
+      },
+      gotoMonth() {
+        this.week = false;
+        this.month = true;
+      }
+    }
+  };
+  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", null, [
+      vue.createElementVNode("view", { class: "navbar_box" }, [
+        vue.createElementVNode("view", {
+          class: "back",
+          onClick: _cache[0] || (_cache[0] = (...args) => $options.goback && $options.goback(...args))
+        }, "<"),
+        vue.createElementVNode("view", { class: "navbar_item_box" }, [
+          vue.createElementVNode(
+            "view",
+            {
+              onClick: _cache[1] || (_cache[1] = (...args) => $options.gotoWeek && $options.gotoWeek(...args)),
+              class: "box_item",
+              style: vue.normalizeStyle([{ background: this.week ? "#f5f5f5" : "white" }, { fontSize: this.week ? "20px" : "" }])
+            },
+            "周",
+            4
+            /* STYLE */
+          ),
+          vue.createElementVNode(
+            "view",
+            {
+              onClick: _cache[2] || (_cache[2] = (...args) => $options.gotoMonth && $options.gotoMonth(...args)),
+              class: "box_item",
+              style: vue.normalizeStyle([{ background: this.month ? "#f5f5f5" : "white" }, { fontSize: this.month ? "20px" : "" }])
+            },
+            "月",
+            4
+            /* STYLE */
+          )
+        ])
+      ]),
+      vue.createElementVNode("view", { style: { "height": "80px" } }),
+      vue.createElementVNode("view", { class: "baogao_box" }, [
+        vue.createCommentVNode("周、月一样但获取的数据不一样"),
+        vue.createElementVNode("view", { class: "total_box" }, [
+          vue.createCommentVNode("运动记录"),
+          vue.createElementVNode("view", null, [
+            vue.createCommentVNode("时间"),
+            vue.createElementVNode(
+              "view",
+              { style: { "margin-left": "10px", "padding-top": "10px", "fontSize": "25px" } },
+              vue.toDisplayString($data.year) + "年",
+              1
+              /* TEXT */
+            ),
+            vue.createElementVNode(
+              "view",
+              { style: { "display": "flex", "justify-content": "center", "fontSize": "30px" } },
+              vue.toDisplayString($data.time),
+              1
+              /* TEXT */
+            )
+          ]),
+          vue.createElementVNode("view", { class: "picture_box" }, [
+            vue.createElementVNode("view", { class: "picture" }, "运动时长&次数柱形&折线图")
+          ])
+        ]),
+        vue.createElementVNode("view", { class: "average_box" }, [
+          vue.createCommentVNode("平均值（圆形进度条）"),
+          vue.createElementVNode("view", { class: "average_item" }, "平均运动时长"),
+          vue.createElementVNode("view", { class: "average_item" }, "平均运动次数"),
+          vue.createElementVNode("view", { class: "average_item" }, "平均运动强度")
+        ]),
+        vue.createElementVNode("view", { class: "outside_box" }, [
+          vue.createElementVNode("view", { class: "inside_box" }, [
+            vue.createElementVNode("view", {
+              class: "item_box",
+              style: { "background-color": "#e3fde4" }
+            }, [
+              vue.createElementVNode("view", { class: "item_inside" }, [
+                vue.createElementVNode("view", { class: "count_box" }, [
+                  vue.createTextVNode(" 总时长 "),
+                  vue.createElementVNode("view", { class: "data_box" }, [
+                    vue.createElementVNode(
+                      "view",
+                      { class: "data" },
+                      vue.toDisplayString($data.total_duration_h),
+                      1
+                      /* TEXT */
+                    ),
+                    vue.createTextVNode(" h "),
+                    vue.createElementVNode(
+                      "view",
+                      { class: "data" },
+                      vue.toDisplayString($data.total_duration_m),
+                      1
+                      /* TEXT */
+                    ),
+                    vue.createTextVNode(" min ")
+                  ])
+                ]),
+                vue.createElementVNode("view", { class: "count_box" }, [
+                  vue.createTextVNode(" 总次数 "),
+                  vue.createElementVNode("view", { class: "data_box" }, [
+                    vue.createElementVNode(
+                      "view",
+                      { class: "data" },
+                      vue.toDisplayString($data.total_times),
+                      1
+                      /* TEXT */
+                    ),
+                    vue.createTextVNode(" 次 ")
+                  ])
+                ])
+              ])
+            ]),
+            vue.createElementVNode("view", {
+              class: "item_box",
+              style: { "background-color": "#ffa5ab" }
+            }, [
+              vue.createElementVNode("view", { class: "strength" }, "高强度"),
+              vue.createElementVNode("view", { class: "item_inside" }, [
+                vue.createElementVNode("view", { class: "count_box" }, [
+                  vue.createTextVNode(" 时长 "),
+                  vue.createElementVNode("view", { class: "data_box" }, [
+                    vue.createElementVNode(
+                      "view",
+                      { class: "data" },
+                      vue.toDisplayString($data.high_duration_h),
+                      1
+                      /* TEXT */
+                    ),
+                    vue.createTextVNode(" h "),
+                    vue.createElementVNode(
+                      "view",
+                      { class: "data" },
+                      vue.toDisplayString($data.high_duration_m),
+                      1
+                      /* TEXT */
+                    ),
+                    vue.createTextVNode(" min ")
+                  ])
+                ]),
+                vue.createElementVNode("view", { class: "count_box" }, [
+                  vue.createTextVNode(" 次数 "),
+                  vue.createElementVNode("view", { class: "data_box" }, [
+                    vue.createElementVNode(
+                      "view",
+                      { class: "data" },
+                      vue.toDisplayString($data.high_times),
+                      1
+                      /* TEXT */
+                    ),
+                    vue.createTextVNode(" 次 ")
+                  ])
+                ])
+              ])
+            ]),
+            vue.createElementVNode("view", {
+              class: "item_box",
+              style: { "background-color": "#ffd0b5" }
+            }, [
+              vue.createElementVNode("view", { class: "strength" }, "中强度"),
+              vue.createElementVNode("view", { class: "item_inside" }, [
+                vue.createElementVNode("view", { class: "count_box" }, [
+                  vue.createTextVNode(" 时长 "),
+                  vue.createElementVNode("view", { class: "data_box" }, [
+                    vue.createElementVNode(
+                      "view",
+                      { class: "data" },
+                      vue.toDisplayString($data.medium_duration_h),
+                      1
+                      /* TEXT */
+                    ),
+                    vue.createTextVNode(" h "),
+                    vue.createElementVNode(
+                      "view",
+                      { class: "data" },
+                      vue.toDisplayString($data.medium_duration_m),
+                      1
+                      /* TEXT */
+                    ),
+                    vue.createTextVNode(" min ")
+                  ])
+                ]),
+                vue.createElementVNode("view", { class: "count_box" }, [
+                  vue.createTextVNode(" 次数 "),
+                  vue.createElementVNode("view", { class: "data_box" }, [
+                    vue.createElementVNode(
+                      "view",
+                      { class: "data" },
+                      vue.toDisplayString($data.medium_times),
+                      1
+                      /* TEXT */
+                    ),
+                    vue.createTextVNode(" 次 ")
+                  ])
+                ])
+              ])
+            ]),
+            vue.createElementVNode("view", {
+              class: "item_box",
+              style: { "background-color": "#e8fdfd" }
+            }, [
+              vue.createElementVNode("view", { class: "strength" }, "低强度"),
+              vue.createElementVNode("view", { class: "item_inside" }, [
+                vue.createElementVNode("view", { class: "count_box" }, [
+                  vue.createTextVNode(" 时长 "),
+                  vue.createElementVNode("view", { class: "data_box" }, [
+                    vue.createElementVNode(
+                      "view",
+                      { class: "data" },
+                      vue.toDisplayString($data.low_duration_h),
+                      1
+                      /* TEXT */
+                    ),
+                    vue.createTextVNode(" h "),
+                    vue.createElementVNode(
+                      "view",
+                      { class: "data" },
+                      vue.toDisplayString($data.low_duration_m),
+                      1
+                      /* TEXT */
+                    ),
+                    vue.createTextVNode(" min ")
+                  ])
+                ]),
+                vue.createElementVNode("view", { class: "count_box" }, [
+                  vue.createTextVNode(" 次数 "),
+                  vue.createElementVNode("view", { class: "data_box" }, [
+                    vue.createElementVNode(
+                      "view",
+                      { class: "data" },
+                      vue.toDisplayString($data.low_times),
+                      1
+                      /* TEXT */
+                    ),
+                    vue.createTextVNode(" 次 ")
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]);
+  }
+  const PagesSelfManageSportSport_analyse = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/pages/self-manage/sport/sport_analyse.vue"]]);
+  const _sfc_main$6 = {
+    data() {
+      return {};
+    },
+    methods: {}
+  };
+  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", null, [
+      vue.createElementVNode("view", { class: "play_box" }, "播放区"),
+      vue.createElementVNode("view", { class: "music_box" }, [
+        vue.createElementVNode("view", { class: "music_item" }, "1"),
+        vue.createElementVNode("view", { class: "music_item" }, "2"),
+        vue.createElementVNode("view", { class: "music_item" }, "3"),
+        vue.createElementVNode("view", { class: "music_item" }, "4")
+      ])
+    ]);
+  }
+  const PagesSelfManageSleepBaizaoyinBaizaoyin = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/pages/self-manage/sleep/baizaoyin/baizaoyin.vue"]]);
+  const _sfc_main$5 = {
+    data() {
+      return {};
+    },
+    methods: {}
+  };
+  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", null, [
+      vue.createElementVNode("view", { class: "play_box" }, "播放区"),
+      vue.createElementVNode("view", { class: "music_box" }, [
+        vue.createElementVNode("view", { class: "music_item" }, "1"),
+        vue.createElementVNode("view", { class: "music_item" }, "2"),
+        vue.createElementVNode("view", { class: "music_item" }, "3"),
+        vue.createElementVNode("view", { class: "music_item" }, "4")
+      ])
+    ]);
+  }
+  const PagesSelfManageSleepShuiqianstoryShuiqianstory = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/pages/self-manage/sleep/shuiqianstory/shuiqianstory.vue"]]);
+  const _sfc_main$4 = {
+    data() {
+      return {};
+    },
+    methods: {}
+  };
+  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", null, [
+      vue.createElementVNode("view", { class: "play_box" }, "播放区"),
+      vue.createElementVNode("view", { class: "music_box" }, [
+        vue.createElementVNode("view", { class: "music_item" }, "1"),
+        vue.createElementVNode("view", { class: "music_item" }, "2"),
+        vue.createElementVNode("view", { class: "music_item" }, "3"),
+        vue.createElementVNode("view", { class: "music_item" }, "4")
+      ])
+    ]);
+  }
+  const PagesSelfManageSleepPianoPiano = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/pages/self-manage/sleep/piano/piano.vue"]]);
+  const _sfc_main$3 = {
+    data() {
+      return {};
+    },
+    methods: {}
+  };
+  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", null, [
+      vue.createElementVNode("view", { class: "play_box" }, "播放区"),
+      vue.createElementVNode("view", { class: "music_box" }, [
+        vue.createElementVNode("view", { class: "music_item" }, "1"),
+        vue.createElementVNode("view", { class: "music_item" }, "2"),
+        vue.createElementVNode("view", { class: "music_item" }, "3"),
+        vue.createElementVNode("view", { class: "music_item" }, "4")
+      ])
+    ]);
+  }
+  const PagesSelfManageSleepOther_musicOther_music = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/pages/self-manage/sleep/other_music/other_music.vue"]]);
   const _sfc_main$2 = {
     data() {
       return {};
@@ -7279,24 +9817,298 @@ if (uni.restoreGlobal) {
     methods: {}
   };
   function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view");
+    return vue.openBlock(), vue.createElementBlock("view", null, [
+      vue.createElementVNode("view", { class: "tips_box" }, [
+        vue.createElementVNode("view", { class: "tips_item" }, "1熬夜的危害"),
+        vue.createElementVNode("view", { class: "tips_item" }, "2助眠小技巧"),
+        vue.createElementVNode("view", { class: "tips_item" }, "3")
+      ])
+    ]);
   }
-  var PagesSelfRecordSelfRecord = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/pages/self-record/self-record.vue"]]);
+  const PagesSelfManageSleepSleep_tipsSleep_tips = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/pages/self-manage/sleep/sleep_tips/sleep_tips.vue"]]);
   const _sfc_main$1 = {
     data() {
-      return {};
+      return {
+        week: true,
+        month: false,
+        year: "2023",
+        time: "2月5日-2月11日",
+        //睡觉
+        sleep_early_number: "3",
+        //早睡天数
+        sleep_late_number: "4",
+        //晚睡天数
+        sleep_most_ed: "2月7日周二",
+        //最早睡觉那天
+        sleep_most_ed_time: "22:00",
+        //最早睡觉时间
+        sleep_most_ld: "2月6日周三",
+        //最晚睡觉那天
+        sleep_most_ld_time: "00:00",
+        //最晚睡觉时间
+        //起床
+        getup_early_number: "4",
+        //早起天数
+        getup_late_number: "3",
+        //晚起天数
+        getup_most_ed: "2月10日周五",
+        //最早起床那天
+        getup_most_ed_time: "6:00",
+        //最早起床时间
+        getup_most_ld: "2月11日周六",
+        //最晚起床那天
+        getup_most_ld_time: "9:00",
+        //最晚起床时间
+        //总
+        total_average_h: "7",
+        total_average_m: "30"
+      };
     },
-    methods: {}
+    methods: {
+      goback() {
+        uni.navigateBack();
+      },
+      gotoWeek() {
+        this.week = true;
+        this.month = false;
+      },
+      gotoMonth() {
+        this.week = false;
+        this.month = true;
+      }
+    }
   };
   function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view");
+    return vue.openBlock(), vue.createElementBlock("view", null, [
+      vue.createElementVNode("view", { class: "navbar_box" }, [
+        vue.createElementVNode("view", {
+          class: "back",
+          onClick: _cache[0] || (_cache[0] = (...args) => $options.goback && $options.goback(...args))
+        }, "<"),
+        vue.createElementVNode("view", { class: "navbar_item_box" }, [
+          vue.createElementVNode(
+            "view",
+            {
+              onClick: _cache[1] || (_cache[1] = (...args) => $options.gotoWeek && $options.gotoWeek(...args)),
+              class: "box_item",
+              style: vue.normalizeStyle([{ background: this.week ? "#f5f5f5" : "white" }, { fontSize: this.week ? "20px" : "" }])
+            },
+            "周",
+            4
+            /* STYLE */
+          ),
+          vue.createElementVNode(
+            "view",
+            {
+              onClick: _cache[2] || (_cache[2] = (...args) => $options.gotoMonth && $options.gotoMonth(...args)),
+              class: "box_item",
+              style: vue.normalizeStyle([{ background: this.month ? "#f5f5f5" : "white" }, { fontSize: this.month ? "20px" : "" }])
+            },
+            "月",
+            4
+            /* STYLE */
+          )
+        ])
+      ]),
+      vue.createElementVNode("view", { style: { "height": "80px" } }),
+      vue.createElementVNode("view", { class: "baogao_box" }, [
+        vue.createCommentVNode("周、月一样但获取的数据不一样"),
+        vue.createElementVNode("view", { class: "total_box" }, [
+          vue.createCommentVNode("睡眠记录"),
+          vue.createElementVNode("view", null, [
+            vue.createCommentVNode("时间"),
+            vue.createElementVNode(
+              "view",
+              { style: { "margin-left": "10px", "padding-top": "10px", "fontSize": "25px" } },
+              vue.toDisplayString($data.year) + "年",
+              1
+              /* TEXT */
+            ),
+            vue.createElementVNode(
+              "view",
+              { style: { "display": "flex", "justify-content": "center", "fontSize": "30px" } },
+              vue.toDisplayString($data.time),
+              1
+              /* TEXT */
+            )
+          ]),
+          vue.createElementVNode("view", { class: "picture_box" }, [
+            vue.createElementVNode("view", { class: "picture" }, "睡眠时长（柱形图）")
+          ])
+        ]),
+        vue.createElementVNode("view", { class: "average_box" }, [
+          vue.createCommentVNode("平均值（圆形进度条）"),
+          vue.createElementVNode("view", { class: "average_item" }, "平均起床时间"),
+          vue.createElementVNode("view", { class: "average_item" }, "平均睡觉时间"),
+          vue.createElementVNode("view", { class: "average_item" }, "平均睡眠时长")
+        ]),
+        vue.createElementVNode("view", {
+          class: "outside_box",
+          style: { "background-color": "#ffd0b5" }
+        }, [
+          vue.createCommentVNode("起床"),
+          vue.createElementVNode("view", { class: "inside_box" }, [
+            vue.createElementVNode("view", { class: "day_number_box" }, [
+              vue.createTextVNode(" 起床目标达成天数： "),
+              vue.createElementVNode(
+                "view",
+                { class: "data" },
+                vue.toDisplayString($data.getup_early_number) + "d",
+                1
+                /* TEXT */
+              )
+            ]),
+            vue.createElementVNode("view", { class: "most_box" }, [
+              vue.createElementVNode("view", { class: "most_day" }, [
+                vue.createTextVNode(" 最早的一天： "),
+                vue.createElementVNode(
+                  "view",
+                  { class: "data" },
+                  vue.toDisplayString($data.getup_most_ed),
+                  1
+                  /* TEXT */
+                )
+              ]),
+              vue.createElementVNode("view", { class: "most_time" }, [
+                vue.createTextVNode(" 这天你 "),
+                vue.createElementVNode(
+                  "view",
+                  { class: "data" },
+                  vue.toDisplayString($data.getup_most_ed_time),
+                  1
+                  /* TEXT */
+                ),
+                vue.createTextVNode(" 就起床了！ ")
+              ])
+            ]),
+            vue.createElementVNode("view", { class: "day_number_box" }, [
+              vue.createTextVNode(" 未达成起床目标天数： "),
+              vue.createElementVNode(
+                "view",
+                { class: "data" },
+                vue.toDisplayString($data.getup_late_number) + "d",
+                1
+                /* TEXT */
+              )
+            ]),
+            vue.createElementVNode("view", { class: "most_box" }, [
+              vue.createElementVNode("view", { class: "most_day" }, [
+                vue.createTextVNode(" 最晚的一天： "),
+                vue.createElementVNode(
+                  "view",
+                  { class: "data" },
+                  vue.toDisplayString($data.getup_most_ld),
+                  1
+                  /* TEXT */
+                )
+              ]),
+              vue.createElementVNode("view", { class: "most_time" }, [
+                vue.createTextVNode(" 这天你 "),
+                vue.createElementVNode(
+                  "view",
+                  { class: "data" },
+                  vue.toDisplayString($data.getup_most_ld_time),
+                  1
+                  /* TEXT */
+                ),
+                vue.createTextVNode(" 才起床 ")
+              ])
+            ])
+          ])
+        ]),
+        vue.createElementVNode("view", {
+          class: "outside_box",
+          style: { "background-color": "#6cbbfc" }
+        }, [
+          vue.createCommentVNode("睡觉"),
+          vue.createElementVNode("view", { class: "inside_box" }, [
+            vue.createElementVNode("view", { class: "day_number_box" }, [
+              vue.createTextVNode(" 就寝目标达成天数（23：00前）： "),
+              vue.createElementVNode(
+                "view",
+                { class: "data" },
+                vue.toDisplayString($data.sleep_early_number) + "d",
+                1
+                /* TEXT */
+              )
+            ]),
+            vue.createElementVNode("view", { class: "most_box" }, [
+              vue.createElementVNode("view", { class: "most_day" }, [
+                vue.createTextVNode(" 最早的一天： "),
+                vue.createElementVNode(
+                  "view",
+                  { class: "data" },
+                  vue.toDisplayString($data.sleep_most_ed),
+                  1
+                  /* TEXT */
+                )
+              ]),
+              vue.createElementVNode("view", { class: "most_time" }, [
+                vue.createTextVNode(" 这天你 "),
+                vue.createElementVNode(
+                  "view",
+                  { class: "data" },
+                  vue.toDisplayString($data.sleep_most_ed_time),
+                  1
+                  /* TEXT */
+                ),
+                vue.createTextVNode(" 就睡觉了！ ")
+              ])
+            ]),
+            vue.createElementVNode("view", { class: "day_number_box" }, [
+              vue.createTextVNode(" 未达成就寝目标天数： "),
+              vue.createElementVNode(
+                "view",
+                { class: "data" },
+                vue.toDisplayString($data.sleep_late_number) + "d",
+                1
+                /* TEXT */
+              )
+            ]),
+            vue.createElementVNode("view", { class: "most_box" }, [
+              vue.createElementVNode("view", { class: "most_day" }, [
+                vue.createTextVNode(" 最晚的一天： "),
+                vue.createElementVNode(
+                  "view",
+                  { class: "data" },
+                  vue.toDisplayString($data.sleep_most_ld),
+                  1
+                  /* TEXT */
+                )
+              ]),
+              vue.createElementVNode("view", { class: "most_time" }, [
+                vue.createTextVNode(" 这天你 "),
+                vue.createElementVNode(
+                  "view",
+                  { class: "data" },
+                  vue.toDisplayString($data.sleep_most_ld_time),
+                  1
+                  /* TEXT */
+                ),
+                vue.createTextVNode(" 才睡觉 ")
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]);
   }
-  var PagesSelfManageSelfManage = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/pages/self-manage/self-manage.vue"]]);
+  const PagesSelfManageSleepSleep_analyseSleep_analyse = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/pages/self-manage/sleep/sleep_analyse/sleep_analyse.vue"]]);
   __definePage("pages/index/index", PagesIndexIndex);
   __definePage("pages/index/components/MessageBox/index", PagesIndexComponentsMessageBoxIndex);
   __definePage("pages/todolist/todolist", PagesTodolistTodolist);
   __definePage("pages/self-record/self-record", PagesSelfRecordSelfRecord);
   __definePage("pages/self-manage/self-manage", PagesSelfManageSelfManage);
+  __definePage("pages/self-manage/sport/add_new_sport", PagesSelfManageSportAdd_new_sport);
+  __definePage("pages/self-manage/sport/sport_analyse", PagesSelfManageSportSport_analyse);
+  __definePage("pages/self-manage/sleep/baizaoyin/baizaoyin", PagesSelfManageSleepBaizaoyinBaizaoyin);
+  __definePage("pages/self-manage/sleep/shuiqianstory/shuiqianstory", PagesSelfManageSleepShuiqianstoryShuiqianstory);
+  __definePage("pages/self-manage/sleep/piano/piano", PagesSelfManageSleepPianoPiano);
+  __definePage("pages/self-manage/sleep/other_music/other_music", PagesSelfManageSleepOther_musicOther_music);
+  __definePage("pages/self-manage/sleep/sleep_tips/sleep_tips", PagesSelfManageSleepSleep_tipsSleep_tips);
+  __definePage("pages/self-manage/sleep/sleep_analyse/sleep_analyse", PagesSelfManageSleepSleep_analyseSleep_analyse);
+  __definePage("pages/self-manage/component/sleep/sleep", PagesSelfManageComponentSleepSleep);
+  __definePage("pages/self-manage/component/sport/sport", PagesSelfManageComponentSportSport);
   const _sfc_main = {
     onLaunch: function() {
       formatAppLog("log", "at App.vue:4", "App Launch");
@@ -7308,7 +10120,7 @@ if (uni.restoreGlobal) {
       formatAppLog("log", "at App.vue:10", "App Hide");
     }
   };
-  var App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/App.vue"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__file", "C:/Users/33213/Desktop/大学生自我管理APP/dxszwglapp/大学生自我管理APP/App.vue"]]);
   function createApp(rootComponent, rootProps) {
     rootComponent.mpTye = "app";
     rootComponent.render = () => {
