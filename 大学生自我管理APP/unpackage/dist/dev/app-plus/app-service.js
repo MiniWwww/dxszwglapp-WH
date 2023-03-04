@@ -229,7 +229,7 @@ if (uni.restoreGlobal) {
       vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
     ], 6);
   }
-  var __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$h], ["__scopeId", "data-v-511e81f9"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-table/components/uni-th/uni-th.vue"]]);
+  var __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$h], ["__scopeId", "data-v-511e81f9"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-table/components/uni-th/uni-th.vue"]]);
   const _sfc_main$l = {
     name: "TableCheckbox",
     emits: ["checkboxSelected"],
@@ -1005,6 +1005,9 @@ if (uni.restoreGlobal) {
       style: {
         navigationBarTitleText: "uni-app"
       }
+    },
+    {
+      path: "pages/index/components/MessageBox/index"
     },
     {
       path: "pages/todolist/todolist",
@@ -3331,6 +3334,19 @@ if (uni.restoreGlobal) {
     }).catch((e) => {
     });
   }
+  function uniHttpPost(name, body) {
+    return new Promise((resolve, reject) => {
+      yn.callFunction({
+        name,
+        data: body
+      }).then((res) => {
+        resolve(res.result);
+      }).catch((err) => {
+        reject(err);
+      });
+    }).catch((e) => {
+    });
+  }
   function formatScheduleData(data2) {
     return data2.reduce((prev, cur) => {
       const index = cur.index;
@@ -3349,6 +3365,18 @@ if (uni.restoreGlobal) {
       singleBox: formatScheduleData(singleBox)
     });
   }
+  async function setScheduleData(data2) {
+    const result = await uniHttpPost("setScheduleTable", data2);
+    return Promise.resolve({
+      result
+    });
+  }
+  async function deleteScheduleData(data2) {
+    const result = await uniHttpPost("deleteCourse", data2);
+    return Promise.resolve({
+      result
+    });
+  }
   const data = vue.reactive({
     singleBox: [],
     duration: []
@@ -3361,12 +3389,11 @@ if (uni.restoreGlobal) {
       data.singleBox = singleBox;
       data.duration = duration;
     }
-    function setSchedule({
-      type,
-      result
-    }) {
+    function editSchedule(result) {
     }
-    return [data, setInitialData, setSchedule];
+    function addSchedule(result) {
+    }
+    return [data, setInitialData, editSchedule, addSchedule];
   }
   var weekdays = [
     {
@@ -3520,7 +3547,7 @@ if (uni.restoreGlobal) {
       ])
     ], 6);
   }
-  var __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$c], ["__scopeId", "data-v-19622063"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-card/components/uni-card/uni-card.vue"]]);
+  var __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$c], ["__scopeId", "data-v-19622063"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-card/components/uni-card/uni-card.vue"]]);
   const _sfc_main$g = {
     __name: "Card",
     props: {
@@ -3528,7 +3555,7 @@ if (uni.restoreGlobal) {
     },
     setup(__props) {
       return (_ctx, _cache) => {
-        const _component_uni_card = resolveEasycom(vue.resolveDynamicComponent("uni-card"), __easycom_0$1);
+        const _component_uni_card = resolveEasycom(vue.resolveDynamicComponent("uni-card"), __easycom_0$2);
         return vue.openBlock(), vue.createBlock(_component_uni_card, {
           "is-full": true,
           padding: "2px 0"
@@ -3548,6 +3575,139 @@ if (uni.restoreGlobal) {
     }
   };
   var Card = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["__scopeId", "data-v-08e6c3ef"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/pages/index/components/SchedduleTable/Card.vue"]]);
+  const _sfc_main$f = {
+    __name: "index",
+    setup(__props) {
+      const [
+        data2,
+        setInitialData,
+        editSchedule,
+        addSchedule
+      ] = useInitialData();
+      vue.onMounted(async () => {
+        setInitialData(await getInitialData());
+      });
+      vue.onUpdated(() => {
+        formatAppLog("log", "at pages/index/components/SchedduleTable/index.vue:57", \u89E6\u53D1onUpdated);
+      });
+      vue.reactive({
+        course: "",
+        teacher: "",
+        adress: "",
+        score: ""
+      });
+      const addCourse = (index, weekday, formType) => {
+        uni.navigateTo({
+          url: "/pages/index/components/MessageBox/index"
+        });
+        uni.$emit("addCourse", {
+          msg: {
+            formType,
+            weekday,
+            index,
+            btnCancelText: "\u53D6\u6D88",
+            btnConfirmText: "\u786E\u5B9A"
+          }
+        });
+      };
+      const editCourse = (index, weekday, formType, singleBoxData) => {
+        uni.navigateTo({
+          url: "/pages/index/components/MessageBox/index"
+        });
+        uni.$emit("editCourse", {
+          msg: {
+            formType,
+            weekday,
+            index,
+            course: singleBoxData.course,
+            teacher: singleBoxData.teacher,
+            adress: singleBoxData.adress,
+            score: singleBoxData.score,
+            btnCancelText: "\u53D6\u6D88",
+            btnConfirmText: "\u786E\u5B9A",
+            btnDeleteText: "\u5220\u9664"
+          }
+        });
+      };
+      const {
+        duration,
+        singleBox
+      } = vue.toRefs(data2);
+      return (_ctx, _cache) => {
+        const _component_uni_th = resolveEasycom(vue.resolveDynamicComponent("uni-th"), __easycom_0$3);
+        const _component_uni_tr = resolveEasycom(vue.resolveDynamicComponent("uni-tr"), __easycom_1$1);
+        const _component_uni_td = resolveEasycom(vue.resolveDynamicComponent("uni-td"), __easycom_2$1);
+        const _component_uni_table = resolveEasycom(vue.resolveDynamicComponent("uni-table"), __easycom_3$1);
+        return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
+          vue.createVNode(_component_uni_table, {
+            border: "",
+            stripe: "",
+            emptyText: "\u6682\u65E0\u66F4\u591A\u6570\u636E"
+          }, {
+            default: vue.withCtx(() => [
+              vue.createCommentVNode(" \u661F\u671F "),
+              vue.createVNode(_component_uni_tr, null, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_uni_th, { width: "1" }),
+                  (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(weekdays), (item) => {
+                    return vue.openBlock(), vue.createBlock(_component_uni_th, {
+                      align: "center",
+                      keyt: item.id,
+                      width: "1"
+                    }, {
+                      default: vue.withCtx(() => [
+                        vue.createTextVNode(vue.toDisplayString(item.title), 1)
+                      ]),
+                      _: 2
+                    }, 1032, ["keyt"]);
+                  }), 256))
+                ]),
+                _: 1
+              }),
+              vue.createCommentVNode(" \u8868\u683C\u6570\u636E\u884C "),
+              (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(duration), (item) => {
+                return vue.openBlock(), vue.createBlock(_component_uni_tr, null, {
+                  default: vue.withCtx(() => [
+                    vue.createVNode(_component_uni_td, { style: { "font-size": "8px" } }, {
+                      default: vue.withCtx(() => [
+                        vue.createElementVNode("view", null, "\u7B2C" + vue.toDisplayString(item.index) + "\u8282", 1),
+                        vue.createElementVNode("view", null, vue.toDisplayString(item.title), 1)
+                      ]),
+                      _: 2
+                    }, 1024),
+                    (vue.openBlock(), vue.createElementBlock(vue.Fragment, null, vue.renderList(5, (n2) => {
+                      return vue.createVNode(_component_uni_td, {
+                        key: n2,
+                        onClick: ($event) => addCourse(item.index, n2, "\u65B0\u589E\u8BFE\u7A0B"),
+                        style: { "padding": "0", "margin": "0" }
+                      }, {
+                        default: vue.withCtx(() => [
+                          vue.createElementVNode("view", {
+                            onClick: _cache[0] || (_cache[0] = vue.withModifiers(() => {
+                            }, ["stop"]))
+                          }, [
+                            vue.unref(singleBox)[item.index + "_" + n2] ? (vue.openBlock(), vue.createBlock(Card, {
+                              key: 0,
+                              data: vue.unref(singleBox)[item.index + "_" + n2],
+                              onClick: ($event) => editCourse(item.index, n2, "\u7F16\u8F91\u8BFE\u7A0B", vue.unref(singleBox)[item.index + "_" + n2])
+                            }, null, 8, ["data", "onClick"])) : vue.createCommentVNode("v-if", true)
+                          ])
+                        ]),
+                        _: 2
+                      }, 1032, ["onClick"]);
+                    }), 64))
+                  ]),
+                  _: 2
+                }, 1024);
+              }), 256))
+            ]),
+            _: 1
+          })
+        ]);
+      };
+    }
+  };
+  var ScheduleTable = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/pages/index/components/SchedduleTable/index.vue"]]);
   var icons = {
     "id": "2852637",
     "name": "uniui\u56FE\u6807\u5E93",
@@ -4723,7 +4883,7 @@ if (uni.restoreGlobal) {
     const reg = /^[0-9]*$/g;
     return typeof val === "number" || reg.test(val) ? val + "px" : val;
   };
-  const _sfc_main$f = {
+  const _sfc_main$e = {
     name: "UniIcons",
     emits: ["click"],
     props: {
@@ -4774,7 +4934,7 @@ if (uni.restoreGlobal) {
       onClick: _cache[0] || (_cache[0] = (...args) => $options._onClick && $options._onClick(...args))
     }, null, 6);
   }
-  var __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$b], ["__scopeId", "data-v-a2e81f6e"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  var __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$b], ["__scopeId", "data-v-a2e81f6e"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
   function obj2strClass(obj) {
     let classess = "";
     for (let key in obj) {
@@ -4793,7 +4953,7 @@ if (uni.restoreGlobal) {
     }
     return style;
   }
-  const _sfc_main$e = {
+  const _sfc_main$d = {
     name: "uni-easyinput",
     emits: ["click", "iconClick", "update:modelValue", "input", "focus", "blur", "confirm", "clear", "eyes", "change"],
     model: {
@@ -5077,7 +5237,7 @@ if (uni.restoreGlobal) {
     }
   };
   function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0);
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$1);
     return vue.openBlock(), vue.createElementBlock("view", {
       class: vue.normalizeClass(["uni-easyinput", { "uni-easyinput-error": $options.msg }]),
       style: vue.normalizeStyle($options.boxStyle)
@@ -5165,8 +5325,8 @@ if (uni.restoreGlobal) {
       ], 6)
     ], 6);
   }
-  var __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$a], ["__scopeId", "data-v-abe12412"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue"]]);
-  const _sfc_main$d = {
+  var __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$a], ["__scopeId", "data-v-abe12412"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue"]]);
+  const _sfc_main$c = {
     name: "uniFormsItem",
     options: {
       virtualHost: true
@@ -5469,7 +5629,7 @@ if (uni.restoreGlobal) {
       ])
     ], 2);
   }
-  var __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$9], ["__scopeId", "data-v-61dfc0d0"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
+  var __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$9], ["__scopeId", "data-v-61dfc0d0"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
   var pattern = {
     email: /^\S+?@\S+?\.\S+?$/,
     idcard: /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
@@ -6029,7 +6189,7 @@ if (uni.restoreGlobal) {
       return false;
     }
   };
-  const _sfc_main$c = {
+  const _sfc_main$b = {
     name: "uniForms",
     emits: ["validate", "submit"],
     options: {
@@ -6278,8 +6438,8 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  var __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$8], ["__scopeId", "data-v-7ae0e404"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-forms/components/uni-forms/uni-forms.vue"]]);
-  const _sfc_main$b = {
+  var __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$8], ["__scopeId", "data-v-7ae0e404"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-forms/components/uni-forms/uni-forms.vue"]]);
+  const _sfc_main$a = {
     name: "UniSection",
     emits: ["click"],
     props: {
@@ -6371,57 +6531,36 @@ if (uni.restoreGlobal) {
       ], 4)
     ]);
   }
-  var __easycom_4 = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$7], ["__scopeId", "data-v-f7ca1098"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-section/components/uni-section/uni-section.vue"]]);
-  const _sfc_main$a = {
+  var __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$7], ["__scopeId", "data-v-f7ca1098"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/uni_modules/uni-section/components/uni-section/uni-section.vue"]]);
+  const _sfc_main$9 = {
     __name: "index",
-    props: {
-      formType: {
-        type: String,
-        default: ""
-      },
-      weekday: {
-        type: Number,
-        default: 1
-      },
-      index: {
-        type: Number,
-        default: 1
-      },
-      course: {
-        type: String
-      },
-      teacher: {
-        type: String
-      },
-      adress: {
-        type: String
-      },
-      score: {
-        type: Number
-      },
-      btnCancelText: {
-        type: String,
-        default: "Cancel"
-      },
-      btnConfirmText: {
-        type: String,
-        default: "Confirm"
-      },
-      btnDeleteText: {
-        type: String,
-        default: "Delete"
-      }
-    },
-    setup(__props, { expose }) {
-      const state = vue.reactive({
-        visible: false,
-        type: "CONFIRM"
+    setup(__props) {
+      let formType = vue.ref("");
+      const {
+        receiveData
+      } = new Promise((resolve, reject) => {
+        uni.$once("addCourse", function(data2) {
+          resolve(data2.msg);
+        });
       });
+      uni.$once("editCourse", function(data2) {
+        formatAppLog("log", "at pages/index/components/MessageBox/index.vue:67", data2.msg);
+        formType = data2.msg.formType;
+        receiveData.weekday = data2.msg.weekday;
+        receiveData.index = data2.msg.index;
+        receiveData.course = data2.msg.course;
+        receiveData.teacher = data2.msg.teacher;
+        receiveData.adress = data2.msg.adress;
+        receiveData.score = data2.msg.score;
+      });
+      formatAppLog("log", "at pages/index/components/MessageBox/index.vue:77", receiveData);
       const customFormData = vue.reactive({
-        course: "",
-        teacher: "",
-        adress: "",
-        score: 0
+        weekday: receiveData.weekday,
+        index: receiveData.index,
+        course: receiveData.course,
+        teacher: receiveData.teacher,
+        adress: receiveData.adress,
+        score: receiveData.score
       });
       const customRules = vue.reactive({
         course: {
@@ -6449,43 +6588,44 @@ if (uni.restoreGlobal) {
         }
       });
       function handleCancelClick() {
-        state.type = "CANCEL";
-        state.visible = false;
+        uni.navigateBack();
       }
       function handleConfirmClick() {
-        state.type = "CONFIRM";
-        state.visible = false;
+        const data2 = {
+          weekday: customFormData.weekday,
+          index: customFormData.index,
+          course: customFormData.course,
+          teacher: customFormData.teacher,
+          adress: customFormData.adress,
+          score: customFormData.score
+        };
+        setScheduleData(data2);
+        uni.navigateBack();
       }
       function handleDeleteClick() {
-        state.type = "DELETE";
-        state.visible = false;
+        const data2 = {
+          weekday: customFormData.weekday,
+          index: customFormData.index,
+          course: customFormData.course,
+          teacher: customFormData.teacher,
+          adress: customFormData.adress,
+          score: customFormData.score
+        };
+        deleteScheduleData(data2);
+        uni.navigateBack();
       }
-      function setVisible(isVisible) {
-        state.visible = isVisible;
-      }
-      expose({
-        state,
-        setVisible
-      });
       return (_ctx, _cache) => {
-        const _component_uni_card = resolveEasycom(vue.resolveDynamicComponent("uni-card"), __easycom_0$1);
-        const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_1);
-        const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_2);
-        const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_3);
-        const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_4);
+        const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_0);
+        const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_1);
+        const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_2);
+        const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_3);
         return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
           vue.createVNode(_component_uni_section, {
-            title: __props.formType,
+            title: vue.unref(formType),
             type: "line",
             class: "FormCard"
           }, {
             default: vue.withCtx(() => [
-              vue.createVNode(_component_uni_card, null, {
-                default: vue.withCtx(() => [
-                  vue.createTextVNode("\u5468" + vue.toDisplayString(__props.weekday) + " \xA0\xA0\xA0\u7B2C" + vue.toDisplayString(__props.index) + "\u8282", 1)
-                ]),
-                _: 1
-              }),
               vue.createElementVNode("view", { class: "example" }, [
                 vue.createVNode(_component_uni_forms, {
                   ref: "customForm",
@@ -6494,6 +6634,36 @@ if (uni.restoreGlobal) {
                 }, {
                   default: vue.withCtx(() => [
                     vue.createVNode(_component_uni_forms_item, {
+                      label: "\u661F\u671F",
+                      required: "",
+                      name: "weekday"
+                    }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_uni_easyinput, {
+                          modelValue: customFormData.weekday,
+                          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => customFormData.weekday = $event),
+                          value: customFormData.weekday,
+                          placeholder: "\u8BF7\u8F93\u5165\u8BFE\u7A0B\u540D"
+                        }, null, 8, ["modelValue", "value"])
+                      ]),
+                      _: 1
+                    }),
+                    vue.createVNode(_component_uni_forms_item, {
+                      label: "\u8282\u6570",
+                      required: "",
+                      name: "index"
+                    }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_uni_easyinput, {
+                          modelValue: customFormData.index,
+                          "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => customFormData.index = $event),
+                          value: customFormData.index,
+                          placeholder: "\u8BF7\u8F93\u5165\u8BFE\u7A0B\u540D"
+                        }, null, 8, ["modelValue", "value"])
+                      ]),
+                      _: 1
+                    }),
+                    vue.createVNode(_component_uni_forms_item, {
                       label: "\u8BFE\u7A0B",
                       required: "",
                       name: "course"
@@ -6501,8 +6671,8 @@ if (uni.restoreGlobal) {
                       default: vue.withCtx(() => [
                         vue.createVNode(_component_uni_easyinput, {
                           modelValue: customFormData.course,
-                          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => customFormData.course = $event),
-                          value: __props.course,
+                          "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => customFormData.course = $event),
+                          value: customFormData.course,
                           placeholder: "\u8BF7\u8F93\u5165\u8BFE\u7A0B\u540D"
                         }, null, 8, ["modelValue", "value"])
                       ]),
@@ -6516,8 +6686,8 @@ if (uni.restoreGlobal) {
                       default: vue.withCtx(() => [
                         vue.createVNode(_component_uni_easyinput, {
                           modelValue: customFormData.teacher,
-                          "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => customFormData.teacher = $event),
-                          value: __props.teacher,
+                          "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => customFormData.teacher = $event),
+                          value: customFormData.teacher,
                           placeholder: "\u8BF7\u8F93\u5165\u8001\u5E08"
                         }, null, 8, ["modelValue", "value"])
                       ]),
@@ -6531,8 +6701,8 @@ if (uni.restoreGlobal) {
                       default: vue.withCtx(() => [
                         vue.createVNode(_component_uni_easyinput, {
                           modelValue: customFormData.adress,
-                          "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => customFormData.adress = $event),
-                          value: __props.adress,
+                          "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => customFormData.adress = $event),
+                          value: customFormData.adress,
                           placeholder: "\u8BF7\u8F93\u5165\u6559\u5BA4"
                         }, null, 8, ["modelValue", "value"])
                       ]),
@@ -6546,8 +6716,8 @@ if (uni.restoreGlobal) {
                       default: vue.withCtx(() => [
                         vue.createVNode(_component_uni_easyinput, {
                           modelValue: customFormData.score,
-                          "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => customFormData.score = $event),
-                          value: __props.score,
+                          "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => customFormData.score = $event),
+                          value: customFormData.score,
                           placeholder: "\u8BF7\u8F93\u5165\u5B66\u5206"
                         }, null, 8, ["modelValue", "value"])
                       ]),
@@ -6560,16 +6730,16 @@ if (uni.restoreGlobal) {
                   vue.createElementVNode("button", {
                     type: "default",
                     onClick: handleCancelClick
-                  }, vue.toDisplayString(__props.btnCancelText), 1),
-                  __props.formType === "\u7F16\u8F91\u8BFE\u7A0B" ? (vue.openBlock(), vue.createElementBlock("button", {
+                  }),
+                  vue.unref(formType) === "\u7F16\u8F91\u8BFE\u7A0B" ? (vue.openBlock(), vue.createElementBlock("button", {
                     key: 0,
                     type: "warn",
                     onClick: handleDeleteClick
-                  }, vue.toDisplayString(__props.btnDeleteText), 1)) : vue.createCommentVNode("v-if", true),
+                  })) : vue.createCommentVNode("v-if", true),
                   vue.createElementVNode("button", {
                     type: "primary",
                     onClick: handleConfirmClick
-                  }, vue.toDisplayString(__props.btnConfirmText), 1)
+                  })
                 ])
               ])
             ]),
@@ -6579,174 +6749,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  var MyMessageBoxComponent = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__scopeId", "data-v-0a55f2da"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/pages/index/components/MessageBox/index.vue"]]);
-  function MyMessageBox(options) {
-    const MyMessageBoxApp = vue.createApp(MyMessageBoxComponent, options);
-    showMessageBox(MyMessageBoxApp, {
-      confirm: options.confirm,
-      cancel: options.cancel,
-      remove: options.remove
-    });
-  }
-  function showMessageBox(app, {
-    confirm,
-    cancel,
-    remove
-  }) {
-    const oFragment = document.createDocumentFragment();
-    const vm = app.mount(oFragment);
-    var first = document.body.firstChild;
-    document.body.insertBefore(oFragment, first);
-    vm.setVisible(true);
-    vue.watch(vm.state, (state) => {
-      if (!state.visible) {
-        switch (state.type) {
-          case "CONFIRM":
-            typeof confrim === "function" && confirm();
-            break;
-          case "CANCEL":
-            typeof cancel === "function" && cancel();
-            break;
-          case "DELETE":
-            typeof remove === "function" && remove();
-            break;
-        }
-        hideMessageBox(app);
-      }
-    });
-  }
-  function hideMessageBox(app) {
-    app.unmount();
-  }
-  const _sfc_main$9 = {
-    __name: "index",
-    setup(__props) {
-      const [
-        data2,
-        setInitialData,
-        setSchedule
-      ] = useInitialData();
-      vue.onMounted(async () => {
-        setInitialData(await getInitialData());
-      });
-      vue.reactive({
-        course: "",
-        teacher: "",
-        adress: "",
-        score: ""
-      });
-      const addCourse = (index, weekday, formType) => {
-        MyMessageBox({
-          formType,
-          weekday,
-          index,
-          btnCancelText: "\u53D6\u6D88",
-          btnConfirmText: "\u786E\u5B9A",
-          confirm() {
-            formatAppLog("log", "at pages/index/components/SchedduleTable/index.vue:67", "Confirm");
-          },
-          cancel() {
-            formatAppLog("log", "at pages/index/components/SchedduleTable/index.vue:70", "Cancel");
-          }
-        });
-      };
-      const editCourse = (index, weekday, formType, singleBoxData) => {
-        MyMessageBox({
-          formType,
-          weekday,
-          index,
-          course: singleBoxData.course,
-          teacher: singleBoxData.teacher,
-          adress: singleBoxData.adress,
-          score: singleBoxData.score,
-          btnCancelText: "\u53D6\u6D88",
-          btnConfirmText: "\u786E\u5B9A",
-          btnDeleteText: "\u5220\u9664",
-          confirm() {
-            formatAppLog("log", "at pages/index/components/SchedduleTable/index.vue:88", "Confirm");
-          },
-          cancel() {
-            formatAppLog("log", "at pages/index/components/SchedduleTable/index.vue:91", "Cancel");
-          },
-          remove() {
-            formatAppLog("log", "at pages/index/components/SchedduleTable/index.vue:94", "Delete");
-          }
-        });
-      };
-      const {
-        duration,
-        singleBox
-      } = vue.toRefs(data2);
-      return (_ctx, _cache) => {
-        const _component_uni_th = resolveEasycom(vue.resolveDynamicComponent("uni-th"), __easycom_0$2);
-        const _component_uni_tr = resolveEasycom(vue.resolveDynamicComponent("uni-tr"), __easycom_1$1);
-        const _component_uni_td = resolveEasycom(vue.resolveDynamicComponent("uni-td"), __easycom_2$1);
-        const _component_uni_table = resolveEasycom(vue.resolveDynamicComponent("uni-table"), __easycom_3$1);
-        return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
-          vue.createVNode(_component_uni_table, {
-            border: "",
-            stripe: "",
-            emptyText: "\u6682\u65E0\u66F4\u591A\u6570\u636E"
-          }, {
-            default: vue.withCtx(() => [
-              vue.createCommentVNode(" \u661F\u671F "),
-              vue.createVNode(_component_uni_tr, null, {
-                default: vue.withCtx(() => [
-                  vue.createVNode(_component_uni_th, { width: "1" }),
-                  (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(weekdays), (item) => {
-                    return vue.openBlock(), vue.createBlock(_component_uni_th, {
-                      align: "center",
-                      keyt: item.id,
-                      width: "1"
-                    }, {
-                      default: vue.withCtx(() => [
-                        vue.createTextVNode(vue.toDisplayString(item.title), 1)
-                      ]),
-                      _: 2
-                    }, 1032, ["keyt"]);
-                  }), 256))
-                ]),
-                _: 1
-              }),
-              vue.createCommentVNode(" \u8868\u683C\u6570\u636E\u884C "),
-              (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(duration), (item) => {
-                return vue.openBlock(), vue.createBlock(_component_uni_tr, null, {
-                  default: vue.withCtx(() => [
-                    vue.createVNode(_component_uni_td, { style: { "font-size": "8px" } }, {
-                      default: vue.withCtx(() => [
-                        vue.createElementVNode("view", null, "\u7B2C" + vue.toDisplayString(item.index) + "\u8282", 1),
-                        vue.createElementVNode("view", null, vue.toDisplayString(item.title), 1)
-                      ]),
-                      _: 2
-                    }, 1024),
-                    (vue.openBlock(), vue.createElementBlock(vue.Fragment, null, vue.renderList(5, (n2) => {
-                      return vue.createVNode(_component_uni_td, {
-                        key: n2,
-                        onClick: vue.withModifiers(($event) => addCourse(item.index, n2, "\u65B0\u589E\u8BFE\u7A0B"), ["self"]),
-                        style: { "padding": "0", "margin": "0" }
-                      }, {
-                        default: vue.withCtx(() => [
-                          vue.unref(singleBox)[item.index + "_" + n2] ? (vue.openBlock(), vue.createBlock(Card, {
-                            key: 0,
-                            data: vue.unref(singleBox)[item.index + "_" + n2],
-                            onClick: vue.withModifiers(($event) => editCourse(item.index, n2, "\u7F16\u8F91\u8BFE\u7A0B", vue.unref(singleBox)[item.index + "_" + n2]), ["self"])
-                          }, null, 8, ["data", "onClick"])) : vue.createCommentVNode("v-if", true)
-                        ]),
-                        _: 2
-                      }, 1032, ["onClick"]);
-                    }), 64))
-                  ]),
-                  _: 2
-                }, 1024);
-              }), 256))
-            ]),
-            _: 1
-          })
-        ]);
-      };
-    }
-  };
-  var ScheduleTable = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/pages/index/components/SchedduleTable/index.vue"]]);
+  var PagesIndexComponentsMessageBoxIndex = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__scopeId", "data-v-0a55f2da"], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/pages/index/components/MessageBox/index.vue"]]);
   const _sfc_main$8 = {
     __name: "index",
     setup(__props) {
@@ -7290,6 +7293,7 @@ if (uni.restoreGlobal) {
   }
   var PagesSelfManageSelfManage = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "F:/code/\u5927\u521B/dxszwglapp/\u5927\u5B66\u751F\u81EA\u6211\u7BA1\u7406APP/pages/self-manage/self-manage.vue"]]);
   __definePage("pages/index/index", PagesIndexIndex);
+  __definePage("pages/index/components/MessageBox/index", PagesIndexComponentsMessageBoxIndex);
   __definePage("pages/todolist/todolist", PagesTodolistTodolist);
   __definePage("pages/self-record/self-record", PagesSelfRecordSelfRecord);
   __definePage("pages/self-manage/self-manage", PagesSelfManageSelfManage);

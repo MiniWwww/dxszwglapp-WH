@@ -12,10 +12,12 @@
           <view>第{{ item.index }}节</view>
           <view>{{ item.title }}</view>
         </uni-td>
-        <uni-td v-for="n in 5" :key="n" @click.self="$event => addCourse(item.index, n, '新增课程')"
+        <uni-td v-for="n in 5" :key="n" @click="$event => addCourse(item.index, n, '新增课程')"
           style="padding: 0; margin: 0;">
-          <Card v-if="singleBox[item.index + '_' + n]" :data="singleBox[item.index + '_' + n]"
-            @click.self="$event => editCourse(item.index, n, '编辑课程', singleBox[item.index + '_' + n])"></Card>
+          <view @click.stop="">
+            <Card v-if="singleBox[item.index + '_' + n]" :data="singleBox[item.index + '_' + n]"
+              @click="$event => editCourse(item.index, n, '编辑课程', singleBox[item.index + '_' + n])"></Card>
+          </view>
         </uni-td>
       </uni-tr>
     </uni-table>
@@ -25,28 +27,34 @@
 <script setup>
   import {
     onMounted,
+    onUpdated,
     reactive,
     ref,
     toRefs
   } from 'vue'
   import {
-    getInitialData
+    getInitialData,
+    setScheduleData
   } from './scripts/service.js'
   import {
     useInitialData
   } from './scripts/hooks.js'
   import weekdays from '../../data/week.js'
   import Card from './Card.vue'
-  import MyMessageBox from '../MessageBox/index.js'
 
   const [
     data,
     setInitialData,
-    setSchedule
+    editSchedule,
+    addSchedule
   ] = useInitialData()
 
   onMounted(async () => {
     setInitialData(await getInitialData())
+  })
+
+  onUpdated(() => {
+    console.log(触发onUpdated)
   })
 
   let cardData = reactive({
@@ -57,41 +65,36 @@
   })
 
   const addCourse = (index, weekday, formType) => {
-    MyMessageBox({
-      formType,
-      weekday,
-      index,
-      btnCancelText: '取消',
-      btnConfirmText: '确定',
-      confirm() {
-        console.log('Confirm');
-      },
-      cancel() {
-        console.log('Cancel');
+    uni.navigateTo({
+      url: '/pages/index/components/MessageBox/index'
+    })
+    uni.$emit('addCourse', {
+      msg: {
+        formType,
+        weekday,
+        index,
+        btnCancelText: '取消',
+        btnConfirmText: '确定',
       }
     })
   }
 
   const editCourse = (index, weekday, formType, singleBoxData) => {
-    MyMessageBox({
-      formType,
-      weekday,
-      index,
-      course: singleBoxData.course,
-      teacher: singleBoxData.teacher,
-      adress: singleBoxData.adress,
-      score: singleBoxData.score,
-      btnCancelText: '取消',
-      btnConfirmText: '确定',
-      btnDeleteText: '删除',
-      confirm() {
-        console.log('Confirm')
-      },
-      cancel() {
-        console.log('Cancel')
-      },
-      remove() {
-        console.log('Delete')
+    uni.navigateTo({
+      url: '/pages/index/components/MessageBox/index'
+    })
+    uni.$emit('editCourse', {
+      msg: {
+        formType,
+        weekday,
+        index,
+        course: singleBoxData.course,
+        teacher: singleBoxData.teacher,
+        adress: singleBoxData.adress,
+        score: singleBoxData.score,
+        btnCancelText: '取消',
+        btnConfirmText: '确定',
+        btnDeleteText: '删除'
       }
     })
   }

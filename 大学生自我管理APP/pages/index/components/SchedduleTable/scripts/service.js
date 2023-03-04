@@ -23,3 +23,17 @@ export async function getInitialData() {
     singleBox: formatScheduleData(singleBox)
   })
 }
+
+export async function setScheduleData(data) {
+  const result = await uniHttpPost('setScheduleTable', data)
+  return Promise.resolve({
+    result
+  })
+}
+
+export async function deleteScheduleData(data) {
+  const result = await uniHttpPost('deleteCourse', data)
+  return Promise.resolve({
+    result
+  })
+}
