@@ -36,7 +36,7 @@
             "path" : "pages/self-manage/sport/add_new_sport",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "添加运动项目",
                 "enablePullDownRefresh": false
             }
             

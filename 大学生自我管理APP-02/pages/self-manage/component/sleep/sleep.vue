@@ -23,19 +23,19 @@
 				<view class="clock_button">打卡</view> <!--早于目标时间则点赞-->
 			</view>
 		</view>
-		<uni-list class="assitant_box" :border="false">	<!--睡眠助手-->
-			<uni-collapse class="assitant_item" style="width: 95%;">
+		<uni-list class="assistant_box" :border="false">	<!--睡眠助手-->
+			<uni-collapse class="assistant_item" style="width: 95%;">
 				<uni-collapse-item  title="助眠音乐">
 					<uni-list style="margin-left: 20px;">
-						<uni-list-item title="白噪音" showArrow clickable @click="goto_baizaoyin"></uni-list-item>
-						<uni-list-item title="钢琴曲" showArrow clickable @click="goto_piano"></uni-list-item>
-						<uni-list-item title="睡前故事" showArrow clickable @click="goto_shuiqianstory"></uni-list-item>
-						<uni-list-item title="其他" showArrow clickable @click="goto_other_music"></uni-list-item>
+						<uni-list-item class="list_item" title="白噪音" showArrow clickable @click="goto_baizaoyin"></uni-list-item>
+						<uni-list-item class="list_item" title="钢琴曲" showArrow clickable @click="goto_piano"></uni-list-item>
+						<uni-list-item class="list_item" title="睡前故事" showArrow clickable @click="goto_shuiqianstory"></uni-list-item>
+						<uni-list-item class="list_item" title="其他" showArrow clickable @click="goto_other_music"></uni-list-item>
 					</uni-list>
 				</uni-collapse-item>
 			</uni-collapse>
-			<uni-list-item class="assitant_item" title="睡眠小tips" showArrow clickable @click="goto_tips"></uni-list-item>
-			<uni-list-item class="assitant_item" title="睡眠报告" showArrow clickable @click="goto_analyse"></uni-list-item>
+			<uni-list-item class="list_item" title="睡眠小tips" showArrow clickable @click="goto_tips"></uni-list-item>
+			<uni-list-item class="list_item" title="睡眠报告" showArrow clickable @click="goto_analyse"></uni-list-item>
 		</uni-list>
 	</view>
 </template>
@@ -119,7 +119,7 @@
 	.manage_box{
 		width: 90%;
 		margin: 15px;
-		height: 350px;
+		height: 400px;
 		border-radius: 10px;
 		background: white;
 		box-shadow: -1px 1px 5px 1px rgba(0, 0, 0, 0.1), -1px 2px 1px 0 rgba(255, 255, 255) inset;
@@ -128,7 +128,7 @@
 	.goalTime_box{
 		box-shadow: -1px 1px 5px 1px rgba(0, 0, 0, 0.1), -1px 2px 1px 0 rgba(255, 255, 255) inset;
 		border-radius: 10px;
-		height: 80px;
+		height: 100px;
 		display: flex;
 		justify-content: space-evenly;
 		align-items: center;
@@ -153,15 +153,16 @@
 		height: 30rpx;
 	}
 	.clock_box{
-		height: 270px;
+		/* height: 280px; */
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 		margin-bottom: 5px;
+		margin-top: 10px;
 	}
 	.img{
-		height:190px;
+		height:200px;
 		align-items: center;
 		justify-content: center;
 	}
@@ -174,10 +175,9 @@
 		font-size: 23px;
 		box-shadow: -1px 1px 5px 1px rgba(0, 0, 0, 0.1), -1px 2px 1px 0 rgba(255, 255, 255) inset;
 		border-radius: 10px;
-		margin: 3px;
 		background: #f1fdf2;
 	}
-	.assitant_box{
+	.assistant_box{
 		width: 90%;
 		margin: 15px;
 		border-radius: 10px;
@@ -185,9 +185,18 @@
 		box-shadow: -1px 1px 5px 1px rgba(0, 0, 0, 0.1), -1px 2px 1px 0 rgba(255, 255, 255) inset;
 		
 	}
-	.assitant_item{
+	.assistant_item{
 		background: white;
  		box-shadow: -1px 1px 5px 1px rgba(0, 0, 0, 0.1), -1px 2px 1px 0 rgba(255, 255, 255) inset;
-		margin: 8px;
+		margin: 8px; 
+		text-align: left;
+		
 	} 
+	.list_item{
+		background: white;
+		box-shadow: -1px 1px 5px 1px rgba(0, 0, 0, 0.1), -1px 2px 1px 0 rgba(255, 255, 255) inset;
+		margin: 8px; 
+		text-align: left;
+		height: 50px;
+	}
 </style>

@@ -12,17 +12,29 @@
 				<view class="period_item" :class="{ 'period_item_select': item.period }" @click="select_period">定时</view>
 			</view>
 			<view class="peroid" v-if="item.period">
-				（周期设置 几天一次，每天几次
+				<view class="period_cycle">
+					<view style="color: black; font-size: 16px;">重复日期</view>
+					<view class="period_cycle_item" v-for="(i, index) in weekList" :key="i.time" @click="select_period_time(index)">
+						<view >{{i.time}}</view>
+						<view class="period_checkbox" :class="{'period_checkbox_select': i.check}">
+							<view v-if="i.check">√</view>
+						</view>
+					</view>
+				</view>
+				<view class="period_times">
+					<view style="color: black; font-size: 16px;">次数</view>
+					<textarea style="margin-left: 10px;" v-model="item.times" auto-height placeholder="请输入每天完成的次数"></textarea>
+				</view>
 			</view>
 		</uni-card>
 		<uni-card title="强度">
 			<radio-group class="intensity_group">
-				<radio>低</radio>
-				<radio>中</radio>
-				<radio>高</radio>
+				<radio color="#a8bda8">低</radio>
+				<radio color="#a8bda8">中</radio>
+				<radio color="#a8bda8">高</radio>
 			</radio-group>
 		</uni-card>
-		<view class="save_button" >√</view>
+		<view class="save_button" @click="save">√</view>
 	</view>
 </template>
 
@@ -30,7 +42,16 @@
 	export default {
 		data() {
 			return {
-				item: {title:'', period_free:true, period:'', note:'', intensity: '低'},
+				weekList: [
+					{time: '周日', check: false}, 
+					{time: '周一', check: false}, 
+					{time: '周二', check: false}, 
+					{time: '周三', check: false}, 
+					{time: '周四', check: false},
+					{time: '周五', check: false},
+					{time: '周六', check: false},
+					],
+				item: {title:'', period_free:true, period:'', note:'', intensity: '低', times: '', cycle: ''},
 				
 			};
 		},
@@ -42,6 +63,39 @@
 			select_period(){
 				this.item.period_free=false;
 				this.item.period=true;
+			},
+			select_period_time(index){
+				if(this.weekList[index].check==false){
+					this.weekList[index].check=true;
+				}
+				else{
+					this.weekList[index].check=false;
+				}
+				
+			},
+			save(){
+				if(this.item.title==''){
+					uni.showModal({
+						title:'提示',
+						content:'请输入运动项目！',
+						showCancel:false
+					})
+				}
+				else{
+					var cycle=''
+					this.weekList.forEach(v=>{
+						if(v.check==true){
+							cycle=cycle+' '+v.time;
+						}
+					});
+					console.log(cycle);
+					this.item.cycle=cycle;
+					const eventChannel = this.getOpenerEventChannel();
+					eventChannel.emit('addNewSport',this.item);
+					console.log('Success!',this.item);
+					this.item = {title:'', period_free:true, period:'', note:'', intensity: '低', times: '', cycle: ''};
+					uni.navigateBack();
+				}
 			}
 		}
 	}
@@ -57,12 +111,44 @@
 		justify-content: space-around;
 	}
 	.period_item{
-		font-size: 10px;
+		font-size: 14px;
 	}
 	.period_item_select{
 		font-size: 20px;
 		font-weight: 700;
 		color: #a8bda8;
+	}
+	.peroid{
+		margin: 5px;
+	}
+	.period_cycle{
+		
+	}
+	.period_cycle_item{
+		display: flex;
+		justify-content: space-between;
+		height: 30px;
+		margin-left: 10px;
+	}
+	.period_checkbox{
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		background: #ffffff;
+		box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
+		margin-right: 10px;
+	}
+	.period_checkbox_select{
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		background-color: #a8bda8;
+		color: #ffffff;
+		box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
+		margin-right: 10px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 	.intensity_group{
 		display: flex;
@@ -70,7 +156,7 @@
 		justify-content: space-around;
 	}
 	.save_button{
-		position: absolute;
+		position: fixed;
 		display: flex;
 		align-items: center;
 		justify-content: center;
