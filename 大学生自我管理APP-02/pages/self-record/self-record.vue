@@ -1,7 +1,7 @@
 <template>
-	<!--预计有什么功能：记录（图文）的发送和删除，（数据是否需要云端存储？），
-	用户给自己消息点赞，系统发送每日总结，系统发出待办和自我管理计划的提醒，生日提醒-->
-	<!--需要接收其他页面传来的数据，还需要比对时间……-->
+	<!--预计有什么功能：记录（图文）的发送和删除√，消息的发送时间√，数据的云端存取，数据的本地存取（？），
+	用户给自己消息点赞√，系统发送每日总结，系统发出待办和自我管理计划的提醒，生日提醒-->
+	<!--需要从云端读取相关数据，还需要比对时间……-->
 	<view class="content">
 		
 		<!--消息内容区-->
@@ -35,6 +35,12 @@
 						<view class="message" v-if="item.TextType == 1" @tap="previewImg(item.sendText)">
 							<image :src="item.sendText" class="msg-img" mode="widthFix"></image>
 						</view>
+						<!--点赞小心心图标-->
+						<view class="like-heart" @tap="like(item)">
+							<image v-if="item.isLike == 0" src="../../static/like-heart-white.png" style="max-width: 100rpx;" mode="widthFix"></image>
+							<image v-if="item.isLike == 1" src="../../static/like-heart-red.png" style="max-width: 100rpx;" mode="widthFix"></image>
+						</view>
+						
 					</view>
 				</view>
 			</view>
@@ -64,6 +70,7 @@
 				sendText:'',
 				createTime:'',
 				TextType:'',
+				isLike:'',
 				
 				msg:[
 					{
@@ -71,70 +78,88 @@
 						"receviceName": "系统",
 						"sendText": "测试5",
 						"createTime": "2023-01-06 12:40:05",
-						"TextType": 0
+						"TextType": 0,
+						"isLike":0,
 					},
 					{
 						"sendName": "我",
 						"receviceName": "系统",
 						"sendText": "测试4",
 						"createTime": "2023-01-06 12:40:00",
-						"TextType": 0
+						"TextType": 0,
+						"isLike":0,
 					},
 					{
 						"sendName": "我",
 						"receviceName": "系统",
 						"sendText": "测试3",
 						"createTime": "2023-01-05 15:20:00",
-						"TextType": 0
+						"TextType": 0,
+						"isLike":0,
 					},
 					{
 						"sendName": "我",
 						"receviceName": "系统",
 						"sendText": "测试2",
 						"createTime": "2023-01-05 12:40:00",
-						"TextType": 0
+						"TextType": 0,
+						"isLike":0,
 					},
 					{
 						"sendName": "我",
 						"receviceName": "系统",
 						"sendText": "测试1",
 						"createTime": "2023-01-02 12:40:00",
-						"TextType": 0
+						"TextType": 0,
+						"isLike":0,
+					},
+					{
+						"sendName": "系统",
+						"receviceName": "我",
+						"sendText": "发消息试试吧",
+						"createTime": "2023-01-01 12:50:00",
+						"TextType": 0,
+						"isLike":0,
 					},
 					{
 						"sendName": "我",
 						"receviceName": "系统",
 						"sendText": "啦啦啦",
 						"createTime": "2023-01-01 12:45:20",
-						"TextType": 0
+						"TextType": 0,
+						"isLike":0,
 					},
 					{
 						"sendName": "系统",
 						"receviceName": "我",
 						"sendText": "../../static/logo.png",
 						"createTime": "2023-01-01 12:40:13",
-						"TextType": 1
+						"TextType": 1,
+						"isLike":0,
 					},
 					{
 						"sendName": "系统",
 						"receviceName": "我",
 						"sendText": "如果想删除一条消息，可以点击该消息对应的头像",
 						"createTime": "2023-01-01 12:40:12",
-						"TextType": 0
+						"TextType": 0,
+						"isLike":0,
 					},
 					{
 						"sendName": "系统",
 						"receviceName": "我",
 						"sendText": "系统将会为你提供每日总结和事项提醒服务~",
 						"createTime": "2023-01-01 12:40:11",
-						"TextType": 0
+						"TextType": 0,
+						"isLike":0,
 					},
 					{
 						"sendName": "系统",
 						"receviceName": "我",
 						"sendText": "欢迎使用本APP！",
 						"createTime": "2023-01-01 12:40:10",
-						"TextType": 0  //0表示文字消息，1表示图片消息
+						"TextType": 0,  //0表示文字消息，1表示图片消息
+						"isLike":0,
 					}
 				],
 				//反转数据接收
@@ -208,7 +233,8 @@
 					"receviceName": "系统",
 					"sendText": e.message,
 					"createTime": new Date(),
-					"TextType": e.type
+					"TextType": e.type,
+					"isLike": 0,
 				};
 				
 				this.unshiftmsg.push(data);
@@ -253,6 +279,18 @@
 					}
 				});
 			},
+			
+			//点赞与取消
+			like(e){
+				if(e.isLike == 0){
+					e.isLike=1;
+					console.log("进行点赞")
+				}
+				else{
+					e.isLike=0;
+					console.log("取消点赞")
+				}
+			}
 			
 		}
 	}
@@ -308,6 +346,9 @@
 			.msg-img{
 				max-width: 400rpx;
 				border-radius: 20rpx;
+			}
+			.like-heart{//点赞小心心图标
+				margin-right: 5%;
 			}
 		}
 		
