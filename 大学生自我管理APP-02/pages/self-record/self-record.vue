@@ -13,7 +13,7 @@
 					
 					<!--系统消息-->
 					<view class="msg-m msg-left" v-if="item.sendName == '系统'" >
-						<image class="user-img" src="../../static/system-head.png"></image>
+						<image class="user-img" src="../../static/system-head.png"  @click="bindClick(index)"></image>
 						<!-- 文字 -->
 						<view class="message" v-if="item.TextType == 0">
 							<view class="msg-text">{{item.sendText}}</view>
@@ -26,7 +26,7 @@
 					
 					<!--用户消息-->
 					<view class="msg-m msg-right" v-if="item.sendName != '系统'">
-						<image class="user-img" src="../../static/user-head.png"></image>
+						<image class="user-img" src="../../static/user-head.png" @click="bindClick(index)"></image>
 						<!-- 文字 -->
 						<view class="message" v-if="item.TextType == 0">
 							<view class="msg-text">{{item.sendText}}</view>
@@ -112,8 +112,15 @@
 						"sendName": "系统",
 						"receviceName": "我",
 						"sendText": "../../static/logo.png",
-						"createTime": "2023-01-01 12:40:12",
+						"createTime": "2023-01-01 12:40:13",
 						"TextType": 1
+					},
+					{
+						"sendName": "系统",
+						"receviceName": "我",
+						"sendText": "如果想删除一条消息，可以点击该消息对应的头像",
+						"createTime": "2023-01-01 12:40:12",
+						"TextType": 0
 					},
 					{
 						"sendName": "系统",
@@ -228,9 +235,24 @@
 				this.$nextTick(function() {
 					this.scrollToView = 'msg' + (this.unshiftmsg.length - 1)
 				})
-			}
+			},
 			
-			
+			//删除某一条消息
+			bindClick(index) {
+				let unshiftmsg=this.unshiftmsg;
+				uni.showModal({
+					title:'提示',
+					content:'是否删除',
+					success:function(res){
+						if(res.confirm){
+							console.log('确认删除');
+							unshiftmsg.splice(index,1);
+						}else if(res.cancel){
+							console.log('取消');
+						}
+					}
+				});
+			},
 			
 		}
 	}
