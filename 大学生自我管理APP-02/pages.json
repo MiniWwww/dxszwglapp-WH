@@ -124,6 +124,33 @@
             }
             
         }
+		,{
+		      "path" : "pages/self-manage/component/play/play",
+		      "style" :                                                                                    
+		      {
+		          "navigationBarTitleText": "",
+		          "enablePullDownRefresh": false
+		      }
+		      
+		  }
+		  ,{
+		      "path" : "pages/self-manage/play/play",
+		      "style" :                                                                                    
+		      {
+		          "navigationBarTitleText": "",
+		          "enablePullDownRefresh": false
+		      }
+		      
+		  }
+		  ,{
+		      "path" : "pages/self-manage/component/PersonCenter/PersonCenter",
+		      "style" :                                                                                    
+		      {
+		          "navigationBarTitleText": "",
+		          "enablePullDownRefresh": false
+		      }
+		      
+		  }
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",

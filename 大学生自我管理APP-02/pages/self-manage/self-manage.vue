@@ -1,24 +1,32 @@
 <template>
 	<view>
 		<view class="navbar_box">
-			<view  @click="goToSport" class="box_item" :style="[{background:((this.sport)?'#f5f5f5':'white')},{fontSize:((this.sport)?'20px':'')}]">运动</view>
-			<view  @click="goToSleep" class="box_item" :style="[{background:((this.sleep)?'#f5f5f5':'white')},{fontSize:((this.sleep)?'20px':'')}]">睡眠</view>
-			<view  @click="goToPlay" class="box_item" :style="[{background:((this.play)?'#f5f5f5':'white')},{fontSize:((this.play)?'20px':'')}]">娱乐</view>
+			<view class="part">
+				
+				<view  @click="goToSport" class="box_item" :style="[{background:((this.sport)?'#f5f5f5':'white')},{fontSize:((this.sport)?'20px':'')}]">运动</view>
+				<view  @click="goToSleep" class="box_item" :style="[{background:((this.sleep)?'#f5f5f5':'white')},{fontSize:((this.sleep)?'20px':'')}]">睡眠</view>
+				<view  @click="goToPlay" class="box_item" :style="[{background:((this.play)?'#f5f5f5':'white')},{fontSize:((this.play)?'20px':'')}]">娱乐</view>
+			</view>
+			<view class="person-icon" >
+				<uni-icons @click="gotoCenter"   type="contact" size=30 ></uni-icons>
+			</view>
 		</view>
+		
 		<view style="height: 80px;"></view>
 		<view class="item">
 			<sport v-if="sport"></sport>
 			<sleep v-if="sleep"></sleep>
+			<play  v-if="play"></play>
 		</view>
-		
 	</view>
 </template>
 
 <script>
 	import sport from './component/sport/sport.vue'
 	import sleep from './component/sleep/sleep.vue'
+	import play from './component/play/play.vue'
 	export default {
-		components:{sleep, sport},
+		components:{sleep, sport, play},
 		data() {
 			return {
 				sport:true,
@@ -42,6 +50,11 @@
 				this.sleep=false;
 				this.play=true;
 			},
+			gotoCenter(){
+				uni.navigateTo({
+					url:'/pages/self-manage/component/PersonCenter/PersonCenter'
+				})
+			}
 		}
 	}
 </script>
@@ -60,13 +73,24 @@
 		background-color: #ffffff;
 	}
 	.box_item{
-		position: relative;
-		width:20%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		position: relative;
+		width:20%;
 		height: 40px;
 		font-size: 15px;
 		border-radius: 10px;
+	}
+	.part{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width:100%;
+	}
+	.person-icon{
+		position: fixed;
+		z-index: 2;
+		right: 20px;
 	}
 </style>
