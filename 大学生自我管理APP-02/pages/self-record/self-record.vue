@@ -1,11 +1,12 @@
 <template>
-	<!--预计有什么功能：记录（图文）的发送和删除√，消息的发送时间√，数据的云端存取，数据的本地存取（？），
-	用户给自己消息点赞√，系统发送每日总结，系统发出待办和自我管理计划的提醒，生日提醒-->
-	<!--需要从云端读取相关数据，还需要比对时间……-->
+	<!--预计有什么功能：记录（图文）的发送和删除√，消息的发送时间√，数据的本地存取√，数据的云端存取（？），
+	用户给自己消息点赞√，系统发送每日总结，系统发出待办和自我管理计划的提醒，生日提醒（？）-->
+	<!--如何从云端读取用于总结的相关数据、比对时间……？？？？？？？？？-->
 	<view class="content">
 		
 		<!--消息内容区-->
-		<scroll-view class="chat" scroll-y="true" scroll-with-animation="true" scroll-into-view="scrollToView">
+		<!--记得去搜索uniapp如何使用scroll-into-view！！！！！！！！！！！！！！！！！！！！-->
+		<scroll-view class="chat" scroll-y="true" scroll-with-animation="true" :scroll-into-view="scrollToView">
 			<view class="chat-main" :style="{paddingBottom:inputh+'px'}">
 				<view class="chat-ls" v-for="(item,index) in unshiftmsg" :key="index" :id="'msg'+ index">
 					<!--将一条消息的发送时间数据传到函数chatTime进行处理，然后显示-->
@@ -46,12 +47,8 @@
 			</view>
 		</scroll-view>
 		
-		
-		
 		<!-- 输入栏 -->
 		<submit @inputs="inputs"></submit>
-		
-		
 		
 	</view>
 </template>
@@ -72,6 +69,7 @@
 				TextType:'',
 				isLike:'',
 				
+				/*
 				msg:[
 					{
 						"sendName": "我",
@@ -162,41 +160,117 @@
 						"isLike":0,
 					}
 				],
-				//反转数据接收
-				unshiftmsg:[],  //尚未发送的消息
+				*/
+				
+				unshiftmsg:[
+					{
+						"sendName": "系统",
+						"receviceName": "我",
+						"sendText": "欢迎使用本APP！",
+						"createTime": "2023-01-01 12:40:10",
+						"TextType": 0,  //0表示文字消息，1表示图片消息
+						"isLike":0,
+					},
+					{
+						"sendName": "系统",
+						"receviceName": "我",
+						"sendText": "系统将会为你提供每日总结和事项提醒服务~",
+						"createTime": "2023-01-01 12:40:11",
+						"TextType": 0,
+						"isLike":0,
+					},
+					{
+						"sendName": "系统",
+						"receviceName": "我",
+						"sendText": "如果想删除一条消息，可以点击该消息对应的头像",
+						"createTime": "2023-01-01 12:40:12",
+						"TextType": 0,
+						"isLike":0,
+					}
+				],
 				imgMsg:[],  //图片消息
+				
 				oldTime: new Date(),
-				inputh: '60'
+				inputh: '60',
+				
+				//need_system_send: 0,
+				birthday:'',
+				//用户的生日信息，记得要改为从其它地方获取得到！-----------如果韦航的用户信息页面有这项，再添加生日提醒功能……
 			}
 		},
 		
-		onLoad() {
-			
-			// 数组倒叙 主要是应对后端传过来的数据
-			
-			for (var i = 0; i < this.msg.length; i++) {
-				//时间间隔处理
-				if (i < this.msg.length - 1) { //这里表示头部时间还是显示一下
-					let t = dateTime.spaceTime(this.oldTime, this.msg[i].createTime);
-					if (t) {
-						this.oldTime = t;
-					}
-					this.msg[i].createTime = t;
+		onHide() {
+			var that = this;
+			uni.setStorage({
+				key:'self-record-unshiftmsg',
+				data:that.unshiftmsg,
+				success() {
+					console.log('离开页面时，保存所有消息到本地存储',that.unshiftmsg);
 				}
-				
-				// 获取图片，为下面的预览做准备
-				if (this.msg[i].TextType == 1) {
-					this.imgMsg.unshift(this.msg[i].sendText)
-				}
-				this.unshiftmsg.unshift(this.msg[i]);
-				
+			})
+		},
+		/*
+		onShow() {
+			var that = this;
+			if(that.need_system_send == 1)
+			{
+				that.system_send(new Date().getTime());
+				that.need_system_send = 0;
 			}
+		},
+		*/
+		onLoad() {
+			var that = this;
+			uni.getStorage({
+				key:'self-record-unshiftmsg',
+				success:function(res){
+					that.unshiftmsg = res.data;
+					console.log('从本地存储读取消息',res.data);
+					
+					// 获取图片，为下面的预览做准备
+					for (var i = 0; i < that.unshiftmsg.length; i++) {
+						if (that.unshiftmsg[i].TextType == 1) {
+							that.imgMsg.push(that.unshiftmsg[i].sendText);
+						}
+					}
+					
+					//获取当前时间，看系统是否需要发送鼓励消息
+					let now = new Date();
+					//获取now具体时间
+					let now_Y = now.getFullYear();
+					let now_M = now.getMonth()+1;
+					let now_D = now.getDate();
+					
+					//实现本地存储后，先从本地取所有消息，再取最后一条消息的creatTime（记为old），将其日期与当前日期比较
+					var i = that.unshiftmsg.length - 1;
+					let e = that.unshiftmsg[i].createTime;
+					if(i<1) {e='2023-01-01 00:01:01';}  //以防消息列表为空的情况……
+					let old = new Date(e);
+					let old_Y = old.getFullYear();
+					let old_M = old.getMonth()+1;
+					let old_D = old.getDate();
+					console.log(old_Y + "/" + old_M + "/" + old_D);
+					
+					//判断现在打开此页面时是否是新的一天第一次打开，是的话，就调用系统发消息函数
+					if( (old_Y<now_Y) || ((old_Y==now_Y)&&(old_M<now_M)) || ((old_Y==now_Y)&&(old_M==now_M)&&(old_D<now_D)) )
+					{
+						that.system_send(now.getTime());
+						//that.need_system_send = 1;
+					}
+					
+					// 跳转到最后一条数据 与前面的:id进行对照
+					that.$nextTick(function(){
+						that.scrollToView = 'msg' + (that.unshiftmsg.length - 1);
+					})
+				}
+			})
 			
-			
+			/*
 			// 跳转到最后一条数据 与前面的:id进行对照
 			this.$nextTick(function() {
 				this.scrollToView = 'msg' + (this.unshiftmsg.length - 1)
 			})
+			*/
 			
 		},
 		
@@ -227,7 +301,6 @@
 			
 			//接受输入内容
 			inputs(e) {
-				//时间间隔处理
 				let data = {
 					"sendName": "我",
 					"receviceName": "系统",
@@ -245,9 +318,11 @@
 				if (e.type == 1) {
 					this.imgMsg.push(e.message);
 				}
-				console.log(e)
+				console.log(e);
+				console.log(data.createTime);
 			},
 			
+			/*
 			//输入框高度
 			heights(e) {
 				console.log("高度:", e)
@@ -262,6 +337,7 @@
 					this.scrollToView = 'msg' + (this.unshiftmsg.length - 1)
 				})
 			},
+			*/
 			
 			//删除某一条消息
 			bindClick(index) {
@@ -290,6 +366,39 @@
 					e.isLike=0;
 					console.log("取消点赞")
 				}
+			},
+			
+			//每天用户第一次打开页面时，系统发送一条鼓励消息
+			system_send(e){
+				let sys_data = {
+					"sendName": "系统",
+					"receviceName": "我",
+					"sendText": "新的一天，要继续加油哦！",
+					"createTime": e,
+					"TextType": 0,
+					"isLike": 0,
+				};
+				
+				this.unshiftmsg.push(sys_data);
+				// 跳转到最后一条数据 与前面的:id进行对照
+				this.$nextTick(function() {
+					this.scrollToView = 'msg' + (this.unshiftmsg.length - 1)
+				})
+				console.log("系统发送鼓励消息");
+			},
+			
+			//以本页面使用的格式来表示一个时间，如"2023-01-01 12:40:10"
+			addTimes(m){return m<10?'0'+m:m},//对于一位数字的，前面加个'0'
+			traversalTime(timestamp) {
+				//timestamp(时间戳)是整数，否则要parseInt转换
+				let time = new Date(timestamp);
+				let y = time.getFullYear();
+				let m = time.getMonth() + 1;//注，对于getMonth，实际上第i月返回值是i-1,所以getmonth之后还要+1
+				let d = time.getDate();
+				let h = time.getHours();
+				let min = time.getMinutes();
+				let s = time.getSeconds();
+				return y+'-'+this.addTimes(m)+'-'+this.addTimes(d)+' '+this.addTimes(h)+':'+this.addTimes(min)+":"+this.addTimes(s);
 			}
 			
 		}
@@ -377,7 +486,5 @@
 		}
 	}
 }
-
-
 
 </style>
