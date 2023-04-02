@@ -151,6 +151,15 @@
 		      }
 		      
 		  }
+		  ,{
+		        "path" : "pages/self-manage/component/musicPlay/musicPlay",
+		        "style" :                                                                                    
+		        {
+		            "navigationBarTitleText": "",
+		            "enablePullDownRefresh": false
+		        }
+		        
+		    }
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",

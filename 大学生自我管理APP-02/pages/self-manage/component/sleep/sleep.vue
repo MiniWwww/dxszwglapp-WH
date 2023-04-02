@@ -20,7 +20,27 @@
 					<image v-if="DayTimeJudge" class="img" src="../../static/sun.png" mode="heightFix"></image>
 					<image v-if="!DayTimeJudge" class="img" src="../../static/moon.png" mode="heightFix"></image>
 				</view>
-				<view class="clock_button">打卡</view> <!--早于目标时间则点赞-->
+				<view class="clockTime_box">
+					<view class="clock_today">{{today}}</view>
+					<view class="clockTime">
+						<view class="clockTime_item">
+							<view @click="getup_clock">起床打卡</view>
+							<view v-if="getup">
+								<image v-if="getup_success&&!getup_like" class="like_img" src="../../../../static/点赞.png" @click="like_getup"></image>
+								<image v-if="getup_like" class="like_img" src="../../../../static/点赞2.jpg"></image>
+								{{getup_time}}
+							</view>
+						</view>
+						<view class="clockTime_item" >
+							<view @click="sleep_clock">就寝打卡</view>
+							<view v-if="sleep">
+								<image v-if="sleep_success&&!sleep_like" class="like_img" src="../../../../static/点赞.png" @click="like_sleep"></image>
+								<image v-if="sleep_like" class="like_img" src="../../../../static/点赞2.jpg"></image>
+								{{sleep_time}}
+							</view>
+						</view>
+					</view>
+				</view>
 			</view>
 		</view>
 		<uni-list class="assistant_box" :border="false">	<!--睡眠助手-->
@@ -45,11 +65,19 @@
 		name:"sleep",
 		data() {
 			return {
+				week:["星期日","星期一","星期二","星期三","星期四","星期五","星期六"],
 				getup_goal:'07:00',
 				sleep_goal:'23:00',
-				nowtime: [{hour:''}, {minute:''}, {seconds:''}],
-				getup_time:'',
-				sleep_time:'',
+				today: '',
+				nowtime: [{hour:''},{minute:''}],
+				getup_time:'9:00',
+				sleep_time:'11:00',
+				sleep: false,
+				getup: false,
+				getup_success: false,
+				sleep_success: false,
+				getup_like: false,
+				sleep_like:false,
 			};
 		},
 		computed:{
@@ -62,21 +90,93 @@
 			}
 		},
 		methods:{
+			addTimes(m){return m<10?'0'+m:m },
 			getNowTime(){ //获取当前时间
-				var time=new Date();
+				var time=new Date(new Date().getTime());
+				let y=time.getFullYear();
+				let m=time.getMonth()+1;
+				let d=time.getDate();
 				let h=time.getHours();
-				let m=time.getMinutes();
-				let s=time.getSeconds();
-				console.log(h,m,s);
-				this.nowtime.hour=h;
-				this.nowtime.minute=m;
-				this.nowtime.seconds=s;
+				let mi=time.getMinutes();
+				let day=time.getDay();
+				
+				this.today=y+'年'+this.addTimes(m)+'月'+this.addTimes(d)+'日'+' '+this.week[day];
+				this.nowtime.hour = this.addTimes(h);
+				this.nowtime.minute = this.addTimes(mi);
+				
+				console.log(this.today);
 			},
 			bindTimeChange_g: function(e) {
 				this.getup_goal = e.detail.value
 			},
 			bindTimeChange_s: function(e) {
 				this.sleep_goal = e.detail.value
+			},
+			getup_clock(){
+				var that=this;
+				uni.showModal({
+					title:'提示',
+					content:'进行起床打卡？',
+					success:function(res){
+						if(res.confirm){
+							that.getNowTime();
+							that.getup_time=that.nowtime.hour+':'+that.nowtime.minute;
+							that.getup=true;
+							var time_goal=Date.parse('2023/01/01 '+that.getup_goal+':59');
+							var time_now=Date.parse('2023/01/01 '+that.getup_time+':00');
+							if(time_now<=time_goal){
+								that.getup_success=true;
+								uni.showToast({
+									title:'起床时间：'+that.getup_time+'\n起床目标达成，给自己点个赞吧！',
+									icon:'none',
+								})
+							}
+							else{
+								uni.showToast({
+									title:'起床时间：'+that.getup_time,
+									icon:'none',
+								})
+							}
+						}
+					}
+				})
+			},
+			sleep_clock(){
+				var that=this;
+				uni.showModal({
+					title:'提示',
+					content:'进行就寝打卡？',
+					success:function(res){
+						if(res.confirm){
+							that.getNowTime();
+							that.sleep_time=that.nowtime.hour+':'+that.nowtime.minute;
+							that.sleep=true;
+							var time_goal=Date.parse('2023/01/01 '+that.sleep_goal+':59');
+							var time_now=Date.parse('2023/01/01 '+that.sleep_time+':00');
+							if(time_now<=time_goal){
+								that.sleep_success=true;
+								uni.showToast({
+									title:'就寝时间：'+that.sleep_time+'\n就寝目标达成，给自己点个赞吧！',
+									icon:'none',
+									duration:2500,
+								})
+							}
+							else{
+								uni.showToast({
+									title:'就寝时间：'+that.sleep_time,
+									icon:'none',
+									duration:2500,
+								})
+							}
+						}
+					}
+				})
+			},
+			like_getup(){
+				this.getup_like=true;
+			},
+			like_sleep(){
+				this.sleep_like=true;
 			},
 			goto_baizaoyin(){
 				uni.navigateTo({
@@ -119,7 +219,6 @@
 	.manage_box{
 		width: 90%;
 		margin: 15px;
-		height: 400px;
 		border-radius: 10px;
 		background: white;
 		box-shadow: -1px 1px 5px 1px rgba(0, 0, 0, 0.1), -1px 2px 1px 0 rgba(255, 255, 255) inset;
@@ -160,22 +259,39 @@
 		justify-content: center;
 		margin-bottom: 5px;
 		margin-top: 10px;
+		width: 100%;
 	}
 	.img{
 		height:200px;
 		align-items: center;
 		justify-content: center;
 	}
-	.clock_button{
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 150px;
-		height: 50px;
-		font-size: 23px;
+	.clockTime_box{
+		width: 100%;
 		box-shadow: -1px 1px 5px 1px rgba(0, 0, 0, 0.1), -1px 2px 1px 0 rgba(255, 255, 255) inset;
 		border-radius: 10px;
 		background: #f1fdf2;
+	}
+	.clock_today{
+		font-size: 20px;
+		width: 100%;
+		box-shadow: -1px 1px 5px 1px rgba(0, 0, 0, 0.1), -1px 2px 1px 0 rgba(255, 255, 255) inset;
+		border-radius: 10px;
+	}
+	.clockTime{
+		height: 100px;
+		display: flex;
+		justify-content: space-evenly;
+		align-items: center;
+		width: 100%;
+	}
+	.clockTime_item{
+		font-size: 25px;
+		text-align: center;
+	}
+	.like_img{
+		height: 20px;
+		width: 20px;
 	}
 	.assistant_box{
 		width: 90%;
