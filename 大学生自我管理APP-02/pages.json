@@ -132,9 +132,27 @@
 		          "enablePullDownRefresh": false
 		      }
 		      
-		  }
+		  },
+		  {
+		        "path" : "pages/self-manage/component/play/EventForm",
+		        "style" :                                                                                    
+		        {
+		            "navigationBarTitleText": "",
+		            "enablePullDownRefresh": false
+		        }
+		        
+		    }
 		  ,{
 		      "path" : "pages/self-manage/play/play",
+		      "style" :                                                                                    
+		      {
+		          "navigationBarTitleText": "",
+		          "enablePullDownRefresh": false
+		      }
+		      
+		  },
+		  {
+		      "path" : "pages/self-manage/component/play/AddProject",
 		      "style" :                                                                                    
 		      {
 		          "navigationBarTitleText": "",
@@ -160,7 +178,8 @@
 		        }
 		        
 		    }
-  ],
+      
+    ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",
