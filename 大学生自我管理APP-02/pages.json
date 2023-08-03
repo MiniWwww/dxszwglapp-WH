@@ -132,9 +132,9 @@
 		          "enablePullDownRefresh": false
 		      }
 		      
-		  },
-		  {
-		        "path" : "pages/self-manage/component/play/EventForm",
+		  }
+		  ,{
+		        "path" : "pages/self-manage/play/EventFormRecord",
 		        "style" :                                                                                    
 		        {
 		            "navigationBarTitleText": "",
@@ -142,25 +142,18 @@
 		        }
 		        
 		    }
-		  ,{
-		      "path" : "pages/self-manage/play/play",
-		      "style" :                                                                                    
-		      {
-		          "navigationBarTitleText": "",
-		          "enablePullDownRefresh": false
-		      }
-		      
-		  },
+		  ,
 		  {
-		      "path" : "pages/self-manage/component/play/AddProject",
-		      "style" :                                                                                    
-		      {
-		          "navigationBarTitleText": "",
-		          "enablePullDownRefresh": false
-		      }
-		      
-		  }
-		  ,{
+		        "path" : "pages/self-manage/play/add_playGoal",
+		        "style" :                                                                                    
+		        {
+		            "navigationBarTitleText": "",
+		            "enablePullDownRefresh": false
+		        }
+		        
+		    }
+		  ,
+		  {
 		      "path" : "pages/self-manage/component/PersonCenter/PersonCenter",
 		      "style" :                                                                                    
 		      {

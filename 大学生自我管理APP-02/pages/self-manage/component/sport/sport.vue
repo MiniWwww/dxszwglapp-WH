@@ -68,6 +68,7 @@
 					}
 				})
 				this.activePopUp=false;
+				
 			},
 			to_analyse(){
 				uni.navigateTo({
